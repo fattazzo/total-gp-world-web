@@ -34,7 +34,7 @@
     width: auto;
 
     .navigation {
-      @include nb-ltr(padding-right, nb-theme(padding));
+      @include nb-ltr(padding-right, 1px);
       @include nb-rtl(padding-left, nb-theme(padding));
       font-size: 2.5rem;
       text-decoration: none;
@@ -46,7 +46,7 @@
     }
 
     .logo {
-      padding: 0 nb-theme(padding);
+      padding-right: 5px;
       font-size: 1.75rem;
       font-weight: nb-theme(font-weight-bolder);
       @include nb-ltr(border-left, 1px solid nb-theme(separator));

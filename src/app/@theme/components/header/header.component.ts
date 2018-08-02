@@ -18,6 +18,10 @@ export class HeaderComponent implements OnInit {
 
   userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
 
+  seasons : string[] = ['current', '1950', '1951', '1952', '1953'];
+
+  @Input() selectedSeason : string = 'current';
+
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private userService: UserService,

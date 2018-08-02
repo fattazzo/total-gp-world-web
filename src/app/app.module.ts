@@ -4,6 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { APP_BASE_HREF } from '@angular/common';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -15,6 +16,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { CustomInterceptor,DataService } from './services/data.service';
+
+import { NgxEchartsModule } from 'ngx-echarts';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -22,6 +27,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    NgxEchartsModule,
 
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
@@ -29,7 +35,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   bootstrap: [AppComponent],
   providers: [
-    { provide: APP_BASE_HREF, useValue: '/' },
+    { provide: APP_BASE_HREF, useValue: '/' },DataService,
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: CustomInterceptor,
+        multi: true,
+}
   ],
 })
 export class AppModule {

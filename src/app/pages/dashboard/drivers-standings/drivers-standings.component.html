@@ -1,0 +1,106 @@
+<!--<nb-card size="large">
+    <div class="chart-container">
+    <div class="table-header">
+      <div>Drivers</div>
+      <div class="subtitle">Standings</div>
+    </div>
+
+    <div class="stats-month">
+        <div class="results">
+          <b>Position</b>
+        </div>
+        <div class="results">
+          <b>Driver</b>
+        </div>
+        <div class="results">
+            <b>Points</b>
+          </div>
+      </div>
+    <div class="stats-content">
+        
+          <div class="stats-month" *ngFor="let stand of standings">
+            <div>
+              <span class="month">{{ stand.position }}</span>
+            </div>
+            <div class="results">
+              <b>{{stand.Driver.givenName}} {{stand.Driver.familyName}}</b> ({{stand.Driver.code}})
+            </div>
+            <div>
+                <span class="month">{{ stand.points }}</span>
+              </div>
+          </div>
+        </div>
+
+  </div>
+
+</nb-card>
+-->
+<nb-card size="large">
+  <div class="consumption-table">
+    <div class="table-header">
+      <div>Drivers</div>
+      <div class="subtitle">Standings</div>
+    </div>
+
+    <div class="stats-month">
+      <div class="results">
+        <b>Position</b>
+      </div>
+      <div class="results">
+        <b>Driver</b>
+      </div>
+      <div class="results">
+          <b>Points</b>
+        </div>
+    </div>
+    <div class="stats-content">  
+        <div class="stats-month" *ngFor="let stand of standings">
+          <div>
+            <span class="month">{{ stand.position }}</span>
+          </div>
+          <div class="results">
+            <b>{{stand.Driver.givenName}} {{stand.Driver.familyName}}</b> ({{stand.Driver.code}})
+          </div>
+          <div>
+              <span class="month">{{ stand.points }}</span>
+          </div>
+        </div>
+    </div>
+  </div>
+
+    <div class="chart-container">
+      <div class="chart-header">
+        <div class="header-stats">
+          <div class="stats-block">
+            <div class="subtitle">Consumed</div>
+            <div>
+              <span class="value">816</span>
+              <span class="unit">kWh</span>
+            </div>
+          </div>
+  
+          <div class="stats-block currency">
+            <div class="subtitle">Spent</div>
+            <div>
+              <span class="value">291</span>
+              <span class="unit">USD</span>
+            </div>
+          </div>
+        </div>
+  
+        <div class="dropdown"
+             [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"
+             ngbDropdown>
+          <button type="button" ngbDropdownToggle class="btn"
+                  [ngClass]="{ 'btn-outline-success': currentTheme == 'default', 'btn-primary': currentTheme != 'default'}">
+            {{ type }}
+          </button>
+          <ul class="dropdown-menu" ngbDropdownMenu>
+            <li class="dropdown-item" *ngFor="let t of types" (click)="type = t">{{ t }}</li>
+          </ul>
+        </div>
+  
+      </div>
+  <drivers-st-chart></drivers-st-chart>
+  </div>
+</nb-card>
