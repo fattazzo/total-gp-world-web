@@ -23,10 +23,10 @@ export class CustomInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (!req.headers.has('Content-Type')) {
-            //req = req.clone({ headers: req.headers.set('Content-Type', 'application/json') });
+            // req = req.clone({ headers: req.headers.set('Content-Type', 'application/json') });
         }
-        //req = req.clone({ headers: req.headers.set('Access-Control-Allow-Origin', '*') });
-        //req = req.clone({ headers: req.headers.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE') });
+        // req = req.clone({ headers: req.headers.set('Access-Control-Allow-Origin', '*') });
+        // req = req.clone({ headers: req.headers.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE') });
         req = req.clone({ headers: req.headers.set('Accept', 'application/json') });
         console.log(JSON.stringify(req.headers));
         
