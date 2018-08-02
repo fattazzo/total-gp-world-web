@@ -10,6 +10,9 @@ import { DriversComponent } from './drivers/drivers.component';
 import { ConstructorsComponent } from './constructors/constructors.component';
 import { CircuitsComponent } from './circuits/circuits.component';
 
+import { TreeComponent } from './components/tree/tree.component'
+import { TemperatureDraggerComponent } from './dashboard/temperature/temperature-dragger/temperature-dragger.component'
+
 const PAGES_COMPONENTS = [
   PagesComponent,
 ];
@@ -27,6 +30,8 @@ const PAGES_COMPONENTS = [
     DriversComponent,
     ConstructorsComponent,
     CircuitsComponent,
+    TreeComponent,
+    TemperatureDraggerComponent,
   ],
 })
 export class PagesModule {
