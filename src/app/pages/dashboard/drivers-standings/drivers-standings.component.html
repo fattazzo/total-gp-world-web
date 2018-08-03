@@ -1,4 +1,4 @@
-<!--<nb-card size="large">
+<nb-card size="large">
     <div class="chart-container">
     <div class="table-header">
       <div>Drivers</div>
@@ -34,7 +34,8 @@
   </div>
 
 </nb-card>
--->
+
+<!--
 <nb-card size="large">
   <div class="consumption-table">
     <div class="table-header">
@@ -88,19 +89,8 @@
           </div>
         </div>
   
-        <div class="dropdown"
-             [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }"
-             ngbDropdown>
-          <button type="button" ngbDropdownToggle class="btn"
-                  [ngClass]="{ 'btn-outline-success': currentTheme == 'default', 'btn-primary': currentTheme != 'default'}">
-            {{ type }}
-          </button>
-          <ul class="dropdown-menu" ngbDropdownMenu>
-            <li class="dropdown-item" *ngFor="let t of types" (click)="type = t">{{ t }}</li>
-          </ul>
-        </div>
-  
       </div>
   <drivers-st-chart></drivers-st-chart>
   </div>
 </nb-card>
+-->

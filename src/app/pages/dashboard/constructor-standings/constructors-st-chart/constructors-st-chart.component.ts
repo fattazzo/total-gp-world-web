@@ -1,23 +1,26 @@
-import { delay } from 'rxjs/operators';
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 
-import { DriversService } from '../../../../services/drivers.service';
+import { ConstructorsService } from '../../../../services/constructors.service';
 
-import { DriverStanding } from '../../../../domain/driver-standing';
+import { ConstructorStanding } from '../../../../domain/constructor-standing';
+
+import * as echarts from 'echarts';
+
+
 
 @Component({
-  selector: 'drivers-st-chart',
-  templateUrl: './drivers-st-chart.component.html',
-  styleUrls: ['./drivers-st-chart.component.scss']
+  selector: 'constructors-st-chart',
+  templateUrl : './constructors-st-chart.component.html',
+  styleUrls: ['./constructors-st-chart.component.scss']
 })
-export class DriversStChartComponent implements AfterViewInit, OnDestroy {
+export class ConstructorsStChartComponent implements AfterViewInit, OnDestroy {
   options: any = {};
   themeSubscription: any;
 
-  standings : DriverStanding[] = [];
+  standings : ConstructorStanding[] = [];
 
-  constructor(private theme: NbThemeService, private driversService: DriversService) {
+  constructor(private theme: NbThemeService, private constructorsService: ConstructorsService) {
   }
 
   ngAfterViewInit() {
@@ -31,7 +34,7 @@ export class DriversStChartComponent implements AfterViewInit, OnDestroy {
   public getStandings() : void {
     //console.log(this.dataService.getSeasons());
 
-    this.driversService
+    this.constructorsService
             .getStandings("current")
             .subscribe(
             result => {
@@ -41,9 +44,9 @@ export class DriversStChartComponent implements AfterViewInit, OnDestroy {
               if(result == undefined || result.length == 0) {
                 this.standings = [];
               } else {
-                var tmp : DriverStanding[] = [];
+                var tmp : ConstructorStanding[] = [];
                 result.forEach( (element) => {
-                  tmp.push(new DriverStanding(element))
+                  tmp.push(new ConstructorStanding(element))
                 });
                 this.standings = tmp;
               }
@@ -63,7 +66,7 @@ export class DriversStChartComponent implements AfterViewInit, OnDestroy {
       const colors = config.variables;
       const echarts: any = config.variables.echarts;
 
-      console.log(this.standings.map(s => s.Driver.givenName).slice(0,4));
+      console.log(this.standings.map(s => s.Constructor.name).slice(0,4));
 
       this.options = {
         backgroundColor: echarts.bg,
@@ -85,7 +88,7 @@ export class DriversStChartComponent implements AfterViewInit, OnDestroy {
         },
         series: [
           {
-            name: 'Drivers',
+            name: 'Constructors',
             type: 'pie',
             radius: '80%',
             center: ['50%', '50%'],
@@ -113,10 +116,10 @@ export class DriversStChartComponent implements AfterViewInit, OnDestroy {
         ],
       };
 
-      this.options.legend.data = this.standings.map(s => s.Driver.givenName + '\n' + s.Driver.familyName).slice(0,5);
+      this.options.legend.data = this.standings.map(s => s.Constructor.name).slice(0,5);
       var tmp = [];
       this.standings.forEach(function (stand) {
-        tmp.push({ value: stand.points, name: (stand.Driver.givenName + '\n' + stand.Driver.familyName) });
+        tmp.push({ value: stand.points, name: (stand.Constructor.name) });
       })
       this.options.series[0].data = tmp.slice(0,5);
     });
