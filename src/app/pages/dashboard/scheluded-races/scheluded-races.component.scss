@@ -21,7 +21,7 @@
       .mat-header-cell {
         @include nb-card-header();
         font-size: 1.25rem;
-          min-width: 150px;
+        min-width: 150px;  
       }
 
       .mat-cell {
@@ -34,4 +34,16 @@
         padding-bottom: 0;
         min-width: 150px;
     }
+
+    .table-header {
+        @include nb-card-header();
+        font-size: 1.25rem;
+    
+        .subtitle {
+          color: nb-theme(color-fg);
+          font-family: nb-theme(font-main);
+          font-size: 1rem;
+          font-weight: nb-theme(font-weight-light);
+        }
+      }
 }
