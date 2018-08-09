@@ -43,8 +43,6 @@ export class HeaderComponent implements OnInit {
   }
 
   onChange(seasonValue) {
-    console.log("Cambio season a " + seasonValue);
-
     this.seasonsService.setSeason(seasonValue);
     this.selectedSeason = seasonValue;
   }

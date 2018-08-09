@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 import { ConstructorsService } from '../../../services/constructors.service';
+import { SeasonsService } from '../../../services/seasons.service';
 
 import { ConstructorStanding } from '../../../domain/constructor-standing';
+
+import { Configuration } from '../../../app.constants';
 
 @Component({
   selector: 'constructor-standings',
@@ -11,41 +15,14 @@ import { ConstructorStanding } from '../../../domain/constructor-standing';
 })
 export class ConstructorStandingsComponent implements OnInit {
 
-  standings : ConstructorStanding[];
+  standings: Observable<ConstructorStanding[]>;
 
-  constructor(private constructorsService: ConstructorsService) { }
+  constructor(private constructorsService: ConstructorsService, private seasonsService: SeasonsService, private config: Configuration) { }
 
   ngOnInit() {
-    console.log('bbb');
-    this.getSeasons();
-  }
-
-  public getSeasons() : void {
-    //console.log(this.dataService.getSeasons());
-
-    this.constructorsService
-            .getStandings("current")
-            .subscribe(
-            result => {
-              console.log('Risultato: ' + result.length);
-              //this.standings = result;
-
-              if(result == undefined || result.length == 0) {
-                this.standings = [];
-              } else {
-                var tmp : ConstructorStanding[] = [];
-                result.forEach( (element) => {
-                  tmp.push(new ConstructorStanding(element))
-                });
-                this.standings = tmp;
-              }
-            },
-            error => () => {
-              console.log('Something went wrong...');
-            },
-            () => {
-              console.log('Getting all values complete');
-            });
+    this.seasonsService.getSeason().subscribe((newSeason) => {
+      this.standings = this.constructorsService.getStandings(newSeason)
+    });
   }
 
 }

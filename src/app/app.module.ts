@@ -16,8 +16,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { CustomInterceptor,DataService } from './services/data.service';
-
 import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
@@ -35,12 +33,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
   ],
   bootstrap: [AppComponent],
   providers: [
-    { provide: APP_BASE_HREF, useValue: '/' },DataService,
-    {
-        provide: HTTP_INTERCEPTORS,
-        useClass: CustomInterceptor,
-        multi: true,
-}
+    { provide: APP_BASE_HREF, useValue: '/' },
   ],
 })
 export class AppModule {

@@ -69,6 +69,22 @@
       }
     }
 
+    .iconbox {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 5.75rem;
+      height: 4.75rem;
+      font-size: 1.75rem;
+      border-radius: nb-theme(card-border-radius);
+      transition: width 0.4s ease;
+      transform: translate3d(0, 0, 0);
+      -webkit-transform-style: preserve-3d;
+      -webkit-backface-visibility: hidden;
+      color: nb-theme(color-white);
+      @include btn-hero-primary-gradient();
+    }
+
     &:hover {
       background: lighten(nb-theme(card-bg), 5%);
 
@@ -120,6 +136,7 @@
       flex-direction: column;
       justify-content: center;
       height: 100%;
+      width: 100%;
       @include nb-ltr(padding, 0 0.5rem 0 0.75rem);
       @include nb-rtl(padding, 0 0.75rem 0 0.5rem);
       border-left: 1px solid transparent;

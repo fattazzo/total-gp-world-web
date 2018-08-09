@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DataService } from '../../services/data.service';
 import { SeasonsResponse } from '../../domain/seasons-response';
 
 @Component({
@@ -10,26 +9,13 @@ import { SeasonsResponse } from '../../domain/seasons-response';
 })
 export class DriversComponent implements OnInit {
 
-  constructor(private dataService: DataService) { }
+  constructor() { }
 
   ngOnInit() {
     this.getSeasons();
   }
 
   public getSeasons() : void {
-    //console.log(this.dataService.getSeasons());
-
-    /**
-    this.dataService
-            .getSeasons()
-            .subscribe((data: SeasonsResponse) => console.log('Risultato: ' + new SeasonsResponse(data).toString()),
-            error => () => {
-              console.log('Something went wrong...');
-            },
-            () => {
-              console.log('Getting all values complete');
-            });
-            **/
   }
 
 }

@@ -2,71 +2,41 @@ import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 
 import { ConstructorsService } from '../../../../services/constructors.service';
+import { SeasonsService } from '../../../../services/seasons.service';
 
 import { ConstructorStanding } from '../../../../domain/constructor-standing';
 
-import * as echarts from 'echarts';
-
-
-
 @Component({
   selector: 'constructors-st-chart',
-  templateUrl : './constructors-st-chart.component.html',
+  templateUrl: './constructors-st-chart.component.html',
   styleUrls: ['./constructors-st-chart.component.scss', '../constructor-standings.component.scss']
 })
 export class ConstructorsStChartComponent implements AfterViewInit, OnDestroy {
   options: any = {};
   themeSubscription: any;
 
-  standings : ConstructorStanding[] = [];
-
-  constructor(private theme: NbThemeService, private constructorsService: ConstructorsService) {
+  constructor(private theme: NbThemeService, private constructorsService: ConstructorsService, private seasonsService: SeasonsService) {
   }
 
   ngAfterViewInit() {
-    this.getStandings();
+    this.seasonsService.getSeason()
+      .subscribe((newSeason) => {
+        console.log("Constructors Chart: loading season " + newSeason);
+        this.constructorsService.getStandings(newSeason).subscribe(
+          d => this.updateData(d)
+        )
+      });
   }
 
   ngOnDestroy(): void {
     this.themeSubscription.unsubscribe();
   }
 
-  public getStandings() : void {
-    //console.log(this.dataService.getSeasons());
-
-    this.constructorsService
-            .getStandings("current")
-            .subscribe(
-            result => {
-              console.log('Risultato: ' + result.length);
-              //this.standings = result;
-
-              if(result == undefined || result.length == 0) {
-                this.standings = [];
-              } else {
-                var tmp : ConstructorStanding[] = [];
-                result.forEach( (element) => {
-                  tmp.push(new ConstructorStanding(element))
-                });
-                this.standings = tmp;
-              }
-              this.updateData();
-            },
-            error => () => {
-              console.log('Something went wrong...');
-            },
-            () => {
-              console.log('Getting all values complete');
-            });
-  }
-
-  private updateData() {
+  private updateData(stands: ConstructorStanding[]) {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
 
       const colors = config.variables;
       const echarts: any = config.variables.echarts;
-
-      console.log(this.standings.map(s => s.Constructor.name).slice(0,4));
 
       this.options = {
         backgroundColor: echarts.bg,
@@ -81,7 +51,7 @@ export class ConstructorsStChartComponent implements AfterViewInit, OnDestroy {
           left: 'center',
           top: 'bottom',
           confine: true,
-          data : [],
+          data: [],
           textStyle: {
             color: echarts.textColor,
           },
@@ -101,9 +71,9 @@ export class ConstructorsStChartComponent implements AfterViewInit, OnDestroy {
               },
             },
             label: {
-              position : 'inside',
+              position: 'inside',
               color: echarts.textColor,
-              
+
             },
             labelLine: {
               normal: {
@@ -116,12 +86,12 @@ export class ConstructorsStChartComponent implements AfterViewInit, OnDestroy {
         ],
       };
 
-      this.options.legend.data = this.standings.map(s => s.Constructor.name).slice(0,5);
+      this.options.legend.data = stands.map(s => s.Constructor.name).slice(0, 5);
       var tmp = [];
-      this.standings.forEach(function (stand) {
-        tmp.push({ value: stand.points, name: (stand.Constructor.name) });
+      stands.forEach(function (stand) {
+        tmp.push({ value: stand.points, name: stand.Constructor.name });
       })
-      this.options.series[0].data = tmp.slice(0,5);
+      this.options.series[0].data = tmp.slice(0, 5);
     });
   }
 }

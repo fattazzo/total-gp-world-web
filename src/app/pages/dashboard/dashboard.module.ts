@@ -9,12 +9,18 @@ import { ConstructorStandingsComponent } from './constructor-standings/construct
 import { DriversStChartComponent } from './drivers-standings/drivers-st-chart/drivers-st-chart.component';
 import { ConstructorsStChartComponent } from './constructor-standings/constructors-st-chart/constructors-st-chart.component';
 import { StatusCardComponent } from './status-card/status-card.component';
+import { ScheludedRacesComponent } from './scheluded-races/scheluded-races.component';
+
+import { MatTableModule } from '@angular/material';
+import { CdkTableModule } from '@angular/cdk/table';
 
 
 @NgModule({
   imports: [
     ThemeModule,
-    NgxEchartsModule
+    NgxEchartsModule,
+    CdkTableModule,
+    MatTableModule
   ],
   declarations: [
     DashboardComponent,
@@ -23,6 +29,7 @@ import { StatusCardComponent } from './status-card/status-card.component';
     DriversStChartComponent,
     ConstructorsStChartComponent,
     StatusCardComponent,
+    ScheludedRacesComponent,
   ],
 })
 export class DashboardModule { }

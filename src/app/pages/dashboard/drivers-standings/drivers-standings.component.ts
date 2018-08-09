@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 import { DriversService } from '../../../services/drivers.service';
 import { SeasonsService } from '../../../services/seasons.service';
 
 import { DriverStanding } from '../../../domain/driver-standing';
-import { Driver } from "../../../domain/driver";
-import { Constructor } from "../../../domain/constructor";
-
-import { Observable } from 'rxjs/Observable';
 
 import { Configuration } from '../../../app.constants';
 
@@ -23,9 +20,7 @@ export class DriversStandingsComponent implements OnInit {
   constructor(private driversService: DriversService, private seasonsService: SeasonsService, private config: Configuration) { }
 
   ngOnInit() {
-    this.seasonsService.getSeason()
-    .subscribe((newSeason) => {
-      console.log("Drivers standings: carico la stagione " + newSeason);
+    this.seasonsService.getSeason().subscribe((newSeason) => {
       this.standings = this.driversService.getStandings(newSeason)
     });
   }

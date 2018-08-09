@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { shareReplay, map } from 'rxjs/operators';
 
 import { Configuration } from '../app.constants';
-import { of } from "rxjs";
 
 import { DriverStanding } from '../domain/driver-standing'
 
@@ -20,19 +19,18 @@ export class DriversService {
 
   public getStandings(season: string) {
     if (!this.cache$ || season != this.seasonCache$) {
-      console.log('Cache vuota, carica la classifica piloti');
+      console.log('Driver standings: Empty cache, load from remote');
       this.seasonCache$ = season;
-      this.cache$ = this.loadStandings(season).pipe(
-        shareReplay(1)
-      );
+      this.cache$ = this.loadStandings(season).pipe(shareReplay(1));
     } else {
-      console.log('Classifica piloti dalla cache');
+      console.log('Driver standings: get data from cache');
     }
 
     return this.cache$;
   }
 
   private loadStandings(season: string) : Observable<DriverStanding[]> {
+    console.log(`Calling ${this.config.ServerWithApiUrl}${season}/driverStandings.json`)
     return this.http.get(`${this.config.ServerWithApiUrl}${season}/driverStandings.json`)
       .pipe(map(result => {
           var tmp : DriverStanding[] = [];
