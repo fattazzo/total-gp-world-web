@@ -13,13 +13,13 @@ export class DriversComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    console.log('bbb');
     this.getSeasons();
   }
 
   public getSeasons() : void {
     //console.log(this.dataService.getSeasons());
 
+    /**
     this.dataService
             .getSeasons()
             .subscribe((data: SeasonsResponse) => console.log('Risultato: ' + new SeasonsResponse(data).toString()),
@@ -29,6 +29,7 @@ export class DriversComponent implements OnInit {
             () => {
               console.log('Getting all values complete');
             });
+            **/
   }
 
 }

@@ -8,6 +8,7 @@ import { DriversStandingsComponent } from './drivers-standings/drivers-standings
 import { ConstructorStandingsComponent } from './constructor-standings/constructor-standings.component';
 import { DriversStChartComponent } from './drivers-standings/drivers-st-chart/drivers-st-chart.component';
 import { ConstructorsStChartComponent } from './constructor-standings/constructors-st-chart/constructors-st-chart.component';
+import { StatusCardComponent } from './status-card/status-card.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { ConstructorsStChartComponent } from './constructor-standings/constructo
     ConstructorStandingsComponent,
     DriversStChartComponent,
     ConstructorsStChartComponent,
+    StatusCardComponent,
   ],
 })
 export class DashboardModule { }

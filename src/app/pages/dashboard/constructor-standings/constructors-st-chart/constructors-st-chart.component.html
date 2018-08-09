@@ -1,5 +1,12 @@
-<nb-card size="large">
-  <div class="chart-container">
-    <div echarts [options]="options" class="echart"></div>
-  </div>
+<nb-card size="large">  
+    <div class="chart-container">
+        <div class="table-header">
+          <div>Constructos</div>
+          <div class="subtitle">Standings (top 5)</div>
+        </div>
+
+        <div style="height: 100%;">
+          <div echarts [options]="options" class="echart"></div>
+        </div>
+    </div>
 </nb-card>

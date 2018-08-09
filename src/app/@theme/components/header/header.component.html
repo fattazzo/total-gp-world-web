@@ -29,9 +29,9 @@
 
   <div class="logo-containter">
     <div class="logo">Season</div>
-      <select  [(ngModel)]="selectedSeason">
-          <option *ngFor="let s of seasons" value={{s}}>
-              {{s}}
+      <select  [(ngModel)]="selectedSeason" (change)="onChange($event.target.value)">
+          <option *ngFor="let s of seasons | async" value={{s.season}}>
+              {{s.season}}
           </option>
       </select>
   </div>

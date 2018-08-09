@@ -3,67 +3,46 @@ import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 
 import { DriversService } from '../../../../services/drivers.service';
+import { SeasonsService } from '../../../../services/seasons.service';
 
 import { DriverStanding } from '../../../../domain/driver-standing';
+
+import { Observable } from 'rxjs/Observable';
+import { of } from "rxjs";
 
 @Component({
   selector: 'drivers-st-chart',
   templateUrl: './drivers-st-chart.component.html',
-  styleUrls: ['./drivers-st-chart.component.scss']
+  styleUrls: ['./drivers-st-chart.component.scss', '../drivers-standings.component.scss']
 })
 export class DriversStChartComponent implements AfterViewInit, OnDestroy {
   options: any = {};
   themeSubscription: any;
 
-  standings : DriverStanding[] = [];
-
-  constructor(private theme: NbThemeService, private driversService: DriversService) {
+  constructor(private theme: NbThemeService, private driversService: DriversService, private seasonsService: SeasonsService) {
   }
 
   ngAfterViewInit() {
-    this.getStandings();
+    this.seasonsService.getSeason()
+    .subscribe((newSeason) => {
+      console.log("Drivers Chart: loading season " + newSeason);
+      this.driversService.getStandings(newSeason).subscribe(
+        d => this.updateData(d)
+      )
+    });
   }
 
   ngOnDestroy(): void {
     this.themeSubscription.unsubscribe();
   }
 
-  public getStandings() : void {
-    //console.log(this.dataService.getSeasons());
-
-    this.driversService
-            .getStandings("current")
-            .subscribe(
-            result => {
-              console.log('Risultato: ' + result.length);
-              //this.standings = result;
-
-              if(result == undefined || result.length == 0) {
-                this.standings = [];
-              } else {
-                var tmp : DriverStanding[] = [];
-                result.forEach( (element) => {
-                  tmp.push(new DriverStanding(element))
-                });
-                this.standings = tmp;
-              }
-              this.updateData();
-            },
-            error => () => {
-              console.log('Something went wrong...');
-            },
-            () => {
-              console.log('Getting all values complete');
-            });
-  }
-
-  private updateData() {
+  private updateData(stands : DriverStanding[]) {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
 
       const colors = config.variables;
       const echarts: any = config.variables.echarts;
 
-      console.log(this.standings.map(s => s.Driver.givenName).slice(0,4));
+      console.log(stands.map(s => s.Driver.givenName).slice(0,4));
 
       this.options = {
         backgroundColor: echarts.bg,
@@ -113,9 +92,9 @@ export class DriversStChartComponent implements AfterViewInit, OnDestroy {
         ],
       };
 
-      this.options.legend.data = this.standings.map(s => s.Driver.givenName + '\n' + s.Driver.familyName).slice(0,5);
+      this.options.legend.data = stands.map(s => s.Driver.givenName + '\n' + s.Driver.familyName).slice(0,5);
       var tmp = [];
-      this.standings.forEach(function (stand) {
+      stands.forEach(function (stand) {
         tmp.push({ value: stand.points, name: (stand.Driver.givenName + '\n' + stand.Driver.familyName) });
       })
       this.options.series[0].data = tmp.slice(0,5);

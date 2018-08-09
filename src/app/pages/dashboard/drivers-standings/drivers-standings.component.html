@@ -18,13 +18,18 @@
       </div>
     <div class="stats-content">
         
-          <div class="stats-month" *ngFor="let stand of standings">
+          <div class="stats-month" *ngFor="let stand of standings | async">
             <div>
               <span class="month">{{ stand.position }}</span>
             </div>
-            <div class="results">
+            <div class="results" *ngIf="stand.Driver.code; else nameOnly">
               <b>{{stand.Driver.givenName}} {{stand.Driver.familyName}}</b> ({{stand.Driver.code}})
             </div>
+            <ng-template #nameOnly>
+              <div class="results">
+                <b>{{stand.Driver.givenName}} {{stand.Driver.familyName}}</b>
+              </div>
+            </ng-template>
             <div>
                 <span class="month">{{ stand.points }}</span>
               </div>

@@ -12,7 +12,7 @@ import * as echarts from 'echarts';
 @Component({
   selector: 'constructors-st-chart',
   templateUrl : './constructors-st-chart.component.html',
-  styleUrls: ['./constructors-st-chart.component.scss']
+  styleUrls: ['./constructors-st-chart.component.scss', '../constructor-standings.component.scss']
 })
 export class ConstructorsStChartComponent implements AfterViewInit, OnDestroy {
   options: any = {};
