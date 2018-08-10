@@ -26,8 +26,8 @@ export class ScheludedRacesComponent implements OnInit {
     { columnDef: 'raceName', header: 'Name', cell: (race: Race) => `${race.raceName}` },
     { columnDef: 'date', header: 'Date', cell: (race: Race) => `${race.date}` },
     { columnDef: 'time', header: 'Time', cell: (race: Race) => `${race.time}` },
-    { columnDef: 'circuit', header: 'Circuit', cell: (race: Race) => `${race.Circuit.circuitName}` },
     { columnDef: 'country', header: 'Country', cell: (race: Race) => `${race.Circuit.Location.country}` },
+    { columnDef: 'locality', header: 'Locality', cell: (race: Race) => `${race.Circuit.Location.locality}` },
   ];
 
   displayedColumns = this.columns.map(c => c.columnDef);

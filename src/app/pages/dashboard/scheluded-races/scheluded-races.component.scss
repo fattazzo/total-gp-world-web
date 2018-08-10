@@ -8,20 +8,17 @@
 @include nb-install-component() {
 
     .example-container {
-        display: flex;
-        flex-direction: column;
-        max-height: 500px;
+        height: 500px;
+        overflow: auto;
       }
       
       .mat-table {
-        overflow: auto;
-        max-height: 500px;
+        width: 100%;
       }
 
       .mat-header-cell {
         @include nb-card-header();
-        font-size: 1.25rem;
-        min-width: 150px;  
+        font-size: 1.25rem; 
       }
 
       .mat-cell {
@@ -32,8 +29,14 @@
         color: nb-theme(color-fg-heading);
         padding-top: 0;
         padding-bottom: 0;
-        min-width: 150px;
-    }
+        white-space: nowrap;
+      }
+
+      .mat-row {
+        &:hover {
+          background-color: nb-theme(layout-bg);
+        }
+      }
 
     .table-header {
         @include nb-card-header();
@@ -46,4 +49,12 @@
           font-weight: nb-theme(font-weight-light);
         }
       }
+
+    .link-black {
+      color: nb-theme(color-fg-heading);
+
+      &:hover {
+        color: nb-theme(color-primary);
+      }
+    }
 }
