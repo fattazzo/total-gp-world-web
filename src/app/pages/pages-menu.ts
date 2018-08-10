@@ -8,26 +8,22 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
-    title: 'CURRENT SEASON',
+    title: 'SECTIONS',
     group: true,
   },
   {
     title: 'Drivers',
     icon: 'fas fa-user-astronaut',
-    link: '/pages/drivers',
+    link: '/pages/sections/driver',
   },
   {
     title: 'Constructors',
     icon: 'fas fa-car',
-    link: '/pages/constructors',
+    link: '/pages/sections/constructor',
   },
   {
     title: 'Circuits',
     icon: 'fas fa-road',
     link: '/pages/circuits',
-  },
-  {
-    title: 'SINCE 1950',
-    group: true,
-  },
+  }
 ];

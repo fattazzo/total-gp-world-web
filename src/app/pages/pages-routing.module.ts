@@ -3,9 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { DriversComponent } from './drivers/drivers.component';
-import { ConstructorsComponent } from './constructors/constructors.component';
-import { CircuitsComponent } from './circuits/circuits.component';
+import { DriverComponent } from './sections/driver/driver.component';
+import { ConstructorComponent } from './sections/constructor/constructor.component';
 
 const routes: Routes = [{
   path: '',
@@ -21,17 +20,21 @@ const routes: Routes = [{
       pathMatch: 'full',
     },
     {
-      path: 'drivers',
-      component : DriversComponent,
+      path: 'sections/driver',
+      component: DriverComponent,
     },
     {
-      path: 'constructors',
-      component : ConstructorsComponent,
+      path: 'sections/driver/:driverId',
+      component: DriverComponent,
     },
     {
-      path: 'circuits',
-      component : CircuitsComponent,
+      path: 'sections/constructor',
+      component: ConstructorComponent,
     },
+    {
+      path: 'sections/constructor/:constructorId',
+      component: ConstructorComponent,
+    }
   ],
 }];
 

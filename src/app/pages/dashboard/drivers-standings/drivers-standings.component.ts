@@ -6,8 +6,6 @@ import { SeasonsService } from '../../../services/seasons.service';
 
 import { DriverStanding } from '../../../domain/driver-standing';
 
-import { Configuration } from '../../../app.constants';
-
 @Component({
   selector: 'drivers-standings',
   templateUrl: './drivers-standings.component.html',
@@ -15,9 +13,9 @@ import { Configuration } from '../../../app.constants';
 })
 export class DriversStandingsComponent implements OnInit {
 
-  standings : Observable<DriverStanding[]>;
+  standings: Observable<DriverStanding[]>;
 
-  constructor(private driversService: DriversService, private seasonsService: SeasonsService, private config: Configuration) { }
+  constructor(private driversService: DriversService, private seasonsService: SeasonsService) { }
 
   ngOnInit() {
     this.seasonsService.getSeason().subscribe((newSeason) => {

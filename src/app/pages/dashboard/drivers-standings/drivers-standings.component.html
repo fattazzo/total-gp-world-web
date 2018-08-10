@@ -22,14 +22,16 @@
         <div>
           <span class="month">{{ stand.position }}</span>
         </div>
-        <div class="results" *ngIf="stand.Driver.code; else nameOnly">
-          <b>{{stand.Driver.givenName}} {{stand.Driver.familyName}}</b> ({{stand.Driver.code}})
-        </div>
-        <ng-template #nameOnly>
-          <div class="results">
-            <b>{{stand.Driver.givenName}} {{stand.Driver.familyName}}</b>
+        <a href="#/pages/sections/driver/{{stand.Driver.driverId}}">
+          <div class="results" *ngIf="stand.Driver.code; else nameOnly">
+            <b>{{stand.Driver.givenName}} {{stand.Driver.familyName}}</b> ({{stand.Driver.code}})
           </div>
-        </ng-template>
+          <ng-template #nameOnly>
+            <div class="results">
+              <b>{{stand.Driver.givenName}} {{stand.Driver.familyName}}</b>
+            </div>
+          </ng-template>
+        </a>
         <div>
           <span class="month">{{ stand.points }}</span>
         </div>

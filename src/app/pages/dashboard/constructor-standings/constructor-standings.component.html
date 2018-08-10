@@ -22,14 +22,16 @@
         <div>
           <span class="month">{{ stand.position }}</span>
         </div>
-        <div class="results" *ngIf="stand.Constructor.nationality; else nameOnly">
-          <b>{{stand.Constructor.name}}</b> ({{stand.Constructor.nationality}})
-        </div>
-        <ng-template #nameOnly>
-          <div class="results">
-            <b>{{stand.Constructor.name}}</b>
+        <a href="#/pages/sections/constructor/{{stand.Constructor.constructorId}}">
+          <div class="results" *ngIf="stand.Constructor.nationality; else nameOnly">
+            <b>{{stand.Constructor.name}}</b> ({{stand.Constructor.nationality}})
           </div>
-        </ng-template>
+          <ng-template #nameOnly>
+            <div class="results">
+              <b>{{stand.Constructor.name}}</b>
+            </div>
+          </ng-template>
+        </a>
         <div>
           <span class="month">{{ stand.points }}</span>
         </div>

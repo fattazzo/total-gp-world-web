@@ -23,8 +23,8 @@ export class DashboardComponent implements OnInit {
   constructorsCards: Observable<CardSettings[]>;
   racesCards: Observable<CardSettings[]>;
 
-  constructor(private driversService: DriversService, 
-    private constructorsService: ConstructorsService, 
+  constructor(private driversService: DriversService,
+    private constructorsService: ConstructorsService,
     private seasonsService: SeasonsService,
     private racesService: RacesService) { }
 
@@ -33,8 +33,10 @@ export class DashboardComponent implements OnInit {
     this.constructorsCards = of(DashboardCards.constructorsCards);
     this.racesCards = of(DashboardCards.racesCards);
 
+    console.log("aaaaaaaaaaaaaaaa");
     this.seasonsService.getSeason()
       .subscribe((newSeason) => {
+        console.log("bbbbbbbbbbbbb")
         this.driversService.getStandings(newSeason).subscribe(standings => this.updateDriversCards(standings));
         this.constructorsService.getStandings(newSeason).subscribe(standings => this.updateConstructorsCards(standings));
         this.racesService.getSchedule(newSeason).subscribe(schedule => this.updateRacesCards(schedule));
@@ -82,7 +84,7 @@ export class DashboardComponent implements OnInit {
       nationalities.add(race.Circuit.Location.country)
     })
 
-    DashboardCards.updateRacesCardsValues(nrRaces,nationalities.size);
+    DashboardCards.updateRacesCardsValues(nrRaces, nationalities.size);
   }
 
 }

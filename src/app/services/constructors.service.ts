@@ -6,39 +6,87 @@ import { shareReplay, map } from 'rxjs/operators';
 import { Configuration } from '../app.constants';
 
 import { ConstructorStanding } from '../domain/constructor-standing';
+import { Constructor } from '../domain/constructor';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConstructorsService {
 
-  private cache$: Observable<ConstructorStanding[]>;
   private seasonCache$: string;
 
-  constructor(private http: HttpClient, private config : Configuration) { }
+  private cacheStanding$: Observable<ConstructorStanding[]>;
+  private cacheConstructors$: Observable<Constructor[]>;
 
+  constructor(private http: HttpClient, private config: Configuration) { }
+
+  /**
+   * Load the constructor standing of the season
+   * 
+   * @param season season name
+   */
   public getStandings(season: string) {
-    if (!this.cache$ || season != this.seasonCache$) {
+    if (!this.cacheStanding$ || season != this.seasonCache$) {
       console.log('Constructor standings: Empty cache, load from remote');
       this.seasonCache$ = season;
-      this.cache$ = this.loadStandings(season).pipe(shareReplay(1));
+      this.cacheStanding$ = this.loadStandings(season).pipe(shareReplay(1));
     } else {
       console.log('Constructor standings: get data from cache');
     }
 
-    return this.cache$;
+    return this.cacheStanding$;
   }
 
-  private loadStandings(season: string) : Observable<ConstructorStanding[]> {
+  /**
+   * Load all constructors of the season
+   * 
+   * @param season season name
+   */
+  public get(season: string) {
+    if (!this.cacheConstructors$ || season != this.seasonCache$) {
+      console.log('Constructors: Empty cache, load from remote');
+      this.seasonCache$ = season;
+      this.cacheConstructors$ = this.load(season).pipe(shareReplay(1));
+    } else {
+      console.log('Constructors: get data from cache');
+    }
+
+    return this.cacheConstructors$;
+  }
+
+  /**
+   * Load constructor standing from remote
+   * 
+   * @param season season name
+   */
+  private loadStandings(season: string): Observable<ConstructorStanding[]> {
     console.log(`Calling ${this.config.ServerWithApiUrl}${season}/constructorStandings.json`)
     return this.http.get(`${this.config.ServerWithApiUrl}${season}/constructorStandings.json`)
       .pipe(map(result => {
-          var tmp : ConstructorStanding[] = [];
-          result['MRData']['StandingsTable']['StandingsLists'][0].ConstructorStandings.forEach( (element) => {
-            tmp.push(new ConstructorStanding(element))
-          });
-          return tmp
-          
-        }));
+        var tmp: ConstructorStanding[] = [];
+        result['MRData']['StandingsTable']['StandingsLists'][0].ConstructorStandings.forEach((element) => {
+          tmp.push(new ConstructorStanding(element))
+        });
+        return tmp
+
+      }));
+  }
+
+  /**
+   * Load constructor's list from remote
+   * 
+   * @param season season name
+   */
+  private load(season: string): Observable<Constructor[]> {
+    console.log(`Calling ${this.config.ServerWithApiUrl}${season}/constructors.json`)
+    return this.http.get(`${this.config.ServerWithApiUrl}${season}/constructors.json`)
+      .pipe(map(result => {
+        var tmp: Constructor[] = [];
+        result['MRData']['ConstructorTable'].Constructors.forEach((element) => {
+          tmp.push(new Constructor(element))
+        });
+        return tmp
+
+      }));
   }
 }
