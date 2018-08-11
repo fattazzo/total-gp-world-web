@@ -26,7 +26,9 @@ export class ConstructorsService {
    * @param season season name
    */
   public getStandings(season: string) {
-    if (!this.cacheStanding$ || season != this.seasonCache$) {
+    this.clearCacheIfNeeded(season);
+
+    if (!this.cacheStanding$) {
       console.log('Constructor standings: Empty cache, load from remote');
       this.seasonCache$ = season;
       this.cacheStanding$ = this.loadStandings(season).pipe(shareReplay(1));
@@ -43,7 +45,9 @@ export class ConstructorsService {
    * @param season season name
    */
   public get(season: string) {
-    if (!this.cacheConstructors$ || season != this.seasonCache$) {
+    this.clearCacheIfNeeded(season);
+
+    if (!this.cacheConstructors$) {
       console.log('Constructors: Empty cache, load from remote');
       this.seasonCache$ = season;
       this.cacheConstructors$ = this.load(season).pipe(shareReplay(1));
@@ -52,6 +56,14 @@ export class ConstructorsService {
     }
 
     return this.cacheConstructors$;
+  }
+
+  private clearCacheIfNeeded(season: string) {
+    if (season != this.seasonCache$) {
+      this.seasonCache$ = null;
+      this.cacheConstructors$ = null;
+      this.cacheStanding$ = null;
+    }
   }
 
   /**

@@ -26,7 +26,9 @@ export class DriversService {
    * @param season season name
    */
   public getStandings(season: string) {
-    if (!this.cacheStandings$ || season != this.seasonCache$) {
+    this.clearCacheIfNeeded(season);
+
+    if (!this.cacheStandings$) {
       console.log('Driver standings: Empty cache, load from remote');
       this.seasonCache$ = season;
       this.cacheStandings$ = this.loadStandings(season).pipe(shareReplay(1));
@@ -43,7 +45,9 @@ export class DriversService {
    * @param season season name
    */
   public get(season: string) {
-    if (!this.cacheDrivers$ || season != this.seasonCache$) {
+    this.clearCacheIfNeeded(season);
+
+    if (!this.cacheDrivers$) {
       console.log('Drivers: Empty cache, load from remote');
       this.seasonCache$ = season;
       this.cacheDrivers$ = this.load(season).pipe(shareReplay(1));
@@ -52,6 +56,14 @@ export class DriversService {
     }
 
     return this.cacheDrivers$;
+  }
+
+  private clearCacheIfNeeded(season: string) {
+    if (season != this.seasonCache$) {
+      this.seasonCache$ = null;
+      this.cacheDrivers$ = null;
+      this.cacheStandings$ = null;
+    }
   }
 
   /**
