@@ -7,6 +7,7 @@ import { Configuration } from '../app.constants';
 
 import { DriverStanding } from '../domain/driver-standing'
 import { Driver } from '../domain/driver';
+import { WikipediaPage } from '../domain/wikipedia-page';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +57,11 @@ export class DriversService {
     }
 
     return this.cacheDrivers$;
+  }
+
+  public getInfo(driver: Driver): Observable<WikipediaPage> {
+    var restUrl = driver.url.replace('/wiki/', '/api/rest_v1/page/summary/');
+    return this.http.get<WikipediaPage>(restUrl);
   }
 
   private clearCacheIfNeeded(season: string) {

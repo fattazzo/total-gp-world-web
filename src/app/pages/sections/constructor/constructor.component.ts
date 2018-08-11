@@ -23,7 +23,6 @@ export class ConstructorComponent implements OnInit {
   ngOnInit() {
     this.constructorSelected = this.route.snapshot.paramMap.get('constructorId')
     this.seasonsService.getSeason().subscribe((newSeason) => {
-      console.log('prova ' + newSeason);
       this.constructors = this.constructorsService.get(newSeason)
     });
   }

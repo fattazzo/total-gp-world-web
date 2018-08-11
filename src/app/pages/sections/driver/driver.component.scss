@@ -7,6 +7,10 @@
 
 @include nb-install-component() {
 
+    .form-content {
+        margin-bottom: 10px;
+    }
+
     .table-header {
         @include nb-card-header();
         font-size: 1.38rem;
@@ -14,4 +18,10 @@
         align-items: center;
         padding: 0;
       }
+
+    .row {
+        flex-wrap: wrap;
+        margin-right: 0px;
+        margin-left: 0px;
+    }
 }
