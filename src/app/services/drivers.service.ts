@@ -60,7 +60,7 @@ export class DriversService {
   }
 
   public getInfo(driver: Driver): Observable<WikipediaPage> {
-    var restUrl = driver.url.replace('/wiki/', '/api/rest_v1/page/summary/');
+    var restUrl = driver.url.replace('http', 'https').replace('/wiki/', '/api/rest_v1/page/summary/');
     return this.http.get<WikipediaPage>(restUrl);
   }
 
