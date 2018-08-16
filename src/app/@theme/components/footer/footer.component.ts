@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   template: `
     <span class="created-by">Created by <b>Fattazzo</b> 2018</span>
     <div class="socials">
+      <a href="https://play.google.com/store/apps/details?id=com.gmail.fattazzo.formula1world" target="_blank" class="ion ion-android-playstore"></a>
       <a href="https://github.com/fattazzo" target="_blank" class="ion ion-social-github"></a>
       <a href="https://www.facebook.com/Fattazzo" target="_blank" class="ion ion-social-facebook"></a>
       <a href="https://plus.google.com/+GianlucaFattarsi" target="_blank" class="ion ion-social-googleplus"></a>
