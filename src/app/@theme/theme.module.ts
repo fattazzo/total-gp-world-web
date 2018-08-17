@@ -31,7 +31,7 @@ import {
   ThemeSwitcherComponent,
   ThemeSwitcherListComponent,
 } from './components';
-import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
+import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe, ReversePipe } from './pipes';
 import {
   OneColumnLayoutComponent,
   SampleLayoutComponent,
@@ -85,6 +85,7 @@ const PIPES = [
   PluralPipe,
   RoundPipe,
   TimingPipe,
+  ReversePipe,
 ];
 
 const NB_THEME_PROVIDERS = [
@@ -92,7 +93,7 @@ const NB_THEME_PROVIDERS = [
     {
       name: 'corporate',
     },
-    [ DEFAULT_THEME, COSMIC_THEME, CORPORATE_THEME ],
+    [DEFAULT_THEME, COSMIC_THEME, CORPORATE_THEME],
   ).providers,
   ...NbSidebarModule.forRoot().providers,
   ...NbMenuModule.forRoot().providers,

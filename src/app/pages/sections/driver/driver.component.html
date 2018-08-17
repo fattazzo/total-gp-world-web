@@ -28,16 +28,15 @@
       stagioni partecipate: http://ergast.com/api/f1/drivers/alonso/seasons
     </nb-card>
   </div>
-</div>
+</div>-->
 
 <div class="row">
-  <div class="col-xxxl-12 col-xxl-12 col-lg-12 col-md-12">
-    <nb-card>
-      selected seasons race results: http://ergast.com/api/f1/current/drivers/alonso/results
-    </nb-card>
+  <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-12">
+    <driver-results [season]="season" [driverId]="driverIdSelected"></driver-results>
   </div>
 </div>
 
+<!--
 <div class="row">
   <div class="col-xxxl-12 col-xxl-12 col-lg-12 col-md-12">
     <nb-card>

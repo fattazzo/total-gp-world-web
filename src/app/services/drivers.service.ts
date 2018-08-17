@@ -8,6 +8,8 @@ import { Configuration } from '../app.constants';
 import { DriverStanding } from '../domain/driver-standing'
 import { Driver } from '../domain/driver';
 import { WikipediaPage } from '../domain/wikipedia-page';
+import { Race } from '../domain/race';
+import { ErgastResponse } from '../domain/ergast/ergast-response';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,7 @@ export class DriversService {
 
   private cacheStandings$: Observable<DriverStanding[]>;
   private cacheDrivers$: Observable<Driver[]>;
+  private cacheRaces$: Map<string, Observable<Race[]>> = new Map();
 
   constructor(private http: HttpClient, private config: Configuration) { }
 
@@ -49,11 +52,11 @@ export class DriversService {
     this.clearCacheIfNeeded(season);
 
     if (!this.cacheDrivers$) {
-      console.log('Drivers: Empty cache, load from remote');
+      console.log(`Drivers ${season}: Empty cache, load from remote`);
       this.seasonCache$ = season;
       this.cacheDrivers$ = this.load(season).pipe(shareReplay(1));
     } else {
-      console.log('Drivers: get data from cache');
+      console.log(`Drivers ${season}: get data from cache`);
     }
 
     return this.cacheDrivers$;
@@ -64,11 +67,26 @@ export class DriversService {
     return this.http.get<WikipediaPage>(restUrl);
   }
 
+  public getResults(season: string, driverId: string): Observable<Race[]> {
+    this.clearCacheIfNeeded(season);
+
+    if (!this.cacheRaces$.get(driverId)) {
+      console.log('Results: Empty cache, load from remote');
+      this.seasonCache$ = season;
+      this.cacheRaces$.set(driverId, this.loadResults(season, driverId));
+    } else {
+      console.log('Results: get data from cache');
+    }
+
+    return this.cacheRaces$.get(driverId);
+  }
+
   private clearCacheIfNeeded(season: string) {
     if (season != this.seasonCache$) {
       this.seasonCache$ = null;
       this.cacheDrivers$ = null;
       this.cacheStandings$ = null;
+      this.cacheRaces$ = new Map();
     }
   }
 
@@ -78,16 +96,11 @@ export class DriversService {
    * @param season season name
    */
   private loadStandings(season: string): Observable<DriverStanding[]> {
-    console.log(`Calling ${this.config.ServerWithApiUrl}${season}/driverStandings.json`)
-    return this.http.get(`${this.config.ServerWithApiUrl}${season}/driverStandings.json`)
-      .pipe(map(result => {
-        var tmp: DriverStanding[] = [];
-        result['MRData']['StandingsTable']['StandingsLists'][0].DriverStandings.forEach((element) => {
-          tmp.push(new DriverStanding(element))
-        });
-        return tmp
-
-      }));
+    console.log(`Calling ${this.config.ServerWithApiUrl}${season}/driverStandings.json`);
+    return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/driverStandings.json`)
+      .pipe(map(result =>
+        (result.MRData.StandingsTable.StandingsLists[0] === undefined) ? [] : result.MRData.StandingsTable.StandingsLists[0].DriverStandings)
+      );
   }
 
   /**
@@ -97,14 +110,21 @@ export class DriversService {
    */
   private load(season: string): Observable<Driver[]> {
     console.log(`Calling ${this.config.ServerWithApiUrl}${season}/drivers.json`)
-    return this.http.get(`${this.config.ServerWithApiUrl}${season}/drivers.json`)
-      .pipe(map(result => {
-        var tmp: Driver[] = [];
-        result['MRData']['DriverTable'].Drivers.forEach((element) => {
-          tmp.push(new Driver(element))
-        });
-        return tmp
+    return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/drivers.json`)
+      .pipe(map(result => result.MRData.DriverTable.Drivers)
+      );
+  }
 
-      }));
+  /**
+   * Load driver results of the season from remote.
+   * 
+   * @param season season name
+   * @param driverId driver id
+   */
+  private loadResults(season: string, driverId: string): Observable<Race[]> {
+    console.log(`Calling ${this.config.ServerWithApiUrl}${season}/drivers/${driverId}/results.json`)
+    return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/drivers/${driverId}/results.json`)
+      .pipe(map(result => result.MRData.RaceTable.Races)
+      );
   }
 }

@@ -1,4 +1,5 @@
 import { Circuit } from "./circuit";
+import { Result } from "./result";
 
 export class Race {
 
@@ -10,13 +11,5 @@ export class Race {
     date: string;
     time: string;
 
-    constructor(json: any) {
-        this.season = json.season;
-        this.round = json.round;
-        this.url = json.url;
-        this.raceName = json.raceName;
-        this.Circuit = new Circuit(json.Circuit);
-        this.date = json.date;
-        this.time = json.time;
-    }
+    Results: Result[];
 }

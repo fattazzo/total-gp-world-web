@@ -5,6 +5,7 @@ import { shareReplay, map } from 'rxjs/operators';
 
 import { Configuration } from '../app.constants';
 import { Race } from '../domain/race';
+import { ErgastResponse } from '../domain/ergast/ergast-response';
 
 @Injectable({
   providedIn: 'root'
@@ -30,14 +31,8 @@ export class RacesService {
 
   private loadSchedule(season: string): Observable<Race[]> {
     console.log(`Calling ${this.config.ServerWithApiUrl}${season}.json`)
-    return this.http.get(`${this.config.ServerWithApiUrl}${season}.json`)
-      .pipe(map(result => {
-        var tmp: Race[] = [];
-        result['MRData']['RaceTable'].Races.forEach((element) => {
-          tmp.push(new Race(element))
-        });
-        return tmp
-
-      }));
+    return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}.json`)
+      .pipe(map(result => result.MRData.RaceTable.Races)
+      );
   }
 }

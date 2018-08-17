@@ -6,6 +6,7 @@ import { shareReplay, map } from 'rxjs/operators';
 import { Configuration } from '../app.constants';
 import { of, Subject, BehaviorSubject } from "rxjs";
 import { Season } from '../domain/season';
+import { ErgastResponse } from '../domain/ergast/ergast-response';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class SeasonsService {
 
   private season = new BehaviorSubject<string>('current');
 
-  constructor(private http: HttpClient,private config : Configuration) { }
+  constructor(private http: HttpClient, private config: Configuration) { }
 
   setSeason(newSeason: string) {
     this.season.next(newSeason);
@@ -27,7 +28,7 @@ export class SeasonsService {
   }
 
   get seasons() {
-    if(! this.seasonsCache$) {
+    if (!this.seasonsCache$) {
       this.seasonsCache$ = this.loadSeasons();
     }
 
@@ -37,13 +38,13 @@ export class SeasonsService {
   private loadSeasons(): Observable<Season[]> {
     var currentYear = new Date().getFullYear();
     var diffYears = currentYear - 1950 + 1;
-    return this.http.get(`${this.config.ServerWithApiUrl}seasons.json?limit=${currentYear}&offset=0`)
+    return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}seasons.json?limit=${currentYear}&offset=0`)
       .pipe(map(result => {
-        var tmp : Season[] = [];
-        result['MRData']['SeasonTable'].Seasons.forEach( (element) => {
-          tmp.unshift(new Season(element))
-        });
-        tmp.unshift(new Season({season: "current",url: ""}));
+        var tmp: Season[] = result.MRData.SeasonTable.Seasons;
+        var currentSeason = new Season();
+        currentSeason.season = "current";
+        currentSeason.url = "";
+        tmp.push(currentSeason);
         return tmp
       }));
   }

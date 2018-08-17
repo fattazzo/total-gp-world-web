@@ -21,12 +21,15 @@ export class DriverComponent implements OnInit {
 
   wikiPage: WikipediaPage;
 
+  season: string;
+
   constructor(private route: ActivatedRoute,
     private driversService: DriversService,
     private seasonsService: SeasonsService) { }
 
   ngOnInit() {
-    this.driverIdSelected = this.route.snapshot.paramMap.get('driverId')
+    this.driverIdSelected = this.route.snapshot.paramMap.get('driverId');
+    this.seasonsService.getSeason().subscribe(s => this.season = s)
     this.onChange(this.driverIdSelected);
 
     this.seasonsService.getSeason().subscribe((newSeason) => {

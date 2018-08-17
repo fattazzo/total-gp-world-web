@@ -7,6 +7,8 @@ import { Configuration } from '../app.constants';
 
 import { ConstructorStanding } from '../domain/constructor-standing';
 import { Constructor } from '../domain/constructor';
+import { ErgastResponse } from '../domain/ergast/ergast-response';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -73,15 +75,10 @@ export class ConstructorsService {
    */
   private loadStandings(season: string): Observable<ConstructorStanding[]> {
     console.log(`Calling ${this.config.ServerWithApiUrl}${season}/constructorStandings.json`)
-    return this.http.get(`${this.config.ServerWithApiUrl}${season}/constructorStandings.json`)
-      .pipe(map(result => {
-        var tmp: ConstructorStanding[] = [];
-        result['MRData']['StandingsTable']['StandingsLists'][0].ConstructorStandings.forEach((element) => {
-          tmp.push(new ConstructorStanding(element))
-        });
-        return tmp
-
-      }));
+    return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/constructorStandings.json`)
+      .pipe(map(result =>
+        (result.MRData.StandingsTable.StandingsLists[0] === undefined) ? [] : result.MRData.StandingsTable.StandingsLists[0].ConstructorStandings)
+      );
   }
 
   /**
@@ -91,14 +88,8 @@ export class ConstructorsService {
    */
   private load(season: string): Observable<Constructor[]> {
     console.log(`Calling ${this.config.ServerWithApiUrl}${season}/constructors.json`)
-    return this.http.get(`${this.config.ServerWithApiUrl}${season}/constructors.json`)
-      .pipe(map(result => {
-        var tmp: Constructor[] = [];
-        result['MRData']['ConstructorTable'].Constructors.forEach((element) => {
-          tmp.push(new Constructor(element))
-        });
-        return tmp
-
-      }));
+    return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/constructors.json`)
+      .pipe(map(result => result.MRData.ConstructorTable.Constructors)
+      );
   }
 }
