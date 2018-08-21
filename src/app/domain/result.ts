@@ -6,14 +6,14 @@ import { FastestLap } from "./fastest-lap";
 export class Result {
 
     number: string;
-    position: string;
+    position: number;
     positionText: string;
-    points: string;
+    points: number;
 
     Driver: Driver;
     Constructor: Constructor;
 
-    grid: string;
+    grid: number;
     laps: string;
     status: string;
 

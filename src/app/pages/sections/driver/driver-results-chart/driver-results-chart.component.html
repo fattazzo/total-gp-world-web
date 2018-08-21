@@ -1,3 +1,22 @@
-<p>
-  driver-results-chart works!
-</p>
+<nb-card *ngIf="(results | async)?.length">
+  <div class="main-header">
+    <div class="table-header">
+      <div>Results</div>
+      <div class="subtitle">Choose a chart value</div>
+    </div>
+
+    <div class="dropdown" [ngClass]="{ 'ghost-dropdown': currentTheme === 'corporate' }" ngbDropdown>
+      <button type="button" ngbDropdownToggle class="btn" [ngClass]="{ 'btn-outline-success': currentTheme == 'default', 'btn-primary': currentTheme != 'default'}">
+        {{ type }}
+      </button>
+      <ul class="dropdown-menu" ngbDropdownMenu>
+        <li class="dropdown-item" *ngFor="let t of types" (click)="changeDataType(t)">{{ t }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="example-container">
+    <div echarts [options]="option" class="echart" (chartInit)="onChartInit($event)">
+    </div>
+  </div>
+</nb-card>

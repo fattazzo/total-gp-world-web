@@ -9,7 +9,7 @@ import { Race } from '../../../../domain/race';
   templateUrl: './driver-results.component.html',
   styleUrls: ['./driver-results.component.scss']
 })
-export class DriverResultsComponent implements OnInit {
+export class DriverResultsComponent {
 
   private _driverId: string;
   private _season: string;
@@ -29,9 +29,6 @@ export class DriverResultsComponent implements OnInit {
   displayedColumns = this.columns.map(c => c.columnDef);
 
   constructor(private driversService: DriversService) { }
-
-  ngOnInit() {
-  }
 
   @Input('season')
   set season(season: string) {
