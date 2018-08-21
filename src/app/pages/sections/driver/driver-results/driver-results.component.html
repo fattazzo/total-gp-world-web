@@ -1,19 +1,9 @@
-<nb-card *ngIf="(results | async)?.length">
-  <div class="table-header">
-    <div>Results</div>
-    <div class="subtitle">Season {{_season}}</div>
+<div class="row" *ngIf="(results)?.length">
+  <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-12">
+    <driver-results-table [results]="results"></driver-results-table>
   </div>
 
-  <div class="example-container">
-    <table mat-table [dataSource]="results">
-
-      <ng-container *ngFor="let column of columns" [cdkColumnDef]="column.columnDef">
-        <th mat-header-cell *cdkHeaderCellDef>{{ column.header }} </th>
-        <td mat-cell *cdkCellDef="let row">{{ column.cell(row) }} </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+  <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-12">
+    <driver-results-charts [results]="results"></driver-results-charts>
   </div>
-</nb-card>
+</div>

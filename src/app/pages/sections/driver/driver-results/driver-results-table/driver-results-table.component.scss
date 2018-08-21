@@ -1,0 +1,127 @@
+@import '../../../../../@theme/styles/themes';
+@import '~@nebular/theme/components/card/card.component.theme';
+@import '~@nebular/theme/styles/global/typography/typography';
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/bootstrap/breakpoints';
+@import '~@nebular/theme/styles/global/bootstrap/hero-buttons';
+
+@include nb-install-component() {
+
+    .table-header {
+        @include nb-card-header();
+        font-size: 1.25rem;
+    
+        .subtitle {
+          color: nb-theme(color-fg);
+          font-family: nb-theme(font-main);
+          font-size: 1rem;
+          font-weight: nb-theme(font-weight-light);
+        }
+    }
+
+    .example-container {
+        height: 400px;
+        width: 100%;
+        overflow: scroll;
+      }
+      
+      .mat-table {
+        width: 100%;
+      }
+
+      .mat-header-cell {
+        @include nb-card-header();
+        font-size: 1.25rem; 
+      }
+
+      .mat-cell {
+        @include nb-card-header();
+        font-family: nb-theme(font-secondary);
+        font-size: 1rem;
+        font-weight: nb-theme(font-weight-bolder);
+        color: nb-theme(color-fg-heading);
+        padding-top: 0;
+        padding-bottom: 0;
+        white-space: nowrap;
+      }
+
+      .mat-row {
+        &:hover {
+          background-color: nb-theme(layout-bg);
+        }
+      }
+
+      /deep/ nb-card-header {
+        display: flex;
+        justify-content: space-between;
+    
+        .header-container {
+          display: flex;
+          @include nb-rtl(flex-direction, row-reverse);
+        }
+    
+        .title {
+          padding-left: 1rem;
+        }
+      }
+
+      nb-card-body {
+
+      }
+    
+      /deep/ nb-card-body {
+        display: flex;
+        position: relative;
+        flex: 1;
+        padding: 0;
+        overflow: hidden;
+    
+        .period {
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+          justify-content: flex-end;
+        }
+    
+        .time-interval {
+          font-size: nb-theme(font-size-sm);
+          color: nb-theme(color-fg);
+          white-space: nowrap;
+        }
+    
+        .value {
+          font-family: nb-theme(font-secondary), serif;
+          font-weight: nb-theme(font-weight-bold);
+          color: nb-theme(card-fg-heading);
+    
+          .currency {
+            color: nb-theme(color-success);
+    
+            @include nb-for-theme(corporate) {
+              color: nb-theme(color-primary);
+            }
+          }
+        }
+    
+        .start-period {
+          .time-interval, .value {
+            text-align: right;
+          }
+        }
+    
+        .end-period {
+          .time-interval, .value {
+            text-align: left;
+          }
+    }
+    ngx-stats-bar-animation-chart {
+        flex: 1;
+        position: relative;
+  
+        .echart {
+          height: 100%;
+          width: 100%;
+        }
+      }
+  }
+}

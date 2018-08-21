@@ -1,0 +1,19 @@
+<nb-card>
+  <div class="table-header">
+    <div>Results</div>
+    <div class="subtitle">Season {{_season}}</div>
+  </div>
+
+  <div class="example-container">
+    <table mat-table [dataSource]="results">
+
+      <ng-container *ngFor="let column of columns" [cdkColumnDef]="column.columnDef">
+        <th mat-header-cell *cdkHeaderCellDef>{{ column.header }} </th>
+        <td mat-cell *cdkCellDef="let row">{{ column.cell(row) }} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</nb-card>

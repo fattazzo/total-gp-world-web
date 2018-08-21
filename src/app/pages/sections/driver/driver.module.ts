@@ -9,7 +9,8 @@ import { DriverWikiComponent } from './driver-wiki/driver-wiki.component';
 import { MatTableModule } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
 import { DriverResultsComponent } from './driver-results/driver-results.component';
-import { DriverResultsChartComponent } from './driver-results-chart/driver-results-chart.component';
+import { DriverResultsTableComponent } from './driver-results/driver-results-table/driver-results-table.component';
+import { DriverResultsChartsComponent } from './driver-results/driver-results-charts/driver-results-charts.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { DriverResultsChartComponent } from './driver-results-chart/driver-resul
         DriverComponent,
         DriverWikiComponent,
         DriverResultsComponent,
-        DriverResultsChartComponent
+        DriverResultsTableComponent,
+        DriverResultsChartsComponent,
     ],
 })
 export class DriverModule { }
