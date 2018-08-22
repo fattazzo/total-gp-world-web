@@ -4,18 +4,16 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Launch Chrome against localhost",
-            "url": "http://localhost:4200",
-            "sourceMaps": true,
-            "webRoot": "${workspaceRoot}"
-        },
-        {
-            "type": "chrome",
-            "request": "attach",
-            "name": "Attach to Chrome",
-            "port": 9222,
-            "sourceMaps": true,
-            "webRoot": "${workspaceRoot}"
+            "name": "Launch Chromium against localhost",
+            "url": "http://localhost:4200/#",
+            "webRoot": "${workspaceFolder}",
+            "runtimeExecutable": "/usr/bin/chromium",
+            "runtimeArgs": [
+                "--new-window",
+                "-user-data-dir=\"/${workspaceFolder}/DevProfile\"",
+                "--remote-debugging-port=9222",
+                "--disable-background-networking"
+            ]
         }
     ]
 }

@@ -12,7 +12,7 @@ import { ChartBuilder } from './chart-builder';
 })
 export class DriverResultsChartsComponent implements OnDestroy {
 
-  type = 'Points';
+  type$ = 'Points';
   types = ['Points', 'Grid', 'Position'];
 
   currentTheme: string;
@@ -30,6 +30,12 @@ export class DriverResultsChartsComponent implements OnDestroy {
     });
   }
 
+  @Input('type')
+  set type(type: string) {
+    this.type$ = type;
+    this.loadChart();
+  }
+
   @Input('results')
   set results(results: Race[]) {
     this.results$ = results;
@@ -40,34 +46,25 @@ export class DriverResultsChartsComponent implements OnDestroy {
     this.themeSubscription.unsubscribe();
   }
 
-  changeDataType(newType: string) {
-    this.type = newType;
-    this.loadChart();
-  }
-
   private loadChart() {
     this.themeSubscription = this.themeService.getJsTheme().subscribe(config => {
       const eTheme: any = config.variables.electricity;
 
       var data = this.buildSerieData();
 
-      if (this.type === this.types[0]) {
+      if (this.type$ === this.types[0]) {
         var xdata = this.results$.map(race => race.raceName);
-        this.option = ChartBuilder.buildBarChartOptions(eTheme, this.type, data, xdata);
+        this.option = ChartBuilder.buildBarChartOptions(eTheme, this.type$, data, xdata);
       } else {
-        this.option = ChartBuilder.buildPieChartOptions(this.type, 'Position {b}<br># {c} ({d}%)', data, this.buildLegendData());
+        this.option = ChartBuilder.buildPieChartOptions(this.type$, 'Position {b}<br># {c} ({d}%)', data, this.buildLegendData());
       }
 
       this.resizeChart();
     });
   }
 
-
-
   private buildSerieData(): any[] {
-
-
-    switch (this.type) {
+    switch (this.type$) {
       case this.types[0]: {
         return this.results$.map(race => race.Results[0].points);
       }
@@ -92,7 +89,7 @@ export class DriverResultsChartsComponent implements OnDestroy {
   }
 
   private buildLegendData(): any[] {
-    switch (this.type) {
+    switch (this.type$) {
       case this.types[1]: {
         return this.results$.map(race => race.Results[0].grid);
       }

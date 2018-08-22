@@ -1,15 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DriversService } from '../../../../services/drivers.service';
-import { Observable, of, race } from 'rxjs';
-import { Result } from '../../../../domain/result';
 import { Race } from '../../../../domain/race';
+import { DriversService } from '../../../../services/drivers.service';
 
 @Component({
-  selector: 'driver-results',
-  templateUrl: './driver-results.component.html',
-  styleUrls: ['./driver-results.component.scss']
+  selector: 'driver-qualifying',
+  templateUrl: './driver-qualifying.component.html',
+  styleUrls: ['./driver-qualifying.component.scss']
 })
-export class DriverResultsComponent {
+export class DriverQualifyingComponent {
 
   private _driverId: string;
   private _season: string;
@@ -17,8 +15,6 @@ export class DriverResultsComponent {
   public results: Race[];
 
   revealed = false;
-
-  type: string = 'Points';
 
   constructor(private driversService: DriversService) { }
 
@@ -34,10 +30,6 @@ export class DriverResultsComponent {
     this.loadResults();
   }
 
-  setType(type: string): void {
-    this.type = type;
-  }
-
   toggleView() {
     this.revealed = !this.revealed;
   }
@@ -46,7 +38,7 @@ export class DriverResultsComponent {
     this.results = [];
 
     if (this._season != undefined && this._driverId != undefined) {
-      this.driversService.getResults(this._season, this._driverId)
+      this.driversService.getQualifying(this._season, this._driverId)
         .subscribe(res => {
           this.results = res
         });

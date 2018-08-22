@@ -21,6 +21,7 @@ export class DriversService {
   private cacheStandings$: Observable<DriverStanding[]>;
   private cacheDrivers$: Observable<Driver[]>;
   private cacheRaces$: Map<string, Observable<Race[]>> = new Map();
+  private cacheQualifyng$: Map<string, Observable<Race[]>> = new Map();
 
   constructor(private http: HttpClient, private config: Configuration) { }
 
@@ -81,12 +82,27 @@ export class DriversService {
     return this.cacheRaces$.get(driverId);
   }
 
+  public getQualifying(season: string, driverId: string): Observable<Race[]> {
+    this.clearCacheIfNeeded(season);
+
+    if (!this.cacheQualifyng$.get(driverId)) {
+      console.log('Qualifying: Empty cache, load from remote');
+      this.seasonCache$ = season;
+      this.cacheQualifyng$.set(driverId, this.loadQualifying(season, driverId));
+    } else {
+      console.log('Qualifying: get data from cache');
+    }
+
+    return this.cacheQualifyng$.get(driverId);
+  }
+
   private clearCacheIfNeeded(season: string) {
     if (season != this.seasonCache$) {
       this.seasonCache$ = null;
       this.cacheDrivers$ = null;
       this.cacheStandings$ = null;
       this.cacheRaces$ = new Map();
+      this.cacheQualifyng$ = new Map();
     }
   }
 
@@ -124,6 +140,19 @@ export class DriversService {
   private loadResults(season: string, driverId: string): Observable<Race[]> {
     console.log(`Calling ${this.config.ServerWithApiUrl}${season}/drivers/${driverId}/results.json`)
     return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/drivers/${driverId}/results.json`)
+      .pipe(map(result => result.MRData.RaceTable.Races)
+      );
+  }
+
+  /**
+   * Load driver qualifying results of the season from remote.
+   * 
+   * @param season season name
+   * @param driverId driver id
+   */
+  private loadQualifying(season: string, driverId: string): Observable<Race[]> {
+    console.log(`Calling ${this.config.ServerWithApiUrl}${season}/drivers/${driverId}/qualifying.json`)
+    return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/drivers/${driverId}/qualifying.json`)
       .pipe(map(result => result.MRData.RaceTable.Races)
       );
   }

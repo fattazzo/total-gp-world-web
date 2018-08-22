@@ -1,0 +1,34 @@
+@import '../../../../../@theme/styles/themes';
+@import '~@nebular/theme/components/card/card.component.theme';
+
+@include nb-install-component() {
+
+  /deep/ nb-card {
+    margin-bottom: 0rem;
+  }
+
+  nb-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0rem 4rem 0.5rem 0rem;
+    @include nb-rtl(padding-right, 1.25rem);
+    @include nb-rtl(padding-left, 4rem);
+  }
+
+  .dropdown {
+    min-width: 120px;
+  }
+
+  .table-header {
+    @include nb-card-header();
+    font-size: 1.25rem;
+
+    .subtitle {
+      color: nb-theme(color-fg);
+      font-family: nb-theme(font-main);
+      font-size: 1rem;
+      font-weight: nb-theme(font-weight-light);
+    }
+}
+}
