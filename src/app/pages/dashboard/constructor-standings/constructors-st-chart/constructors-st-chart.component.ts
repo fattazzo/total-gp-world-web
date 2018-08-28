@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, Input } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 
 import { ConstructorsService } from '../../../../services/constructors.service';
@@ -9,23 +9,20 @@ import { ConstructorStanding } from '../../../../domain/constructor-standing';
 @Component({
   selector: 'constructors-st-chart',
   templateUrl: './constructors-st-chart.component.html',
-  styleUrls: ['./constructors-st-chart.component.scss', '../constructor-standings.component.scss']
+  styleUrls: ['./constructors-st-chart.component.scss', '../constructors-st-table/constructors-st-table.component.scss']
 })
-export class ConstructorsStChartComponent implements AfterViewInit, OnDestroy {
+export class ConstructorsStChartComponent implements OnDestroy {
   options: any = {};
   themeSubscription: any;
+
+  loading = true;
 
   constructor(private theme: NbThemeService, private constructorsService: ConstructorsService, private seasonsService: SeasonsService) {
   }
 
-  ngAfterViewInit() {
-    this.seasonsService.getSeason()
-      .subscribe((newSeason) => {
-        console.log("Constructors Chart: loading season " + newSeason);
-        this.constructorsService.getStandings(newSeason).subscribe(
-          d => this.updateData(d)
-        )
-      });
+  @Input('standings')
+  set standings(st: ConstructorStanding[]) {
+    this.updateData(st);
   }
 
   ngOnDestroy(): void {
@@ -33,6 +30,7 @@ export class ConstructorsStChartComponent implements AfterViewInit, OnDestroy {
   }
 
   private updateData(stands: ConstructorStanding[]) {
+    this.loading = stands === undefined || stands.length === 0
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
 
       const colors = config.variables;

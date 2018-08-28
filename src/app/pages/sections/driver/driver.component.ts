@@ -1,58 +1,69 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { DriversService } from '../../../services/drivers.service';
 import { SeasonsService } from '../../../services/seasons.service';
 
 import { Driver } from '../../../domain/driver';
-import { WikipediaPage } from '../../../domain/wikipedia-page';
 
 @Component({
   selector: 'driver',
   templateUrl: './driver.component.html',
   styleUrls: ['./driver.component.scss']
 })
-export class DriverComponent implements OnInit {
+export class DriverComponent implements OnInit, OnDestroy {
 
-  @Input() driverIdSelected: string;
+  driverIdSelected: string;
+  season: string;
 
   drivers: Observable<Driver[]> = of();
 
-  wikiPage: WikipediaPage;
+  wikiUrl: string;
 
-  season: string;
+  seasonSubscribe: any;
 
-  constructor(private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute, private router: Router,
     private driversService: DriversService,
     private seasonsService: SeasonsService) { }
 
-  ngOnInit() {
-    this.driverIdSelected = this.route.snapshot.paramMap.get('driverId');
-    this.seasonsService.getSeason().subscribe(s => this.season = s)
-    this.onChange(this.driverIdSelected);
+  ngOnDestroy() {
+    this.seasonSubscribe.unsubscribe();
+  }
 
-    this.seasonsService.getSeason().subscribe((newSeason) => {
-      this.drivers = this.driversService.get(newSeason);
-      this.onChange(this.driverIdSelected)
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+
+      this.season = params['season'];
+      this.driverIdSelected = params['driverId'];
+
+      if (this.season != undefined) {
+        this.drivers = this.driversService.get(this.season);
+        this.wikiUrl = undefined;
+
+        if (this.driverIdSelected != undefined) {
+          this.drivers.forEach(ds => {
+            ds.forEach(d => {
+              if (d.driverId === this.driverIdSelected) {
+                this.wikiUrl = d.url;
+              }
+            })
+          })
+        }
+      }
+    });
+
+    this.seasonSubscribe = this.seasonsService.getSeason().subscribe((newSeason) => {
+      if (this.season != newSeason) {
+        this.season = newSeason;
+        this.drivers = this.driversService.get(newSeason);
+        this.onChange(this.driverIdSelected)
+      }
     });
   }
 
   onChange(newValue) {
-    this.wikiPage = undefined;
-
-    this.drivers.forEach(ds => {
-      ds.forEach(d => {
-        if (d.driverId === newValue) {
-          this.driverIdSelected = newValue;
-
-          this.driversService.getInfo(d)
-            .subscribe(
-              info => this.wikiPage = info,
-              error => this.wikiPage = undefined);
-        }
-      })
-    })
+    this.router.navigate(['/pages/sections/driver', { season: this.season, driverId: newValue }]);
   }
 
 }

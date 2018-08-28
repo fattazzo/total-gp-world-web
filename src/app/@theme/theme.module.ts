@@ -20,6 +20,7 @@ import {
 } from '@nebular/theme';
 
 import { NbSecurityModule } from '@nebular/security';
+import { NbSpinnerModule } from '@nebular/theme/components/spinner/spinner.module';
 
 import {
   FooterComponent,
@@ -59,6 +60,7 @@ const NB_MODULES = [
   NbContextMenuModule,
   NgbModule,
   NbSecurityModule, // *nbIsGranted directive
+  NbSpinnerModule
 ];
 
 const COMPONENTS = [

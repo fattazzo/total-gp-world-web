@@ -24,6 +24,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Circuits',
     icon: 'fas fa-road',
-    link: '/pages/circuits',
+    link: '/pages/sections/circuit',
   }
 ];

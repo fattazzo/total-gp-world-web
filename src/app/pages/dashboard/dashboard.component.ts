@@ -12,6 +12,7 @@ import { DriverStanding } from '../../domain/driver-standing';
 import { ConstructorStanding } from '../../domain/constructor-standing';
 import { Race } from '../../domain/race';
 import { RacesService } from '../../services/races.service';
+import { Configuration } from '../../app.constants';
 
 @Component({
   selector: 'ngx-dashboard',
@@ -23,20 +24,23 @@ export class DashboardComponent implements OnInit {
   constructorsCards: Observable<CardSettings[]>;
   racesCards: Observable<CardSettings[]>;
 
+  season: string;
+
   constructor(private driversService: DriversService,
     private constructorsService: ConstructorsService,
     private seasonsService: SeasonsService,
-    private racesService: RacesService) { }
+    private racesService: RacesService,
+    private config: Configuration) { }
 
   ngOnInit() {
+    this.season = this.config.season;
     this.driversCards = of(DashboardCards.driversCards);
     this.constructorsCards = of(DashboardCards.constructorsCards);
     this.racesCards = of(DashboardCards.racesCards);
 
-    console.log("aaaaaaaaaaaaaaaa");
     this.seasonsService.getSeason()
       .subscribe((newSeason) => {
-        console.log("bbbbbbbbbbbbb")
+        this.season = newSeason;
         this.driversService.getStandings(newSeason).subscribe(standings => this.updateDriversCards(standings));
         this.constructorsService.getStandings(newSeason).subscribe(standings => this.updateConstructorsCards(standings));
         this.racesService.getSchedule(newSeason).subscribe(schedule => this.updateRacesCards(schedule));

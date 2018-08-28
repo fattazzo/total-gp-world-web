@@ -1,4 +1,4 @@
-@import '../../../@theme/styles/themes';
+@import '../../../../@theme/styles/themes';
 @import '~@nebular/theme/components/card/card.component.theme';
 @import '~@nebular/theme/styles/global/typography/typography';
 @import '~bootstrap/scss/mixins/breakpoints';
@@ -6,6 +6,14 @@
 @import '~@nebular/theme/styles/global/bootstrap/hero-buttons';
 
 @include nb-install-component() {
+
+  .link-black {
+    color: nb-theme(color-fg-heading);
+
+    &:hover {
+      color: nb-theme(color-primary);
+    }
+  }
 
   nb-card {
     display: flex;

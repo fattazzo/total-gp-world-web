@@ -1,0 +1,35 @@
+<nb-card [nbSpinner]="!schedule?.length" nbSpinnerStatus="primary" nbSpinnerSize="xxlarge" nbSpinnerMessage="">
+  <div class="table-header">
+    <div>Races</div>
+    <div class="subtitle">Schedule</div>
+  </div>
+
+  <div class="example-container">
+    <table mat-table [dataSource]="schedule">
+
+      <ng-container *ngFor="let column of columns" [cdkColumnDef]="column.columnDef">
+        <th mat-header-cell *cdkHeaderCellDef>{{ column.header }} </th>
+        <td mat-cell *cdkCellDef="let row">
+          <div [ngSwitch]="column.columnDef">
+            <div *ngSwitchCase="'raceName'">
+              <a [routerLink]="['/pages/sections/circuit',{ season: season , circuitId: row.Circuit.circuitId}]" class="link-black">
+                {{ column.cell(row) }}
+              </a>
+            </div>
+            <div *ngSwitchCase="'locality'">
+              <a href="https://maps.google.com/?q={{ row.Circuit.Location.lat }},{{ row.Circuit.Location.long }}" target="_blank" class="link-black">
+                <i class="fa fa-map-marker-alt"></i> {{ column.cell(row) }}
+              </a>
+            </div>
+            <div *ngSwitchDefault>
+              {{ column.cell(row) }}
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</nb-card>

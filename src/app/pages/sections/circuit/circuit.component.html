@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-xxxl-3 col-xxl-3 col-lg-6 col-md-6">
+    <form class="form-content">
+      <div class="table-header row">
+        <div for="circuitSelect" style="padding-right: 10px">Circuit</div>
+        <div>
+          <select id="circuitSelect" [(ngModel)]="circuitSelected" (ngModelChange)="onChange($event)" name="circuitSelect">
+            <option *ngFor="let c of circuits | async" value={{c.circuitId}}>
+              {{c.circuitName}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xxxl-12 col-xxl-12 col-lg-12 col-md-12">
+    <wikipedia-page [wikiUrl]="wikiUrl"></wikipedia-page>
+  </div>
+</div>

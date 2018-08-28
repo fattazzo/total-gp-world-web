@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, Input } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 
 import { DriversService } from '../../../../services/drivers.service';
@@ -9,23 +9,19 @@ import { DriverStanding } from '../../../../domain/driver-standing';
 @Component({
   selector: 'drivers-st-chart',
   templateUrl: './drivers-st-chart.component.html',
-  styleUrls: ['./drivers-st-chart.component.scss', '../drivers-standings.component.scss']
+  styleUrls: ['./drivers-st-chart.component.scss', '../drivers-st-table/drivers-st-table.component.scss']
 })
-export class DriversStChartComponent implements AfterViewInit, OnDestroy {
+export class DriversStChartComponent implements OnDestroy {
   options: any = {};
   themeSubscription: any;
 
-  constructor(private theme: NbThemeService, private driversService: DriversService, private seasonsService: SeasonsService) {
-  }
+  loading = true;
 
-  ngAfterViewInit() {
-    this.seasonsService.getSeason()
-      .subscribe((newSeason) => {
-        console.log("Drivers Chart: loading season " + newSeason);
-        this.driversService.getStandings(newSeason).subscribe(
-          d => this.updateData(d)
-        )
-      });
+  constructor(private theme: NbThemeService) { }
+
+  @Input('standings')
+  set standings(st: DriverStanding[]) {
+    this.updateData(st);
   }
 
   ngOnDestroy(): void {
@@ -33,6 +29,7 @@ export class DriversStChartComponent implements AfterViewInit, OnDestroy {
   }
 
   private updateData(stands: DriverStanding[]) {
+    this.loading = stands === undefined || stands.length === 0
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
 
       const colors = config.variables;

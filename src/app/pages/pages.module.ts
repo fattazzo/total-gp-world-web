@@ -9,6 +9,7 @@ import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { DriverModule } from './sections/driver/driver.module';
 import { ConstructorModule } from './sections/constructor/constructor.module';
+import { CircuitModule } from './sections/circuit/circuit.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -21,6 +22,7 @@ const PAGES_COMPONENTS = [
     DashboardModule,
     DriverModule,
     ConstructorModule,
+    CircuitModule,
     MiscellaneousModule,
     NgxEchartsModule,
   ],

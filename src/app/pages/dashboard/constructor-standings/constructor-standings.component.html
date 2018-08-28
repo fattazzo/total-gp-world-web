@@ -1,41 +1,8 @@
-<nb-card size="large">
-  <div class="chart-container">
-    <div class="table-header">
-      <div>Constructors</div>
-      <div class="subtitle">Standings</div>
-    </div>
-
-    <div class="stats-month">
-      <div class="results">
-        <b>Position</b>
-      </div>
-      <div class="results">
-        <b>Constructor</b>
-      </div>
-      <div class="results">
-        <b>Points</b>
-      </div>
-    </div>
-
-    <div class="stats-content">
-      <div class="stats-month" *ngFor="let stand of standings | async">
-        <div>
-          <span class="month">{{ stand.position }}</span>
-        </div>
-        <a href="#/pages/sections/constructor/{{stand.Constructor.constructorId}}">
-          <div class="results" *ngIf="stand.Constructor.nationality; else nameOnly">
-            <b>{{stand.Constructor.name}}</b> ({{stand.Constructor.nationality}})
-          </div>
-          <ng-template #nameOnly>
-            <div class="results">
-              <b>{{stand.Constructor.name}}</b>
-            </div>
-          </ng-template>
-        </a>
-        <div>
-          <span class="month">{{ stand.points }}</span>
-        </div>
-      </div>
-    </div>
+<div class="row">
+  <div class="col-xxxl-4 col-xxl-6 col-lg-6 col-md-12">
+    <constructors-st-table [season]="season" [standings]="standings"></constructors-st-table>
   </div>
-</nb-card>
+  <div class="col-xxxl-8 col-xxl-6 col-lg-6 col-md-12">
+    <constructors-st-chart [standings]="standings"></constructors-st-chart>
+  </div>
+</div>

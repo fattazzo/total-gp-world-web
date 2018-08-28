@@ -9,6 +9,7 @@ import { ConstructorStanding } from '../domain/constructor-standing';
 import { Constructor } from '../domain/constructor';
 import { ErgastResponse } from '../domain/ergast/ergast-response';
 import { of } from 'rxjs';
+import { WikipediaPage } from '../pages/components/wikipedia-page/domain/wikipedia-page';
 
 @Injectable({
   providedIn: 'root'

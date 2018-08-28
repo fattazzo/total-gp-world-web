@@ -4,7 +4,6 @@ import { NgxEchartsModule } from 'ngx-echarts';
 
 import { ThemeModule } from '../../../@theme/theme.module';
 import { DriverComponent } from './driver.component';
-import { DriverWikiComponent } from './driver-wiki/driver-wiki.component';
 
 import { MatTableModule } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
@@ -17,17 +16,18 @@ import { DriverQualifyingChartComponent } from './driver-qualifying/driver-quali
 import { DriverQualifyingHeaderComponent } from './driver-qualifying/driver-qualifying-header/driver-qualifying-header.component';
 import { DriverResultsHeaderComponent } from './driver-results/driver-results-header/driver-results-header.component';
 
+import { WikipediaPageModule } from '../../components/wikipedia-page/wikipedia-page.module'
 
 @NgModule({
     imports: [
         ThemeModule,
         NgxEchartsModule,
         CdkTableModule,
-        MatTableModule
+        MatTableModule,
+        WikipediaPageModule
     ],
     declarations: [
         DriverComponent,
-        DriverWikiComponent,
         DriverResultsComponent,
         DriverResultsTableComponent,
         DriverResultsChartsComponent,

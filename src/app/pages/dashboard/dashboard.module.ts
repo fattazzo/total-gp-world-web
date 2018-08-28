@@ -4,15 +4,14 @@ import { NgxEchartsModule } from 'ngx-echarts';
 
 import { ThemeModule } from '../../@theme/theme.module';
 import { DashboardComponent } from './dashboard.component';
-import { DriversStandingsComponent } from './drivers-standings/drivers-standings.component';
-import { ConstructorStandingsComponent } from './constructor-standings/constructor-standings.component';
-import { DriversStChartComponent } from './drivers-standings/drivers-st-chart/drivers-st-chart.component';
-import { ConstructorsStChartComponent } from './constructor-standings/constructors-st-chart/constructors-st-chart.component';
 import { StatusCardComponent } from './status-card/status-card.component';
-import { ScheludedRacesComponent } from './scheluded-races/scheluded-races.component';
 
 import { MatTableModule } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
+
+import { DriverStandingsModule } from './driver-standings/driver-standings.module';
+import { ConstructorStandingsModule } from './constructor-standings/constructor-standings.module';
+import { ScheludedRacesModule } from './scheluded-races/scheluded-races.module';
 
 
 @NgModule({
@@ -20,16 +19,14 @@ import { CdkTableModule } from '@angular/cdk/table';
     ThemeModule,
     NgxEchartsModule,
     CdkTableModule,
-    MatTableModule
+    MatTableModule,
+    DriverStandingsModule,
+    ConstructorStandingsModule,
+    ScheludedRacesModule
   ],
   declarations: [
     DashboardComponent,
-    DriversStandingsComponent,
-    ConstructorStandingsComponent,
-    DriversStChartComponent,
-    ConstructorsStChartComponent,
     StatusCardComponent,
-    ScheludedRacesComponent,
-  ],
+  ]
 })
 export class DashboardModule { }

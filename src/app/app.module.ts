@@ -16,6 +16,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+// import ngx-translate and the http loader
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient } from '@angular/common/http';
+
 import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
@@ -26,6 +31,13 @@ import { NgxEchartsModule } from 'ngx-echarts';
     HttpClientModule,
     AppRoutingModule,
     NgxEchartsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
 
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
@@ -37,4 +49,9 @@ import { NgxEchartsModule } from 'ngx-echarts';
   ],
 })
 export class AppModule {
+}
+
+// required for AOT compilation
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
 }

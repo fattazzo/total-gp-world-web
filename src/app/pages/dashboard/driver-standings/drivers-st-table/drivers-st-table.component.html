@@ -1,4 +1,4 @@
-<nb-card size="large">
+<nb-card size="large" [nbSpinner]="!standings?.length" nbSpinnerStatus="primary" nbSpinnerSize="xxlarge" nbSpinnerMessage="">
   <div class="chart-container">
     <div class="table-header">
       <div>Drivers</div>
@@ -18,11 +18,11 @@
     </div>
 
     <div class="stats-content">
-      <div class="stats-month" *ngFor="let stand of standings | async">
+      <div class="stats-month" *ngFor="let stand of standings">
         <div>
           <span class="month">{{ stand.position }}</span>
         </div>
-        <a href="#/pages/sections/driver/{{stand.Driver.driverId}}">
+        <a [routerLink]="['/pages/sections/driver',{ season: season , driverId: stand.Driver.driverId}]" class="link-black">
           <div class="results" *ngIf="stand.Driver.code; else nameOnly">
             <b>{{stand.Driver.givenName}} {{stand.Driver.familyName}}</b> ({{stand.Driver.code}})
           </div>

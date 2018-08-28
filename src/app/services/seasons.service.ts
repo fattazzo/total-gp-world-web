@@ -21,6 +21,7 @@ export class SeasonsService {
 
   setSeason(newSeason: string) {
     this.season.next(newSeason);
+    this.config.season = newSeason;
   }
 
   getSeason(): Observable<string> {

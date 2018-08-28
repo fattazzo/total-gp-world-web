@@ -6,15 +6,31 @@
       </div>
     </nb-card>
   </div>
-  <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-6" *ngIf="wikiPage.extract">
+  <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-6" *ngIf="wikiPage.extract_html">
     <nb-card>
       <div class="table-header">
-        <div>Info</div>
-        <div class="subtitle">(intro from Wikipedia)</div>
+        <div>
+          <div>Info</div>
+          <div class="subtitle">(intro from Wikipedia)</div>
+        </div>
+
+        <div class="dropdown ghost-dropdown" ngbDropdown>
+          <button type="button" class="btn btn-sm" ngbDropdownToggle [ngClass]="{
+                            'btn-success': currentTheme === 'default',
+                            'btn-primary': currentTheme !== 'default'}">
+            {{wikiLang}}
+          </button>
+          <ul ngbDropdownMenu class="dropdown-menu">
+            <li class="dropdown-item" *ngFor="let lang of translate.getLangs()" (click)="reloadLang(lang)">
+              {{ lang }}
+            </li>
+          </ul>
+        </div>
       </div>
 
       <div class="table-header">
-        <div class="text">{{wikiPage.extract}}</div>
+        <div [innerHtml]="wikiPage.extract_html" class="text"></div>
+
       </div>
     </nb-card>
   </div>

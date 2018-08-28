@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { ConstructorsService } from '../../../services/constructors.service';
@@ -10,19 +10,34 @@ import { Configuration } from '../../../app.constants';
 
 @Component({
   selector: 'constructor-standings',
-  templateUrl: './constructor-standings.component.html',
-  styleUrls: ['./constructor-standings.component.scss']
+  templateUrl: './constructor-standings.component.html'
 })
 export class ConstructorStandingsComponent implements OnInit {
 
-  standings: Observable<ConstructorStanding[]>;
+  @Input() season: string;
 
-  constructor(private constructorsService: ConstructorsService, private seasonsService: SeasonsService, private config: Configuration) { }
+  standings: ConstructorStanding[];
+
+  constructor(private config: Configuration,
+    private constructorsService: ConstructorsService,
+    private seasonsService: SeasonsService) { }
 
   ngOnInit() {
-    this.seasonsService.getSeason().subscribe((newSeason) => {
-      this.standings = this.constructorsService.getStandings(newSeason)
-    });
+    if (this.season === undefined) this.season = this.config.season;
+    this.loadStandings();
+
+    this.seasonsService.getSeason()
+      .subscribe((newSeason) => {
+        this.season = newSeason;
+        this.loadStandings();
+      });
+  }
+
+  private loadStandings() {
+    this.standings = [];
+    this.constructorsService.getStandings(this.season).subscribe(
+      st => this.standings = st
+    )
   }
 
 }

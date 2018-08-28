@@ -9,13 +9,16 @@ import { ConstructorComponent } from './constructor.component';
 import { MatTableModule } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
 
+import { WikipediaPageModule } from '../../components/wikipedia-page/wikipedia-page.module'
+
 
 @NgModule({
     imports: [
         ThemeModule,
         NgxEchartsModule,
         CdkTableModule,
-        MatTableModule
+        MatTableModule,
+        WikipediaPageModule
     ],
     declarations: [
         ConstructorComponent

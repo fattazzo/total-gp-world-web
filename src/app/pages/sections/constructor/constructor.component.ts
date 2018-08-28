@@ -1,29 +1,68 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Constructor } from '../../../domain/constructor';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { ConstructorsService } from '../../../services/constructors.service';
 import { SeasonsService } from '../../../services/seasons.service';
+import { WikipediaPage } from '../../components/wikipedia-page/domain/wikipedia-page';
+import { WikipediaService } from '../../components/wikipedia-page/service/wikipedia.service';
 
 @Component({
   selector: 'constructor',
   templateUrl: './constructor.component.html',
   styleUrls: ['./constructor.component.scss']
 })
-export class ConstructorComponent implements OnInit {
+export class ConstructorComponent implements OnInit, OnDestroy {
 
-  @Input() constructorSelected: string;
+  constructorSelected: string;
+  season: string;
 
-  constructors: Observable<Constructor[]>;
+  constructors: Observable<Constructor[]> = of();
 
-  constructor(private route: ActivatedRoute,
+  wikiUrl: string;
+
+  seasonSubscribe: any;
+
+  constructor(private route: ActivatedRoute, private router: Router,
     private constructorsService: ConstructorsService,
-    private seasonsService: SeasonsService) { }
+    private seasonsService: SeasonsService, ) { }
+
+  ngOnDestroy() {
+    this.seasonSubscribe.unsubscribe();
+  }
 
   ngOnInit() {
-    this.constructorSelected = this.route.snapshot.paramMap.get('constructorId')
-    this.seasonsService.getSeason().subscribe((newSeason) => {
-      this.constructors = this.constructorsService.get(newSeason)
+    this.route.params.subscribe(params => {
+
+      this.season = params['season'];
+      this.constructorSelected = params['constructorId'];
+
+      if (this.season != undefined) {
+        this.constructors = this.constructorsService.get(this.season);
+        this.wikiUrl = undefined;
+
+        if (this.constructorSelected != undefined) {
+          this.constructors.forEach(cs => {
+            cs.forEach(c => {
+              if (c.constructorId === this.constructorSelected) {
+                this.wikiUrl = c.url;
+              }
+            })
+          })
+        }
+      }
     });
+
+    this.seasonSubscribe = this.seasonsService.getSeason().subscribe((newSeason) => {
+      if (this.season != newSeason) {
+        this.season = newSeason;
+        this.constructors = this.constructorsService.get(newSeason);
+        this.onChange(this.constructorSelected)
+      }
+    });
+  }
+
+  onChange(newValue) {
+    this.router.navigate(['/pages/sections/constructor', { season: this.season, constructorId: newValue }]);
   }
 }

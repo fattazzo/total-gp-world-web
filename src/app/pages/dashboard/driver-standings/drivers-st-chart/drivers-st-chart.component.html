@@ -1,0 +1,12 @@
+<nb-card size="large" [nbSpinner]="loading" nbSpinnerStatus="primary" nbSpinnerSize="xxlarge" nbSpinnerMessage="">
+  <div class="chart-container">
+    <div class="table-header">
+      <div>Drivers</div>
+      <div class="subtitle">Standings (top 5)</div>
+    </div>
+
+    <div style="height: 100%;">
+      <div echarts [options]="options" class="echart"></div>
+    </div>
+  </div>
+</nb-card>

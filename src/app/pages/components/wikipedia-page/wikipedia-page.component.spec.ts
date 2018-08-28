@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DriverWikiComponent } from './driver-wiki.component';
+import { WikipediaPageComponent } from './wikipedia-page.component';
 
-describe('DriverWikiComponent', () => {
-  let component: DriverWikiComponent;
-  let fixture: ComponentFixture<DriverWikiComponent>;
+describe('WikipediaPageComponent', () => {
+  let component: WikipediaPageComponent;
+  let fixture: ComponentFixture<WikipediaPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DriverWikiComponent ]
+      declarations: [ WikipediaPageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DriverWikiComponent);
+    fixture = TestBed.createComponent(WikipediaPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

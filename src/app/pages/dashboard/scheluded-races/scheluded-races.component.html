@@ -1,25 +1,5 @@
-<div class="table-header">
-    <div>Races</div>
-    <div class="subtitle">Schedule</div>
-</div>
-
-<div class="example-container">
-    <table mat-table [dataSource]="schedule">
-
-        <ng-container *ngFor="let column of columns" [cdkColumnDef]="column.columnDef">
-            <th mat-header-cell *cdkHeaderCellDef>{{ column.header }} </th>
-            <td mat-cell *cdkCellDef="let row">
-                <a *ngIf="column.columnDef === 'locality'; else nameOnly" href="https://maps.google.com/?q={{ row.Circuit.Location.lat }},{{ row.Circuit.Location.long }}"
-                    target="_blank" class="link-black">
-                    <i class="fa fa-map-marker-alt"></i> {{ column.cell(row) }}
-                </a>
-                <ng-template #nameOnly>
-                    {{ column.cell(row) }}
-                </ng-template>
-            </td>
-        </ng-container>f
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+<div class="row">
+    <div class="col-xxxl-12 col-xxl-12 col-lg-12 col-md-12">
+        <scheduled-races-table [season]="season" [schedule]="schedule"></scheduled-races-table>
+    </div>
 </div>

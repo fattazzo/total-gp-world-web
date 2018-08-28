@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { shareReplay, map } from 'rxjs/operators';
+import { shareReplay, map, first } from 'rxjs/operators';
 
 import { Configuration } from '../app.constants';
 
 import { DriverStanding } from '../domain/driver-standing'
 import { Driver } from '../domain/driver';
-import { WikipediaPage } from '../domain/wikipedia-page';
+import { WikipediaPage } from '../pages/components/wikipedia-page/domain/wikipedia-page';
 import { Race } from '../domain/race';
 import { ErgastResponse } from '../domain/ergast/ergast-response';
 
@@ -61,11 +61,6 @@ export class DriversService {
     }
 
     return this.cacheDrivers$;
-  }
-
-  public getInfo(driver: Driver): Observable<WikipediaPage> {
-    var restUrl = driver.url.replace('http', 'https').replace('/wiki/', '/api/rest_v1/page/summary/');
-    return this.http.get<WikipediaPage>(restUrl);
   }
 
   public getResults(season: string, driverId: string): Observable<Race[]> {
