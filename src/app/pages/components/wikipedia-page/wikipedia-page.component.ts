@@ -32,7 +32,7 @@ export class WikipediaPageComponent implements OnInit {
     this.wikiLangs = undefined;
 
     if (url != undefined) {
-      this.wikipediaService.getInfo(url, this.wikiLang).subscribe(info => this.wikiPage = info);
+      this.wikipediaService.getInfo(url, this.translate.currentLang).subscribe(info => this.wikiPage = info);
       this.wikipediaService.getAvailableLangs(url).subscribe(res => this.wikiLangs = res);
     }
   }
