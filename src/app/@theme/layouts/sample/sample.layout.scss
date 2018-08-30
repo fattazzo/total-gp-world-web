@@ -43,6 +43,13 @@
     }
   }
 
+  nb-sidebar {
+    /deep/ nb-sidebar-footer {
+      height:auto;
+      padding: 0px;
+    }
+  }
+
   nb-sidebar.menu-sidebar {
 
     margin-top: nb-theme(sidebar-header-gap);

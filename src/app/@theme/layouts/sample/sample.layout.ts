@@ -24,6 +24,7 @@ import { StateService } from '../../../@core/data/state.service';
       <nb-sidebar class="menu-sidebar"
                    tag="menu-sidebar"
                    responsive
+                   state="expanded"
                    [end]="sidebar.id === 'end'">
         <nb-sidebar-header *ngIf="currentTheme !== 'corporate'">
           <a href="#" class="btn btn-hero-success main-btn">
@@ -31,6 +32,9 @@ import { StateService } from '../../../@core/data/state.service';
           </a>
         </nb-sidebar-header>
         <ng-content select="nb-menu"></ng-content>
+        <nb-sidebar-footer>
+          <app-controls></app-controls>
+        </nb-sidebar-footer>
       </nb-sidebar>
 
       <nb-layout-column class="main-content">
@@ -110,10 +114,10 @@ export class SampleLayoutComponent implements OnDestroy {
   currentTheme: string;
 
   constructor(protected stateService: StateService,
-              protected menuService: NbMenuService,
-              protected themeService: NbThemeService,
-              protected bpService: NbMediaBreakpointsService,
-              protected sidebarService: NbSidebarService) {
+    protected menuService: NbMenuService,
+    protected themeService: NbThemeService,
+    protected bpService: NbMediaBreakpointsService,
+    protected sidebarService: NbSidebarService) {
     this.stateService.onLayoutState()
       .pipe(takeWhile(() => this.alive))
       .subscribe((layout: string) => this.layout = layout);
@@ -142,7 +146,7 @@ export class SampleLayoutComponent implements OnDestroy {
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
         this.currentTheme = theme.name;
-    });
+      });
   }
 
   ngOnDestroy() {

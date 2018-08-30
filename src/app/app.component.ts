@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   constructor(private analytics: AnalyticsService, private translate: TranslateService) {
     translate.addLangs(["en", "it"]);
     translate.setDefaultLang('en');
-    translate.use("en");
+    translate.use(translate.getBrowserLang());
   }
 
   ngOnInit() {

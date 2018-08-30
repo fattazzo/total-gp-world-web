@@ -12,6 +12,8 @@ import { ScheduledRacesTableComponent } from './scheduled-races-table/scheduled-
 
 import { RouterModule } from '@angular/router';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 
 @NgModule({
   imports: [
@@ -19,7 +21,8 @@ import { RouterModule } from '@angular/router';
     NgxEchartsModule,
     CdkTableModule,
     MatTableModule,
-    RouterModule
+    RouterModule,
+    TranslateModule
   ],
   declarations: [
     ScheludedRacesComponent,

@@ -14,6 +14,8 @@ import { DriversStChartComponent } from './drivers-st-chart/drivers-st-chart.com
 
 import { RouterModule } from '@angular/router';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 
 @NgModule({
   imports: [
@@ -21,7 +23,8 @@ import { RouterModule } from '@angular/router';
     NgxEchartsModule,
     CdkTableModule,
     MatTableModule,
-    RouterModule
+    RouterModule,
+    TranslateModule,
   ],
   declarations: [
     DriverStandingsComponent,

@@ -12,12 +12,12 @@ export class ScheduledRacesTableComponent implements OnInit {
   @Input() season: string;
 
   columns = [
-    { columnDef: 'round', header: 'Round', cell: (race: Race) => `${race.round}` },
-    { columnDef: 'raceName', header: 'Name', cell: (race: Race) => `${race.raceName}` },
-    { columnDef: 'date', header: 'Date', cell: (race: Race) => `${race.date}` },
-    { columnDef: 'time', header: 'Time', cell: (race: Race) => `${race.time}` },
-    { columnDef: 'country', header: 'Country', cell: (race: Race) => `${race.Circuit.Location.country}` },
-    { columnDef: 'locality', header: 'Locality', cell: (race: Race) => `${race.Circuit.Location.locality}` },
+    { columnDef: 'round', key: 'round.sing', cell: (race: Race) => `${race.round}` },
+    { columnDef: 'raceName', key: 'name.sing', cell: (race: Race) => `${race.raceName}` },
+    { columnDef: 'date', key: 'date.sing', cell: (race: Race) => race.date === undefined ? '' : `${race.date.substr(8, 2)}-${race.date.substr(5, 2)}-${race.date.substr(0, 4)}` },
+    { columnDef: 'time', key: 'time.sing', cell: (race: Race) => `${race.time}` },
+    { columnDef: 'country', key: 'country.sing', cell: (race: Race) => `${race.Circuit.Location.country}` },
+    { columnDef: 'locality', key: 'locality.sing', cell: (race: Race) => `${race.Circuit.Location.locality}` },
   ];
 
   displayedColumns = this.columns.map(c => c.columnDef);

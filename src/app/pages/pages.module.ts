@@ -11,6 +11,9 @@ import { DriverModule } from './sections/driver/driver.module';
 import { ConstructorModule } from './sections/constructor/constructor.module';
 import { CircuitModule } from './sections/circuit/circuit.module';
 
+import { CapitalizePipe } from '../@theme/pipes'
+import { UpperCasePipe } from '@angular/common';
+
 const PAGES_COMPONENTS = [
   PagesComponent,
 ];
@@ -24,7 +27,11 @@ const PAGES_COMPONENTS = [
     ConstructorModule,
     CircuitModule,
     MiscellaneousModule,
-    NgxEchartsModule,
+    NgxEchartsModule
+  ],
+  providers: [
+    CapitalizePipe,
+    UpperCasePipe
   ],
   declarations: [
     ...PAGES_COMPONENTS

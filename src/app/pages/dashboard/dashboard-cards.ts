@@ -3,25 +3,25 @@ import { CardSettings } from "./card-settings";
 export class DashboardCards {
 
     static driversPointsCard: CardSettings = {
-        title: 'Drivers points',
+        title: 'driver.points',
         iconClass: 'fas fa-layer-group',
         type: 'primary',
         value: '',
     };
     static driversNumberCard: CardSettings = {
-        title: 'Total drivers',
+        title: 'driver.numbers',
         iconClass: 'fas fa-users',
         type: 'success',
         value: '',
     };
     static driversWinningCard: CardSettings = {
-        title: 'Winning drivers',
+        title: 'driver.winning',
         iconClass: 'fas fa-trophy',
         type: 'info',
         value: '',
     };
     static driversNationalitiesCard: CardSettings = {
-        title: 'Drivers nationalities',
+        title: 'driver.nationalities',
         iconClass: 'far fa-flag',
         type: 'warning',
         value: '',
@@ -39,25 +39,25 @@ export class DashboardCards {
     }
 
     static constructorsPointsCard: CardSettings = {
-        title: 'Constructors points',
+        title: 'constructor.points',
         iconClass: 'fas fa-layer-group',
         type: 'primary',
         value: '',
     };
     static constructorsNumberCard: CardSettings = {
-        title: 'Total constructors',
+        title: 'constructor.numbers',
         iconClass: 'fas fa-users',
         type: 'success',
         value: '',
     };
     static constructorsWinningCard: CardSettings = {
-        title: 'Winning constructors',
+        title: 'constructor.winning',
         iconClass: 'fas fa-trophy',
         type: 'info',
         value: '',
     };
     static constructorsNationalitiesCard: CardSettings = {
-        title: 'Constructors nationalities',
+        title: 'constructor.nationalities',
         iconClass: 'far fa-flag',
         type: 'warning',
         value: '',
@@ -75,14 +75,14 @@ export class DashboardCards {
     }
 
     static racesNumberCard: CardSettings = {
-        title: 'Total races',
+        title: 'race.numbers',
         iconClass: 'fas fa-users',
         type: 'success',
         value: '',
     };
 
     static racesNationalitiesCard: CardSettings = {
-        title: 'Races nationalities',
+        title: 'race.nationalities',
         iconClass: 'far fa-flag',
         type: 'warning',
         value: '',

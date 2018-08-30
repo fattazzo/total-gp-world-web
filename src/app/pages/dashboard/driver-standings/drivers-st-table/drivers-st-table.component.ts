@@ -1,12 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-
-import { DriversService } from '../../../../services/drivers.service';
-import { SeasonsService } from '../../../../services/seasons.service';
 
 import { DriverStanding } from '../../../../domain/driver-standing';
-import { Configuration } from '../../../../app.constants';
-import { StandingsTable } from '../../../../domain/tables/standings-table';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'drivers-st-table',
@@ -18,8 +13,7 @@ export class DriversStTableComponent implements OnInit {
   @Input() standings: DriverStanding[];
   @Input() season: string;
 
-  constructor(private driversService: DriversService) {
-  }
+  constructor(public translate: TranslateService) { }
 
   ngOnInit() {
   }

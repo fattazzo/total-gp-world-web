@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { NgxEchartsModule } from 'ngx-echarts';
 
-
 import { ThemeModule } from '../../../@theme/theme.module';
 
 import { MatTableModule } from '@angular/material';
@@ -13,6 +12,8 @@ import { ConstructorsStChartComponent } from './constructors-st-chart/constructo
 
 import { RouterModule } from '@angular/router';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { RouterModule } from '@angular/router';
     NgxEchartsModule,
     CdkTableModule,
     MatTableModule,
-    RouterModule
+    RouterModule,
+    TranslateModule
   ],
   declarations: [
     ConstructorStandingsComponent,

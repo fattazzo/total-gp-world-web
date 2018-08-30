@@ -43,6 +43,8 @@ import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
 
+import { AppControlsComponent } from '../components/app-controls/app-controls.component'
+
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
 const NB_MODULES = [
@@ -76,6 +78,8 @@ const COMPONENTS = [
   SampleLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
+
+  AppControlsComponent
 ];
 
 const ENTRY_COMPONENTS = [
@@ -87,7 +91,7 @@ const PIPES = [
   PluralPipe,
   RoundPipe,
   TimingPipe,
-  ReversePipe,
+  ReversePipe
 ];
 
 const NB_THEME_PROVIDERS = [

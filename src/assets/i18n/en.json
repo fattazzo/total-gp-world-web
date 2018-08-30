@@ -1,6 +1,65 @@
 {
-    "demo": {
-        "title": "Translation demo",
-        "text": "This is a simple demonstration app for ngx-translate"
+    "position": {
+        "sing": "position",
+        "plur": "positions"
+    },
+    "driver": {
+        "sing": "driver",
+        "plur": "drivers",
+        "points": "points",
+        "numbers": "total",
+        "winning": "winning",
+        "nationalities": "nationalities"
+    },
+    "point": {
+        "sing": "point",
+        "plur": "points"
+    },
+    "standing": {
+        "sing": "standing",
+        "plur": "standings"
+    },
+    "constructor": {
+        "sing": "constructor",
+        "plur": "constructors",
+        "points": "points",
+        "numbers": "total",
+        "winning": "winning",
+        "nationalities": "nationalities"
+    },
+    "section": {
+        "plur": "sections"
+    },
+    "dashboard": {
+        "sing": "dashboard"
+    },
+    "circuit": {
+        "plur": "circuits"
+    },
+    "race": {
+        "plur": "races",
+        "numbers": "total",
+        "nationalities": "countries"
+    },
+    "schedule": {
+        "sing": "schedule"
+    },
+    "round": {
+        "sing": "round"
+    },
+    "name": {
+        "sing": "name"
+    },
+    "date": {
+        "sing": "date"
+    },
+    "time": {
+        "sing": "time"
+    },
+    "country": {
+        "sing": "country"
+    },
+    "locality": {
+        "sing": "locality"
     }
 }

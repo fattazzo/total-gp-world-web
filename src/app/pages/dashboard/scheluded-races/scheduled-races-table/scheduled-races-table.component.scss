@@ -8,17 +8,25 @@
 @include nb-install-component() {
 
     .example-container {
+        display: flex;
+        flex-direction: column;
         height: 500px;
         overflow: auto;
       }
       
       .mat-table {
+        flex: 1;
         width: 100%;
+      }
+
+      .mat-header-row {
+        background: white;
       }
 
       .mat-header-cell {
         @include nb-card-header();
         font-size: 1.25rem; 
+        background: white;
       }
 
       .mat-cell {

@@ -13,6 +13,8 @@ import { DriverStandingsModule } from './driver-standings/driver-standings.modul
 import { ConstructorStandingsModule } from './constructor-standings/constructor-standings.module';
 import { ScheludedRacesModule } from './scheluded-races/scheluded-races.module';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 
 @NgModule({
   imports: [
@@ -22,7 +24,8 @@ import { ScheludedRacesModule } from './scheluded-races/scheluded-races.module';
     MatTableModule,
     DriverStandingsModule,
     ConstructorStandingsModule,
-    ScheludedRacesModule
+    ScheludedRacesModule,
+    TranslateModule
   ],
   declarations: [
     DashboardComponent,

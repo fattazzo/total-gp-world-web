@@ -11,7 +11,7 @@ import { Component, Input } from '@angular/core';
         </div>
       </div>
       <div class="details">
-        <div class="title">{{ title }}</div>
+        <div class="title">{{ title | translate | ngxCapitalize }}</div>
       </div>
       <div class="icon-container">
         <div class="iconbox">
@@ -26,5 +26,5 @@ export class StatusCardComponent {
   @Input() title: string;
   @Input() type: string;
   @Input() on = true;
-  @Input() value : string;
+  @Input() value: string;
 }

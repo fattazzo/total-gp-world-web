@@ -15,5 +15,4 @@ export class Race {
     Results: Result[];
 
     QualifyingResults: QualifyingResult[];
-
 }

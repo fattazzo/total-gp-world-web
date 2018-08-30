@@ -1,19 +1,19 @@
 <nb-card size="large" [nbSpinner]="!standings?.length" nbSpinnerStatus="primary" nbSpinnerSize="xxlarge" nbSpinnerMessage="">
   <div class="chart-container">
     <div class="table-header">
-      <div>Constructors</div>
-      <div class="subtitle">Standings</div>
+      <div>{{ 'constructor.plur' | translate | ngxCapitalize }}</div>
+      <div class="subtitle">{{ 'standing.sing' | translate | ngxCapitalize }}</div>
     </div>
 
     <div class="stats-month">
       <div class="results">
-        <b>Position</b>
+        <b>{{ 'position.sing' | translate | ngxCapitalize }}</b>
       </div>
       <div class="results">
-        <b>Constructor</b>
+        <b>{{ 'constructor.sing' | translate | ngxCapitalize }}</b>
       </div>
       <div class="results">
-        <b>Points</b>
+        <b>{{ 'point.plur' | translate | ngxCapitalize }}</b>
       </div>
     </div>
 
