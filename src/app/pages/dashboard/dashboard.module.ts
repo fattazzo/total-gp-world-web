@@ -14,6 +14,7 @@ import { ConstructorStandingsModule } from './constructor-standings/constructor-
 import { ScheludedRacesModule } from './scheluded-races/scheluded-races.module';
 
 import { TranslateModule } from '@ngx-translate/core';
+import { DashboardRoutingModule } from './dashboard-routing.module';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { TranslateModule } from '@ngx-translate/core';
     DriverStandingsModule,
     ConstructorStandingsModule,
     ScheludedRacesModule,
-    TranslateModule
+    TranslateModule,
+    DashboardRoutingModule
   ],
   declarations: [
     DashboardComponent,

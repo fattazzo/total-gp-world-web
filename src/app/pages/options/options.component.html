@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-xxxl-3 col-xxl-3 col-lg-3 col-md-4 col-sm-12">
+    <h2>{{ 'language.sing' | translate | ngxCapitalize }}</h2>
+  </div>
+
+  <div class="col-xxxl-3 col-xxl-3 col-lg-3 col-md-8 col-sm-12">
+    <div [(ngModel)]="currentLang" ngbRadioGroup class="btn-group btn-group-toggle btn-outline-toggle-group btn-group-full-width btn-toggle-radio-group">
+      <label ngbButtonLabel class="btn btn-outline-primary" *ngFor="let lang of translate.getLangs()">
+        <input ngbButton type="radio" value="{{lang}}" (click)="onLangChange(lang)"> {{lang}}
+      </label>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xxxl-3 col-xxl-3 col-lg-3 col-md-4">
+    <h2>{{ 'theme.sing' | translate | ngxCapitalize }}</h2>
+  </div>
+
+  <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-8">
+    <themes-switcher></themes-switcher>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xxxl-3 col-xxl-3 col-lg-3 col-md-4">
+    <h2>{{ 'direction.sing' | translate | ngxCapitalize }}</h2>
+  </div>
+
+  <!--<div class="col-xxxl-3 col-xxl-3 col-lg-3 col-md-6">-->
+  <ngx-layout-direction-switcher></ngx-layout-direction-switcher>
+  <!--</div>-->
+</div>

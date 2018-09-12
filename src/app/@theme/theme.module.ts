@@ -45,6 +45,8 @@ import { CORPORATE_THEME } from './styles/theme.corporate';
 
 import { AppControlsComponent } from '../components/app-controls/app-controls.component'
 
+import { NgSelectModule } from '@ng-select/ng-select';
+
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
 const NB_MODULES = [
@@ -79,7 +81,7 @@ const COMPONENTS = [
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
 
-  AppControlsComponent
+  AppControlsComponent,
 ];
 
 const ENTRY_COMPONENTS = [
@@ -106,7 +108,7 @@ const NB_THEME_PROVIDERS = [
 ];
 
 @NgModule({
-  imports: [...BASE_MODULES, ...NB_MODULES],
+  imports: [...BASE_MODULES, ...NB_MODULES, NgSelectModule],
   exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS, ...PIPES],
   declarations: [...COMPONENTS, ...PIPES],
   entryComponents: [...ENTRY_COMPONENTS],

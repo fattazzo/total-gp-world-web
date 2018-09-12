@@ -1,0 +1,21 @@
+<nb-card-body>
+  <div style="min-width:600px; overflow:hidden">
+    <p-table [columns]="cols" [value]="racesResults" [tableStyle]="{'table-layout':'auto'}">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th class="table-header-cell" *ngFor="let col of columns">{{col.header}}</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+        <tr class="ui-widget-header table-header-cell" *ngIf="multipleResults && (rowIndex === 0 || rowData.raceName != racesResults[rowIndex-1].raceName)">
+          <td [attr.colspan]="cols.length">
+            <span style="font-weight:bold">{{rowData.raceName}}</span>
+          </td>
+        </tr>
+        <tr>
+          <td *ngFor="let col of columns">{{col.cell(rowData)}}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</nb-card-body>

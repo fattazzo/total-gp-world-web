@@ -1,38 +1,42 @@
 <div class="row" *ngIf="wikiPage">
   <div class="col-xxxl-3 col-xxl-3 col-lg-3 col-md-3" *ngIf="wikiPage.thumbnail">
-    <nb-card>
-      <div class="img-content">
-        <img class="img-wiki" src="{{wikiPage.thumbnail.source}}">
-      </div>
-    </nb-card>
+    <div style="height: 100%; padding-bottom: 1.5rem">
+      <nb-card style="height: 100%;">
+        <div class="img-content">
+          <img class="img-wiki" src="{{wikiPage.thumbnail.source}}">
+        </div>
+      </nb-card>
+    </div>
   </div>
   <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-6" *ngIf="wikiPage.extract_html">
-    <nb-card>
-      <div class="table-header">
-        <div>
-          <div>Info</div>
-          <div class="subtitle">(intro from Wikipedia)</div>
-        </div>
+    <div style="height: 100%; padding-bottom: 1.5rem">
+      <nb-card style="height: 100%;">
+        <div class="table-header">
+          <div>
+            <div>{{ 'info.sing' | translate | ngxCapitalize }}</div>
+            <div class="subtitle">( {{ 'wikipedia.introOf' | translate | ngxCapitalize }} )</div>
+          </div>
 
-        <div class="dropdown ghost-dropdown" ngbDropdown>
-          <button type="button" class="btn btn-sm" ngbDropdownToggle [ngClass]="{
+          <div class="dropdown ghost-dropdown" ngbDropdown>
+            <button type="button" class="btn btn-sm" ngbDropdownToggle [ngClass]="{
                             'btn-success': currentTheme === 'default',
                             'btn-primary': currentTheme !== 'default'}">
-            {{wikiLang}}
-          </button>
-          <ul ngbDropdownMenu class="dropdown-menu">
-            <li class="dropdown-item" *ngFor="let lang of translate.getLangs()" (click)="reloadLang(lang)">
-              {{ lang }}
-            </li>
-          </ul>
+              {{wikiLang}}
+            </button>
+            <ul ngbDropdownMenu class="dropdown-menu">
+              <li class="dropdown-item" *ngFor="let lang of translate.getLangs()" (click)="reloadLang(lang)">
+                {{ lang }}
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
 
-      <div class="table-header">
-        <div [innerHtml]="wikiPage.extract_html" class="text"></div>
+        <div class="table-header">
+          <div [innerHtml]="wikiPage.extract_html" class="text"></div>
 
-      </div>
-    </nb-card>
+        </div>
+      </nb-card>
+    </div>
   </div>
 
   <div class="col-xxxl-3 col-xxl-3 col-lg-3 col-md-3">

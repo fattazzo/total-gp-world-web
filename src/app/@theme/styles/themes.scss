@@ -3,6 +3,8 @@
 // @nebular out of the box themes
 @import '~@nebular/theme/styles/themes';
 
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
 // which themes you what to enable (empty to enable all)
 $nb-enabled-themes: (default, cosmic, corporate);
 

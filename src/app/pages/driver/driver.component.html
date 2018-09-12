@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-xxxl-3 col-xxl-3 col-lg-6 col-md-6">
+    <form class="form-content">
+      <div class="table-header row">
+        <div for="driverSelect" style="padding-right: 10px">Driver</div>
+        <div>
+          <select id="driverSelect" [(ngModel)]="driverIdSelected" (ngModelChange)="onChange($event)" name="driverSelect">
+            <option *ngFor="let dr of drivers | async" value={{dr.driverId}}>
+              {{dr.givenName}} {{dr.familyName}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xxxl-12 col-xxl-12 col-lg-12 col-md-12">
+    <wikipedia-page [wikiUrl]="wikiUrl"></wikipedia-page>
+  </div>
+</div>
+
+<!--
+<div class="row">
+  <div class="col-xxxl-12 col-xxl-12 col-lg-12 col-md-12">
+    <nb-card>
+      stagioni partecipate: http://ergast.com/api/f1/drivers/alonso/seasons
+    </nb-card>
+  </div>
+</div>-->
+
+<div class="row">
+  <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-12">
+    <f1-results [season]="season" [driverId]="driverIdSelected"></f1-results>
+  </div>
+
+  <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-12">
+    <f1-qualifying [season]="season" [driverId]="driverIdSelected"></f1-qualifying>
+  </div>
+</div>
+
+<!--
+<div class="row">
+  <div class="col-xxxl-12 col-xxl-12 col-lg-12 col-md-12">
+    <nb-card>
+      selected seasons finishing status: http://ergast.com/api/f1/current/drivers/alonso/status
+    </nb-card>
+  </div>
+</div>
+-->

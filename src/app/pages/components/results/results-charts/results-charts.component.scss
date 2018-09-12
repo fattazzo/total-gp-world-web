@@ -1,0 +1,32 @@
+@import "../../../../@theme/styles/themes";
+@import "~@nebular/theme/components/card/card.component.theme";
+@import "~@nebular/theme/styles/global/typography/typography";
+@import "~bootstrap/scss/mixins/breakpoints";
+@import "~@nebular/theme/styles/global/bootstrap/breakpoints";
+@import "~@nebular/theme/styles/global/bootstrap/hero-buttons";
+
+@include nb-install-component() {
+  .example-container {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .echart {
+    //flex-grow: 1;
+    height: 100%;
+    width: 100%;
+  }
+
+  .dropdown {
+    @include nb-card-header();
+    min-width: 130px;
+  }
+
+  second-card-container {
+    height: 100%;
+  }
+}

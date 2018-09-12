@@ -4,7 +4,6 @@ import { MENU_I18N_SPEC } from './pages-menu';
 import { TranslateService } from '@ngx-translate/core';
 import { NbMenuItem } from '@nebular/theme';
 import { CapitalizePipe } from '../@theme/pipes';
-import { indexDebugNode } from '@angular/core/src/debug/debug_node';
 import { UpperCasePipe } from '@angular/common';
 
 @Component({
@@ -50,10 +49,6 @@ export class PagesComponent implements OnInit, OnDestroy {
         }
       }
     })
-  }
-
-  private builI18NArrayKeys() {
-
   }
 }
 

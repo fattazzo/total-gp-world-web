@@ -7,9 +7,6 @@ import { ThemeModule } from '../@theme/theme.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 
 import { DashboardModule } from './dashboard/dashboard.module';
-import { DriverModule } from './sections/driver/driver.module';
-import { ConstructorModule } from './sections/constructor/constructor.module';
-import { CircuitModule } from './sections/circuit/circuit.module';
 
 import { CapitalizePipe } from '../@theme/pipes'
 import { UpperCasePipe } from '@angular/common';
@@ -23,9 +20,6 @@ const PAGES_COMPONENTS = [
     PagesRoutingModule,
     ThemeModule,
     DashboardModule,
-    DriverModule,
-    ConstructorModule,
-    CircuitModule,
     MiscellaneousModule,
     NgxEchartsModule
   ],

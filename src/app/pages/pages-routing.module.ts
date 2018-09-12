@@ -2,49 +2,35 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ConstructorComponent } from './sections/constructor/constructor.component';
-import { CircuitComponent } from './sections/circuit/circuit.component';
-import { DriverComponent } from './sections/driver/driver.component';
 
 const routes: Routes = [
-  //{ path: 'sections/driver', loadChildren: 'app/pages/sections/driver/driver.module#DriverModule' },
   {
-    path: '',
-    component: PagesComponent,
+    path: '', component: PagesComponent,
     children: [
       {
         path: 'dashboard',
-        component: DashboardComponent,
+        loadChildren: './dashboard/dashboard.module#DashboardModule'
       },
       {
         path: '',
         redirectTo: 'dashboard',
-        pathMatch: 'full',
+        pathMatch: 'full'
       },
       {
         path: 'sections/driver',
-        component: DriverComponent,
-      },
-      {
-        path: 'sections/driver/:season/:driverId',
-        component: DriverComponent,
+        loadChildren: './driver/driver.module#DriverModule'
       },
       {
         path: 'sections/constructor',
-        component: ConstructorComponent,
-      },
-      {
-        path: 'sections/constructor/:season/:constructorId',
-        component: ConstructorComponent,
+        loadChildren: './constructor/constructor.module#ConstructorModule'
       },
       {
         path: 'sections/circuit',
-        component: CircuitComponent,
+        loadChildren: './circuit/circuit.module#CircuitModule'
       },
       {
-        path: 'sections/circuit/:season/:circuitId',
-        component: CircuitComponent,
+        path: 'options',
+        loadChildren: './options/options.module#OptionsModule'
       }
     ],
   }];

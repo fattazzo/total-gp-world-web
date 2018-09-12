@@ -64,7 +64,7 @@ export class DriversService {
   }
 
   public getResults(season: string, driverId: string): Observable<Race[]> {
-    this.clearCacheIfNeeded(season);
+    this.clearCacheIfNeeded(season, driverId);
 
     if (!this.cacheRaces$.get(driverId)) {
       console.log('Results: Empty cache, load from remote');
@@ -78,7 +78,7 @@ export class DriversService {
   }
 
   public getQualifying(season: string, driverId: string): Observable<Race[]> {
-    this.clearCacheIfNeeded(season);
+    this.clearCacheIfNeeded(season, driverId);
 
     if (!this.cacheQualifyng$.get(driverId)) {
       console.log('Qualifying: Empty cache, load from remote');
@@ -91,13 +91,18 @@ export class DriversService {
     return this.cacheQualifyng$.get(driverId);
   }
 
-  private clearCacheIfNeeded(season: string) {
+  private clearCacheIfNeeded(season: string, driverId: string = null) {
     if (season != this.seasonCache$) {
       this.seasonCache$ = null;
       this.cacheDrivers$ = null;
       this.cacheStandings$ = null;
-      this.cacheRaces$ = new Map();
-      this.cacheQualifyng$ = new Map();
+      if (driverId == null) {
+        this.cacheRaces$ = new Map();
+        this.cacheQualifyng$ = new Map();
+      } else {
+        this.cacheRaces$.delete(driverId);
+        this.cacheQualifyng$.delete(driverId);
+      }
     }
   }
 

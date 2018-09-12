@@ -61,5 +61,21 @@
     },
     "locality": {
         "sing": "locality"
+    },
+    "language": {
+        "sing": "language"
+    },
+    "theme": {
+        "sing": "theme"
+    },
+    "direction": {
+        "sing": "direction"
+    },
+    "info": {
+        "sing": "info"
+    },
+    "wikipedia": {
+        "sing": "wikipedia",
+        "introOf": "intro from Wikipedia"
     }
 }

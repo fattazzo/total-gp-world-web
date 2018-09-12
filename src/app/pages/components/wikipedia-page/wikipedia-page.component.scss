@@ -1,26 +1,30 @@
-@import '../../../@theme/styles/themes';
-@import '~@nebular/theme/components/card/card.component.theme';
-@import '~@nebular/theme/styles/global/typography/typography';
-@import '~bootstrap/scss/mixins/breakpoints';
-@import '~@nebular/theme/styles/global/bootstrap/breakpoints';
-@import '~@nebular/theme/styles/global/bootstrap/hero-buttons';
+@import "../../../@theme/styles/themes";
+@import "~@nebular/theme/components/card/card.component.theme";
+@import "~@nebular/theme/styles/global/typography/typography";
+@import "~bootstrap/scss/mixins/breakpoints";
+@import "~@nebular/theme/styles/global/bootstrap/breakpoints";
+@import "~@nebular/theme/styles/global/bootstrap/hero-buttons";
 
 @include nb-install-component() {
+  .img-content {
+    height: 100%;
+    margin: 15px;
+    display: flex;
+    align-items: center;
+  }
 
-    .img-content {
-        margin: 15px;
-        display: flex;
-            align-items: center;
-    }
+  .img-wiki {
+    max-height: 320px;
+    max-width: 256px;
+    display: block;
+    margin: auto;
 
-    .img-wiki {
-        max-height: 320px; 
-        max-width: 256px;
-        display:block;
-        margin:auto;
-    }
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
 
-    .table-header {
+  .table-header {
     @include nb-card-header();
     font-size: 1.25rem;
     display: flex;
@@ -35,8 +39,8 @@
     }
 
     .text {
-        font-family: nb-theme(font-main);
-        font-weight: nb-theme(font-weight-light);
-      }
+      font-family: nb-theme(font-main);
+      font-weight: nb-theme(font-weight-light);
+    }
   }
 }
