@@ -53,8 +53,11 @@
     "date": {
         "sing": "data"
     },
-    "time": {
+    "hour": {
         "sing": "ora"
+    },
+    "time": {
+        "sing": "tempo"
     },
     "country": {
         "sing": "nazione"
@@ -77,5 +80,20 @@
     "wikipedia": {
         "sing": "wikipedia",
         "introOf": "intro da Wikipedia"
+    },
+    "grid": {
+        "sing": "griglia"
+    },
+    "status": {
+        "sing": "stato"
+    },
+    "lap": {
+        "plur": "giri"
+    },
+    "result": {
+        "plur": "risultati"
+    },
+    "qualify": {
+        "plur": "qualifiche"
     }
 }

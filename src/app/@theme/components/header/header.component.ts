@@ -60,9 +60,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.currentLang = lang;
   }
 
-  onChange(season: Season) {
-    this.seasonsService.setSeason(season.season);
-    this.selectedSeason = season.season;
+  onChange(season: string) {
+    this.seasonsService.setSeason(season);
+    this.selectedSeason = season;
   }
 
   toggleSidebar(): boolean {

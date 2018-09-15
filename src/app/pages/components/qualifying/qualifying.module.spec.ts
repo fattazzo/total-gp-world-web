@@ -1,6 +1,6 @@
 import { QualifyingModule } from './qualifying.module';
 
-describe('QualifyngModule', () => {
+describe('QualifyingModule', () => {
   let qualifyngModule: QualifyingModule;
 
   beforeEach(() => {

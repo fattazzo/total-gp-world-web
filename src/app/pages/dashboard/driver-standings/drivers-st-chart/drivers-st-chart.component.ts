@@ -12,7 +12,10 @@ import { DriverStanding } from '../../../../domain/driver-standing';
   styleUrls: ['./drivers-st-chart.component.scss', '../drivers-st-table/drivers-st-table.component.scss']
 })
 export class DriversStChartComponent implements OnDestroy {
+
   options: any = {};
+  data: any;
+
   themeSubscription: any;
 
   loading = true;
@@ -33,8 +36,9 @@ export class DriversStChartComponent implements OnDestroy {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
 
       const colors = config.variables;
-      const echarts: any = config.variables.echarts;
+      const chartjs: any = config.variables.chartjs;
 
+      /**
       this.options = {
         backgroundColor: echarts.bg,
         color: [colors.warningLight, colors.infoLight, colors.dangerLight, colors.successLight, colors.primaryLight],
@@ -89,6 +93,50 @@ export class DriversStChartComponent implements OnDestroy {
         tmp.push({ value: stand.points, name: (stand.Driver.givenName + '\n' + stand.Driver.familyName) });
       })
       this.options.series[0].data = tmp.slice(0, 5);
+      */
+
+      this.options = {
+        maintainAspectRatio: false,
+        responsive: true,
+        scales: {
+          xAxes: [
+            {
+              display: false,
+            },
+          ],
+          yAxes: [
+            {
+              display: false,
+            },
+          ],
+        },
+        legend: {
+          labels: {
+            fontColor: chartjs.textColor,
+          },
+          position: 'bottom',
+          //fullWidth: true,
+        },
+        layout: {
+          padding: {
+            left: 20,
+            right: 20,
+            top: 20,
+            bottom: 20
+          }
+        }
+      };
+
+
+
+      this.data = {
+        type: 'pie',
+        labels: stands.map(s => s.Driver.givenName + '\n' + s.Driver.familyName).slice(0, 5),
+        datasets: [{
+          data: stands.map(s => s.points).slice(0, 5),
+          backgroundColor: [colors.warningLight, colors.infoLight, colors.dangerLight, colors.successLight, colors.primaryLight],
+        }]
+      };
     });
   }
 }

@@ -1,25 +1,52 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Race } from '../../../../domain/race';
+import { RaceQualifyingTable } from './domain/race-qualifying-table';
 
 @Component({
   selector: 'qualifying-table',
   templateUrl: './qualifying-table.component.html',
   styleUrls: ['./qualifying-table.component.scss']
 })
-export class QualifyingTableComponent {
+export class QualifyingTableComponent implements OnInit {
 
-  @Input() results: Race[];
+  racesResults: RaceQualifyingTable[];
+  multipleResults: boolean = false;
 
-  columns = [
-    { columnDef: 'raceName', header: 'Race', cell: (race: Race) => `${race.raceName}` },
-    { columnDef: 'position', header: 'Position', cell: (race: Race) => `${race.QualifyingResults[0].position}` },
-    { columnDef: 'Q1', header: 'Q1', cell: (race: Race) => race.QualifyingResults[0].Q1 === undefined ? '' : `${race.QualifyingResults[0].Q1}` },
-    { columnDef: 'Q2', header: 'Q2', cell: (race: Race) => race.QualifyingResults[0].Q2 === undefined ? '' : `${race.QualifyingResults[0].Q2}` },
-    { columnDef: 'Q3', header: 'Q3', cell: (race: Race) => race.QualifyingResults[0].Q3 === undefined ? '' : `${race.QualifyingResults[0].Q3}` },
-  ];
-
-  displayedColumns = this.columns.map(c => c.columnDef);
+  cols: any[];
 
   constructor() { }
 
+  ngOnInit() {
+    this.buildColumns();
+  }
+
+  @Input('results')
+  set results(results: Race[]) {
+    this.racesResults = [];
+    this.multipleResults = false
+
+    results.forEach(race =>
+      race.QualifyingResults.forEach((result, index) => {
+        this.racesResults.push(new RaceQualifyingTable(race.raceName, race.Circuit, result));
+        this.multipleResults = this.multipleResults || (index > 0);
+      })
+    )
+
+    this.buildColumns();
+  }
+
+  private buildColumns() {
+    this.cols = [];
+
+    if (this.multipleResults) {
+      this.cols.push({ field: 'driverName', key: 'driver.sing', cell: (race: RaceQualifyingTable) => `${race.driverName}` });
+    }
+
+    this.cols.push(
+      { field: 'position', key: 'position.sing', cell: (race: RaceQualifyingTable) => `${race.result.position}` },
+      { field: 'q1', key: 'Q1', cell: (race: RaceQualifyingTable) => `${race.q1}` },
+      { field: 'q2', key: 'Q2', cell: (race: RaceQualifyingTable) => `${race.q2}` },
+      { field: 'q3', key: 'Q3', cell: (race: RaceQualifyingTable) => `${race.q3}` }
+    );
+  }
 }

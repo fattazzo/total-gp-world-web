@@ -6,9 +6,6 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { DashboardComponent } from './dashboard.component';
 import { StatusCardComponent } from './status-card/status-card.component';
 
-import { MatTableModule } from '@angular/material';
-import { CdkTableModule } from '@angular/cdk/table';
-
 import { DriverStandingsModule } from './driver-standings/driver-standings.module';
 import { ConstructorStandingsModule } from './constructor-standings/constructor-standings.module';
 import { ScheludedRacesModule } from './scheluded-races/scheluded-races.module';
@@ -21,8 +18,6 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
   imports: [
     ThemeModule,
     NgxEchartsModule,
-    CdkTableModule,
-    MatTableModule,
     DriverStandingsModule,
     ConstructorStandingsModule,
     ScheludedRacesModule,

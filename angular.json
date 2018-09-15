@@ -33,11 +33,13 @@
               "node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
               "src/app/@theme/styles/styles.scss",
               "node_modules/primeng/resources/themes/nova-dark/theme.css",
-              "node_modules/primeng/resources/primeng.min.css"
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeicons/primeicons.css"
             ],
             "scripts": [
               "node_modules/pace-js/pace.min.js",
-              "node_modules/echarts/dist/echarts.min.js"
+              "node_modules/echarts/dist/echarts.min.js",
+              "node_modules/chart.js/dist/Chart.js"
             ]
           },
           "configurations": {
@@ -86,7 +88,8 @@
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [
               "node_modules/pace-js/pace.min.js",
-              "node_modules/echarts/dist/echarts.min.js"
+              "node_modules/echarts/dist/echarts.min.js",
+              "node_modules/chart.js/dist/Chart.js"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
@@ -100,7 +103,8 @@
               "node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
               "src/app/@theme/styles/styles.scss",
               "node_modules/primeng/resources/themes/nova-dark/theme.css",
-              "node_modules/primeng/resources/primeng.min.css"
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeicons/primeicons.css"
             ],
             "assets": [
               "src/assets",

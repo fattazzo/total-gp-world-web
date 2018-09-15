@@ -25,15 +25,21 @@
 
   <div class="season-containter">
     <div class="logo">Season</div>
-    <ng-select [items]="seasons | async | reverse" [searchable]="false" bindLabel="season" bindValue="season" [(ngModel)]="selectedSeason"
-      [clearable]="false" (change)="onChange($event)">
-    </ng-select>
+    <p-dropdown [options]="seasons | async | reverse | selectItemPipe:'season'" [(ngModel)]="selectedSeason" [dataKey]="value"
+      [ngModelOptions]="{standalone: true}" (onChange)="onChange($event.value)" [autoWidth]="false">
+      <ng-template let-item pTemplate="selectedItem">
+        <div style="white-space: nowrap;">{{item.label.season}}</div>
+      </ng-template>
+      <ng-template let-item pTemplate="item">
+        <div style="white-space: nowrap;">{{item.label.season}}</div>
+      </ng-template>
+    </p-dropdown>
   </div>
 
   <div class="lang-containter">
     <i _ngcontent-c6="" class="fas fa-language"></i>
-    <ng-select [(ngModel)]="currentLang" [searchable]="false" [clearable]="false" (change)="onLangChange($event)" class="lang-select">
-      <ng-option *ngFor="let lang of translate.getLangs()" [value]="lang">{{lang}}</ng-option>
-    </ng-select>
+    <p-dropdown [options]="translate.getLangs() | selectItemPipe:'*'" [(ngModel)]="currentLang" [ngModelOptions]="{standalone: true}"
+      (onChange)="onLangChange($event.value)" [autoWidth]="false">
+    </p-dropdown>
   </div>
 </div>

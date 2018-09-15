@@ -4,9 +4,6 @@ import { NgxEchartsModule } from 'ngx-echarts';
 
 import { ThemeModule } from '../../@theme/theme.module';
 
-import { MatTableModule } from '@angular/material';
-import { CdkTableModule } from '@angular/cdk/table';
-
 import { TranslateModule } from '@ngx-translate/core';
 
 import { OptionsComponent } from './options.component';
@@ -18,8 +15,6 @@ import { OptionsRoutingModule } from './options-routing.module';
   imports: [
     ThemeModule,
     NgxEchartsModule,
-    CdkTableModule,
-    MatTableModule,
     TranslateModule,
     OptionsRoutingModule
   ],

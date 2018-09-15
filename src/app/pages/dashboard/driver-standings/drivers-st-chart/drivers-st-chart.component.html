@@ -1,10 +1,16 @@
 <nb-card size="large" [nbSpinner]="loading" nbSpinnerStatus="primary" nbSpinnerSize="xxlarge" nbSpinnerMessage="">
   <div class="chart-container">
     <div class="table-header">
-      <div>{{ 'driver.plur' | translate | ngxCapitalize }}</div>
-      <div class="subtitle">{{ 'standing.sing' | translate | ngxCapitalize }} (top 5)</div>
+      <span><i class="fas fa-user-astronaut fa-2x"></i></span>
+      <div style="margin-right: 10px;margin-left: 10px">
+        <div>{{ 'driver.plur' | translate | ngxCapitalize }}</div>
+        <div class="subtitle">{{ 'standing.sing' | translate | ngxCapitalize }} (top 5)</div>
+      </div>
     </div>
 
-    <div echarts [options]="options" class="echart"></div>
+    <!--<div echarts [options]="options" class="echart"></div>-->
+    <div class="echart">
+      <p-chart type="doughnut" [data]="data" [options]="options" width="100%" height="100%"></p-chart>
+    </div>
   </div>
 </nb-card>

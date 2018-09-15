@@ -1,6 +1,9 @@
 <nb-card-header>
   <div class="table-header">
-    <div>Results</div>
+    <div>
+      <i class="fas fa-trophy fa-2x"></i>
+      {{ 'result.plur' | translate | ngxCapitalize }}
+    </div>
   </div>
 
   <div class="dropdown ghost-dropdown" ngbDropdown *ngIf="showTypesControl">

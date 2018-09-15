@@ -1,15 +1,18 @@
 <div class="row">
-  <div class="col-xxxl-3 col-xxl-3 col-lg-6 col-md-6">
+  <div class="col-12">
     <form class="form-content">
       <div class="table-header row">
         <div for="driverSelect" style="padding-right: 10px">Driver</div>
-        <div>
-          <select id="driverSelect" [(ngModel)]="driverIdSelected" (ngModelChange)="onChange($event)" name="driverSelect">
-            <option *ngFor="let dr of drivers | async" value={{dr.driverId}}>
-              {{dr.givenName}} {{dr.familyName}}
-            </option>
-          </select>
-        </div>
+
+        <p-dropdown [options]="drivers | async | selectItemPipe:'driverId':'givenName'" [(ngModel)]="driverIdSelected" [dataKey]="value"
+          [ngModelOptions]="{standalone: true}" (onChange)="onChange($event.value)" placeholder="Select a Driver" [autoWidth]="false">
+          <ng-template let-item pTemplate="selectedItem">
+            <div style="white-space: nowrap;">{{item.label.givenName}} {{item.label.familyName}}</div>
+          </ng-template>
+          <ng-template let-item pTemplate="item">
+            <div style="white-space: nowrap;">{{item.label.givenName}} {{item.label.familyName}}</div>
+          </ng-template>
+        </p-dropdown>
       </div>
     </form>
   </div>

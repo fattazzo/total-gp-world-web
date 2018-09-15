@@ -15,7 +15,7 @@ export class ScheduledRacesTableComponent implements OnInit {
     { columnDef: 'round', key: 'round.sing', cell: (race: Race) => `${race.round}` },
     { columnDef: 'raceName', key: 'name.sing', cell: (race: Race) => `${race.raceName}` },
     { columnDef: 'date', key: 'date.sing', cell: (race: Race) => race.date === undefined ? '' : `${race.date.substr(8, 2)}-${race.date.substr(5, 2)}-${race.date.substr(0, 4)}` },
-    { columnDef: 'time', key: 'time.sing', cell: (race: Race) => `${race.time}` },
+    { columnDef: 'time', key: 'hour.sing', cell: (race: Race) => race.time === undefined ? '' : `${race.time}` },
     { columnDef: 'country', key: 'country.sing', cell: (race: Race) => `${race.Circuit.Location.country}` },
     { columnDef: 'locality', key: 'locality.sing', cell: (race: Race) => `${race.Circuit.Location.locality}` },
   ];

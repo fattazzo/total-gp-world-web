@@ -45,7 +45,8 @@ import { CORPORATE_THEME } from './styles/theme.corporate';
 
 import { AppControlsComponent } from '../components/app-controls/app-controls.component'
 
-import { NgSelectModule } from '@ng-select/ng-select';
+import { DropdownModule } from 'primeng/dropdown';
+import { ApplicationPipesModule } from '../pipes/application-pipes.module';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
@@ -108,7 +109,7 @@ const NB_THEME_PROVIDERS = [
 ];
 
 @NgModule({
-  imports: [...BASE_MODULES, ...NB_MODULES, NgSelectModule],
+  imports: [...BASE_MODULES, ...NB_MODULES, DropdownModule, ApplicationPipesModule],
   exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS, ...PIPES],
   declarations: [...COMPONENTS, ...PIPES],
   entryComponents: [...ENTRY_COMPONENTS],

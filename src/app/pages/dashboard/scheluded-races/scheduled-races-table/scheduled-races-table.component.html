@@ -1,38 +1,48 @@
 <nb-card [nbSpinner]="!schedule?.length" nbSpinnerStatus="primary" nbSpinnerSize="xxlarge" nbSpinnerMessage="">
-  <div class="table-header">
-    <div>{{ 'race.plur' | translate | ngxCapitalize }}</div>
-    <div class="subtitle">{{ 'schedule.sing' | translate | ngxCapitalize }}</div>
-  </div>
+  <nb-card-header>
+    <div class="table-header">
+      <span><i class="fas fa-road fa-2x"></i></span>
+      <div style="margin-right: 10px;margin-left: 10px">
+        <div>{{ 'race.plur' | translate | ngxCapitalize }}</div>
+        <div class="subtitle">{{ 'schedule.sing' | translate | ngxCapitalize }}</div>
+      </div>
+    </div>
+  </nb-card-header>
 
-  <div class="example-container">
-    <table mat-table [dataSource]="schedule">
-
-      <ng-container *ngFor="let column of columns" [cdkColumnDef]="column.columnDef">
-        <th mat-header-cell *cdkHeaderCellDef>{{ column.key | translate | ngxCapitalize }} </th>
-        <td mat-cell *cdkCellDef="let row">
-          <div [ngSwitch]="column.columnDef">
-            <div *ngSwitchCase="'raceName'">
-              <a [routerLink]="['/pages/sections/circuit',{ season: season , circuitId: row.Circuit.circuitId}]" class="link-black">
-                {{ column.cell(row) }}
-              </a>
-            </div>
-            <div *ngSwitchCase="'date'">
-              {{ column.cell(row)}}
-            </div>
-            <div *ngSwitchCase="'locality'">
-              <a href="https://maps.google.com/?q={{ row.Circuit.Location.lat }},{{ row.Circuit.Location.long }}" target="_blank" class="link-black">
-                <i class="fa fa-map-marker-alt"></i> {{ column.cell(row) }}
-              </a>
-            </div>
-            <div *ngSwitchDefault>
-              {{ column.cell(row) }}
-            </div>
-          </div>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  </div>
+  <nb-card-body>
+    <div class="table-container">
+      <p-table [columns]="columns" [value]="schedule" [tableStyle]="{'table-layout':'auto'}">
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th class="table-header-cell" *ngFor="let col of columns">{{col.key | translate | ngxCapitalize}}</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+          <tr>
+            <td class="table-cell" *ngFor="let col of columns">
+              <div [ngSwitch]="col.columnDef">
+                <div *ngSwitchCase="'raceName'">
+                  <a [routerLink]="['/pages/sections/circuit',{ season: season , circuitId: rowData.Circuit.circuitId}]" class="link-black">
+                    {{col.cell(rowData)}}
+                  </a>
+                </div>
+                <div *ngSwitchCase="'date'">
+                  {{col.cell(rowData)}}
+                </div>
+                <div *ngSwitchCase="'locality'">
+                  <a href="https://maps.google.com/?q={{ rowData.Circuit.Location.lat }},{{ rowData.Circuit.Location.long }}" target="_blank"
+                    class="link-black">
+                    <i class="fa fa-map-marker-alt"></i> {{col.cell(rowData)}}
+                  </a>
+                </div>
+                <div *ngSwitchDefault>
+                  {{col.cell(rowData)}}
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </nb-card-body>
 </nb-card>

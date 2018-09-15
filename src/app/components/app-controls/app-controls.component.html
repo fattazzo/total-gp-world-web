@@ -1,8 +1,8 @@
 <div class="controls-row">
   <div>
-    <ng-select [(ngModel)]="currentLang" [searchable]="false" [clearable]="false" (change)="onLangChange($event)" class="lang-select">
-      <ng-option *ngFor="let lang of translate.getLangs()" [value]="lang">{{lang}}</ng-option>
-    </ng-select>
+    <p-dropdown [options]="translate.getLangs() | selectItemPipe:'*'" [(ngModel)]="currentLang" [ngModelOptions]="{standalone: true}"
+      (onChange)="onLangChange($event.value)" [autoWidth]="false" styleClass="lang-selection-class">
+    </p-dropdown>
   </div>
 </div>
 

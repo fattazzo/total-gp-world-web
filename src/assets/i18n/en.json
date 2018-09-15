@@ -53,6 +53,9 @@
     "date": {
         "sing": "date"
     },
+    "hour": {
+        "sing": "hour"
+    },
     "time": {
         "sing": "time"
     },
@@ -77,5 +80,20 @@
     "wikipedia": {
         "sing": "wikipedia",
         "introOf": "intro from Wikipedia"
+    },
+    "grid": {
+        "sing": "grid"
+    },
+    "status": {
+        "sing": "status"
+    },
+    "lap": {
+        "plur": "laps"
+    },
+    "result": {
+        "plur": "results"
+    },
+    "qualify": {
+        "plur": "qualifying"
     }
 }

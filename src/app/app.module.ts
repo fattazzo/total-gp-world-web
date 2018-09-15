@@ -23,8 +23,6 @@ import { HttpClient } from '@angular/common/http';
 
 import { NgxEchartsModule } from 'ngx-echarts';
 
-import { NgSelectModule } from '@ng-select/ng-select';
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -43,8 +41,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
-    CoreModule.forRoot(),
-    NgSelectModule
+    CoreModule.forRoot()
   ],
   bootstrap: [AppComponent],
   providers: [

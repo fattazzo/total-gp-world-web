@@ -24,30 +24,22 @@
     overflow: scroll;
   }
 
-  .mat-table {
-    width: 100%;
-    overflow: auto;
-  }
-
-  .mat-header-cell {
-    @include nb-card-header();
-    font-size: 1.25rem;
-  }
-
-  .mat-cell {
-    @include nb-card-header();
+  .table-cell {
     font-family: nb-theme(font-secondary);
     font-size: 1rem;
-    font-weight: nb-theme(font-weight-bolder);
-    color: nb-theme(color-fg-heading);
-    padding-top: 0;
-    padding-bottom: 0;
-    white-space: nowrap;
+    font-weight: nb-theme(font-weight-light) !important;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
   }
 
-  .mat-row {
-    &:hover {
-      background-color: nb-theme(layout-bg);
-    }
+  .table-header-cell {
+    font-family: nb-theme(font-secondary) !important;
+    font-size: 1rem !important;
+    font-weight: bold;
+    color: nb-theme(color-fg-heading) !important;
+  }
+
+  nb-card-body {
+    padding: 0px;
   }
 }

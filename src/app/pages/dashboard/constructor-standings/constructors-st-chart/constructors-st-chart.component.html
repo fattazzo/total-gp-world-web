@@ -1,8 +1,11 @@
 <nb-card size="large" [nbSpinner]="loading" nbSpinnerStatus="primary" nbSpinnerSize="xxlarge" nbSpinnerMessage="">
   <div class="chart-container">
     <div class="table-header">
-      <div>{{ 'constructor.plur' | translate | ngxCapitalize }}</div>
-      <div class="subtitle">{{ 'standing.sing' | translate | ngxCapitalize }} (top 5)</div>
+      <span><i class="fas fa-car fa-2x"></i></span>
+      <div style="margin-right: 10px;margin-left: 10px">
+        <div>{{ 'constructor.plur' | translate | ngxCapitalize }}</div>
+        <div class="subtitle">{{ 'standing.sing' | translate | ngxCapitalize }} (top 5)</div>
+      </div>
     </div>
 
     <div echarts [options]="options" class="echart"></div>

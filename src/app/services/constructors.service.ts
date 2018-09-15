@@ -22,6 +22,7 @@ export class ConstructorsService {
   private cacheStanding$: Observable<ConstructorStanding[]>;
   private cacheConstructors$: Observable<Constructor[]>;
   private cacheRaces$: Map<string, Observable<Race[]>> = new Map();
+  private cacheQualifying$: Map<string, Observable<Race[]>> = new Map();
 
   constructor(private http: HttpClient, private config: Configuration) { }
 
@@ -77,6 +78,20 @@ export class ConstructorsService {
     return this.cacheRaces$.get(constructorId);
   }
 
+  public getQualifying(season: string, constructorId: string): Observable<Race[]> {
+    this.clearCacheIfNeeded(season, constructorId);
+
+    if (!this.cacheQualifying$.get(constructorId)) {
+      console.log('Qualifying: Empty cache, load from remote');
+      this.seasonCache$ = season;
+      this.cacheQualifying$.set(constructorId, this.loadQualifying(season, constructorId));
+    } else {
+      console.log('Qualifying: get data from cache');
+    }
+
+    return this.cacheQualifying$.get(constructorId);
+  }
+
   private clearCacheIfNeeded(season: string, constructorId: string = null) {
     if (season != this.seasonCache$) {
       this.seasonCache$ = null;
@@ -84,8 +99,10 @@ export class ConstructorsService {
       this.cacheStanding$ = null;
       if (constructorId == null) {
         this.cacheRaces$ = new Map();
+        this.cacheQualifying$ = new Map();
       } else {
         this.cacheRaces$.delete(constructorId);
+        this.cacheQualifying$.delete(constructorId);
       }
     }
   }
@@ -124,6 +141,19 @@ export class ConstructorsService {
   private loadResults(season: string, constructorId: string): Observable<Race[]> {
     console.log(`Calling ${this.config.ServerWithApiUrl}${season}/constructors/${constructorId}/results.json`)
     return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/constructors/${constructorId}/results.json`)
+      .pipe(map(result => result.MRData.RaceTable.Races)
+      );
+  }
+
+  /**
+   * Load constructors qualifying results of the season from remote.
+   * 
+   * @param season season name
+   * @param constructorId constructor id
+   */
+  private loadQualifying(season: string, constructorId: string): Observable<Race[]> {
+    console.log(`Calling ${this.config.ServerWithApiUrl}${season}/constructors/${constructorId}/qualifying.json`)
+    return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/constructors/${constructorId}/qualifying.json`)
       .pipe(map(result => result.MRData.RaceTable.Races)
       );
   }
