@@ -4,8 +4,8 @@
       <div class="table-header row">
         <div for="constructorSelect" style="padding-right: 10px">Constructor</div>
 
-        <p-dropdown [options]="constructors | async | selectItemPipe:'constructorId':'name'" [(ngModel)]="constructorSelected" [dataKey]="value"
-          [ngModelOptions]="{standalone: true}" (onChange)="onChange($event.value)" placeholder="Select a Constructor" [autoWidth]="false">
+        <p-dropdown [options]="constructors | async | selectItemPipe:'constructorId':'name'" [(ngModel)]="constructorSelected" [ngModelOptions]="{standalone: true}"
+          (onChange)="onChange($event.value)" placeholder="Select a Constructor" [autoWidth]="false">
           <ng-template let-item pTemplate="selectedItem">
             <div style="white-space: nowrap;">{{item.label.name}}</div>
           </ng-template>

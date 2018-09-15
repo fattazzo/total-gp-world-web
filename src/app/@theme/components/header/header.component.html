@@ -25,8 +25,8 @@
 
   <div class="season-containter">
     <div class="logo">Season</div>
-    <p-dropdown [options]="seasons | async | reverse | selectItemPipe:'season'" [(ngModel)]="selectedSeason" [dataKey]="value"
-      [ngModelOptions]="{standalone: true}" (onChange)="onChange($event.value)" [autoWidth]="false">
+    <p-dropdown [options]="seasons | async | reverse | selectItemPipe:'season'" [(ngModel)]="selectedSeason" [ngModelOptions]="{standalone: true}"
+      (onChange)="onChange($event.value)" [autoWidth]="false">
       <ng-template let-item pTemplate="selectedItem">
         <div style="white-space: nowrap;">{{item.label.season}}</div>
       </ng-template>

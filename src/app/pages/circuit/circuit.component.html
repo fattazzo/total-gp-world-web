@@ -4,8 +4,8 @@
       <div class="table-header row">
         <div for="circuitSelect" style="padding-right: 10px">Circuit</div>
 
-        <p-dropdown [options]="circuits | async | selectItemPipe:'circuitId':'circuitName'" [(ngModel)]="circuitSelected" [dataKey]="value"
-          [ngModelOptions]="{standalone: true}" (onChange)="onChange($event.value)" placeholder="Select a Circuit" [autoWidth]="false">
+        <p-dropdown [options]="circuits | async | selectItemPipe:'circuitId':'circuitName'" [(ngModel)]="circuitSelected" [ngModelOptions]="{standalone: true}"
+          (onChange)="onChange($event.value)" placeholder="Select a Circuit" [autoWidth]="false">
           <ng-template let-item pTemplate="selectedItem">
             <div style="white-space: nowrap;">{{item.label.circuitName}}</div>
           </ng-template>
