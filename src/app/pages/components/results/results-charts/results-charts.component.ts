@@ -1,7 +1,17 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnDestroy, Input } from '@angular/core';
 import { Race } from '../../../../domain/race';
 import { NbThemeService } from '@nebular/theme';
-import { ChartBuilder } from './chart-builder';
+import { NbJSThemeOptions } from '@nebular/theme/services/js-themes/theme.options';
+import { ChartBuilder, Group, ResultType } from './builder/chart-builder';
+import { PieChartBuilder } from './builder/pie-chart-builder';
+import { DoughnutChartBuilder } from './builder/doughnut-chart-builder';
+import { BarChartBuilder } from './builder/bar-chart-builder';
+import { LineChartBuilder } from './builder/line-chart-builder';
+
+import { MenuItem } from 'primeng/api';
+import { ChartType, ChartTypes } from './chart-types';
+import { ChartData } from './builder/chart-data';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'results-charts',
@@ -10,26 +20,30 @@ import { ChartBuilder } from './chart-builder';
 })
 export class ResultsChartsComponent implements OnDestroy {
 
-  type$ = 'Points';
-  types = ['Points', 'Grid', 'Position'];
+  type$: ChartType = ChartTypes.POINTS;
 
   currentTheme: string;
   themeSubscription: any;
 
-  option: any;
-  echartsIntance: any;
+  translationSubscription: any;
+
+  options: any = {};
+  data: any;
+  chartType: string;
 
   private results$: Race[];
 
-  constructor(private themeService: NbThemeService) {
+  constructor(private themeService: NbThemeService, public translate: TranslateService) {
 
     this.themeSubscription = this.themeService.getJsTheme().subscribe(theme => {
       this.currentTheme = theme.name;
     });
+
+    this.translationSubscription = this.translate.onLangChange.subscribe(newLang => this.loadChart())
   }
 
   @Input('type')
-  set type(type: string) {
+  set type(type: ChartType) {
     this.type$ = type;
     this.loadChart();
   }
@@ -42,71 +56,34 @@ export class ResultsChartsComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.themeSubscription.unsubscribe();
+    this.translationSubscription.unsubscribe();
   }
 
   private loadChart() {
     this.themeSubscription = this.themeService.getJsTheme().subscribe(config => {
-      const eTheme: any = config.variables.electricity;
 
-      var data = this.buildSerieData();
-
-      if (this.type$ === this.types[0]) {
-        var xdata = this.results$.map(race => race.raceName);
-        this.option = ChartBuilder.buildBarChartOptions(eTheme, this.type$, data, xdata);
-      } else {
-        this.option = ChartBuilder.buildPieChartOptions(this.type$, 'Position {b}<br># {c} ({d}%)', data, this.buildLegendData());
+      let chartBuilder: ChartBuilder = undefined;
+      switch (this.type$) {
+        case ChartTypes.POINTS: {
+          chartBuilder = new LineChartBuilder(this.results$, Group.Driver, this.type$, this.translate, ResultType.Resul);
+          break;
+        }
+        case ChartTypes.GRID: {
+          chartBuilder = new DoughnutChartBuilder(this.results$, Group.Driver, this.type$, this.translate, ResultType.Resul);
+          break;
+        }
+        case ChartTypes.POSITIONS: {
+          chartBuilder = new PieChartBuilder(this.results$, Group.Driver, this.type$, this.translate, ResultType.Resul);
+          break;
+        }
       }
 
-      this.resizeChart();
+      if (chartBuilder != undefined) {
+        this.data = chartBuilder.getData(config);
+        this.options = chartBuilder.getOptions(config);
+        this.chartType = chartBuilder.getType();
+      }
     });
   }
 
-  private buildSerieData(): any[] {
-    switch (this.type$) {
-      case this.types[0]: {
-        return this.results$.map(race => race.Results[0].points);
-      }
-      case this.types[1]: {
-        let occ = [];
-        this.results$.forEach((race) => {
-          occ[race.Results[0].grid] = occ[race.Results[0].grid] ? occ[race.Results[0].grid] + 1 : 1;
-        })
-        return occ.map((val, index) => ({ value: val, name: index }));
-      }
-      case this.types[2]: {
-        let occ = [];
-        this.results$.forEach((race) => {
-          occ[race.Results[0].position] = occ[race.Results[0].position] ? occ[race.Results[0].position] + 1 : 1;
-        })
-        return occ.map((val, index) => ({ value: val, name: index }));
-      }
-      default: {
-        return this.results$.map(race => race.Results[0].points);
-      }
-    }
-  }
-
-  private buildLegendData(): any[] {
-    switch (this.type$) {
-      case this.types[1]: {
-        return this.results$.map(race => race.Results[0].grid);
-      }
-      case this.types[2]: {
-        return this.results$.map(race => race.Results[0].position);
-      }
-      default: {
-        return [];
-      }
-    }
-  }
-
-  onChartInit(echarts) {
-    this.echartsIntance = echarts;
-  }
-
-  resizeChart() {
-    if (this.echartsIntance) {
-      this.echartsIntance.resize();
-    }
-  }
 }

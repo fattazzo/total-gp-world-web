@@ -5,6 +5,7 @@ import { DriversService } from '../../../../services/drivers.service';
 import { SeasonsService } from '../../../../services/seasons.service';
 
 import { DriverStanding } from '../../../../domain/driver-standing';
+import { NbJSThemeOptions } from '@nebular/theme/services/js-themes/theme.options';
 
 @Component({
   selector: 'drivers-st-chart',
@@ -34,109 +35,38 @@ export class DriversStChartComponent implements OnDestroy {
   private updateData(stands: DriverStanding[]) {
     this.loading = stands === undefined || stands.length === 0
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
-
-      const colors = config.variables;
-      const chartjs: any = config.variables.chartjs;
-
-      /**
-      this.options = {
-        backgroundColor: echarts.bg,
-        color: [colors.warningLight, colors.infoLight, colors.dangerLight, colors.successLight, colors.primaryLight],
-        tooltip: {
-          trigger: 'item',
-          formatter: '{b}\n{c} ({d}%)',
-          confine: true,
-        },
-        legend: {
-          orient: 'horizontal',
-          left: 'center',
-          top: 'bottom',
-          confine: true,
-          data: [],
-          textStyle: {
-            color: echarts.textColor,
-          },
-        },
-        series: [
-          {
-            name: 'Drivers',
-            type: 'pie',
-            radius: '80%',
-            center: ['50%', '50%'],
-            data: [],
-            itemStyle: {
-              emphasis: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: echarts.itemHoverShadowColor,
-              },
-            },
-            label: {
-              position: 'inside',
-              color: echarts.textColor,
-
-            },
-            labelLine: {
-              normal: {
-                lineStyle: {
-                  color: echarts.axisLineColor,
-                },
-              },
-            },
-          },
-        ],
-      };
-
-      this.options.legend.data = stands.map(s => s.Driver.givenName + '\n' + s.Driver.familyName).slice(0, 5);
-      var tmp = [];
-      stands.forEach(function (stand) {
-        tmp.push({ value: stand.points, name: (stand.Driver.givenName + '\n' + stand.Driver.familyName) });
-      })
-      this.options.series[0].data = tmp.slice(0, 5);
-      */
-
-      this.options = {
-        maintainAspectRatio: false,
-        responsive: true,
-        scales: {
-          xAxes: [
-            {
-              display: false,
-            },
-          ],
-          yAxes: [
-            {
-              display: false,
-            },
-          ],
-        },
-        legend: {
-          labels: {
-            fontColor: chartjs.textColor,
-          },
-          position: 'bottom',
-          //fullWidth: true,
-        },
-        layout: {
-          padding: {
-            left: 20,
-            right: 20,
-            top: 20,
-            bottom: 20
-          }
-        }
-      };
-
-
-
-      this.data = {
-        type: 'pie',
-        labels: stands.map(s => s.Driver.givenName + '\n' + s.Driver.familyName).slice(0, 5),
-        datasets: [{
-          data: stands.map(s => s.points).slice(0, 5),
-          backgroundColor: [colors.warningLight, colors.infoLight, colors.dangerLight, colors.successLight, colors.primaryLight],
-        }]
-      };
+      this.options = this.builChartOptions(config);
+      this.data = this.buildChartData(stands, config);
     });
+  }
+
+  private buildChartData(stands: DriverStanding[], config: NbJSThemeOptions): any {
+    return {
+      labels: stands.map(s => s.Driver.givenName + '\n' + s.Driver.familyName).slice(0, 5),
+      datasets: [{
+        data: stands.map(s => s.points).slice(0, 5),
+        backgroundColor: config.variables.chartBGColors
+      }]
+    };
+  }
+
+  private builChartOptions(config: NbJSThemeOptions): any {
+    const chartjs: any = config.variables.chartjs;
+
+    return {
+      maintainAspectRatio: false,
+      responsive: true,
+      scales: {
+        xAxes: [{ display: false, },],
+        yAxes: [{ display: false, },],
+      },
+      legend: {
+        labels: { fontColor: chartjs.textColor },
+        position: 'bottom',
+      },
+      layout: {
+        padding: { left: 20, right: 20, top: 20, bottom: 20 }
+      }
+    };
   }
 }

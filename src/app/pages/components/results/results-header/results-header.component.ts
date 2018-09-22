@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, EventEmitter, Output, Input } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators';
+import { ChartType, ChartTypes } from '../results-charts/chart-types';
 
 @Component({
   selector: 'results-header',
@@ -11,10 +12,10 @@ export class ResultsHeaderComponent implements OnDestroy {
 
   private alive = true;
 
-  @Output() typeChange = new EventEmitter<string>();
+  @Output() typeChange = new EventEmitter<ChartType>();
 
-  @Input() type = 'Points';
-  types = ['Points', 'Grid', 'Position'];
+  @Input() type: ChartType = ChartTypes.POINTS;
+  types = [ChartTypes.POINTS, ChartTypes.GRID, ChartTypes.POSITIONS];
 
   @Input() showTypesControl = false
 
@@ -32,7 +33,7 @@ export class ResultsHeaderComponent implements OnDestroy {
     this.alive = false;
   }
 
-  changeType(typeParam: string): void {
+  changeType(typeParam: ChartType): void {
     this.type = typeParam;
     this.typeChange.emit(typeParam);
   }

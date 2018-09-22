@@ -1,7 +1,11 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Race } from '../../../../domain/race';
 import { NbThemeService } from '@nebular/theme';
-import { ChartBuilder } from '../../results/results-charts/chart-builder';
+import { PieChartBuilder } from '../../results/results-charts/builder/pie-chart-builder';
+import { Group, ResultType } from '../../results/results-charts/builder/chart-builder';
+import { ChartTypes, ChartType } from '../../results/results-charts/chart-types';
+import { TranslateService } from '@ngx-translate/core';
+import { DoughnutChartBuilder } from '../../results/results-charts/builder/doughnut-chart-builder';
 
 @Component({
   selector: 'qualifying-chart',
@@ -10,19 +14,32 @@ import { ChartBuilder } from '../../results/results-charts/chart-builder';
 })
 export class QualifyingChartComponent implements OnDestroy {
 
+  type$: ChartType = ChartTypes.POSITIONS;
+
   currentTheme: string;
   themeSubscription: any;
 
-  option: any;
-  echartsIntance: any;
+  translationSubscription: any;
+
+  options: any = {};
+  data: any;
+  chartType: string;
 
   private results$: Race[];
 
-  constructor(private themeService: NbThemeService) {
+  constructor(private themeService: NbThemeService, public translate: TranslateService) {
 
     this.themeSubscription = this.themeService.getJsTheme().subscribe(theme => {
       this.currentTheme = theme.name;
     });
+
+    this.translationSubscription = this.translate.onLangChange.subscribe(newLang => this.loadChart())
+  }
+
+  @Input('type')
+  set type(type: ChartType) {
+    this.type$ = type;
+    this.loadChart();
   }
 
   @Input('results')
@@ -33,37 +50,16 @@ export class QualifyingChartComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.themeSubscription.unsubscribe();
+    this.translationSubscription.unsubscribe();
   }
 
   private loadChart() {
     this.themeSubscription = this.themeService.getJsTheme().subscribe(config => {
-      const eTheme: any = config.variables.electricity;
 
-      var data = this.buildSerieData();
-      this.option = ChartBuilder.buildPieChartOptions("aaa", 'Position {b}<br># {c} ({d}%)', data, this.buildLegendData());
-      this.resizeChart();
+      var chartBuilder = new DoughnutChartBuilder(this.results$, Group.Driver, this.type$, this.translate, ResultType.Qualify);
+      this.data = chartBuilder.getData(config);
+      this.options = chartBuilder.getOptions(config);
+      this.chartType = chartBuilder.getType();
     });
-  }
-
-  private buildSerieData(): any[] {
-    let occ = [];
-    this.results$.forEach((race) => {
-      occ[race.QualifyingResults[0].position] = occ[race.QualifyingResults[0].position] ? occ[race.QualifyingResults[0].position] + 1 : 1;
-    })
-    return occ.map((val, index) => ({ value: val, name: index }));
-  }
-
-  private buildLegendData(): any[] {
-    return this.results$.map(race => race.QualifyingResults[0].position);
-  }
-
-  onChartInit(echarts) {
-    this.echartsIntance = echarts;
-  }
-
-  resizeChart() {
-    if (this.echartsIntance) {
-      this.echartsIntance.resize();
-    }
   }
 }

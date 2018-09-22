@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { NgxEchartsModule } from 'ngx-echarts';
 
 
 import { ThemeModule } from '../../@theme/theme.module';
@@ -15,7 +14,6 @@ import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
 @NgModule({
     imports: [
         ThemeModule,
-        NgxEchartsModule,
         WikipediaPageModule,
         DriverRoutingModule,
         ResultsModule,

@@ -38,7 +38,6 @@
             ],
             "scripts": [
               "node_modules/pace-js/pace.min.js",
-              "node_modules/echarts/dist/echarts.min.js",
               "node_modules/chart.js/dist/Chart.js"
             ]
           },
@@ -88,7 +87,6 @@
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [
               "node_modules/pace-js/pace.min.js",
-              "node_modules/echarts/dist/echarts.min.js",
               "node_modules/chart.js/dist/Chart.js"
             ],
             "styles": [

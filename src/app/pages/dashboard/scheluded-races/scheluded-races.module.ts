@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import { NgxEchartsModule } from 'ngx-echarts';
-
 
 import { ThemeModule } from '../../../@theme/theme.module';
 
@@ -16,7 +14,6 @@ import { TableModule } from 'primeng/table';
 @NgModule({
   imports: [
     ThemeModule,
-    NgxEchartsModule,
     RouterModule,
     TableModule,
     TranslateModule

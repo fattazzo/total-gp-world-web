@@ -8,6 +8,8 @@
       </div>
     </div>
 
-    <div echarts [options]="options" class="echart"></div>
+    <div class="echart">
+      <p-chart type="doughnut" [data]="data" [options]="options" width="100%" height="100%"></p-chart>
+    </div>
   </div>
 </nb-card>

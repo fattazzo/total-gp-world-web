@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Race } from '../../../domain/race';
 import { DriversService } from '../../../services/drivers.service';
 import { ConstructorsService } from '../../../services/constructors.service';
+import { ChartType, ChartTypes } from './results-charts/chart-types';
 
 @Component({
   selector: 'f1-results',
@@ -18,7 +19,7 @@ export class ResultsComponent {
 
   revealed = false;
 
-  type: string = 'Points';
+  type: ChartType = ChartTypes.POINTS;
 
   constructor(private driversService: DriversService, private constructorService: ConstructorsService) { }
 
@@ -42,7 +43,7 @@ export class ResultsComponent {
     this.loadResults();
   }
 
-  setType(type: string): void {
+  setType(type: ChartType): void {
     this.type = type;
   }
 

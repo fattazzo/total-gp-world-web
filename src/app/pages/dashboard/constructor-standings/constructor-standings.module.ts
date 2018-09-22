@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NgxEchartsModule } from 'ngx-echarts';
+import { ChartModule } from 'primeng/chart'
 
 import { ThemeModule } from '../../../@theme/theme.module';
 
@@ -15,9 +15,9 @@ import { TranslateModule } from '@ngx-translate/core';
 @NgModule({
   imports: [
     ThemeModule,
-    NgxEchartsModule,
     RouterModule,
-    TranslateModule
+    TranslateModule,
+    ChartModule
   ],
   declarations: [
     ConstructorStandingsComponent,

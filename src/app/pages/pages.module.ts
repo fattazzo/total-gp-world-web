@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { NgxEchartsModule } from 'ngx-echarts';
 
 import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from './pages-routing.module';
@@ -20,8 +19,7 @@ const PAGES_COMPONENTS = [
     PagesRoutingModule,
     ThemeModule,
     DashboardModule,
-    MiscellaneousModule,
-    NgxEchartsModule
+    MiscellaneousModule
   ],
   providers: [
     CapitalizePipe,

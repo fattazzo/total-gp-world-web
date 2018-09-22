@@ -82,5 +82,9 @@ export const CORPORATE_THEME = {
       axisLineColor: '#cccccc',
       textColor: '#484848',
     },
+
+    test: {
+      textColor: '#484848'
+    }
   },
 };

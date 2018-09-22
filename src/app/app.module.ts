@@ -21,8 +21,6 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 
-import { NgxEchartsModule } from 'ngx-echarts';
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -30,7 +28,6 @@ import { NgxEchartsModule } from 'ngx-echarts';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    NgxEchartsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
