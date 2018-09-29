@@ -1,4 +1,4 @@
-import { ChartBuilder, Group, ResultType } from "./chart-builder";
+import { ChartBuilder, Group, ResultType, ChartBuilderType } from "./chart-builder";
 import { NbJSThemeOptions } from "@nebular/theme/services/js-themes/theme.options";
 import { Race } from "../../../../../domain/race";
 import { ChartType } from "../chart-types";
@@ -15,8 +15,8 @@ export class PieChartBuilder extends ChartBuilder {
         this.translation$.get(this.type$.labelKey.split('.')[0] + '.sing').subscribe(res => this.labelTooltip = new CapitalizePipe().transform(res));
     }
 
-    getType(): string {
-        return "pie";
+    getType(): ChartBuilderType {
+        return ChartBuilderType.Pie;
     }
 
     getData(config: NbJSThemeOptions) {

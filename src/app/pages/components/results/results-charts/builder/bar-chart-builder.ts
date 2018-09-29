@@ -1,4 +1,4 @@
-import { ChartBuilder, Group, ResultType } from "./chart-builder";
+import { ChartBuilder, Group, ResultType, ChartBuilderType } from "./chart-builder";
 import { NbJSThemeOptions } from "@nebular/theme/services/js-themes/theme.options";
 import { ChartType } from "../chart-types";
 import { TranslateService } from "@ngx-translate/core";
@@ -51,8 +51,8 @@ export class BarChartBuilder extends ChartBuilder {
         return data;
     }
 
-    getType(): string {
-        return 'bar';
+    getType(): ChartBuilderType {
+        return ChartBuilderType.Bar;
     }
 
     protected curtomizeBgColor(color: string) {

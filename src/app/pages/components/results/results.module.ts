@@ -8,6 +8,8 @@ import { ResultsHeaderComponent } from './results-header/results-header.componen
 import { TableModule } from 'primeng/table';
 import { TranslateModule } from '@ngx-translate/core';
 import { ChartModule } from 'primeng/chart';
+import { ApplicationPipesModule } from '../../../pipes/application-pipes.module';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   imports: [
@@ -15,7 +17,9 @@ import { ChartModule } from 'primeng/chart';
     ThemeModule,
     TableModule,
     TranslateModule,
-    ChartModule
+    ChartModule,
+    ApplicationPipesModule,
+    DropdownModule
   ],
   exports: [
     ResultsComponent

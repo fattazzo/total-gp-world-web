@@ -1,19 +1,19 @@
 <nb-card-body>
   <div style="min-width:600px; overflow:hidden">
-    <p-table [columns]="cols" [value]="racesResults" [tableStyle]="{'table-layout':'auto'}">
+    <p-table [columns]="cols" [value]="racesResults" [tableStyle]="{'table-layout':'auto'}" class="ng-table">
       <ng-template pTemplate="header" let-columns>
         <tr>
-          <th class="table-header-cell" *ngFor="let col of columns">{{col.key | translate | ngxCapitalize}}</th>
+          <th *ngFor="let col of columns">{{col.key | translate | ngxCapitalize}}</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex">
-        <tr class="ui-widget-header table-header-cell" *ngIf="multipleResults && (rowIndex === 0 || rowData.raceName != racesResults[rowIndex-1].raceName)">
+        <tr *ngIf="multipleResults && (rowIndex === 0 || rowData.raceName != racesResults[rowIndex-1].raceName)">
           <td [attr.colspan]="cols.length">
             <span style="font-weight:bold">{{rowData.raceName}}</span>
           </td>
         </tr>
         <tr>
-          <td class="table-cell" *ngFor="let col of columns">{{col.cell(rowData)}}</td>
+          <td *ngFor="let col of columns">{{col.cell(rowData)}}</td>
         </tr>
       </ng-template>
     </p-table>

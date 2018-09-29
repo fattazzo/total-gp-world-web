@@ -1,8 +1,9 @@
 import { PieChartBuilder } from "./pie-chart-builder";
+import { ChartBuilderType } from "./chart-builder";
 
 export class DoughnutChartBuilder extends PieChartBuilder {
 
-    getType(): string {
-        return "doughnut";
+    getType(): ChartBuilderType {
+        return ChartBuilderType.Doughnut;
     }
 }

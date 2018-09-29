@@ -1,6 +1,3 @@
-import { Race } from "../../../../../domain/race";
-import { Result } from "../../../../../domain/result";
-
 export class ChartData {
 
     public raceName: string;

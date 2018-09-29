@@ -8,6 +8,8 @@ import { TranslateService } from "@ngx-translate/core";
 export enum Group { Driver, Constructor }
 export enum ResultType { Resul, Qualify }
 
+export enum ChartBuilderType { Line = 'line', Bar = 'bar', Pie = 'pie', Doughnut = 'doughnut' }
+
 export abstract class ChartBuilder {
 
     private results$: Race[];
@@ -130,7 +132,7 @@ export abstract class ChartBuilder {
 
     abstract getData(config: NbJSThemeOptions): any
 
-    abstract getType(): string
+    abstract getType(): ChartBuilderType
 
     abstract getTooltipsCallbacks(): any
 }

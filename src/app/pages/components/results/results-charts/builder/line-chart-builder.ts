@@ -1,9 +1,10 @@
 import { BarChartBuilder } from "./bar-chart-builder";
+import { ChartBuilderType } from "./chart-builder";
 
 export class LineChartBuilder extends BarChartBuilder {
 
-    getType() {
-        return 'line';
+    getType(): ChartBuilderType {
+        return ChartBuilderType.Line;
     }
 
     curtomizeBgColor(color: string) {

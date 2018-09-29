@@ -95,5 +95,11 @@
     },
     "qualify": {
         "plur": "qualifying"
+    },
+    "chart": {
+        "pie": "pie",
+        "doughnut": "doughnut",
+        "line": "line",
+        "bar": "bar"
     }
 }

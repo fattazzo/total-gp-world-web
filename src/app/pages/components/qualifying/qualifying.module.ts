@@ -8,6 +8,8 @@ import { QualifyingChartComponent } from './qualifying-chart/qualifying-chart.co
 import { TableModule } from 'primeng/table';
 import { TranslateModule } from '@ngx-translate/core';
 import { ChartModule } from 'primeng/chart';
+import { DropdownModule } from 'primeng/dropdown';
+import { ApplicationPipesModule } from '../../../pipes/application-pipes.module';
 
 @NgModule({
   imports: [
@@ -15,7 +17,9 @@ import { ChartModule } from 'primeng/chart';
     ThemeModule,
     TableModule,
     TranslateModule,
-    ChartModule
+    ChartModule,
+    DropdownModule,
+    ApplicationPipesModule
   ],
   exports: [
     QualifyngComponent

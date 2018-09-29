@@ -95,5 +95,11 @@
     },
     "qualify": {
         "plur": "qualifiche"
+    },
+    "chart": {
+        "pie": "torta",
+        "doughnut": "ciambella",
+        "line": "linea",
+        "bar": "barre"
     }
 }

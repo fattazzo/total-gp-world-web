@@ -1,17 +1,10 @@
 import { Component, OnDestroy, Input } from '@angular/core';
 import { Race } from '../../../../domain/race';
 import { NbThemeService } from '@nebular/theme';
-import { NbJSThemeOptions } from '@nebular/theme/services/js-themes/theme.options';
-import { ChartBuilder, Group, ResultType } from './builder/chart-builder';
-import { PieChartBuilder } from './builder/pie-chart-builder';
-import { DoughnutChartBuilder } from './builder/doughnut-chart-builder';
-import { BarChartBuilder } from './builder/bar-chart-builder';
-import { LineChartBuilder } from './builder/line-chart-builder';
-
-import { MenuItem } from 'primeng/api';
+import { ChartBuilder, Group, ResultType, ChartBuilderType } from './builder/chart-builder';
 import { ChartType, ChartTypes } from './chart-types';
-import { ChartData } from './builder/chart-data';
 import { TranslateService } from '@ngx-translate/core';
+import { ChartFactory } from './builder/chart-factory';
 
 @Component({
   selector: 'results-charts',
@@ -21,6 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class ResultsChartsComponent implements OnDestroy {
 
   type$: ChartType = ChartTypes.POINTS;
+  altTypes$ = [this.type$.type, this.type$.altType];
 
   currentTheme: string;
   themeSubscription: any;
@@ -29,7 +23,7 @@ export class ResultsChartsComponent implements OnDestroy {
 
   options: any = {};
   data: any;
-  chartType: string;
+  ctype: any;
 
   private results$: Race[];
 
@@ -39,19 +33,20 @@ export class ResultsChartsComponent implements OnDestroy {
       this.currentTheme = theme.name;
     });
 
-    this.translationSubscription = this.translate.onLangChange.subscribe(newLang => this.loadChart())
+    this.translationSubscription = this.translate.onLangChange.subscribe(newLang => this.loadChart(this.type$.type))
   }
 
   @Input('type')
   set type(type: ChartType) {
     this.type$ = type;
-    this.loadChart();
+    this.altTypes$ = [this.type$.type, this.type$.altType];
+    this.loadChart(this.type$.type);
   }
 
   @Input('results')
   set results(results: Race[]) {
     this.results$ = results;
-    this.loadChart();
+    this.loadChart(this.type$.type);
   }
 
   ngOnDestroy() {
@@ -59,31 +54,42 @@ export class ResultsChartsComponent implements OnDestroy {
     this.translationSubscription.unsubscribe();
   }
 
-  private loadChart() {
+  private loadChart(chartBuilderType: ChartBuilderType) {
     this.themeSubscription = this.themeService.getJsTheme().subscribe(config => {
 
-      let chartBuilder: ChartBuilder = undefined;
-      switch (this.type$) {
-        case ChartTypes.POINTS: {
-          chartBuilder = new LineChartBuilder(this.results$, Group.Driver, this.type$, this.translate, ResultType.Resul);
-          break;
-        }
-        case ChartTypes.GRID: {
-          chartBuilder = new DoughnutChartBuilder(this.results$, Group.Driver, this.type$, this.translate, ResultType.Resul);
-          break;
-        }
-        case ChartTypes.POSITIONS: {
-          chartBuilder = new PieChartBuilder(this.results$, Group.Driver, this.type$, this.translate, ResultType.Resul);
-          break;
-        }
-      }
+      let chartBuilder: ChartBuilder = ChartFactory.getBuilder(chartBuilderType, this.results$, Group.Driver, this.type$, this.translate, ResultType.Resul);
 
       if (chartBuilder != undefined) {
         this.data = chartBuilder.getData(config);
         this.options = chartBuilder.getOptions(config);
-        this.chartType = chartBuilder.getType();
+        this.ctype = chartBuilderType;
       }
     });
+  }
+
+  onTypeChange(type: string) {
+    let cbt: ChartBuilderType
+
+    switch (type) {
+      case 'line': {
+        cbt = ChartBuilderType.Line;
+        break;
+      }
+      case 'pie': {
+        cbt = ChartBuilderType.Pie;
+        break;
+      }
+      case 'bar': {
+        cbt = ChartBuilderType.Bar;
+        break;
+      }
+      case 'doughnut': {
+        cbt = ChartBuilderType.Doughnut;
+        break;
+      }
+    }
+
+    this.loadChart(cbt);
   }
 
 }

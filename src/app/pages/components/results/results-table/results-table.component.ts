@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { Race } from '../../../../domain/race';
 import { RaceResultsTable } from './domain/race-results-table';
+import { NbThemeService } from '@nebular/theme';
 
 @Component({
   selector: 'results-table',
@@ -14,7 +15,7 @@ export class ResultsTableComponent implements OnInit {
 
   cols: any[];
 
-  constructor() { }
+  constructor(private themeService: NbThemeService) { }
 
   ngOnInit() {
     this.buildColumns();
@@ -25,14 +26,16 @@ export class ResultsTableComponent implements OnInit {
     this.racesResults = [];
     this.multipleResults = false
 
-    results.forEach(race =>
-      race.Results.forEach((result, index) => {
-        this.racesResults.push(new RaceResultsTable(race.raceName, race.Circuit, result));
-        this.multipleResults = this.multipleResults || (index > 0);
-      })
-    )
+    this.themeService.getJsTheme().subscribe(config => {
+      results.forEach(race =>
+        race.Results.forEach((result, index) => {
+          this.racesResults.push(new RaceResultsTable(race.raceName, race.Circuit, result));
+          this.multipleResults = this.multipleResults || (index > 0);
+        })
+      )
 
-    this.buildColumns();
+      this.buildColumns();
+    });
   }
 
   private buildColumns() {

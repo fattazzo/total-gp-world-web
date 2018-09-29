@@ -11,7 +11,7 @@
 
   <nb-card-body>
     <div class="table-container">
-      <p-table [columns]="columns" [value]="schedule" [tableStyle]="{'table-layout':'auto'}">
+      <p-table [columns]="columns" [value]="schedule" [tableStyle]="{'table-layout':'auto'}" class="ng-table">
         <ng-template pTemplate="header" let-columns>
           <tr>
             <th class="table-header-cell" *ngFor="let col of columns">{{col.key | translate | ngxCapitalize}}</th>
@@ -22,7 +22,8 @@
             <td class="table-cell" *ngFor="let col of columns">
               <div [ngSwitch]="col.columnDef">
                 <div *ngSwitchCase="'raceName'">
-                  <a [routerLink]="['/pages/sections/circuit',{ season: season , circuitId: rowData.Circuit.circuitId}]" class="link-black">
+                  <a [routerLink]="['/pages/sections/circuit',{ season: season , circuitId: rowData.Circuit.circuitId}]"
+                    class="link-black">
                     {{col.cell(rowData)}}
                   </a>
                 </div>
@@ -30,8 +31,8 @@
                   {{col.cell(rowData)}}
                 </div>
                 <div *ngSwitchCase="'locality'">
-                  <a href="https://maps.google.com/?q={{ rowData.Circuit.Location.lat }},{{ rowData.Circuit.Location.long }}" target="_blank"
-                    class="link-black">
+                  <a href="https://maps.google.com/?q={{ rowData.Circuit.Location.lat }},{{ rowData.Circuit.Location.long }}"
+                    target="_blank" class="link-black">
                     <i class="fa fa-map-marker-alt"></i> {{col.cell(rowData)}}
                   </a>
                 </div>
