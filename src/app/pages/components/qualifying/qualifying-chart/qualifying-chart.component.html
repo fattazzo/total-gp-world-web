@@ -1,6 +1,6 @@
 <nb-card-body>
   <div style="position: absolute; top:0; left:0; margin:20px; z-index: 10;">
-    <p-dropdown [options]="altTypes$ | selectItemPipe" [(ngModel)]="chartType" [ngModelOptions]="{standalone: true}"
+    <p-dropdown [options]="altTypes$ | selectItemPipe" [(ngModel)]="ctype" [ngModelOptions]="{standalone: true}"
       (onChange)="onTypeChange($event.value)" [autoWidth]="false" class="ng-dropdown">
       <ng-template let-item pTemplate="selectedItem">
         <div><i class="fas fa-chart-line"></i></div>
