@@ -1,41 +1,17 @@
-<div class="row">
-  <div class="col-xxxl-9 col-xxl-12 col-lg-12 col-md-12">
+<div class="ui-g">
+  <div class="ui-g-12">
     <driver-standings [season]="season"></driver-standings>
   </div>
-
-  <div class="col-xxxl-3 col-xxl-6 col-lg-6 col-md-12">
-    <div *ngFor="let card of driversCards | async">
-      <ngx-status-card [title]="card.title" [type]="card.type" [value]="card.value">
-        <i [ngClass]="card.iconClass"></i>
-      </ngx-status-card>
-    </div>
-  </div>
 </div>
 
-<div class="row">
-  <div class="col-xxxl-9 col-xxl-12 col-lg-12 col-md-12">
+<div class="ui-g">
+  <div class="ui-g-12">
     <constructor-standings [season]="season"></constructor-standings>
   </div>
-
-  <div class="col-xxxl-3 col-xxl-6 col-lg-6 col-md-12">
-    <div *ngFor="let card of constructorsCards | async">
-      <ngx-status-card [title]="card.title" [type]="card.type" [value]="card.value">
-        <i [ngClass]="card.iconClass"></i>
-      </ngx-status-card>
-    </div>
-  </div>
 </div>
 
-<div class="row">
-  <div class="col-xxxl-9 col-xxl-9 col-lg-12 col-md-12 col-sm-12">
+<div class="ui-g">
+  <div class="ui-g-12">
     <scheluded-races [season]="season"></scheluded-races>
-  </div>
-
-  <div class="col-xxxl-3 col-xxl-3 col-lg-12 col-md-12 col-sm-12">
-    <div *ngFor="let card of racesCards | async">
-      <ngx-status-card [title]="card.title" [type]="card.type" [value]="card.value">
-        <i [ngClass]="card.iconClass"></i>
-      </ngx-status-card>
-    </div>
   </div>
 </div>

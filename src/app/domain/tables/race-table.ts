@@ -1,6 +1,5 @@
-import { Race } from "../race";
+import { Race } from '../race';
 
 export class RaceTable {
-
-    Races: Race[];
+  Races: Race[];
 }

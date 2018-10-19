@@ -21,16 +21,16 @@
   nb-card-back {
     height: 100%;
 
-    /deep/ nb-card-header {
+    ::ng-deep nb-card-header {
       border: none;
     }
-    /deep/ nb-card {
+    ::ng-deep nb-card {
       border: none;
     }
   }
 
   nb-card-front {
-    /deep/ nb-card {
+    ::ng-deep nb-card {
       margin-bottom: 0rem;
     }
   }

@@ -10,6 +10,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ChartModule } from 'primeng/chart';
 import { ApplicationPipesModule } from '../../../pipes/application-pipes.module';
 import { DropdownModule } from 'primeng/dropdown';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { DropdownModule } from 'primeng/dropdown';
     TranslateModule,
     ChartModule,
     ApplicationPipesModule,
-    DropdownModule
+    DropdownModule,
+    RouterModule
   ],
   exports: [
     ResultsComponent

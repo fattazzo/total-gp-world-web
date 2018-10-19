@@ -10,10 +10,12 @@ import { NbJSThemeOptions } from '@nebular/theme/services/js-themes/theme.option
 @Component({
   selector: 'drivers-st-chart',
   templateUrl: './drivers-st-chart.component.html',
-  styleUrls: ['./drivers-st-chart.component.scss', '../drivers-st-table/drivers-st-table.component.scss']
+  styleUrls: [
+    './drivers-st-chart.component.scss',
+    '../drivers-st-table/drivers-st-table.component.scss',
+  ],
 })
 export class DriversStChartComponent implements OnDestroy {
-
   options: any = {};
   data: any;
 
@@ -21,7 +23,7 @@ export class DriversStChartComponent implements OnDestroy {
 
   loading = true;
 
-  constructor(private theme: NbThemeService) { }
+  constructor(private theme: NbThemeService) {}
 
   @Input('standings')
   set standings(st: DriverStanding[]) {
@@ -33,20 +35,27 @@ export class DriversStChartComponent implements OnDestroy {
   }
 
   private updateData(stands: DriverStanding[]) {
-    this.loading = stands === undefined || stands.length === 0
+    this.loading = stands === undefined;
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
       this.options = this.builChartOptions(config);
-      this.data = this.buildChartData(stands, config);
+      this.data = this.buildChartData(stands || [], config);
     });
   }
 
-  private buildChartData(stands: DriverStanding[], config: NbJSThemeOptions): any {
+  private buildChartData(
+    stands: DriverStanding[],
+    config: NbJSThemeOptions,
+  ): any {
     return {
-      labels: stands.map(s => s.Driver.givenName + '\n' + s.Driver.familyName).slice(0, 5),
-      datasets: [{
-        data: stands.map(s => s.points).slice(0, 5),
-        backgroundColor: config.variables.chartBGColors
-      }]
+      labels: stands
+        .map(s => s.Driver.givenName + '\n' + s.Driver.familyName)
+        .slice(0, 5),
+      datasets: [
+        {
+          data: stands.map(s => s.points).slice(0, 5),
+          backgroundColor: config.variables.chartBGColors,
+        },
+      ],
     };
   }
 
@@ -57,16 +66,16 @@ export class DriversStChartComponent implements OnDestroy {
       maintainAspectRatio: false,
       responsive: true,
       scales: {
-        xAxes: [{ display: false, },],
-        yAxes: [{ display: false, },],
+        xAxes: [{ display: false }],
+        yAxes: [{ display: false }],
       },
       legend: {
         labels: { fontColor: chartjs.textColor },
         position: 'bottom',
       },
       layout: {
-        padding: { left: 20, right: 20, top: 20, bottom: 20 }
-      }
+        padding: { left: 20, right: 20, top: 20, bottom: 20 },
+      },
     };
   }
 }

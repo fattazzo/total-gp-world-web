@@ -2,11 +2,11 @@
   <nb-card-front>
     <nb-card>
       <results-header></results-header>
-      <results-table [results]="results"></results-table>
-      <i class="nb-arrow-up" (click)="toggleView()"></i>
+      <results-table [results]="results" [season]="_season"></results-table>
+      <i class="nb-arrow-up" (click)="toggleView()" *ngIf="showChart"></i>
     </nb-card>
   </nb-card-front>
-  <nb-card-back>
+  <nb-card-back *ngIf="showChart">
     <nb-card>
       <results-header (typeChange)="setType($event)" [showTypesControl]="true"></results-header>
       <results-charts [results]="results" [type]="type"></results-charts>

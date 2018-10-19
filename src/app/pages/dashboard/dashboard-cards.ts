@@ -1,4 +1,4 @@
-import { CardSettings } from "./card-settings";
+import { CardSettings } from './card-settings';
 
 export class DashboardCards {
 
@@ -67,7 +67,11 @@ export class DashboardCards {
         return [this.constructorsPointsCard, this.constructorsNumberCard, this.constructorsWinningCard, this.constructorsNationalitiesCard];
     }
 
-    public static updateConstructorsCardsValues(nrConstructors: number, totalPoins: number, winningConstructors: number, nationalities: number) {
+    public static updateConstructorsCardsValues(
+        nrConstructors: number,
+        totalPoins: number,
+        winningConstructors: number,
+        nationalities: number) {
         this.constructorsNumberCard.value = nrConstructors.toString();
         this.constructorsPointsCard.value = totalPoins.toString();
         this.constructorsWinningCard.value = winningConstructors.toString();

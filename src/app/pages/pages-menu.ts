@@ -5,29 +5,53 @@ export const MENU_I18N_SPEC: TitleI18NSpec[] = [
     capitalize: true,
     uppercase: false,
     key: 'dashboard.sing',
-    menuItem: { title: 'Dashboard', icon: 'fas fa-home', link: '/pages/dashboard', home: true }
+    menuItem: {
+      title: 'Dashboard',
+      icon: 'fas fa-home',
+      link: '/pages/dashboard',
+      home: true,
+    },
   },
   {
     capitalize: false,
     uppercase: true,
     key: 'section.plur',
-    menuItem: { title: 'SECTIONS', group: true }
+    menuItem: { title: 'SECTIONS', group: true },
   },
   {
     capitalize: true,
     uppercase: false,
     key: 'driver.plur',
-    menuItem: { title: "Drivers", icon: 'fas fa-user-astronaut', link: '/pages/sections/driver' }
+    menuItem: {
+      title: 'Drivers',
+      icon: 'fas fa-user-astronaut',
+      link: '/pages/sections/driver',
+    },
   },
   {
     capitalize: true,
     uppercase: false,
     key: 'constructor.plur',
-    menuItem: { title: 'Constructors', icon: 'fas fa-car', link: '/pages/sections/constructor' }
-  }, {
+    menuItem: {
+      title: 'Constructors',
+      icon: 'fas fa-car',
+      link: '/pages/sections/constructor',
+    },
+  },
+  {
     capitalize: true,
     uppercase: false,
     key: 'circuit.plur',
-    menuItem: { title: 'Circuits', icon: 'fas fa-road', link: '/pages/sections/circuit' }
-  }
+    menuItem: {
+      title: 'Circuits',
+      icon: 'fas fa-road',
+      link: '/pages/sections/circuit',
+    },
+  },
+  {
+    capitalize: false,
+    uppercase: true,
+    key: 'other.sing',
+    menuItem: { title: 'OTHERS', group: true },
+  },
 ];

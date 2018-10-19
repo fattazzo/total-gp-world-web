@@ -1,7 +1,7 @@
-@import '../../styles/themes';
-@import '~@nebular/theme/styles/global/bootstrap/hero-buttons';
-@import '~bootstrap/scss/mixins/breakpoints';
-@import '~@nebular/theme/styles/global/bootstrap/breakpoints';
+@import "../../styles/themes";
+@import "~bootstrap/scss/mixins/breakpoints";
+@import "~@nebular/theme/styles/global/breakpoints";
+@import "~@nebular/bootstrap/styles/hero-buttons";
 
 @include nb-install-component() {
   .switch-label {
@@ -87,7 +87,7 @@
 
     .slider::before {
       position: absolute;
-      content: '';
+      content: "";
       height: 1.5rem;
       width: 1.5rem;
       border-radius: 50%;

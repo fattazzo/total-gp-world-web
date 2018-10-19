@@ -9,6 +9,8 @@ import { CircuitRoutingModule } from './circuit-routing.module';
 
 import { DropdownModule } from 'primeng/dropdown';
 import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
+import { ResultsModule } from '../components/results/results.module';
+import { SeasonsModule } from '../components/seasons/seasons.module';
 
 @NgModule({
   imports: [
@@ -16,10 +18,12 @@ import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
     WikipediaPageModule,
     CircuitRoutingModule,
     DropdownModule,
-    ApplicationPipesModule
+    ApplicationPipesModule,
+    ResultsModule,
+    SeasonsModule,
   ],
   declarations: [
-    CircuitComponent
+    CircuitComponent,
   ],
 })
 export class CircuitModule { }

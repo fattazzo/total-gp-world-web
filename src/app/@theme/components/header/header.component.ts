@@ -5,8 +5,7 @@ import { UserService } from '../../../@core/data/users.service';
 import { AnalyticsService } from '../../../@core/utils/analytics.service';
 
 import { SeasonsService } from '../../../services/seasons.service';
-
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
 import { Season } from '../../../domain/season';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
@@ -49,6 +48,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.langSubscribe = this.translate.onLangChange.subscribe(event => {
       this.currentLang = event.lang
     })
+
+    this.seasonsService.getSeason().subscribe(s => this.selectedSeason = s)
   }
 
   ngOnDestroy() {

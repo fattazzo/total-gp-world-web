@@ -10,6 +10,7 @@ import { ResultsModule } from '../components/results/results.module';
 import { QualifyingModule } from '../components/qualifying/qualifying.module';
 import { DropdownModule } from 'primeng/dropdown';
 import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
+import { SeasonsModule } from '../components/seasons/seasons.module';
 
 @NgModule({
     imports: [
@@ -19,7 +20,8 @@ import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
         ResultsModule,
         QualifyingModule,
         DropdownModule,
-        ApplicationPipesModule
+        ApplicationPipesModule,
+        SeasonsModule
     ],
     declarations: [
         DriverComponent

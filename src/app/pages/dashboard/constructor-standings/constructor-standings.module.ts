@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ChartModule } from 'primeng/chart'
+import { ChartModule } from 'primeng/chart';
 
 import { ThemeModule } from '../../../@theme/theme.module';
 
@@ -10,24 +10,25 @@ import { ConstructorsStChartComponent } from './constructors-st-chart/constructo
 import { RouterModule } from '@angular/router';
 
 import { TranslateModule } from '@ngx-translate/core';
-
+import { StatusCardModule } from '../../components/status-card/status-card.module';
 
 @NgModule({
   imports: [
     ThemeModule,
     RouterModule,
     TranslateModule,
-    ChartModule
+    ChartModule,
+    StatusCardModule,
   ],
   declarations: [
     ConstructorStandingsComponent,
     ConstructorsStTableComponent,
-    ConstructorsStChartComponent
+    ConstructorsStChartComponent,
   ],
   exports: [
     ConstructorStandingsComponent,
     ConstructorsStTableComponent,
-    ConstructorsStChartComponent
-  ]
+    ConstructorsStChartComponent,
+  ],
 })
-export class ConstructorStandingsModule { }
+export class ConstructorStandingsModule {}

@@ -1,27 +1,26 @@
-import { Race } from "../race";
-import { RaceTable } from "../tables/race-table";
-import { SeasonTable } from "../tables/season-table";
-import { DriverTable } from "../tables/driver-table";
-import { StandingsTable } from "../tables/standings-table";
-import { ConstructorTable } from "../tables/constructor-table";
-import { CircuitTable } from "../tables/circuit-table";
+import { CircuitTable } from '../tables/circuit-table';
+import { ConstructorTable } from '../tables/constructor-table';
+import { DriverTable } from '../tables/driver-table';
+import { RaceTable } from '../tables/race-table';
+import { SeasonTable } from '../tables/season-table';
+import { StandingsTable } from '../tables/standings-table';
 
 export class MRData {
-    xmlns: string;
-    series: string;
-    url: string;
-    limit: string;
-    offset: string;
-    total: string;
+  xmlns: string;
+  series: string;
+  url: string;
+  limit: string;
+  offset: string;
+  total: string;
 
-    RaceTable: RaceTable;
+  RaceTable: RaceTable;
 
-    SeasonTable: SeasonTable;
+  SeasonTable: SeasonTable;
 
-    DriverTable: DriverTable;
-    ConstructorTable: ConstructorTable;
+  DriverTable: DriverTable;
+  ConstructorTable: ConstructorTable;
 
-    StandingsTable: StandingsTable;
+  StandingsTable: StandingsTable;
 
-    CircuitTable: CircuitTable;
+  CircuitTable: CircuitTable;
 }

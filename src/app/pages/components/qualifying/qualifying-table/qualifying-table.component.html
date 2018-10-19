@@ -7,7 +7,7 @@
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex">
-        <tr *ngIf="multipleResults && (rowIndex === 0 || rowData.raceName != racesResults[rowIndex-1].raceName)">
+        <tr *ngIf="(rowIndex === 0 || rowData.raceName != racesResults[rowIndex-1].raceName)">
           <td [attr.colspan]="cols.length">
             <span style="font-weight:bold">{{rowData.raceName}}</span>
           </td>

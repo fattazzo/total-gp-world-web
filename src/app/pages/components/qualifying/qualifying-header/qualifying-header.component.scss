@@ -2,7 +2,7 @@
 @import "~@nebular/theme/components/card/card.component.theme";
 
 @include nb-install-component() {
-  /deep/ nb-card {
+  ::ng-deep nb-card {
     margin-bottom: 0rem;
   }
 

@@ -1,105 +1,113 @@
 {
-    "position": {
-        "sing": "posizione",
-        "plur": "posizioni"
-    },
-    "driver": {
-        "sing": "pilota",
-        "plur": "piloti",
-        "points": "punti",
-        "numbers": "numero",
-        "winning": "piloti vincenti",
-        "nationalities": "nazionalità"
-    },
-    "point": {
-        "sing": "punto",
-        "plur": "punti"
-    },
-    "standing": {
-        "sing": "classifica",
-        "plur": "classifiche"
-    },
-    "constructor": {
-        "sing": "costruttore",
-        "plur": "costruttori",
-        "points": "punti",
-        "numbers": "numero",
-        "winning": "team vincenti",
-        "nationalities": "nazioni"
-    },
-    "section": {
-        "plur": "sezioni"
-    },
-    "dashboard": {
-        "sing": "dashboard"
-    },
-    "circuit": {
-        "plur": "circuiti"
-    },
-    "race": {
-        "plur": "gare",
-        "numbers": "numero",
-        "nationalities": "nazioni"
-    },
-    "schedule": {
-        "sing": "elenco"
-    },
-    "round": {
-        "sing": "round"
-    },
-    "name": {
-        "sing": "nome"
-    },
-    "date": {
-        "sing": "data"
-    },
-    "hour": {
-        "sing": "ora"
-    },
-    "time": {
-        "sing": "tempo"
-    },
-    "country": {
-        "sing": "nazione"
-    },
-    "locality": {
-        "sing": "località"
-    },
-    "language": {
-        "sing": "lingua"
-    },
-    "theme": {
-        "sing": "tema"
-    },
-    "direction": {
-        "sing": "direzione"
-    },
-    "info": {
-        "sing": "info"
-    },
-    "wikipedia": {
-        "sing": "wikipedia",
-        "introOf": "intro da Wikipedia"
-    },
-    "grid": {
-        "sing": "griglia"
-    },
-    "status": {
-        "sing": "stato"
-    },
-    "lap": {
-        "plur": "giri"
-    },
-    "result": {
-        "plur": "risultati"
-    },
-    "qualify": {
-        "plur": "qualifiche"
-    },
-    "chart": {
-        "pie": "torta",
-        "doughnut": "ciambella",
-        "line": "linea",
-        "bar": "barre"
-    }
+  "position": {
+    "sing": "posizione",
+    "plur": "posizioni"
+  },
+  "driver": {
+    "sing": "pilota",
+    "plur": "piloti",
+    "points": "punti",
+    "numbers": "numero",
+    "winning": "piloti vincenti",
+    "nationalities": "nazionalità"
+  },
+  "point": {
+    "sing": "punto",
+    "plur": "punti"
+  },
+  "standing": {
+    "sing": "classifica",
+    "plur": "classifiche"
+  },
+  "constructor": {
+    "sing": "costruttore",
+    "plur": "costruttori",
+    "points": "punti",
+    "numbers": "numero",
+    "winning": "team vincenti",
+    "nationalities": "nazioni"
+  },
+  "section": {
+    "plur": "sezioni"
+  },
+  "dashboard": {
+    "sing": "dashboard"
+  },
+  "circuit": {
+    "plur": "circuiti"
+  },
+  "race": {
+    "plur": "gare",
+    "numbers": "numero",
+    "nationalities": "nazioni"
+  },
+  "schedule": {
+    "sing": "elenco"
+  },
+  "round": {
+    "sing": "round"
+  },
+  "name": {
+    "sing": "nome"
+  },
+  "date": {
+    "sing": "data"
+  },
+  "hour": {
+    "sing": "ora"
+  },
+  "time": {
+    "sing": "tempo"
+  },
+  "country": {
+    "sing": "nazione"
+  },
+  "locality": {
+    "sing": "località"
+  },
+  "language": {
+    "sing": "lingua"
+  },
+  "theme": {
+    "sing": "tema"
+  },
+  "direction": {
+    "sing": "direzione"
+  },
+  "info": {
+    "sing": "info"
+  },
+  "wikipedia": {
+    "sing": "wikipedia",
+    "introOf": "intro da Wikipedia"
+  },
+  "grid": {
+    "sing": "griglia"
+  },
+  "status": {
+    "sing": "stato"
+  },
+  "lap": {
+    "plur": "giri"
+  },
+  "result": {
+    "plur": "risultati"
+  },
+  "qualify": {
+    "plur": "qualifiche"
+  },
+  "chart": {
+    "pie": "torta",
+    "doughnut": "ciambella",
+    "line": "linea",
+    "bar": "barre"
+  },
+  "continue-reading": "continua a leggere...",
+  "season": {
+    "sing": "stagione",
+    "plur": "stagioni"
+  },
+  "other": {
+    "sing": "altro"
+  }
 }

@@ -1,7 +1,7 @@
-@import '../../../styles/themes';
-@import '~@nebular/theme/styles/core/mixins';
-@import '~bootstrap/scss/mixins/breakpoints';
-@import '~@nebular/theme/styles/global/bootstrap/breakpoints';
+@import "../../../styles/themes";
+@import "~@nebular/theme/styles/core/mixins";
+@import "~bootstrap/scss/mixins/breakpoints";
+@import "~@nebular/theme/styles/global/breakpoints";
 
 $icon-color-default: #0bbb79;
 $icon-color-cosmic: #7958fa;
@@ -34,21 +34,30 @@ $icon-top-color-corporate: #e9e8eb;
           color: $icon-color-default;
 
           // Hack for IE11, IE11 should not set background
-          background: -webkit-linear-gradient($icon-top-color-default, $icon-color-default);
+          background: -webkit-linear-gradient(
+            $icon-top-color-default,
+            $icon-color-default
+          );
         }
 
         &.drop-icon-cosmic {
           color: $icon-color-cosmic;
 
           // Hack for IE11, IE11 should not set background
-          background: -webkit-linear-gradient($icon-top-color-cosmic, $icon-color-cosmic);
+          background: -webkit-linear-gradient(
+            $icon-top-color-cosmic,
+            $icon-color-cosmic
+          );
         }
 
         &.drop-icon-corporate {
           color: $icon-color-corporate;
 
           // Hack for IE11, IE11 should not set background
-          background: -webkit-linear-gradient($icon-top-color-corporate, $icon-color-corporate);
+          background: -webkit-linear-gradient(
+            $icon-top-color-corporate,
+            $icon-color-corporate
+          );
         }
 
         &.drop-icon-default,

@@ -21,4 +21,8 @@ export class RaceResultsTable {
     get driverName() {
         return `${this.result.Driver.givenName} ${this.result.Driver.familyName}`
     }
+
+    get constructorName() {
+        return `${this.result.Constructor.name}`
+    }
 }

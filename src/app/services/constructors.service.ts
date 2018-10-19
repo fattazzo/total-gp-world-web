@@ -8,12 +8,11 @@ import { Configuration } from '../app.constants';
 import { ConstructorStanding } from '../domain/constructor-standing';
 import { Constructor } from '../domain/constructor';
 import { ErgastResponse } from '../domain/ergast/ergast-response';
-import { of } from 'rxjs';
-import { WikipediaPage } from '../pages/components/wikipedia-page/domain/wikipedia-page';
 import { Race } from '../domain/race';
+import { Season } from '../domain/season';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ConstructorsService {
 
@@ -23,23 +22,21 @@ export class ConstructorsService {
   private cacheConstructors$: Observable<Constructor[]>;
   private cacheRaces$: Map<string, Observable<Race[]>> = new Map();
   private cacheQualifying$: Map<string, Observable<Race[]>> = new Map();
+  private cacheSeasons$: Map<string, Observable<Season[]>> = new Map();
 
   constructor(private http: HttpClient, private config: Configuration) { }
 
   /**
    * Load the constructor standing of the season
-   * 
+   *
    * @param season season name
    */
   public getStandings(season: string) {
     this.clearCacheIfNeeded(season);
 
     if (!this.cacheStanding$) {
-      console.log('Constructor standings: Empty cache, load from remote');
       this.seasonCache$ = season;
       this.cacheStanding$ = this.loadStandings(season).pipe(shareReplay(1));
-    } else {
-      console.log('Constructor standings: get data from cache');
     }
 
     return this.cacheStanding$;
@@ -47,18 +44,15 @@ export class ConstructorsService {
 
   /**
    * Load all constructors of the season
-   * 
+   *
    * @param season season name
    */
   public get(season: string) {
     this.clearCacheIfNeeded(season);
 
     if (!this.cacheConstructors$) {
-      console.log('Constructors: Empty cache, load from remote');
       this.seasonCache$ = season;
       this.cacheConstructors$ = this.load(season).pipe(shareReplay(1));
-    } else {
-      console.log('Constructors: get data from cache');
     }
 
     return this.cacheConstructors$;
@@ -68,11 +62,8 @@ export class ConstructorsService {
     this.clearCacheIfNeeded(season, constructorId);
 
     if (!this.cacheRaces$.get(constructorId)) {
-      console.log('Results: Empty cache, load from remote');
       this.seasonCache$ = season;
       this.cacheRaces$.set(constructorId, this.loadResults(season, constructorId));
-    } else {
-      console.log('Results: get data from cache');
     }
 
     return this.cacheRaces$.get(constructorId);
@@ -82,18 +73,23 @@ export class ConstructorsService {
     this.clearCacheIfNeeded(season, constructorId);
 
     if (!this.cacheQualifying$.get(constructorId)) {
-      console.log('Qualifying: Empty cache, load from remote');
       this.seasonCache$ = season;
       this.cacheQualifying$.set(constructorId, this.loadQualifying(season, constructorId));
-    } else {
-      console.log('Qualifying: get data from cache');
     }
 
     return this.cacheQualifying$.get(constructorId);
   }
 
+  public getSeasons(constructorId: string): Observable<Season[]> {
+    if (!this.cacheSeasons$.get(constructorId)) {
+      this.cacheSeasons$.set(constructorId, this.loadSeasons(constructorId));
+    }
+
+    return this.cacheSeasons$.get(constructorId);
+  }
+
   private clearCacheIfNeeded(season: string, constructorId: string = null) {
-    if (season != this.seasonCache$) {
+    if (season !== this.seasonCache$) {
       this.seasonCache$ = null;
       this.cacheConstructors$ = null;
       this.cacheStanding$ = null;
@@ -109,52 +105,61 @@ export class ConstructorsService {
 
   /**
    * Load constructor standing from remote
-   * 
+   *
    * @param season season name
    */
   private loadStandings(season: string): Observable<ConstructorStanding[]> {
-    console.log(`Calling ${this.config.ServerWithApiUrl}${season}/constructorStandings.json`)
     return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/constructorStandings.json`)
       .pipe(map(result =>
-        (result.MRData.StandingsTable.StandingsLists[0] === undefined) ? [] : result.MRData.StandingsTable.StandingsLists[0].ConstructorStandings)
+        (result.MRData.StandingsTable.StandingsLists[0] === undefined)
+        ? []
+        : result.MRData.StandingsTable.StandingsLists[0].ConstructorStandings),
       );
   }
 
   /**
    * Load constructor's list from remote
-   * 
+   *
    * @param season season name
    */
   private load(season: string): Observable<Constructor[]> {
-    console.log(`Calling ${this.config.ServerWithApiUrl}${season}/constructors.json`)
     return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/constructors.json`)
-      .pipe(map(result => result.MRData.ConstructorTable.Constructors)
+      .pipe(map(result => result.MRData.ConstructorTable.Constructors),
       );
   }
 
   /**
    * Load constructors results of the season from remote.
-   * 
+   *
    * @param season season name
    * @param constructorId constructor id
    */
   private loadResults(season: string, constructorId: string): Observable<Race[]> {
-    console.log(`Calling ${this.config.ServerWithApiUrl}${season}/constructors/${constructorId}/results.json`)
     return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/constructors/${constructorId}/results.json`)
-      .pipe(map(result => result.MRData.RaceTable.Races)
+      .pipe(map(result => result.MRData.RaceTable.Races),
       );
   }
 
   /**
    * Load constructors qualifying results of the season from remote.
-   * 
+   *
    * @param season season name
    * @param constructorId constructor id
    */
   private loadQualifying(season: string, constructorId: string): Observable<Race[]> {
-    console.log(`Calling ${this.config.ServerWithApiUrl}${season}/constructors/${constructorId}/qualifying.json`)
     return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/constructors/${constructorId}/qualifying.json`)
-      .pipe(map(result => result.MRData.RaceTable.Races)
+      .pipe(map(result => result.MRData.RaceTable.Races),
+      );
+  }
+
+  /**
+   * Load all seasons for constructor from remote.
+   *
+   * @param constructorId constructor id
+   */
+  private loadSeasons(constructorId: string): Observable<Season[]> {
+    return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}constructors/${constructorId}/seasons.json?limit=1000`)
+      .pipe(map(result => result.MRData.SeasonTable.Seasons),
       );
   }
 }

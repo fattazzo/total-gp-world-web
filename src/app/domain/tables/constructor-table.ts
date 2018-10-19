@@ -1,6 +1,5 @@
-import { Constructor } from "../constructor";
+import { Constructor } from '../constructor';
 
 export class ConstructorTable {
-
-    Constructors: Constructor[];
+  Constructors: Constructor[];
 }

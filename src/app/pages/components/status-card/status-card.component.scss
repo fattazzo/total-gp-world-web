@@ -1,5 +1,5 @@
-@import '../../../@theme/styles/themes';
-@import '~@nebular/theme/styles/global/bootstrap/hero-buttons';
+@import "../../../@theme/styles/themes";
+@import "~@nebular/bootstrap/styles/hero-buttons";
 
 @include nb-install-component() {
   nb-card {
@@ -21,7 +21,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 5.75rem;
+      width: 4.75rem;
       height: 4.75rem;
       font-size: 3.75rem;
       border-radius: nb-theme(card-border-radius);
@@ -73,7 +73,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 5.75rem;
+      width: 4.75rem;
       height: 4.75rem;
       font-size: 1.75rem;
       border-radius: nb-theme(card-border-radius);
@@ -116,7 +116,11 @@
       .icon {
         color: nb-theme(card-fg);
 
-        &.primary, &.success, &.info, &.warning, &.danger {
+        &.primary,
+        &.success,
+        &.info,
+        &.warning,
+        &.danger {
           box-shadow: none;
           background-image: linear-gradient(to right, transparent, transparent);
         }
@@ -145,7 +149,7 @@
     .title {
       font-family: nb-theme(font-secondary);
       font-size: 1.25rem;
-      font-weight: nb-theme(font-weight-bold);
+      //font-weight: nb-theme(font-weight-bold);
       color: nb-theme(card-fg-heading);
     }
 
@@ -177,8 +181,14 @@
         width: 7rem;
         height: 100%;
         font-size: 4.5rem;
-        @include nb-ltr(border-radius, nb-theme(card-border-radius) 0 0 nb-theme(card-border-radius));
-        @include nb-rtl(border-radius, 0 nb-theme(card-border-radius) nb-theme(card-border-radius) 0);
+        @include nb-ltr(
+          border-radius,
+          nb-theme(card-border-radius) 0 0 nb-theme(card-border-radius)
+        );
+        @include nb-rtl(
+          border-radius,
+          0 nb-theme(card-border-radius) nb-theme(card-border-radius) 0
+        );
       }
 
       .title {

@@ -1,6 +1,5 @@
-import { Circuit } from "../circuit";
+import { Circuit } from '../circuit';
 
 export class CircuitTable {
-
-    Circuits: Circuit[];
+  Circuits: Circuit[];
 }

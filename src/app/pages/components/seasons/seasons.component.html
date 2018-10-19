@@ -1,0 +1,27 @@
+<div class="ui-g" style="height: 400px">
+  <div class="ui-g-12" style="padding-bottom: 1.5rem">
+    <nb-card style="height: 100%">
+      <nb-card-header>
+        <div class="table-header">
+          <div style="white-space: nowrap; display: flex;flex-direction: row;flex-wrap: wrap;align-items: flex-end;">
+            <i class="fas fa-trophy fa-2x"></i>
+            {{ 'season.plur' | translate | ngxCapitalize }}: {{seasons.length}}
+          </div>
+        </div>
+      </nb-card-header>
+      <nb-card-body>
+        <div style="overflow: hidden; height: 100%;">
+          <div class="stats-content">
+            <div class="stats-month" *ngFor="let season of seasons">
+              <a role="button" (click)="changeSeasons(season.season)" class="link-black">
+                <div class="results">
+                  <b>{{season.season}}</b>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

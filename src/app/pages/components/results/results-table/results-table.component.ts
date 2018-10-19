@@ -11,9 +11,17 @@ import { NbThemeService } from '@nebular/theme';
 export class ResultsTableComponent implements OnInit {
 
   racesResults: RaceResultsTable[];
-  multipleResults: boolean = false;
+
+  showRaceGroup: boolean = false;
+
+  races$: Set<string> = new Set();
+  drivers$: Set<string> = new Set();
+  constructors$: Set<string> = new Set();
 
   cols: any[];
+
+  @Input()
+  season: string;
 
   constructor(private themeService: NbThemeService) { }
 
@@ -24,15 +32,21 @@ export class ResultsTableComponent implements OnInit {
   @Input('results')
   set results(results: Race[]) {
     this.racesResults = [];
-    this.multipleResults = false
+    this.races$ = new Set();
+    this.drivers$ = new Set();
+    this.constructors$ = new Set();
 
-    this.themeService.getJsTheme().subscribe(config => {
+    this.themeService.getJsTheme().subscribe(() => {
       results.forEach(race =>
-        race.Results.forEach((result, index) => {
+        race.Results.forEach(result => {
           this.racesResults.push(new RaceResultsTable(race.raceName, race.Circuit, result));
-          this.multipleResults = this.multipleResults || (index > 0);
+
+          this.races$.add(race.raceName);
+          this.drivers$.add(result.Driver.driverId);
+          this.constructors$.add(result.Constructor.constructorId);
         })
       )
+      this.showRaceGroup = this.races$.size > 1;
 
       this.buildColumns();
     });
@@ -41,8 +55,11 @@ export class ResultsTableComponent implements OnInit {
   private buildColumns() {
     this.cols = [];
 
-    if (this.multipleResults) {
+    if (this.drivers$.size > 1) {
       this.cols.push({ field: 'driverName', key: 'driver.sing', cell: (race: RaceResultsTable) => `${race.driverName}` });
+    }
+    if (this.constructors$.size > 1) {
+      this.cols.push({ field: 'constructorName', key: 'constructor.sing', cell: (race: RaceResultsTable) => `${race.constructorName}` });
     }
 
     this.cols.push(

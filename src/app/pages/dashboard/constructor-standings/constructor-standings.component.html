@@ -1,8 +1,18 @@
-<div class="row">
-  <div class="col-xxxl-4 col-xxl-6 col-lg-6 col-md-12">
+<div class="ui-g">
+  <div class="ui-xl-3 ui-lg-4 ui-md-12 ui-sm-12">
     <constructors-st-table [season]="season" [standings]="standings"></constructors-st-table>
   </div>
-  <div class="col-xxxl-8 col-xxl-6 col-lg-6 col-md-12">
+  <div class="ui-xl-6 ui-lg-8 ui-md-12 ui-sm-12">
     <constructors-st-chart [standings]="standings"></constructors-st-chart>
+  </div>
+
+  <div class="ui-xl-3 ui-lg-12 ui-md-12 ui-sm-12" style="padding: 0;">
+    <div class="ui-g">
+      <div class="ui-xl-12 ui-lg-6 ui-md-12 ui-sm-12" *ngFor="let card of constructorsCards | async">
+        <app-status-card [title]="card.title" [type]="card.type" [value]="card.value">
+          <i [ngClass]="card.iconClass"></i>
+        </app-status-card>
+      </div>
+    </div>
   </div>
 </div>

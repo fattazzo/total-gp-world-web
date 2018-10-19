@@ -3,6 +3,7 @@ import { Race } from '../../../domain/race';
 import { DriversService } from '../../../services/drivers.service';
 import { ConstructorsService } from '../../../services/constructors.service';
 import { ChartType, ChartTypes } from './results-charts/chart-types';
+import { CircuitsService } from '../../../services/circuits.service';
 
 @Component({
   selector: 'f1-results',
@@ -13,6 +14,7 @@ export class ResultsComponent {
 
   private _driverId: string;
   private _constructorId: string;
+  private _circuitId: string;
   private _season: string;
 
   public results: Race[];
@@ -21,7 +23,14 @@ export class ResultsComponent {
 
   type: ChartType = ChartTypes.POINTS;
 
-  constructor(private driversService: DriversService, private constructorService: ConstructorsService) { }
+  @Input()
+  showChart: boolean = true
+
+  constructor(
+    private driversService: DriversService,
+    private constructorService: ConstructorsService,
+    private circuitService: CircuitsService
+  ) { }
 
   @Input('season')
   set season(season: string) {
@@ -33,6 +42,7 @@ export class ResultsComponent {
   set driverId(driverId: string) {
     this._driverId = driverId;
     this._constructorId = undefined;
+    this._circuitId = undefined;
     this.loadResults();
   }
 
@@ -40,6 +50,15 @@ export class ResultsComponent {
   set constructorId(constructorId: string) {
     this._constructorId = constructorId;
     this._driverId = undefined;
+    this._circuitId = undefined;
+    this.loadResults();
+  }
+
+  @Input('circuitId')
+  set circuitId(circuitId: string) {
+    this._circuitId = circuitId;
+    this._driverId = undefined;
+    this._constructorId = undefined;
     this.loadResults();
   }
 
@@ -65,6 +84,11 @@ export class ResultsComponent {
         });
     } else if (this._constructorId != undefined) {
       this.constructorService.getResults(this._season, this._constructorId)
+        .subscribe(res => {
+          this.results = res
+        });
+    } else if (this._circuitId != undefined) {
+      this.circuitService.getResults(this._season, this._circuitId)
         .subscribe(res => {
           this.results = res
         });

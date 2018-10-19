@@ -7,27 +7,20 @@ import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 
 import { DashboardModule } from './dashboard/dashboard.module';
 
-import { CapitalizePipe } from '../@theme/pipes'
+import { CapitalizePipe } from '../@theme/pipes';
 import { UpperCasePipe } from '@angular/common';
+import { AboutComponent } from './about/about.component';
 
-const PAGES_COMPONENTS = [
-  PagesComponent,
-];
+const PAGES_COMPONENTS = [PagesComponent];
 
 @NgModule({
   imports: [
     PagesRoutingModule,
     ThemeModule,
     DashboardModule,
-    MiscellaneousModule
+    MiscellaneousModule,
   ],
-  providers: [
-    CapitalizePipe,
-    UpperCasePipe
-  ],
-  declarations: [
-    ...PAGES_COMPONENTS
-  ],
+  providers: [CapitalizePipe, UpperCasePipe],
+  declarations: [...PAGES_COMPONENTS, AboutComponent],
 })
-export class PagesModule {
-}
+export class PagesModule {}

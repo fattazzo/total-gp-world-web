@@ -8,31 +8,36 @@ import { Race } from '../domain/race';
 import { ErgastResponse } from '../domain/ergast/ergast-response';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RacesService {
-
-  private cache$: Observable<Race[]>;
   private seasonCache$: string;
 
-  constructor(private http: HttpClient, private config: Configuration) { }
+  private cacheSchedule$: Observable<Race[]>;
+
+  constructor(private http: HttpClient, private config: Configuration) {}
 
   public getSchedule(season: string) {
-    if (!this.cache$ || season != this.seasonCache$) {
-      console.log('Race schedule: Empty cache, load from remote');
+    this.clearCacheIfNeeded(season);
+
+    if (!this.cacheSchedule$) {
       this.seasonCache$ = season;
-      this.cache$ = this.loadSchedule(season).pipe(shareReplay(1));
-    } else {
-      console.log('Race schedule: get data from cache');
+      this.cacheSchedule$ = this.loadSchedule(season).pipe(shareReplay(1));
     }
 
-    return this.cache$;
+    return this.cacheSchedule$;
+  }
+
+  private clearCacheIfNeeded(season: string) {
+    if (season !== this.seasonCache$) {
+      this.seasonCache$ = null;
+      this.cacheSchedule$ = null;
+    }
   }
 
   private loadSchedule(season: string): Observable<Race[]> {
-    console.log(`Calling ${this.config.ServerWithApiUrl}${season}.json`)
-    return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}.json`)
-      .pipe(map(result => result.MRData.RaceTable.Races)
-      );
+    return this.http
+      .get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}.json`)
+      .pipe(map(result => result.MRData.RaceTable.Races));
   }
 }

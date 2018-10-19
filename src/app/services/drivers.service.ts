@@ -7,12 +7,12 @@ import { Configuration } from '../app.constants';
 
 import { DriverStanding } from '../domain/driver-standing'
 import { Driver } from '../domain/driver';
-import { WikipediaPage } from '../pages/components/wikipedia-page/domain/wikipedia-page';
 import { Race } from '../domain/race';
 import { ErgastResponse } from '../domain/ergast/ergast-response';
+import { Season } from '../domain/season';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DriversService {
 
@@ -22,23 +22,21 @@ export class DriversService {
   private cacheDrivers$: Observable<Driver[]>;
   private cacheRaces$: Map<string, Observable<Race[]>> = new Map();
   private cacheQualifyng$: Map<string, Observable<Race[]>> = new Map();
+  private cacheSeasons$: Map<string, Observable<Season[]>> = new Map();
 
   constructor(private http: HttpClient, private config: Configuration) { }
 
   /**
    * Load the driver standing of the season
-   * 
+   *
    * @param season season name
    */
   public getStandings(season: string) {
     this.clearCacheIfNeeded(season);
 
     if (!this.cacheStandings$) {
-      console.log('Driver standings: Empty cache, load from remote');
       this.seasonCache$ = season;
       this.cacheStandings$ = this.loadStandings(season).pipe(shareReplay(1));
-    } else {
-      console.log('Driver standings: get data from cache');
     }
 
     return this.cacheStandings$;
@@ -46,18 +44,15 @@ export class DriversService {
 
   /**
    * Load all drivers of the season
-   * 
+   *
    * @param season season name
    */
   public get(season: string) {
     this.clearCacheIfNeeded(season);
 
     if (!this.cacheDrivers$) {
-      console.log(`Drivers ${season}: Empty cache, load from remote`);
       this.seasonCache$ = season;
       this.cacheDrivers$ = this.load(season).pipe(shareReplay(1));
-    } else {
-      console.log(`Drivers ${season}: get data from cache`);
     }
 
     return this.cacheDrivers$;
@@ -67,11 +62,8 @@ export class DriversService {
     this.clearCacheIfNeeded(season, driverId);
 
     if (!this.cacheRaces$.get(driverId)) {
-      console.log('Results: Empty cache, load from remote');
       this.seasonCache$ = season;
       this.cacheRaces$.set(driverId, this.loadResults(season, driverId));
-    } else {
-      console.log('Results: get data from cache');
     }
 
     return this.cacheRaces$.get(driverId);
@@ -81,18 +73,23 @@ export class DriversService {
     this.clearCacheIfNeeded(season, driverId);
 
     if (!this.cacheQualifyng$.get(driverId)) {
-      console.log('Qualifying: Empty cache, load from remote');
       this.seasonCache$ = season;
       this.cacheQualifyng$.set(driverId, this.loadQualifying(season, driverId));
-    } else {
-      console.log('Qualifying: get data from cache');
     }
 
     return this.cacheQualifyng$.get(driverId);
   }
 
+  public getSeasons(driverId: string): Observable<Season[]> {
+    if (!this.cacheSeasons$.get(driverId)) {
+      this.cacheSeasons$.set(driverId, this.loadSeasons(driverId));
+    }
+
+    return this.cacheSeasons$.get(driverId);
+  }
+
   private clearCacheIfNeeded(season: string, driverId: string = null) {
-    if (season != this.seasonCache$) {
+    if (season !== this.seasonCache$) {
       this.seasonCache$ = null;
       this.cacheDrivers$ = null;
       this.cacheStandings$ = null;
@@ -108,52 +105,61 @@ export class DriversService {
 
   /**
    * Load driver standing from remote
-   * 
+   *
    * @param season season name
    */
   private loadStandings(season: string): Observable<DriverStanding[]> {
-    console.log(`Calling ${this.config.ServerWithApiUrl}${season}/driverStandings.json`);
     return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/driverStandings.json`)
       .pipe(map(result =>
-        (result.MRData.StandingsTable.StandingsLists[0] === undefined) ? [] : result.MRData.StandingsTable.StandingsLists[0].DriverStandings)
+        (result.MRData.StandingsTable.StandingsLists[0] === undefined)
+        ? []
+        : result.MRData.StandingsTable.StandingsLists[0].DriverStandings),
       );
   }
 
   /**
    * Load driver's list from remote
-   * 
+   *
    * @param season season name
    */
   private load(season: string): Observable<Driver[]> {
-    console.log(`Calling ${this.config.ServerWithApiUrl}${season}/drivers.json`)
     return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/drivers.json`)
-      .pipe(map(result => result.MRData.DriverTable.Drivers)
+      .pipe(map(result => result.MRData.DriverTable.Drivers),
       );
   }
 
   /**
    * Load driver results of the season from remote.
-   * 
+   *
    * @param season season name
    * @param driverId driver id
    */
   private loadResults(season: string, driverId: string): Observable<Race[]> {
-    console.log(`Calling ${this.config.ServerWithApiUrl}${season}/drivers/${driverId}/results.json`)
     return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/drivers/${driverId}/results.json`)
-      .pipe(map(result => result.MRData.RaceTable.Races)
+      .pipe(map(result => result.MRData.RaceTable.Races),
       );
   }
 
   /**
    * Load driver qualifying results of the season from remote.
-   * 
+   *
    * @param season season name
    * @param driverId driver id
    */
   private loadQualifying(season: string, driverId: string): Observable<Race[]> {
-    console.log(`Calling ${this.config.ServerWithApiUrl}${season}/drivers/${driverId}/qualifying.json`)
     return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/drivers/${driverId}/qualifying.json`)
-      .pipe(map(result => result.MRData.RaceTable.Races)
+      .pipe(map(result => result.MRData.RaceTable.Races),
+      );
+  }
+
+  /**
+   * Load all season for driver from remote.
+   *
+   * @param driverId driver id
+   */
+  private loadSeasons(driverId: string): Observable<Season[]> {
+    return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}drivers/${driverId}/seasons.json`)
+      .pipe(map(result => result.MRData.SeasonTable.Seasons),
       );
   }
 }

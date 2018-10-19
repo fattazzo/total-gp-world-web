@@ -9,22 +9,17 @@ import { RouterModule } from '@angular/router';
 
 import { TranslateModule } from '@ngx-translate/core';
 import { TableModule } from 'primeng/table';
-
+import { StatusCardModule } from '../../components/status-card/status-card.module';
 
 @NgModule({
   imports: [
     ThemeModule,
     RouterModule,
     TableModule,
-    TranslateModule
+    TranslateModule,
+    StatusCardModule,
   ],
-  declarations: [
-    ScheludedRacesComponent,
-    ScheduledRacesTableComponent
-  ],
-  exports: [
-    ScheludedRacesComponent,
-    ScheduledRacesTableComponent
-  ]
+  declarations: [ScheludedRacesComponent, ScheduledRacesTableComponent],
+  exports: [ScheludedRacesComponent, ScheduledRacesTableComponent],
 })
-export class ScheludedRacesModule { }
+export class ScheludedRacesModule {}

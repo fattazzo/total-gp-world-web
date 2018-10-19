@@ -1,6 +1,5 @@
-import { Season } from "../season";
+import { Season } from '../season';
 
 export class SeasonTable {
-
-    Seasons: Season[];
+  Seasons: Season[];
 }

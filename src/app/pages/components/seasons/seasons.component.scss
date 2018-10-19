@@ -1,0 +1,105 @@
+@import "../../../@theme/styles/themes";
+@import "~@nebular/theme/components/card/card.component.theme";
+
+@include nb-install-component() {
+  .table-header {
+    @include nb-card-header();
+    font-size: 1.25rem;
+    padding: 0px;
+
+    .subtitle {
+      color: nb-theme(color-fg);
+      font-family: nb-theme(font-main);
+      font-size: 1rem;
+      font-weight: nb-theme(font-weight-light);
+    }
+  }
+
+  .stats-content {
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  .stats-month {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    color: nb-theme(color-fg);
+    position: relative;
+
+    &:not(:first-child) {
+      border-top: 1px solid nb-theme(separator);
+
+      @include nb-for-theme(corporate) {
+        border-top-color: nb-theme(tabs-separator);
+      }
+    }
+
+    &:hover {
+      background-color: nb-theme(layout-bg);
+
+      &::before {
+        position: absolute;
+        content: "";
+        height: 100%;
+        width: 6px;
+        left: 0;
+        top: 0;
+        background-color: nb-theme(color-success);
+        border-radius: nb-theme(radius);
+      }
+    }
+
+    .month {
+      display: inline-block;
+      width: 2.75rem;
+      font-family: nb-theme(font-secondary);
+      font-size: 1.25rem;
+      font-weight: nb-theme(font-weight-bolder);
+      color: nb-theme(color-fg-heading);
+    }
+
+    .delta {
+      position: relative;
+      display: inline-block;
+      padding-left: 1rem;
+      font-size: 0.75rem;
+
+      color: text-danger();
+
+      &::before {
+        position: absolute;
+        content: "";
+        bottom: 3px;
+        left: 2px;
+
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 8px solid text-danger();
+      }
+
+      &.down {
+        color: text-success();
+
+        &::before {
+          top: 3px;
+          border-top: 8px solid text-success();
+          border-bottom: none;
+        }
+      }
+    }
+
+    .results {
+      font-size: 0.875rem;
+      font-weight: nb-theme(font-weight-light);
+
+      b {
+        font-family: nb-theme(font-secondary);
+        font-size: 1rem;
+        font-weight: nb-theme(font-weight-bolder);
+        color: nb-theme(color-fg-heading);
+      }
+    }
+  }
+}

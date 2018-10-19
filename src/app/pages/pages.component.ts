@@ -16,19 +16,21 @@ import { UpperCasePipe } from '@angular/common';
   `,
 })
 export class PagesComponent implements OnInit, OnDestroy {
-
   menuI18NTitle: TitleI18NSpec[] = MENU_I18N_SPEC;
   menu: NbMenuItem[] = MENU_I18N_SPEC.map(item => item.menuItem);
 
   i18nSubscription: any;
 
-  constructor(private translate: TranslateService, private capitalizePipe: CapitalizePipe, private uppercasePipe: UpperCasePipe) { }
+  constructor(
+    private translate: TranslateService,
+    private capitalizePipe: CapitalizePipe,
+    private uppercasePipe: UpperCasePipe,
+  ) {}
 
   ngOnInit() {
-    this.i18nSubscription = this.translate.onLangChange
-      .subscribe(lang => {
-        this.applyI18N();
-      });
+    this.i18nSubscription = this.translate.onLangChange.subscribe(lang => {
+      this.applyI18N();
+    });
     this.applyI18N();
   }
 
@@ -38,9 +40,9 @@ export class PagesComponent implements OnInit, OnDestroy {
 
   private applyI18N() {
     this.menu.forEach((item, idx, arr) => {
-      var spec = this.menuI18NTitle[idx];
-      if (spec != undefined) {
-        item.title = this.translate.instant(spec.key)
+      const spec = this.menuI18NTitle[idx];
+      if (spec !== undefined) {
+        item.title = this.translate.instant(spec.key);
         if (spec.capitalize) {
           item.title = this.capitalizePipe.transform(item.title);
         }
@@ -48,7 +50,7 @@ export class PagesComponent implements OnInit, OnDestroy {
           item.title = this.uppercasePipe.transform(item.title);
         }
       }
-    })
+    });
   }
 }
 
@@ -58,7 +60,12 @@ export class TitleI18NSpec {
   key: string;
   menuItem: NbMenuItem;
 
-  constructor(capitalize: boolean = true, uppercase: boolean = false, key: string, menuItem: NbMenuItem) {
+  constructor(
+    capitalize: boolean = true,
+    uppercase: boolean = false,
+    key: string,
+    menuItem: NbMenuItem,
+  ) {
     this.capitalize = capitalize;
     this.uppercase = uppercase;
     this.key = key;

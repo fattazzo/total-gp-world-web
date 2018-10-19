@@ -1,9 +1,6 @@
 @import "../../../../@theme/styles/themes";
 @import "~@nebular/theme/components/card/card.component.theme";
 @import "~@nebular/theme/styles/global/typography/typography";
-@import "~bootstrap/scss/mixins/breakpoints";
-@import "~@nebular/theme/styles/global/bootstrap/breakpoints";
-@import "~@nebular/theme/styles/global/bootstrap/hero-buttons";
 
 @include nb-install-component() {
   .table-header {
@@ -26,5 +23,13 @@
 
   nb-card-body {
     padding: 0px;
+  }
+
+  .link-black {
+    color: nb-theme(color-fg-heading);
+
+    &:hover {
+      color: nb-theme(color-primary);
+    }
   }
 }

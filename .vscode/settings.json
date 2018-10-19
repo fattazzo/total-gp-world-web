@@ -1,4 +1,7 @@
 {
     "typescript.tsdk": "./node_modules/typescript/lib",
-    "tslint.enable": false
+    "typescript.preferences.quoteStyle": "single",
+    "prettier.singleQuote": true,
+    "editor.wordWrapColumn": 140,
+    "editor.formatOnSave": true
 }

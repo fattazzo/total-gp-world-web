@@ -10,7 +10,7 @@ import { Driver } from '../../domain/driver';
 @Component({
   selector: 'driver',
   templateUrl: './driver.component.html',
-  styleUrls: ['./driver.component.scss']
+  styleUrls: ['./driver.component.scss'],
 })
 export class DriverComponent implements OnInit, OnDestroy {
 
@@ -37,11 +37,11 @@ export class DriverComponent implements OnInit, OnDestroy {
       this.season = params['season'];
       this.driverIdSelected = params['driverId'];
 
-      if (this.season != undefined) {
+      if (this.season !== undefined) {
         this.drivers = this.driversService.get(this.season);
         this.wikiUrl = undefined;
 
-        if (this.driverIdSelected != undefined) {
+        if (this.driverIdSelected !== undefined) {
           this.drivers.forEach(ds => {
             ds.forEach(d => {
               if (d.driverId === this.driverIdSelected) {
@@ -54,7 +54,7 @@ export class DriverComponent implements OnInit, OnDestroy {
     });
 
     this.seasonSubscribe = this.seasonsService.getSeason().subscribe((newSeason) => {
-      if (this.season != newSeason) {
+      if (this.season !== newSeason) {
         this.season = newSeason;
         this.drivers = this.driversService.get(newSeason);
         this.onChange(this.driverIdSelected)

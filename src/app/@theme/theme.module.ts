@@ -32,7 +32,13 @@ import {
   ThemeSwitcherComponent,
   ThemeSwitcherListComponent,
 } from './components';
-import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe, ReversePipe } from './pipes';
+import {
+  CapitalizePipe,
+  PluralPipe,
+  RoundPipe,
+  TimingPipe,
+  ReversePipe,
+} from './pipes';
 import {
   OneColumnLayoutComponent,
   SampleLayoutComponent,
@@ -43,7 +49,7 @@ import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
 
-import { AppControlsComponent } from '../components/app-controls/app-controls.component'
+import { AppControlsComponent } from '../components/app-controls/app-controls.component';
 
 import { DropdownModule } from 'primeng/dropdown';
 import { ApplicationPipesModule } from '../pipes/application-pipes.module';
@@ -65,7 +71,7 @@ const NB_MODULES = [
   NbContextMenuModule,
   NgbModule,
   NbSecurityModule, // *nbIsGranted directive
-  NbSpinnerModule
+  NbSpinnerModule,
 ];
 
 const COMPONENTS = [
@@ -85,17 +91,9 @@ const COMPONENTS = [
   AppControlsComponent,
 ];
 
-const ENTRY_COMPONENTS = [
-  ThemeSwitcherListComponent,
-];
+const ENTRY_COMPONENTS = [ThemeSwitcherListComponent];
 
-const PIPES = [
-  CapitalizePipe,
-  PluralPipe,
-  RoundPipe,
-  TimingPipe,
-  ReversePipe
-];
+const PIPES = [CapitalizePipe, PluralPipe, RoundPipe, TimingPipe, ReversePipe];
 
 const NB_THEME_PROVIDERS = [
   ...NbThemeModule.forRoot(
@@ -109,7 +107,12 @@ const NB_THEME_PROVIDERS = [
 ];
 
 @NgModule({
-  imports: [...BASE_MODULES, ...NB_MODULES, DropdownModule, ApplicationPipesModule],
+  imports: [
+    ...BASE_MODULES,
+    ...NB_MODULES,
+    DropdownModule,
+    ApplicationPipesModule,
+  ],
   exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS, ...PIPES],
   declarations: [...COMPONENTS, ...PIPES],
   entryComponents: [...ENTRY_COMPONENTS],

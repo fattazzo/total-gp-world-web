@@ -4,17 +4,15 @@ import { ConstructorStanding } from '../../../../domain/constructor-standing';
 @Component({
   selector: 'constructors-st-table',
   templateUrl: './constructors-st-table.component.html',
-  styleUrls: ['./constructors-st-table.component.scss']
+  styleUrls: ['./constructors-st-table.component.scss'],
 })
 export class ConstructorsStTableComponent implements OnInit {
+  @Input()
+  standings: ConstructorStanding[];
+  @Input()
+  season: string;
 
-  @Input() standings: ConstructorStanding[];
-  @Input() season: string;
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-
-  }
-
+  ngOnInit() {}
 }

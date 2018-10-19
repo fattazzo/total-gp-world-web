@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'ngx-status-card',
+  selector: 'app-status-card',
   styleUrls: ['./status-card.component.scss'],
   template: `
     <nb-card>
@@ -22,9 +22,12 @@ import { Component, Input } from '@angular/core';
   `,
 })
 export class StatusCardComponent {
-
-  @Input() title: string;
-  @Input() type: string;
-  @Input() on = true;
-  @Input() value: string;
+  @Input()
+  title: string;
+  @Input()
+  type: string;
+  @Input()
+  on = true;
+  @Input()
+  value: string;
 }
