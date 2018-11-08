@@ -1,7 +1,8 @@
-<nb-card size="large" [nbSpinner]="!standings?.length" nbSpinnerStatus="primary" nbSpinnerSize="xxlarge" nbSpinnerMessage="">
+<nb-card size="large" [nbSpinner]="!standings?.length" nbSpinnerStatus="primary" nbSpinnerSize="xxlarge"
+  nbSpinnerMessage="">
   <div class="chart-container">
     <div class="table-header">
-      <span><i class="fas fa-user-astronaut fa-2x"></i></span>
+      <fa-icon size="2x" icon="user-astronaut"></fa-icon>
       <div style="margin-right: 10px;margin-left: 10px">
         <div>{{ 'driver.plur' | translate | ngxCapitalize }}</div>
         <div class="subtitle">{{ 'standing.sing' | translate | ngxCapitalize }}</div>

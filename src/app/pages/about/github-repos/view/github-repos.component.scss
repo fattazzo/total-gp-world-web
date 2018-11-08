@@ -1,0 +1,15 @@
+@import "../../../../@theme/styles/themes";
+@import "~@nebular/theme/components/card/card.component.theme";
+@import "~@nebular/theme/styles/global/typography/typography";
+
+@include nb-install-component() {
+  .main-container {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+  }
+
+  .i18n-container {
+    flex: 1;
+  }
+}

@@ -11,6 +11,7 @@ import { ChartModule } from 'primeng/chart';
 import { ApplicationPipesModule } from '../../../pipes/application-pipes.module';
 import { DropdownModule } from 'primeng/dropdown';
 import { RouterModule } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   imports: [
@@ -21,16 +22,15 @@ import { RouterModule } from '@angular/router';
     ChartModule,
     ApplicationPipesModule,
     DropdownModule,
-    RouterModule
+    FontAwesomeModule,
+    RouterModule,
   ],
-  exports: [
-    ResultsComponent
-  ],
+  exports: [ResultsComponent],
   declarations: [
     ResultsComponent,
     ResultsHeaderComponent,
     ResultsTableComponent,
-    ResultsChartsComponent
-  ]
+    ResultsChartsComponent,
+  ],
 })
-export class ResultsModule { }
+export class ResultsModule {}

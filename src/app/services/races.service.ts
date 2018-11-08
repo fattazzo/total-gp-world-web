@@ -6,38 +6,36 @@ import { shareReplay, map } from 'rxjs/operators';
 import { Configuration } from '../app.constants';
 import { Race } from '../domain/race';
 import { ErgastResponse } from '../domain/ergast/ergast-response';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RacesService {
-  private seasonCache$: string;
-
-  private cacheSchedule$: Observable<Race[]>;
+  private cacheSchedule$: Map<string, Race[]> = new Map();
 
   constructor(private http: HttpClient, private config: Configuration) {}
 
   public getSchedule(season: string) {
-    this.clearCacheIfNeeded(season);
-
-    if (!this.cacheSchedule$) {
-      this.seasonCache$ = season;
-      this.cacheSchedule$ = this.loadSchedule(season).pipe(shareReplay(1));
+    if (this.cacheSchedule$ && this.cacheSchedule$.has(season)) {
+      return of(this.cacheSchedule$.get(season));
     }
 
-    return this.cacheSchedule$;
-  }
-
-  private clearCacheIfNeeded(season: string) {
-    if (season !== this.seasonCache$) {
-      this.seasonCache$ = null;
-      this.cacheSchedule$ = null;
-    }
+    return this.loadSchedule(season);
   }
 
   private loadSchedule(season: string): Observable<Race[]> {
     return this.http
       .get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}.json`)
-      .pipe(map(result => result.MRData.RaceTable.Races));
+      .pipe(
+        map(result => {
+          const schedule =
+            result.MRData.RaceTable.Races !== undefined
+              ? result.MRData.RaceTable.Races
+              : [];
+          this.cacheSchedule$.set(season, schedule);
+          return schedule;
+        }),
+      );
   }
 }

@@ -10,5 +10,7 @@ export class Configuration implements OnInit {
 
   public season: string;
 
+  public githubUserName = 'fattazzo';
+
   ngOnInit() {}
 }

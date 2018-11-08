@@ -10,6 +10,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ChartModule } from 'primeng/chart';
 import { DropdownModule } from 'primeng/dropdown';
 import { ApplicationPipesModule } from '../../../pipes/application-pipes.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   imports: [
@@ -19,16 +20,15 @@ import { ApplicationPipesModule } from '../../../pipes/application-pipes.module'
     TranslateModule,
     ChartModule,
     DropdownModule,
-    ApplicationPipesModule
+    ApplicationPipesModule,
+    FontAwesomeModule,
   ],
-  exports: [
-    QualifyngComponent
-  ],
+  exports: [QualifyngComponent],
   declarations: [
     QualifyngComponent,
     QualifyingTableComponent,
     QualifyingHeaderComponent,
-    QualifyingChartComponent
-  ]
+    QualifyingChartComponent,
+  ],
 })
-export class QualifyingModule { }
+export class QualifyingModule {}

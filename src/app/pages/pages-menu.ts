@@ -54,4 +54,24 @@ export const MENU_I18N_SPEC: TitleI18NSpec[] = [
     key: 'other.sing',
     menuItem: { title: 'OTHERS', group: true },
   },
+  {
+    capitalize: true,
+    uppercase: false,
+    key: 'info.sing',
+    menuItem: {
+      title: 'Info',
+      icon: 'fas fa-info-circle',
+      link: '/pages/info',
+    },
+  },
+  {
+    capitalize: true,
+    uppercase: false,
+    key: 'about',
+    menuItem: {
+      title: 'About',
+      icon: 'fas fa-id-card',
+      link: '/pages/about',
+    },
+  },
 ];

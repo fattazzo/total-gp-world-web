@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Circuit } from '../domain/circuit';
 import { Configuration } from '../app.constants';
 import { HttpClient } from '@angular/common/http';
@@ -12,14 +12,13 @@ import { Season } from '../domain/season';
   providedIn: 'root',
 })
 export class CircuitsService {
-
   private seasonCache$: string;
 
-  private cacheCircuits$: Observable<Circuit[]>;
-  private cacheResults$: Map<string, Observable<Race[]>> = new Map();
-  private cacheSeasons$: Map<string, Observable<Season[]>> = new Map();
+  private cacheCircuits$: Circuit[];
+  private cacheResults$: Map<string, Race[]> = new Map();
+  private cacheSeasons$: Map<string, Season[]> = new Map();
 
-  constructor(private http: HttpClient, private config: Configuration) { }
+  constructor(private http: HttpClient, private config: Configuration) {}
 
   /**
    * Load all circuits of the season
@@ -29,31 +28,29 @@ export class CircuitsService {
   public get(season: string) {
     this.clearCacheIfNeeded(season);
 
-    if (!this.cacheCircuits$) {
-      this.seasonCache$ = season;
-      this.cacheCircuits$ = this.load(season).pipe(shareReplay(1));
+    if (this.cacheCircuits$ && this.cacheCircuits$.length > 0) {
+      return of(this.cacheCircuits$);
     }
 
-    return this.cacheCircuits$;
+    return this.load(season);
   }
 
   public getResults(season: string, circuitId: string): Observable<Race[]> {
-    this.clearCacheIfNeeded(season)
+    this.clearCacheIfNeeded(season);
 
-    if (!this.cacheResults$.get(circuitId)) {
-      this.seasonCache$ = season;
-      this.cacheResults$.set(circuitId, this.loadResults(season, circuitId));
+    if (this.cacheResults$ && this.cacheResults$.get(circuitId)) {
+      return of(this.cacheResults$.get(circuitId));
     }
 
-    return this.cacheResults$.get(circuitId);
+    return this.loadResults(season, circuitId);
   }
 
   public getSeasons(circuitId: string): Observable<Season[]> {
-    if (!this.cacheSeasons$.get(circuitId)) {
-      this.cacheSeasons$.set(circuitId, this.loadSeasons(circuitId));
+    if (this.cacheSeasons$ && this.cacheSeasons$.get(circuitId)) {
+      return of(this.cacheSeasons$.get(circuitId));
     }
 
-    return this.cacheSeasons$.get(circuitId);
+    return this.loadSeasons(circuitId);
   }
 
   private clearCacheIfNeeded(season: string, circuitId: string = null) {
@@ -66,6 +63,7 @@ export class CircuitsService {
         this.cacheResults$.delete(circuitId);
       }
     }
+    this.seasonCache$ = season;
   }
 
   /**
@@ -74,8 +72,15 @@ export class CircuitsService {
    * @param season season name
    */
   private load(season: string): Observable<Circuit[]> {
-    return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/circuits.json`)
-      .pipe(map(result => result.MRData.CircuitTable.Circuits),
+    return this.http
+      .get<ErgastResponse>(
+        `${this.config.ServerWithApiUrl}${season}/circuits.json`,
+      )
+      .pipe(
+        map(result => {
+          this.cacheCircuits$ = result.MRData.CircuitTable.Circuits;
+          return this.cacheCircuits$;
+        }),
       );
   }
 
@@ -86,8 +91,17 @@ export class CircuitsService {
    * @param circuitId circuit id
    */
   private loadResults(season: string, circuitId: string): Observable<Race[]> {
-    return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/circuits/${circuitId}/results.json`)
-      .pipe(map(result => result.MRData.RaceTable.Races),
+    return this.http
+      .get<ErgastResponse>(
+        `${
+          this.config.ServerWithApiUrl
+        }${season}/circuits/${circuitId}/results.json`,
+      )
+      .pipe(
+        map(result => {
+          this.cacheResults$.set(circuitId, result.MRData.RaceTable.Races);
+          return result.MRData.RaceTable.Races;
+        }),
       );
   }
 
@@ -97,8 +111,17 @@ export class CircuitsService {
    * @param circuitId circuit id
    */
   private loadSeasons(circuitId: string): Observable<Season[]> {
-    return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}circuits/${circuitId}/seasons.json?limit=1000`)
-      .pipe(map(result => result.MRData.SeasonTable.Seasons),
+    return this.http
+      .get<ErgastResponse>(
+        `${
+          this.config.ServerWithApiUrl
+        }circuits/${circuitId}/seasons.json?limit=1000`,
+      )
+      .pipe(
+        map(result => {
+          this.cacheSeasons$.set(circuitId, result.MRData.SeasonTable.Seasons);
+          return result.MRData.SeasonTable.Seasons;
+        }),
       );
   }
 }

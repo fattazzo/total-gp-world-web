@@ -1,10 +1,10 @@
-<div class="ui-g" style="height: 400px">
+<div class="ui-g" style="height: 400px" *ngIf="seasons.length > 0">
   <div class="ui-g-12" style="padding-bottom: 1.5rem">
     <nb-card style="height: 100%">
       <nb-card-header>
         <div class="table-header">
           <div style="white-space: nowrap; display: flex;flex-direction: row;flex-wrap: wrap;align-items: flex-end;">
-            <i class="fas fa-trophy fa-2x"></i>
+            <fa-icon size="2x" icon="trophy"></fa-icon>
             {{ 'season.plur' | translate | ngxCapitalize }}: {{seasons.length}}
           </div>
         </div>

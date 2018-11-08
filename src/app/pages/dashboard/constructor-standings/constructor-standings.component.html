@@ -10,7 +10,7 @@
     <div class="ui-g">
       <div class="ui-xl-12 ui-lg-6 ui-md-12 ui-sm-12" *ngFor="let card of constructorsCards | async">
         <app-status-card [title]="card.title" [type]="card.type" [value]="card.value">
-          <i [ngClass]="card.iconClass"></i>
+          <fa-icon [icon]="card.iconClass"></fa-icon>
         </app-status-card>
       </div>
     </div>

@@ -2,15 +2,8 @@ export const DEFAULT_THEME = {
   name: 'default',
   base: null,
   variables: {
-
     // Safari fix
-    temperature: [
-      '#42db7d',
-      '#42db7d',
-      '#42db7d',
-      '#42db7d',
-      '#42db7d',
-    ],
+    temperature: ['#42db7d', '#42db7d', '#42db7d', '#42db7d', '#42db7d'],
 
     solar: {
       gradientLeft: '#42db7d',
@@ -82,14 +75,30 @@ export const DEFAULT_THEME = {
 
     chartjs: {
       axisLineColor: '#cccccc',
-      textColor: '#484848'
+      textColor: '#484848',
     },
 
     chartBGColors: [
-      '#ff7675', '#74b9ff', '#ffeaa7', '#55efc4', '#fd79a8',
-      '#a29bfe', '#fab1a0', '#81ecec', '#636e72', '#dfe6e9',
-      '#00b894', '#fdcb6e', '#00cec9', '#e17055', '#0984e3',
-      '#d63031', '#6c5ce7', '#e84393', '#b2bec3', '#2d3436'
-    ]
+      '#ff7675',
+      '#74b9ff',
+      '#ffeaa7',
+      '#55efc4',
+      '#fd79a8',
+      '#a29bfe',
+      '#fab1a0',
+      '#81ecec',
+      '#636e72',
+      '#dfe6e9',
+      '#00b894',
+      '#fdcb6e',
+      '#00cec9',
+      '#e17055',
+      '#0984e3',
+      '#d63031',
+      '#6c5ce7',
+      '#e84393',
+      '#b2bec3',
+      '#2d3436',
+    ],
   },
 };

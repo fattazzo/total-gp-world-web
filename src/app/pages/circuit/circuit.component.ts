@@ -8,10 +8,9 @@ import { Circuit } from '../../domain/circuit';
 @Component({
   selector: 'circuit',
   templateUrl: './circuit.component.html',
-  styleUrls: ['./circuit.component.scss']
+  styleUrls: ['./circuit.component.scss'],
 })
 export class CircuitComponent implements OnInit, OnDestroy {
-
   circuitSelected: string;
   season: string;
 
@@ -21,9 +20,12 @@ export class CircuitComponent implements OnInit, OnDestroy {
 
   seasonSubscribe: any;
 
-  constructor(private route: ActivatedRoute, private router: Router,
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private circuitsService: CircuitsService,
-    private seasonsService: SeasonsService) { }
+    private seasonsService: SeasonsService,
+  ) {}
 
   ngOnDestroy() {
     this.seasonSubscribe.unsubscribe();
@@ -31,37 +33,40 @@ export class CircuitComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-
       this.season = params['season'];
       this.circuitSelected = params['circuitId'];
 
-      if (this.season != undefined) {
+      if (this.season !== undefined) {
         this.circuits = this.circuitsService.get(this.season);
         this.wikiUrl = undefined;
 
-        if (this.circuitSelected != undefined) {
+        if (this.circuitSelected !== undefined) {
           this.circuits.forEach(cs => {
             cs.forEach(c => {
               if (c.circuitId === this.circuitSelected) {
                 this.wikiUrl = c.url;
               }
-            })
-          })
+            });
+          });
         }
       }
     });
 
-    this.seasonSubscribe = this.seasonsService.getSeason().subscribe((newSeason) => {
-      if (this.season != newSeason) {
-        this.season = newSeason;
-        this.circuits = this.circuitsService.get(newSeason);
-        this.onChange(this.circuitSelected)
-      }
-    });
+    this.seasonSubscribe = this.seasonsService
+      .getSeason()
+      .subscribe(newSeason => {
+        if (this.season !== newSeason) {
+          this.season = newSeason;
+          this.circuits = this.circuitsService.get(newSeason);
+          this.onChange(this.circuitSelected);
+        }
+      });
   }
 
   onChange(newValue) {
-    this.router.navigate(['/pages/sections/circuit', { season: this.season, circuitId: newValue }]);
+    this.router.navigate([
+      '/pages/sections/circuit',
+      { season: this.season, circuitId: newValue },
+    ]);
   }
-
 }

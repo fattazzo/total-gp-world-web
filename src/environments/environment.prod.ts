@@ -5,4 +5,5 @@
  */
 export const environment = {
   production: true,
+  githubUserApiUrl: 'https://api.github.com/users/',
 };

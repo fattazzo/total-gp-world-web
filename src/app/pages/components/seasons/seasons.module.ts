@@ -7,6 +7,7 @@ import { ApplicationPipesModule } from '../../../pipes/application-pipes.module'
 import { SeasonsComponent } from './seasons.component';
 import { OrderListModule } from 'primeng/orderlist';
 import { RouterModule } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { RouterModule } from '@angular/router';
     ApplicationPipesModule,
     OrderListModule,
     RouterModule,
+    FontAwesomeModule,
   ],
   exports: [SeasonsComponent],
   declarations: [SeasonsComponent],

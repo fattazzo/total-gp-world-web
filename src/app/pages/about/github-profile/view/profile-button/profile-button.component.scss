@@ -1,0 +1,47 @@
+@import "../../../../../@theme/styles/themes";
+@import "../../../../../@theme/styles/brands.scss";
+@import "~@nebular/theme/components/card/card.component.theme";
+@import "~@nebular/theme/styles/global/typography/typography";
+
+@include nb-install-component() {
+  .link {
+    color: nb-theme(color-fg-heading);
+    font-family: nb-theme(font-main);
+    font-size: 1.15rem;
+    font-weight: nb-theme(font-weight-light);
+    margin-top: nb-theme(margin);
+
+    &:visited,
+    &:focus,
+    &:active {
+      color: nb-theme(color-fg-heading);
+      outline: none !important;
+      box-shadow: none;
+    }
+  }
+
+  span {
+    margin-right: 0.75rem;
+    margin-left: 0.75rem;
+  }
+
+  .google {
+    color: $brand-google;
+  }
+
+  .github {
+    color: $brand-github;
+  }
+
+  .facebook {
+    color: $brand-facebook;
+  }
+
+  .linkedin {
+    color: $brand-linkedin;
+  }
+
+  .default {
+    color: nb-theme(color-info);
+  }
+}

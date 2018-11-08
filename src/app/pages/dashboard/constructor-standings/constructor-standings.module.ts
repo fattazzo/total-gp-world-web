@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 
 import { TranslateModule } from '@ngx-translate/core';
 import { StatusCardModule } from '../../components/status-card/status-card.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { StatusCardModule } from '../../components/status-card/status-card.modul
     TranslateModule,
     ChartModule,
     StatusCardModule,
+    FontAwesomeModule,
   ],
   declarations: [
     ConstructorStandingsComponent,

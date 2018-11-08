@@ -4,10 +4,9 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'options',
   templateUrl: './options.component.html',
-  styleUrls: ['./options.component.scss']
+  styleUrls: ['./options.component.scss'],
 })
 export class OptionsComponent implements OnInit, OnDestroy {
-
   currentLang: string;
   langSubscribe: any;
 
@@ -26,13 +25,13 @@ export class OptionsComponent implements OnInit, OnDestroy {
     },
   ];
 
-  constructor(public translate: TranslateService) { }
+  constructor(public translate: TranslateService) {}
 
   ngOnInit() {
     this.currentLang = this.translate.currentLang;
     this.langSubscribe = this.translate.onLangChange.subscribe(event => {
-      this.currentLang = event.lang
-    })
+      this.currentLang = event.lang;
+    });
   }
 
   ngOnDestroy() {

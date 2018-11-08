@@ -10,21 +10,21 @@ import { Constructor } from '../domain/constructor';
 import { ErgastResponse } from '../domain/ergast/ergast-response';
 import { Race } from '../domain/race';
 import { Season } from '../domain/season';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ConstructorsService {
-
   private seasonCache$: string;
 
-  private cacheStanding$: Observable<ConstructorStanding[]>;
+  private cacheStanding$: Map<string, ConstructorStanding[]> = new Map();
   private cacheConstructors$: Observable<Constructor[]>;
   private cacheRaces$: Map<string, Observable<Race[]>> = new Map();
   private cacheQualifying$: Map<string, Observable<Race[]>> = new Map();
   private cacheSeasons$: Map<string, Observable<Season[]>> = new Map();
 
-  constructor(private http: HttpClient, private config: Configuration) { }
+  constructor(private http: HttpClient, private config: Configuration) {}
 
   /**
    * Load the constructor standing of the season
@@ -32,14 +32,11 @@ export class ConstructorsService {
    * @param season season name
    */
   public getStandings(season: string) {
-    this.clearCacheIfNeeded(season);
-
-    if (!this.cacheStanding$) {
-      this.seasonCache$ = season;
-      this.cacheStanding$ = this.loadStandings(season).pipe(shareReplay(1));
+    if (this.cacheStanding$ && this.cacheStanding$.has(season)) {
+      return of(this.cacheStanding$.get(season));
     }
 
-    return this.cacheStanding$;
+    return this.loadStandings(season);
   }
 
   /**
@@ -63,18 +60,27 @@ export class ConstructorsService {
 
     if (!this.cacheRaces$.get(constructorId)) {
       this.seasonCache$ = season;
-      this.cacheRaces$.set(constructorId, this.loadResults(season, constructorId));
+      this.cacheRaces$.set(
+        constructorId,
+        this.loadResults(season, constructorId),
+      );
     }
 
     return this.cacheRaces$.get(constructorId);
   }
 
-  public getQualifying(season: string, constructorId: string): Observable<Race[]> {
+  public getQualifying(
+    season: string,
+    constructorId: string,
+  ): Observable<Race[]> {
     this.clearCacheIfNeeded(season, constructorId);
 
     if (!this.cacheQualifying$.get(constructorId)) {
       this.seasonCache$ = season;
-      this.cacheQualifying$.set(constructorId, this.loadQualifying(season, constructorId));
+      this.cacheQualifying$.set(
+        constructorId,
+        this.loadQualifying(season, constructorId),
+      );
     }
 
     return this.cacheQualifying$.get(constructorId);
@@ -92,7 +98,6 @@ export class ConstructorsService {
     if (season !== this.seasonCache$) {
       this.seasonCache$ = null;
       this.cacheConstructors$ = null;
-      this.cacheStanding$ = null;
       if (constructorId == null) {
         this.cacheRaces$ = new Map();
         this.cacheQualifying$ = new Map();
@@ -109,11 +114,20 @@ export class ConstructorsService {
    * @param season season name
    */
   private loadStandings(season: string): Observable<ConstructorStanding[]> {
-    return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/constructorStandings.json`)
-      .pipe(map(result =>
-        (result.MRData.StandingsTable.StandingsLists[0] === undefined)
-        ? []
-        : result.MRData.StandingsTable.StandingsLists[0].ConstructorStandings),
+    return this.http
+      .get<ErgastResponse>(
+        `${this.config.ServerWithApiUrl}${season}/constructorStandings.json`,
+      )
+      .pipe(
+        map(result => {
+          const stand =
+            result.MRData.StandingsTable.StandingsLists[0] === undefined
+              ? []
+              : result.MRData.StandingsTable.StandingsLists[0]
+                  .ConstructorStandings;
+          this.cacheStanding$.set(season, stand);
+          return stand;
+        }),
       );
   }
 
@@ -123,9 +137,11 @@ export class ConstructorsService {
    * @param season season name
    */
   private load(season: string): Observable<Constructor[]> {
-    return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/constructors.json`)
-      .pipe(map(result => result.MRData.ConstructorTable.Constructors),
-      );
+    return this.http
+      .get<ErgastResponse>(
+        `${this.config.ServerWithApiUrl}${season}/constructors.json`,
+      )
+      .pipe(map(result => result.MRData.ConstructorTable.Constructors));
   }
 
   /**
@@ -134,10 +150,17 @@ export class ConstructorsService {
    * @param season season name
    * @param constructorId constructor id
    */
-  private loadResults(season: string, constructorId: string): Observable<Race[]> {
-    return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/constructors/${constructorId}/results.json`)
-      .pipe(map(result => result.MRData.RaceTable.Races),
-      );
+  private loadResults(
+    season: string,
+    constructorId: string,
+  ): Observable<Race[]> {
+    return this.http
+      .get<ErgastResponse>(
+        `${
+          this.config.ServerWithApiUrl
+        }${season}/constructors/${constructorId}/results.json`,
+      )
+      .pipe(map(result => result.MRData.RaceTable.Races));
   }
 
   /**
@@ -146,10 +169,17 @@ export class ConstructorsService {
    * @param season season name
    * @param constructorId constructor id
    */
-  private loadQualifying(season: string, constructorId: string): Observable<Race[]> {
-    return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/constructors/${constructorId}/qualifying.json`)
-      .pipe(map(result => result.MRData.RaceTable.Races),
-      );
+  private loadQualifying(
+    season: string,
+    constructorId: string,
+  ): Observable<Race[]> {
+    return this.http
+      .get<ErgastResponse>(
+        `${
+          this.config.ServerWithApiUrl
+        }${season}/constructors/${constructorId}/qualifying.json`,
+      )
+      .pipe(map(result => result.MRData.RaceTable.Races));
   }
 
   /**
@@ -158,8 +188,12 @@ export class ConstructorsService {
    * @param constructorId constructor id
    */
   private loadSeasons(constructorId: string): Observable<Season[]> {
-    return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}constructors/${constructorId}/seasons.json?limit=1000`)
-      .pipe(map(result => result.MRData.SeasonTable.Seasons),
-      );
+    return this.http
+      .get<ErgastResponse>(
+        `${
+          this.config.ServerWithApiUrl
+        }constructors/${constructorId}/seasons.json?limit=1000`,
+      )
+      .pipe(map(result => result.MRData.SeasonTable.Seasons));
   }
 }

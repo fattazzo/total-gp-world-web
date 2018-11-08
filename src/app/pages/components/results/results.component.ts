@@ -8,10 +8,9 @@ import { CircuitsService } from '../../../services/circuits.service';
 @Component({
   selector: 'f1-results',
   templateUrl: './results.component.html',
-  styleUrls: ['./results.component.scss']
+  styleUrls: ['./results.component.scss'],
 })
 export class ResultsComponent {
-
   private _driverId: string;
   private _constructorId: string;
   private _circuitId: string;
@@ -24,13 +23,13 @@ export class ResultsComponent {
   type: ChartType = ChartTypes.POINTS;
 
   @Input()
-  showChart: boolean = true
+  showChart: boolean = true;
 
   constructor(
     private driversService: DriversService,
     private constructorService: ConstructorsService,
-    private circuitService: CircuitsService
-  ) { }
+    private circuitService: CircuitsService,
+  ) {}
 
   @Input('season')
   set season(season: string) {
@@ -40,7 +39,8 @@ export class ResultsComponent {
 
   @Input('driverId')
   set driverId(driverId: string) {
-    this._driverId = driverId;
+    this._driverId =
+      driverId && driverId !== 'undefined' ? driverId : undefined;
     this._constructorId = undefined;
     this._circuitId = undefined;
     this.loadResults();
@@ -48,7 +48,10 @@ export class ResultsComponent {
 
   @Input('constructorId')
   set constructorId(constructorId: string) {
-    this._constructorId = constructorId;
+    this._constructorId =
+      constructorId && constructorId !== 'undefined'
+        ? constructorId
+        : undefined;
     this._driverId = undefined;
     this._circuitId = undefined;
     this.loadResults();
@@ -56,7 +59,8 @@ export class ResultsComponent {
 
   @Input('circuitId')
   set circuitId(circuitId: string) {
-    this._circuitId = circuitId;
+    this._circuitId =
+      circuitId && circuitId !== 'undefined' ? circuitId : undefined;
     this._driverId = undefined;
     this._constructorId = undefined;
     this.loadResults();
@@ -77,22 +81,24 @@ export class ResultsComponent {
       return;
     }
 
-    if (this._driverId != undefined) {
-      this.driversService.getResults(this._season, this._driverId)
+    if (this._driverId !== undefined) {
+      this.driversService
+        .getResults(this._season, this._driverId)
         .subscribe(res => {
-          this.results = res
+          this.results = res;
         });
-    } else if (this._constructorId != undefined) {
-      this.constructorService.getResults(this._season, this._constructorId)
+    } else if (this._constructorId !== undefined) {
+      this.constructorService
+        .getResults(this._season, this._constructorId)
         .subscribe(res => {
-          this.results = res
+          this.results = res;
         });
-    } else if (this._circuitId != undefined) {
-      this.circuitService.getResults(this._season, this._circuitId)
+    } else if (this._circuitId !== undefined) {
+      this.circuitService
+        .getResults(this._season, this._circuitId)
         .subscribe(res => {
-          this.results = res
+          this.results = res;
         });
     }
   }
-
 }

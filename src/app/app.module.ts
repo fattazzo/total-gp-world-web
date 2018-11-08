@@ -21,7 +21,13 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 
-import { TableModule } from 'primeng/table';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+
+library.add(fas);
+library.add(fab);
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,26 +36,25 @@ import { TableModule } from 'primeng/table';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    FontAwesomeModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: createTranslateLoader,
-        deps: [HttpClient]
-      }
+        deps: [HttpClient],
+      },
     }),
 
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
-    CoreModule.forRoot()
+    CoreModule.forRoot(),
   ],
   bootstrap: [AppComponent],
-  providers: [
-    { provide: APP_BASE_HREF, useValue: '/' },
-  ],
+  providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
 })
-export class AppModule { }
+export class AppModule {}
 
 // required for AOT compilation
 export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, "assets/i18n/", ".json");
+  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }

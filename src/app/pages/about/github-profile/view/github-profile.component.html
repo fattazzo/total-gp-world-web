@@ -1,0 +1,43 @@
+<ng-container *ngIf="user | async as user$">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <div class="main-container">
+        <div class="image-container">
+          <img src="{{user$?.avatar_url}}" class="profile-image" />
+        </div>
+
+        <div class="name-container">
+          <span class="name-text">{{user$?.name}}</span>
+          <span class="username-text">{{user$?.login}}</span>
+        </div>
+
+        <div class="bio-container">
+          <span class="bio-title">Bio</span>
+          <span class="bio-text">{{user$?.bio}}</span>
+        </div>
+
+        <div class="ui-g contacts-container" *ngIf="projects$ | async as projects">
+          <div *ngIf="projects.author?.email" class="contact-item">
+            <profile-button [icon]="['fas', 'at']" [title]="'Email'" [url]="'mailto:' + projects.author?.email"
+              [brandClass]="'google'"></profile-button>
+          </div>
+          <div *ngIf="projects.author?.github" class="contact-item">
+            <profile-button [icon]="['fab', 'github']" [title]="'GitHub'" [url]="projects.author?.github" [brandClass]="'github'"></profile-button>
+          </div>
+          <div *ngIf="projects.author?.facebook" class="contact-item">
+            <profile-button [icon]="['fab', 'facebook']" [title]="'Facebook'" [url]="projects.author?.facebook"
+              [brandClass]="'facebook'"></profile-button>
+          </div>
+          <div *ngIf="projects.author?.googleplus" class="contact-item">
+            <profile-button [icon]="['fab', 'google-plus-square']" [title]="'Google+'" [url]="projects.author?.googleplus"
+              [brandClass]="'google'"></profile-button>
+          </div>
+          <div *ngIf="projects.author?.linkedin" class="contact-item">
+            <profile-button [icon]="['fab', 'linkedin']" [title]="'LinkedIn'" [url]="projects.author?.linkedin"
+              [brandClass]="'linkedin'"></profile-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

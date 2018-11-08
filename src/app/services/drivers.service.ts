@@ -5,26 +5,26 @@ import { shareReplay, map, first } from 'rxjs/operators';
 
 import { Configuration } from '../app.constants';
 
-import { DriverStanding } from '../domain/driver-standing'
+import { DriverStanding } from '../domain/driver-standing';
 import { Driver } from '../domain/driver';
 import { Race } from '../domain/race';
 import { ErgastResponse } from '../domain/ergast/ergast-response';
 import { Season } from '../domain/season';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DriversService {
-
   private seasonCache$: string;
 
-  private cacheStandings$: Observable<DriverStanding[]>;
+  private cacheStandings$: Map<string, DriverStanding[]> = new Map();
   private cacheDrivers$: Observable<Driver[]>;
   private cacheRaces$: Map<string, Observable<Race[]>> = new Map();
   private cacheQualifyng$: Map<string, Observable<Race[]>> = new Map();
   private cacheSeasons$: Map<string, Observable<Season[]>> = new Map();
 
-  constructor(private http: HttpClient, private config: Configuration) { }
+  constructor(private http: HttpClient, private config: Configuration) {}
 
   /**
    * Load the driver standing of the season
@@ -32,14 +32,11 @@ export class DriversService {
    * @param season season name
    */
   public getStandings(season: string) {
-    this.clearCacheIfNeeded(season);
-
-    if (!this.cacheStandings$) {
-      this.seasonCache$ = season;
-      this.cacheStandings$ = this.loadStandings(season).pipe(shareReplay(1));
+    if (this.cacheStandings$ && this.cacheStandings$.has(season)) {
+      return of(this.cacheStandings$.get(season));
     }
 
-    return this.cacheStandings$;
+    return this.loadStandings(season);
   }
 
   /**
@@ -92,7 +89,6 @@ export class DriversService {
     if (season !== this.seasonCache$) {
       this.seasonCache$ = null;
       this.cacheDrivers$ = null;
-      this.cacheStandings$ = null;
       if (driverId == null) {
         this.cacheRaces$ = new Map();
         this.cacheQualifyng$ = new Map();
@@ -109,11 +105,19 @@ export class DriversService {
    * @param season season name
    */
   private loadStandings(season: string): Observable<DriverStanding[]> {
-    return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/driverStandings.json`)
-      .pipe(map(result =>
-        (result.MRData.StandingsTable.StandingsLists[0] === undefined)
-        ? []
-        : result.MRData.StandingsTable.StandingsLists[0].DriverStandings),
+    return this.http
+      .get<ErgastResponse>(
+        `${this.config.ServerWithApiUrl}${season}/driverStandings.json`,
+      )
+      .pipe(
+        map(result => {
+          const stand =
+            result.MRData.StandingsTable.StandingsLists[0] === undefined
+              ? []
+              : result.MRData.StandingsTable.StandingsLists[0].DriverStandings;
+          this.cacheStandings$.set(season, stand);
+          return stand;
+        }),
       );
   }
 
@@ -123,9 +127,11 @@ export class DriversService {
    * @param season season name
    */
   private load(season: string): Observable<Driver[]> {
-    return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/drivers.json`)
-      .pipe(map(result => result.MRData.DriverTable.Drivers),
-      );
+    return this.http
+      .get<ErgastResponse>(
+        `${this.config.ServerWithApiUrl}${season}/drivers.json`,
+      )
+      .pipe(map(result => result.MRData.DriverTable.Drivers));
   }
 
   /**
@@ -135,9 +141,13 @@ export class DriversService {
    * @param driverId driver id
    */
   private loadResults(season: string, driverId: string): Observable<Race[]> {
-    return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/drivers/${driverId}/results.json`)
-      .pipe(map(result => result.MRData.RaceTable.Races),
-      );
+    return this.http
+      .get<ErgastResponse>(
+        `${
+          this.config.ServerWithApiUrl
+        }${season}/drivers/${driverId}/results.json`,
+      )
+      .pipe(map(result => result.MRData.RaceTable.Races));
   }
 
   /**
@@ -147,9 +157,13 @@ export class DriversService {
    * @param driverId driver id
    */
   private loadQualifying(season: string, driverId: string): Observable<Race[]> {
-    return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}/drivers/${driverId}/qualifying.json`)
-      .pipe(map(result => result.MRData.RaceTable.Races),
-      );
+    return this.http
+      .get<ErgastResponse>(
+        `${
+          this.config.ServerWithApiUrl
+        }${season}/drivers/${driverId}/qualifying.json`,
+      )
+      .pipe(map(result => result.MRData.RaceTable.Races));
   }
 
   /**
@@ -158,8 +172,10 @@ export class DriversService {
    * @param driverId driver id
    */
   private loadSeasons(driverId: string): Observable<Season[]> {
-    return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}drivers/${driverId}/seasons.json`)
-      .pipe(map(result => result.MRData.SeasonTable.Seasons),
-      );
+    return this.http
+      .get<ErgastResponse>(
+        `${this.config.ServerWithApiUrl}drivers/${driverId}/seasons.json`,
+      )
+      .pipe(map(result => result.MRData.SeasonTable.Seasons));
   }
 }

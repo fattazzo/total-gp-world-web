@@ -1,0 +1,28 @@
+<ng-container *ngIf="projects$ | async as projects">
+  <div class="ui-g">
+    <div *ngFor="let prj of projects.projects" class="ui-xl-6 ui-lg-12 ui-md-12 ui-sm-12">
+      <nb-card style="height: 100%">
+        <div class="main-container">
+          <img [src]="prj.image || '/assets/images/github-project-background.png'" />
+          <div class="i18n-container">
+            <github-i18n [i18n]="getI18n(prj.i18n)" [icon]="prj.icon"></github-i18n>
+          </div>
+          <div class="buttons-container ui-g">
+            <div class="ui-xl-4 ui-lg-4 ui-md-6 ui-sm-12" *ngIf="prj.playStoreUrl">
+              <project-button [icon]="['fab', 'google-play']" [title]="'Playstore'" [type]="'playstore'" [url]="prj.playStoreUrl"></project-button>
+            </div>
+            <div class="ui-xl-4 ui-lg-4 ui-md-6 ui-sm-12" *ngIf="prj.githubUrl">
+              <project-button [icon]="['fab', 'github']" [title]="'GitHub'" [type]="'github'" [url]="prj.githubUrl"></project-button>
+            </div>
+            <div class="ui-xl-4 ui-lg-4 ui-md-6 ui-sm-12" *ngIf="prj.wikiUrl">
+              <project-button [icon]="'book'" [title]="'Wiki'" [type]="'wiki'" [url]="prj.wikiUrl"></project-button>
+            </div>
+            <div class="ui-xl-4 ui-lg-4 ui-md-6 ui-sm-12" *ngIf="prj.websiteUrl">
+              <project-button [icon]="'globe'" [title]="'Website'" [type]="'website'" [url]="prj.websiteUrl"></project-button>
+            </div>
+          </div>
+        </div>
+      </nb-card>
+    </div>
+  </div>
+</ng-container>

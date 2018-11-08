@@ -12,7 +12,7 @@ import { CircuitsService } from '../../../services/circuits.service';
   styleUrls: ['./seasons.component.scss'],
 })
 export class SeasonsComponent implements OnInit {
-  seasons: Season[];
+  seasons: Season[] = [];
 
   cols: any[];
 
@@ -22,7 +22,7 @@ export class SeasonsComponent implements OnInit {
     private circuitsService: CircuitsService,
     private seasonsService: SeasonsService,
     private router: Router,
-    ) {}
+  ) {}
 
   ngOnInit() {
     this.cols = [
@@ -38,27 +38,33 @@ export class SeasonsComponent implements OnInit {
   set driverId(value: string) {
     this.seasons = [];
 
-    this.driverService
-      .getSeasons(value)
-      .subscribe(results => (this.seasons = results.reverse()));
+    if (value && value !== 'undefined') {
+      this.driverService
+        .getSeasons(value)
+        .subscribe(results => (this.seasons = results.reverse()));
+    }
   }
 
   @Input('constructorId')
   set constructorId(value: string) {
     this.seasons = [];
 
-    this.constructorService
-      .getSeasons(value)
-      .subscribe(results => (this.seasons = results.reverse()));
+    if (value && value !== 'undefined') {
+      this.constructorService
+        .getSeasons(value)
+        .subscribe(results => (this.seasons = results.reverse()));
+    }
   }
 
   @Input('circuitId')
   set circuitId(value: string) {
     this.seasons = [];
 
-    this.circuitsService
-      .getSeasons(value)
-      .subscribe(results => (this.seasons = results.reverse()));
+    if (value && value !== 'undefined') {
+      this.circuitsService
+        .getSeasons(value)
+        .subscribe(results => (this.seasons = results.reverse()));
+    }
   }
 
   public changeSeasons(season: string) {

@@ -9,7 +9,6 @@ import { DashboardModule } from './dashboard/dashboard.module';
 
 import { CapitalizePipe } from '../@theme/pipes';
 import { UpperCasePipe } from '@angular/common';
-import { AboutComponent } from './about/about.component';
 
 const PAGES_COMPONENTS = [PagesComponent];
 
@@ -21,6 +20,6 @@ const PAGES_COMPONENTS = [PagesComponent];
     MiscellaneousModule,
   ],
   providers: [CapitalizePipe, UpperCasePipe],
-  declarations: [...PAGES_COMPONENTS, AboutComponent],
+  declarations: [...PAGES_COMPONENTS],
 })
 export class PagesModule {}
