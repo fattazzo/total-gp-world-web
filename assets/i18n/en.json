@@ -74,9 +74,6 @@
   "direction": {
     "sing": "direction"
   },
-  "info": {
-    "sing": "info"
-  },
   "wikipedia": {
     "sing": "wikipedia",
     "introOf": "intro from Wikipedia"
@@ -110,5 +107,12 @@
   "other": {
     "sing": "other"
   },
-  "about": "about"
+  "about": "about",
+  "special-thanks": "Special thanks",
+  "info": {
+    "sing": "info",
+    "android-p1": "All data and statistics can also be consulted on all Android devices through a native application in the Google store.",
+    "android-p2": "In the \"About\" section you can find all the project information with download links.",
+    "android-p3": "Here some screenshot of the application."
+  }
 }
