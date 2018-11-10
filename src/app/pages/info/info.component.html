@@ -1,15 +1,71 @@
-<p>
-  Ergast link
-</p>
+<div class="ui-g">
+  <div class="ui-xl-6 ui-lg-6 ui-md-12 ui-sm-12">
+    <nb-card status="primary">
+      <nb-card-header>Releases</nb-card-header>
+      <nb-card-body> <github-releases></github-releases> </nb-card-body>
+    </nb-card>
+  </div>
 
-<p>
-  FAQ
-</p>
+  <div class="ui-xl-6 ui-lg-6 ui-md-12 ui-sm-12">
+    <nb-card status="primary">
+      <nb-card-header>{{ 'special-thanks' | translate }} </nb-card-header>
+      <nb-card-body>
+        <div class="thanks-container">
+          <a href="http://ergast.com/mrd/" target="_blank">
+            <div class="ergast-container">
+              <span>Ergast Developer API</span>
+              <img src="./assets/images/ergast.png" class="ergast-image" />
+            </div>
+          </a>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
 
-<p>
-  Android version
-</p>
+  <div class="ui-xl-6 ui-lg-6 ui-md-12 ui-sm-12">
+    <nb-card status="primary">
+      <nb-card-header>Android</nb-card-header>
+      <nb-card-body>
+        <div class="android-container">
+          <p>{{ 'info.android-p1' | translate }}</p>
+          <p>{{ 'info.android-p2' | translate }}</p>
+          <p>{{ 'info.android-p3' | translate }}</p>
 
-<p>
-  Help: translation
-</p>
+          <div class="ui-g-12 gallery-container">
+            <div>
+              <p-galleria
+                [images]="androidAppImages"
+                panelWidth="306"
+                panelHeight="544"
+                frameWidth="30"
+                frameHeight="54"
+                [showFilmstrip]="false"
+              ></p-galleria>
+            </div>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+
+  <div class="ui-xl-6 ui-lg-6 ui-md-12 ui-sm-12">
+    <nb-card status="primary">
+      <nb-card-header>Translation</nb-card-header>
+      <nb-card-body>
+        <div class="translation-container">
+          <p>Would you like this site to support your favorite language?</p>
+          <p>
+            At this time only Italian and English are active but if you want to
+            dedicate just a little of your free time quickly and easily you can
+            make yourself useful for other users!
+          </p>
+          <p>In the "About" section you can find all the ways to contact me.</p>
+          <img
+            src="./assets/images/thank-you-word-cloud.jpg"
+            class="thank-you-image"
+          />
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
