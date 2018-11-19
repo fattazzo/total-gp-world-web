@@ -114,5 +114,8 @@
     "android-p1": "Tutti i dati e le statistiche possono essere consultate anche su tutti i dispositivi Android attraverso un'applicazione nativa presente nello store di Google.",
     "android-p2": "Nella sezione \"About\" è possibile trovare tutte le informazioni del progetto con i link per il download.",
     "android-p3": "Ecco alcune immagini dell'applicazione."
+  },
+  "current": {
+    "sing": "corrente"
   }
 }
