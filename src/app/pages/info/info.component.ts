@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Configuration } from '../../app.constants';
 
 @Component({
   selector: 'info',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class InfoComponent implements OnInit {
   androidAppImages: any[];
 
-  constructor() {}
+  constructor(public config: Configuration) {}
 
   ngOnInit() {
     const baseUrl =

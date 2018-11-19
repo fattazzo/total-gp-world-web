@@ -12,5 +12,7 @@ export class Configuration implements OnInit {
 
   public githubUserName = 'fattazzo';
 
+  public version = '1.0';
+
   ngOnInit() {}
 }
