@@ -1,5 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Configuration } from '../../app.constants';
+import { TotalGpWorld } from '../../domain/github/total-gp-world';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'info',
@@ -7,86 +10,27 @@ import { Configuration } from '../../app.constants';
   styleUrls: ['./info.component.scss'],
 })
 export class InfoComponent implements OnInit {
-  androidAppImages: any[];
+  androidAppImages: any[] = [];
 
-  constructor(public config: Configuration) {}
+  version: String;
+
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    const baseUrl =
-      'https://raw.githubusercontent.com/wiki/fattazzo/total-gp-world/images/';
+    this.http
+      .get<any>('./assets/version.json')
+      .subscribe(data => (this.version = data['code']));
 
-    this.androidAppImages = [];
-    this.androidAppImages.push({
-      source: `${baseUrl}sez_princ2.png`,
-      title: 'Main window',
-    });
-    this.androidAppImages.push({
-      source: `${baseUrl}drivers.png`,
-      title: 'Drivers',
-    });
-    this.androidAppImages.push({
-      source: `${baseUrl}driver_progress.png`,
-      title: 'Driver progress',
-    });
-    this.androidAppImages.push({
-      source: `${baseUrl}driver_ranking.png`,
-      title: 'Driver ranking charts',
-    });
-    this.androidAppImages.push({
-      source: `${baseUrl}driver_info.png`,
-      title: 'Driver info',
-    });
-    this.androidAppImages.push({
-      source: `${baseUrl}constructors.png`,
-      title: 'Constructors',
-    });
-    this.androidAppImages.push({
-      source: `${baseUrl}constructor_progress.png`,
-      title: 'Constructor progress',
-    });
-    this.androidAppImages.push({
-      source: `${baseUrl}constructor_info.png`,
-      title: 'Constructor info',
-    });
-    this.androidAppImages.push({
-      source: `${baseUrl}races.png`,
-      title: 'Races',
-    });
-    this.androidAppImages.push({
-      source: `${baseUrl}race_results.png`,
-      title: 'Race results',
-    });
-    this.androidAppImages.push({
-      source: `${baseUrl}race_stat_pittops.png`,
-      title: 'Race pit stat',
-    });
-    this.androidAppImages.push({
-      source: `${baseUrl}race_stat_positions.png`,
-      title: 'Race positions stat',
-    });
-    this.androidAppImages.push({
-      source: `${baseUrl}race_qualifications.png`,
-      title: 'Race qualifications',
-    });
-    this.androidAppImages.push({
-      source: `${baseUrl}race_info.png`,
-      title: 'Race info',
-    });
-    this.androidAppImages.push({
-      source: `${baseUrl}news.png`,
-      title: 'News',
-    });
-    this.androidAppImages.push({
-      source: `${baseUrl}stats_drivers_wins.png`,
-      title: 'Drivers stats',
-    });
-    this.androidAppImages.push({
-      source: `${baseUrl}stats_constructors_wins.png`,
-      title: 'Constructors stats',
-    });
-    this.androidAppImages.push({
-      source: `${baseUrl}stats_season_comparison.png`,
-      title: 'Season stats',
-    });
+    this.http
+      .get<TotalGpWorld>('./assets/github/total-gp-world/config.json')
+      .subscribe(config => {
+        const baseUrl = config.imagesUrl;
+        this.androidAppImages = config.images.map(img => {
+          return {
+            source: baseUrl + img.source,
+            title: img.title,
+          };
+        });
+      });
   }
 }
