@@ -1,0 +1,53 @@
+<div class="ui-g container" *ngIf="wikiPage">
+  <div class="ui-g-12 ui-xl-3 ui-lg-3 img-container" *ngIf="wikiPage.thumbnail">
+    <nb-card style="height: 100%;">
+      <div class="img-content">
+        <img class="img-wiki" src="{{wikiPage.thumbnail.source}}">
+      </div>
+    </nb-card>
+  </div>
+
+  <div class="ui-g-12 ui-xl-9 ui-lg-9" *ngIf="wikiPage.extract_html" style="padding-bottom: 1.5rem">
+    <nb-card style="height: 100%;">
+      <div class="box-wiki-content">
+        <div class="box-row header">
+          <div class="table-header">
+            <div>
+              <div>{{ 'info.sing' | translate | ngxCapitalize }}</div>
+              <div class="subtitle">( {{ 'wikipedia.introOf' | translate | ngxCapitalize }} )</div>
+            </div>
+
+            <div class="dropdown ghost-dropdown" ngbDropdown>
+              <button type="button" class="btn btn-sm" ngbDropdownToggle [ngClass]="{
+                                  'btn-success': currentTheme === 'default',
+                                  'btn-primary': currentTheme !== 'default'}">
+                {{wikiLang}}
+              </button>
+              <ul ngbDropdownMenu class="dropdown-menu">
+                <li class="dropdown-item" *ngFor="let lang of translate.getLangs()" (click)="reloadLang(lang)">
+                  {{ lang }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="box-row content">
+          <div [innerHtml]="wikiPage.extract_html" class="text"></div>
+        </div>
+        <div class="box-row footer">
+          <div class="link-desktop">
+            <i class="fa fa-desktop" style="min-width: 40px;"></i>
+            <a href="{{wikiPage.content_urls.desktop.page}}" target="_blank">{{ 'continue-reading' | translate |
+              ngxCapitalize}}</a>
+          </div>
+          <div class="link-mobile">
+            <i class="fa fa-mobile-alt" style="min-width: 40px;"></i>
+            <a href="{{wikiPage.content_urls.mobile.page}}" target="_blank">{{ 'continue-reading' | translate |
+              ngxCapitalize}}</a>
+          </div>
+        </div>
+      </div>
+    </nb-card>
+  </div>
+
+</div>

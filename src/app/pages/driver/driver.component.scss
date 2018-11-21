@@ -1,0 +1,28 @@
+@import "../../@theme/styles/themes";
+@import "~@nebular/theme/components/card/card.component.theme";
+@import "~@nebular/theme/styles/global/typography/typography";
+
+@include nb-install-component() {
+  .form-content {
+    margin-bottom: 10px;
+  }
+
+  .table-header {
+    @include nb-card-header();
+    font-size: 1.38rem;
+    display: flex;
+    align-items: center;
+    padding: 0;
+  }
+
+  .row {
+    flex-wrap: wrap;
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+
+  .ui-dropdown .ui-dropdown-panel {
+    min-width: 100%;
+    width: max-content;
+  }
+}

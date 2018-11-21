@@ -1,0 +1,13 @@
+<div class="ui-g" style="height: 200px;">
+  <nb-list>
+    <nb-list-item *ngFor="let release of (releases$ | async)">
+      <div class="release-container">
+        <span class="name-item">{{ release.name }}</span>
+        <span class="date-item"
+          >({{ release.published_at | date: 'dd/MM/yyyy' }})</span
+        >
+      </div>
+      <div [innerText]="release.body"></div>
+    </nb-list-item>
+  </nb-list>
+</div>

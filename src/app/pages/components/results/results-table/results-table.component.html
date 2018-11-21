@@ -1,0 +1,39 @@
+<nb-card-body>
+  <div style="min-width:600px; overflow:hidden">
+    <p-table [columns]="cols" [value]="racesResults" [tableStyle]="{'table-layout':'auto'}" class="ng-table">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns">{{col.key | translate | ngxCapitalize}}</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+        <tr *ngIf="showRaceGroup && (rowIndex === 0 || rowData.raceName != racesResults[rowIndex-1].raceName)">
+          <td [attr.colspan]="cols.length">
+            <span style="font-weight:bold">{{rowData.raceName}}</span>
+          </td>
+        </tr>
+        <tr>
+          <td *ngFor="let col of columns">
+            <div [ngSwitch]="col.field">
+              <div *ngSwitchCase="'driverName'">
+                <a [routerLink]="['/pages/sections/driver',{ season: season , driverId: rowData.result.Driver.driverId}]"
+                  class="link-black">
+                  {{col.cell(rowData)}}
+                </a>
+              </div>
+              <div *ngSwitchCase="'constructorName'">
+                <a [routerLink]="['/pages/sections/constructor',{ season: season , constructorId: rowData.result.Constructor.constructorId}]"
+                  class="link-black">
+                  {{col.cell(rowData)}}
+                </a>
+              </div>
+              <div *ngSwitchDefault>
+                {{col.cell(rowData)}}
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</nb-card-body>

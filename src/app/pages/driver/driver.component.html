@@ -1,0 +1,50 @@
+<div class="ui-g">
+  <div class="ui-g-12">
+    <form class="form-content">
+      <div class="table-header ui-g">
+        <div for="driverSelect" style="padding-right: 10px">Driver</div>
+
+        <p-dropdown [options]="drivers | async | selectItemPipe:'driverId':'givenName'" [(ngModel)]="driverIdSelected"
+          [ngModelOptions]="{standalone: true}" (onChange)="onChange($event.value)" placeholder="Select a Driver"
+          [autoWidth]="false" filter="true" filterBy="label.givenName,label.familyName">
+          <ng-template let-item pTemplate="selectedItem">
+            <div style="white-space: nowrap;">{{item.label.givenName}} {{item.label.familyName}}</div>
+          </ng-template>
+          <ng-template let-item pTemplate="item">
+            <div style="white-space: nowrap;">{{item.label.givenName}} {{item.label.familyName}}</div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="ui-g">
+  <div class="ui-xl-9 ui-lg-9 ui-md-9 ui-sm-12">
+    <wikipedia-page [wikiUrl]="wikiUrl"></wikipedia-page>
+  </div>
+  <div class="ui-xl-3 ui-lg-3 ui-md-3 ui-sm-12">
+    <f1-seasons [driverId]="driverIdSelected"></f1-seasons>
+  </div>
+</div>
+
+<div class="ui-g">
+  <div class="ui-g-12 ui-xl-6">
+    <f1-results [season]="season" [driverId]="driverIdSelected"></f1-results>
+  </div>
+
+  <div class="ui-g-12 ui-xl-6">
+    <f1-qualifying [season]=" season" [driverId]="driverIdSelected">
+    </f1-qualifying>
+  </div>
+</div>
+
+<!--
+<div class="row">
+  <div class="col-xxxl-12 col-xxl-12 col-lg-12 col-md-12">
+    <nb-card>
+      selected seasons finishing status: http://ergast.com/api/f1/current/drivers/alonso/status
+    </nb-card>
+  </div>
+</div>
+-->

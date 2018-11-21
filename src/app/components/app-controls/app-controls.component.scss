@@ -1,0 +1,68 @@
+@import "../../@theme/styles/themes";
+@import "~bootstrap/scss/mixins/breakpoints";
+@import "~@nebular/theme/styles/global/breakpoints";
+
+@include nb-install-component() {
+  .controls-row {
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    width: 100%;
+    margin-bottom: 1rem;
+
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      a {
+        text-decoration: none;
+        font-size: 2.25rem;
+
+        color: nb-theme(color-fg);
+
+        &.selected {
+          //color: nb-theme(color-fg-text);
+        }
+
+        @include nb-for-theme(cosmic) {
+          &.selected {
+            color: nb-theme(link-color);
+          }
+        }
+      }
+    }
+  }
+
+  .btn {
+    padding: 0.1rem;
+  }
+
+  ul {
+    &.dropdown-menu.show {
+      right: auto;
+      left: 0px !important;
+      float: left !important;
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    .controls-row {
+      display: flex;
+    }
+  }
+
+  p-dropdown {
+    ::ng-deep .ui-dropdown-label {
+      padding: 0.4rem;
+    }
+
+    ::ng-deep .ui-dropdown-trigger {
+      visibility: hidden;
+      width: 0px;
+    }
+  }
+}

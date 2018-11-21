@@ -1,0 +1,35 @@
+@import "../../../../@theme/styles/themes";
+@import "~@nebular/theme/components/card/card.component.theme";
+@import "~@nebular/theme/styles/global/typography/typography";
+
+@include nb-install-component() {
+  .table-header {
+    @include nb-card-header();
+    font-size: 1.25rem;
+
+    .subtitle {
+      color: nb-theme(color-fg);
+      font-family: nb-theme(font-main);
+      font-size: 1rem;
+      font-weight: nb-theme(font-weight-light);
+    }
+  }
+
+  .example-container {
+    height: 100%;
+    width: 100%;
+    overflow: scroll;
+  }
+
+  nb-card-body {
+    padding: 0px;
+  }
+
+  .link-black {
+    color: nb-theme(color-fg-heading);
+
+    &:hover {
+      color: nb-theme(color-primary);
+    }
+  }
+}

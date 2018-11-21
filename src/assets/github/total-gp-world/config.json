@@ -1,0 +1,77 @@
+{
+  "imagesUrl": "https://raw.githubusercontent.com/wiki/fattazzo/total-gp-world/images/",
+  "images": [
+    {
+      "source": "sez_princ2.png",
+      "title": "Main window"
+    },
+    {
+      "source": "drivers.png",
+      "title": "Drivers"
+    },
+    {
+      "source": "driver_progress.png",
+      "title": "Driver progress"
+    },
+    {
+      "source": "driver_ranking.png",
+      "title": "Driver ranking charts"
+    },
+    {
+      "source": "driver_info.png",
+      "title": "Driver info"
+    },
+    {
+      "source": "constructors.png",
+      "title": "Constructors"
+    },
+    {
+      "source": "constructor_progress.png",
+      "title": "Constructor progress"
+    },
+    {
+      "source": "constructor_info.png",
+      "title": "Constructor info"
+    },
+    {
+      "source": "races.png",
+      "title": "Races"
+    },
+    {
+      "source": "race_results.png",
+      "title": "Race results"
+    },
+    {
+      "source": "race_stat_pittops.png",
+      "title": "Race pit stat"
+    },
+    {
+      "source": "race_stat_positions.png",
+      "title": "Race positions stat"
+    },
+    {
+      "source": "race_qualifications.png",
+      "title": "Race qualifications"
+    },
+    {
+      "source": "race_info.png",
+      "title": "Race info"
+    },
+    {
+      "source": "news.png",
+      "title": "News"
+    },
+    {
+      "source": "stats_drivers_wins.png",
+      "title": "Drivers stats"
+    },
+    {
+      "source": "stats_constructors_wins.png",
+      "title": "Constructors stats"
+    },
+    {
+      "source": "stats_season_comparison.png",
+      "title": "Season stats"
+    }
+  ]
+}

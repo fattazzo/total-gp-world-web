@@ -1,0 +1,63 @@
+@import "../../../../../@theme/styles/themes";
+@import "~@nebular/theme/components/card/card.component.theme";
+@import "~@nebular/theme/styles/global/typography/typography";
+
+@include nb-install-component() {
+  .btn {
+    width: 100%;
+    color: nb-theme(color-white);
+    outline: none !important;
+    box-shadow: none;
+
+    &:visited,
+    &:focus,
+    &:active {
+      outline: none !important;
+      box-shadow: none;
+    }
+  }
+
+  .btn-playstore {
+    background-color: nb-theme(brand-google);
+    border-color: #607d8b;
+
+    &:hover {
+      background-color: #4e6570;
+      border-color: #4e6570;
+    }
+  }
+
+  .btn-github {
+    background-color: #3b3533;
+    border-color: #3b3533;
+
+    &:hover {
+      background-color: #000000;
+      border-color: #000000;
+    }
+  }
+
+  .btn-wiki {
+    background-color: #e98635;
+    border-color: #e98635;
+
+    &:hover {
+      background-color: #c45a04;
+      border-color: #c45a04;
+    }
+  }
+
+  .btn-website {
+    background-color: #3f8d2c;
+    border-color: #3f8d2c;
+
+    &:hover {
+      background-color: #2f6621;
+      border-color: #2f6621;
+    }
+  }
+
+  .icon {
+    margin: 0px 5px 0px 5px;
+  }
+}

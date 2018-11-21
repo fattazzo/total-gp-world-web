@@ -1,0 +1,16 @@
+<nb-card-body>
+  <div style="position: absolute; top:0; left:0; margin:20px; z-index: 10;">
+    <p-dropdown [options]="altTypes$ | selectItemPipe" [(ngModel)]="ctype" [ngModelOptions]="{standalone: true}"
+      (onChange)="onTypeChange($event.value)" [autoWidth]="false" class="ng-dropdown">
+      <ng-template let-item pTemplate="selectedItem">
+        <div><i class="fas fa-chart-line"></i></div>
+      </ng-template>
+      <ng-template let-item pTemplate="item">
+        <div style="white-space: nowrap;">{{("chart." + item.label) | translate | ngxCapitalize}}</div>
+      </ng-template>
+    </p-dropdown>
+  </div>
+  <div class="echart">
+    <p-chart [type]="ctype" [data]="data" [options]="options" width="100%" height="100%"></p-chart>
+  </div>
+</nb-card-body>

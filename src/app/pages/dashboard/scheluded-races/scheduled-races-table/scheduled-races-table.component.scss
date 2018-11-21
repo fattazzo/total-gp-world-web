@@ -1,0 +1,38 @@
+@import "../../../../@theme/styles/themes";
+@import "~@nebular/theme/components/card/card.component.theme";
+@import "~@nebular/theme/styles/global/typography/typography";
+@import "~bootstrap/scss/mixins/breakpoints";
+@import "~@nebular/theme/styles/global/breakpoints";
+
+@include nb-install-component() {
+  .table-container {
+    overflow: hidden;
+    min-width: 800px;
+  }
+
+  .table-header {
+    font-size: 1.25rem;
+    display: flex;
+    flex-direction: row;
+
+    .subtitle {
+      color: nb-theme(color-fg);
+      font-family: nb-theme(font-main);
+      font-size: 1rem;
+      font-weight: nb-theme(font-weight-light);
+    }
+  }
+
+  .link-black {
+    color: nb-theme(color-fg-heading);
+
+    &:hover {
+      color: nb-theme(color-primary);
+    }
+  }
+
+  nb-card-body {
+    padding: 0px;
+    margin: 0rem 1.5rem 1.5rem 1.5rem;
+  }
+}

@@ -1,0 +1,33 @@
+@import "../../../../@theme/styles/themes";
+@import "~@nebular/theme/components/card/card.component.theme";
+@import "~@nebular/theme/styles/global/typography/typography";
+@include nb-install-component() {
+  .example-container {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .echart {
+    //margin: 1.25rem;
+    flex: 1;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dropdown {
+    @include nb-card-header();
+    min-width: 130px;
+  }
+
+  second-card-container {
+    height: 100%;
+  }
+}

@@ -1,0 +1,16 @@
+<nb-reveal-card [showToggleButton]="false" [revealed]="revealed" *ngIf="(results)?.length">
+  <nb-card-front>
+    <nb-card>
+      <qualifying-header></qualifying-header>
+      <qualifying-table [results]="results"></qualifying-table>
+      <i class="nb-arrow-up" (click)="toggleView()"></i>
+    </nb-card>
+  </nb-card-front>
+  <nb-card-back>
+    <nb-card>
+      <qualifying-header></qualifying-header>
+      <qualifying-chart [results]="results"></qualifying-chart>
+      <i class="nb-arrow-down" (click)="toggleView()"></i>
+    </nb-card>>
+  </nb-card-back>
+</nb-reveal-card>

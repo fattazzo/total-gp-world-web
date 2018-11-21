@@ -1,0 +1,63 @@
+@import "../../../../@theme/styles/themes";
+@import "~@nebular/theme/components/card/card.component.theme";
+@import "~@nebular/theme/styles/global/typography/typography";
+
+@include nb-install-component() {
+  .main-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .profile-image {
+    border-radius: 6px;
+    width: 100%;
+    height: auto;
+  }
+
+  .name-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    font-family: nb-theme(font-main);
+    font-weight: nb-theme(font-weight-bold);
+
+    .name-text {
+      color: nb-theme(color-fg-heading);
+      font-size: 2rem;
+    }
+
+    .username-text {
+      font-size: 1.25rem;
+    }
+  }
+
+  .bio-container {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    font-family: nb-theme(font-main);
+    font-weight: nb-theme(font-weight-light);
+    color: nb-theme(color-fg-heading);
+
+    .bio-title {
+      font-size: 1.05rem;
+    }
+
+    .bio-text {
+      font-size: 1.05rem;
+    }
+  }
+
+  .contacts-container {
+    padding: 0px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+
+    .contact-item {
+      margin-top: 1rem;
+    }
+  }
+}

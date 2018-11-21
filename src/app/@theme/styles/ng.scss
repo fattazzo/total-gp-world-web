@@ -1,0 +1,49 @@
+@import "./themes";
+
+@mixin ng-theme() {
+  .ng-table {
+    .ui-table-thead {
+      > tr > th {
+        background: nb-theme(smart-table-bg);
+        color: nb-theme(color-fg-heading);
+      }
+    }
+
+    .ui-table-tbody {
+      > tr {
+        background: nb-theme(smart-table-bg);
+        color: nb-theme(color-fg-heading);
+      }
+
+      > tr:nth-child(even) {
+        background: nb-theme(smart-table-bg-even);
+        color: nb-theme(color-fg-heading);
+      }
+    }
+  }
+
+  p-dropdown {
+    .ui-dropdown {
+      border: 2px solid nb-theme(color-bg-active);
+      background: nb-theme(color-bg-active);
+      border-radius: 5px;
+    }
+
+    .ui-dropdown label.ui-dropdown-label {
+      background: nb-theme(color-bg);
+      color: nb-theme(color-fg-text);
+    }
+
+    .ui-dropdown div.ui-dropdown-trigger {
+      background: nb-theme(color-bg);
+    }
+
+    .ui-dropdown ul.ui-dropdown-items.ui-dropdown-list {
+      background: nb-theme(color-bg);
+    }
+
+    .ui-dropdown li.ui-dropdown-item {
+      color: nb-theme(color-fg-text);
+    }
+  }
+}

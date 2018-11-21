@@ -1,0 +1,18 @@
+<div class="ui-g">
+  <div class="ui-xl-3 ui-lg-4 ui-md-12 ui-sm-12">
+    <drivers-st-table [season]="season" [standings]="standings"></drivers-st-table>
+  </div>
+  <div class="ui-xl-6 ui-lg-8 ui-md-12 ui-sm-12">
+    <drivers-st-chart [standings]="standings"></drivers-st-chart>
+  </div>
+
+  <div class="ui-xl-3 ui-lg-12 ui-md-12 ui-sm-12" style="padding: 0;">
+    <div class="ui-g">
+      <div class="ui-xl-12 ui-lg-6 ui-md-12 ui-sm-12" *ngFor="let card of driversCards | async">
+        <app-status-card [title]="card.title" [type]="card.type" [value]="card.value">
+          <fa-icon [icon]="card.iconClass"></fa-icon>
+        </app-status-card>
+      </div>
+    </div>
+  </div>
+</div>

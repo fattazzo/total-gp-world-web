@@ -1,0 +1,45 @@
+<nb-card size="large" [nbSpinner]="!standings" nbSpinnerStatus="primary" nbSpinnerSize="xxlarge" nbSpinnerMessage="">
+  <div class="chart-container">
+    <div class="table-header">
+      <fa-icon size="2x" icon="car"></fa-icon>
+      <div style="margin-right: 10px;margin-left: 10px">
+        <div>{{ 'constructor.plur' | translate | ngxCapitalize }}</div>
+        <div class="subtitle">{{ 'standing.sing' | translate | ngxCapitalize }}</div>
+      </div>
+    </div>
+
+    <div class="stats-month">
+      <div class="results">
+        <b>{{ 'position.sing' | translate | ngxCapitalize }}</b>
+      </div>
+      <div class="results">
+        <b>{{ 'constructor.sing' | translate | ngxCapitalize }}</b>
+      </div>
+      <div class="results">
+        <b>{{ 'point.plur' | translate | ngxCapitalize }}</b>
+      </div>
+    </div>
+
+    <div class="stats-content" *ngIf="standings">
+      <div class="stats-month" *ngFor="let stand of standings">
+        <div>
+          <span class="month">{{ stand.position }}</span>
+        </div>
+        <a [routerLink]="['/pages/sections/constructor',{ season: season , constructorId: stand.Constructor.constructorId}]"
+          class="link-black">
+          <div class="results" *ngIf="stand.Constructor.nationality; else nameOnly">
+            <b>{{stand.Constructor.name}}</b> ({{stand.Constructor.nationality}})
+          </div>
+          <ng-template #nameOnly>
+            <div class="results">
+              <b>{{stand.Constructor.name}}</b>
+            </div>
+          </ng-template>
+        </a>
+        <div>
+          <span class="month">{{ stand.points }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</nb-card>

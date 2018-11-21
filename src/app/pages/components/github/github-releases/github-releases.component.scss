@@ -1,0 +1,21 @@
+@import "../../../../@theme/styles/themes";
+
+@include nb-install-component() {
+  .release-container {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+  }
+
+  .name-item {
+    color: nb-theme(color-fg-heading);
+    font-family: nb-theme(header-font-family);
+    font-size: 2.15rem;
+    font-weight: nb-theme(font-weight-bold);
+  }
+
+  .date-item {
+    margin-left: nb-theme(margin);
+    margin-right: nb-theme(margin);
+  }
+}

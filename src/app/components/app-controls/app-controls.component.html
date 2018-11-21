@@ -1,0 +1,25 @@
+<div class="controls-row">
+  <div>
+    <p-dropdown [options]="translate.getLangs() | selectItemPipe:'*'" [(ngModel)]="currentLang" [ngModelOptions]="{standalone: true}"
+      (onChange)="onLangChange($event.value)" [autoWidth]="false" styleClass="lang-selection-class">
+    </p-dropdown>
+  </div>
+</div>
+
+<div class="controls-row">
+  <div>
+    <a _ngcontent-c6="" href="#/pages/options" class="selected" title="Options"><i _ngcontent-c6="" class="fas fa-cog"></i></a>
+  </div>
+</div>
+
+<!--<div class="controls-row">
+<div class="row-item">
+    <a _ngcontent-c6="" href="#" class="selected" title="Language selector"><i _ngcontent-c6="" class="fas fa-language"></i></a>
+  </div>
+  <div class="row-item">
+    <a _ngcontent-c6="" href="#" class="selected" title="One Column"><i _ngcontent-c6="" class="nb-layout-two-column"></i></a>
+  </div>
+  <div class="row-item">
+    <a _ngcontent-c6="" href="#" class="selected" title="One Column"><i _ngcontent-c6="" class="nb-layout-centre"></i></a>
+  </div>
+</div>-->

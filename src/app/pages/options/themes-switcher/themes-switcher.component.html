@@ -1,0 +1,5 @@
+<div ngbRadioGroup [(ngModel)]="currentTheme" class="btn-group btn-group-toggle btn-outline-toggle-group btn-group-full-width btn-toggle-radio-group">
+  <label ngbButtonLabel class="btn btn-outline-primary" *ngFor="let theme of themes">
+    <input ngbButton type="radio" value="{{theme.key}}" (click)="onToggleTheme(theme.key)"> {{theme.title}}
+  </label>
+</div>

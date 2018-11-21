@@ -1,0 +1,21 @@
+<nb-card-header>
+  <div class="table-header">
+    <div>
+      <fa-icon size="2x" icon="trophy"></fa-icon>
+      {{ 'result.plur' | translate | ngxCapitalize }}
+    </div>
+  </div>
+
+  <div class="dropdown ghost-dropdown" ngbDropdown *ngIf="showTypesControl">
+    <button type="button" class="btn btn-sm" ngbDropdownToggle [ngClass]="{
+                'btn-success': currentTheme === 'default',
+                'btn-primary': currentTheme !== 'default'}">
+      {{ type.labelKey | translate | ngxCapitalize }}
+    </button>
+    <ul ngbDropdownMenu class="dropdown-menu">
+      <li class="dropdown-item" *ngFor="let type of types" (click)="changeType(type)">
+        <span translate="{{type.labelKey}}"></span>
+      </li>
+    </ul>
+  </div>
+</nb-card-header>
