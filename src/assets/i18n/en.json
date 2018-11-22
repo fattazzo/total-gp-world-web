@@ -117,5 +117,8 @@
   },
   "current": {
     "sing": "current"
+  },
+  "comparison": {
+    "sing": "comparison"
   }
 }

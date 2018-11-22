@@ -1,0 +1,28 @@
+<div class="ui-g">
+  <div class="ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12">
+    <nb-card>
+      <div class="ui-g">
+        <div class="ui-xl-2 ui-lg-2 ui-md-2 ui-sm-2">
+          <nb-select
+            placeholder="Select type"
+            [(ngModel)]="selectedType"
+            (selectedChange)="onTypeChange()"
+          >
+            <nb-option value="drivers">{{
+              'driver.plur' | translate | ngxCapitalize
+            }}</nb-option>
+            <nb-option value="constructors">{{
+              'constructor.plur' | translate | ngxCapitalize
+            }}</nb-option>
+          </nb-select>
+        </div>
+        <div class="ui-xl-10 ui-lg-10 ui-md-10 ui-sm-10">
+          <drivers-selection
+            [season]="season"
+            *ngIf="selectedType === 'drivers'"
+          ></drivers-selection>
+        </div>
+      </div>
+    </nb-card>
+  </div>
+</div>

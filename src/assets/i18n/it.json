@@ -117,5 +117,8 @@
   },
   "current": {
     "sing": "corrente"
+  },
+  "comparison": {
+    "sing": "confronto"
   }
 }

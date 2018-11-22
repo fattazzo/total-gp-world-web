@@ -13,6 +13,17 @@ export const MENU_I18N_SPEC: TitleI18NSpec[] = [
     },
   },
   {
+    capitalize: true,
+    uppercase: false,
+    key: 'comparison.sing',
+    menuItem: {
+      title: 'Comparison',
+      icon: 'fas fa-project-diagram',
+      link: '/pages/comparison',
+      home: true,
+    },
+  },
+  {
     capitalize: false,
     uppercase: true,
     key: 'section.plur',

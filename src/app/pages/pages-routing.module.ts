@@ -18,6 +18,10 @@ const routes: Routes = [
         pathMatch: 'full',
       },
       {
+        path: 'comparison',
+        loadChildren: './comparison/comparison.module#ComparisonModule',
+      },
+      {
         path: 'sections/driver',
         loadChildren: './driver/driver.module#DriverModule',
       },

@@ -1,0 +1,19 @@
+<span class="ui-fluid">
+  <p-autoComplete
+    [(ngModel)]="selectedDrivers"
+    [suggestions]="filteredDrivers"
+    (completeMethod)="filterDrivers($event)"
+    [minLength]="1"
+    placeholder="Drivers_"
+    [multiple]="true"
+  >
+    <ng-template let-driver pTemplate="selectedItem">
+      <span style="margin-right: 20px"
+        >{{ driver.givenName }} {{ driver.familyName }}</span
+      >
+    </ng-template>
+    <ng-template let-driver pTemplate="item">
+      <span>{{ driver.givenName }} {{ driver.familyName }}</span>
+    </ng-template>
+  </p-autoComplete>
+</span>

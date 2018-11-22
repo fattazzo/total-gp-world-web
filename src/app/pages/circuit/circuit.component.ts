@@ -57,7 +57,6 @@ export class CircuitComponent implements OnInit, OnDestroy {
       .subscribe(newSeason => {
         if (this.season !== newSeason) {
           this.season = newSeason;
-          this.circuits = this.circuitsService.get(newSeason);
           this.onChange(this.circuitSelected);
         }
       });

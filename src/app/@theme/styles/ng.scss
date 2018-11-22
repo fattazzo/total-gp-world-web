@@ -1,6 +1,11 @@
 @import "./themes";
 
 @mixin ng-theme() {
+  .ui-widget,
+  .ui-widget .ui-widget {
+    font-family: nb-theme(header-font-family) !important;
+  }
+
   .ng-table {
     .ui-table-thead {
       > tr > th {
@@ -44,6 +49,34 @@
 
     .ui-dropdown li.ui-dropdown-item {
       color: nb-theme(color-fg-text);
+    }
+  }
+
+  p-autocomplete {
+    span.ui-autocomplete {
+      height: 100%;
+    }
+    ul.ui-autocomplete-multiple-container {
+      height: 100%;
+      background-color: nb-theme(color-bg);
+    }
+    li.ui-autocomplete-input-token {
+      height: 100% !important;
+    }
+    li.ui-autocomplete-token {
+      background-color: nb-theme(color-primary) !important;
+    }
+    li.ui-autocomplete-list-item.ui-state-highlight {
+      background-color: nb-theme(color-primary) !important;
+    }
+    li.ui-autocomplete-list-item {
+      color: nb-theme(search-text) !important;
+      background-color: nb-theme(color-bg) !important;
+    }
+    input {
+      color: nb-theme(search-text);
+      font-family: nb-theme(header-font-family) !important;
+      height: 100% !important;
     }
   }
 }

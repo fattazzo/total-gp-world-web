@@ -19,7 +19,7 @@ export class DriversService {
   private seasonCache$: string;
 
   private cacheStandings$: Map<string, DriverStanding[]> = new Map();
-  private cacheDrivers$: Observable<Driver[]>;
+  private cacheDrivers$: Driver[];
   private cacheRaces$: Map<string, Observable<Race[]>> = new Map();
   private cacheQualifyng$: Map<string, Observable<Race[]>> = new Map();
   private cacheSeasons$: Map<string, Observable<Season[]>> = new Map();
@@ -47,12 +47,11 @@ export class DriversService {
   public get(season: string) {
     this.clearCacheIfNeeded(season);
 
-    if (!this.cacheDrivers$) {
-      this.seasonCache$ = season;
-      this.cacheDrivers$ = this.load(season).pipe(shareReplay(1));
+    if (this.cacheDrivers$ && this.cacheDrivers$.length > 0) {
+      return of(this.cacheDrivers$);
     }
 
-    return this.cacheDrivers$;
+    return this.load(season);
   }
 
   public getResults(season: string, driverId: string): Observable<Race[]> {
@@ -127,11 +126,22 @@ export class DriversService {
    * @param season season name
    */
   private load(season: string): Observable<Driver[]> {
+    console.log('load drivers!');
     return this.http
       .get<ErgastResponse>(
         `${this.config.ServerWithApiUrl}${season}/drivers.json`,
       )
-      .pipe(map(result => result.MRData.DriverTable.Drivers));
+      .pipe(
+        map(result => {
+          const drivers =
+            result.MRData.DriverTable.Drivers !== undefined
+              ? result.MRData.DriverTable.Drivers
+              : [];
+          this.cacheDrivers$ = drivers;
+          this.seasonCache$ = season;
+          return drivers;
+        }),
+      );
   }
 
   /**

@@ -13,7 +13,6 @@ import { Driver } from '../../domain/driver';
   styleUrls: ['./driver.component.scss'],
 })
 export class DriverComponent implements OnInit, OnDestroy {
-
   driverIdSelected: string;
   season: string;
 
@@ -23,9 +22,12 @@ export class DriverComponent implements OnInit, OnDestroy {
 
   seasonSubscribe: any;
 
-  constructor(private route: ActivatedRoute, private router: Router,
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private driversService: DriversService,
-    private seasonsService: SeasonsService) { }
+    private seasonsService: SeasonsService,
+  ) {}
 
   ngOnDestroy() {
     this.seasonSubscribe.unsubscribe();
@@ -33,7 +35,6 @@ export class DriverComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-
       this.season = params['season'];
       this.driverIdSelected = params['driverId'];
 
@@ -47,23 +48,26 @@ export class DriverComponent implements OnInit, OnDestroy {
               if (d.driverId === this.driverIdSelected) {
                 this.wikiUrl = d.url;
               }
-            })
-          })
+            });
+          });
         }
       }
     });
 
-    this.seasonSubscribe = this.seasonsService.getSeason().subscribe((newSeason) => {
-      if (this.season !== newSeason) {
-        this.season = newSeason;
-        this.drivers = this.driversService.get(newSeason);
-        this.onChange(this.driverIdSelected)
-      }
-    });
+    this.seasonSubscribe = this.seasonsService
+      .getSeason()
+      .subscribe(newSeason => {
+        if (this.season !== newSeason) {
+          this.season = newSeason;
+          this.onChange(this.driverIdSelected);
+        }
+      });
   }
 
   onChange(newValue) {
-    this.router.navigate(['/pages/sections/driver', { season: this.season, driverId: newValue }]);
+    this.router.navigate([
+      '/pages/sections/driver',
+      { season: this.season, driverId: newValue },
+    ]);
   }
-
 }
