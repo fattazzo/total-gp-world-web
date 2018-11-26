@@ -20,7 +20,7 @@ export class DriversService {
 
   private cacheStandings$: Map<string, DriverStanding[]> = new Map();
   private cacheDrivers$: Driver[];
-  private cacheRaces$: Map<string, Observable<Race[]>> = new Map();
+  private cacheRaces: Map<string, Race[]> = new Map();
   private cacheQualifyng$: Map<string, Observable<Race[]>> = new Map();
   private cacheSeasons$: Map<string, Observable<Season[]>> = new Map();
 
@@ -57,12 +57,11 @@ export class DriversService {
   public getResults(season: string, driverId: string): Observable<Race[]> {
     this.clearCacheIfNeeded(season, driverId);
 
-    if (!this.cacheRaces$.get(driverId)) {
-      this.seasonCache$ = season;
-      this.cacheRaces$.set(driverId, this.loadResults(season, driverId));
+    if (this.cacheRaces && this.cacheRaces.has(driverId)) {
+      return of(this.cacheRaces.get(driverId));
     }
 
-    return this.cacheRaces$.get(driverId);
+    return this.loadResults(season, driverId);
   }
 
   public getQualifying(season: string, driverId: string): Observable<Race[]> {
@@ -89,10 +88,10 @@ export class DriversService {
       this.seasonCache$ = null;
       this.cacheDrivers$ = null;
       if (driverId == null) {
-        this.cacheRaces$ = new Map();
+        this.cacheRaces = new Map();
         this.cacheQualifyng$ = new Map();
       } else {
-        this.cacheRaces$.delete(driverId);
+        this.cacheRaces.delete(driverId);
         this.cacheQualifyng$.delete(driverId);
       }
     }
@@ -126,7 +125,6 @@ export class DriversService {
    * @param season season name
    */
   private load(season: string): Observable<Driver[]> {
-    console.log('load drivers!');
     return this.http
       .get<ErgastResponse>(
         `${this.config.ServerWithApiUrl}${season}/drivers.json`,
@@ -157,7 +155,17 @@ export class DriversService {
           this.config.ServerWithApiUrl
         }${season}/drivers/${driverId}/results.json`,
       )
-      .pipe(map(result => result.MRData.RaceTable.Races));
+      .pipe(
+        map(result => {
+          const races =
+            result.MRData.RaceTable.Races !== undefined
+              ? result.MRData.RaceTable.Races
+              : [];
+          this.cacheRaces.set(driverId, races);
+          this.seasonCache$ = season;
+          return races;
+        }),
+      );
   }
 
   /**

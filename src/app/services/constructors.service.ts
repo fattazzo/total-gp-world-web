@@ -19,8 +19,8 @@ export class ConstructorsService {
   private seasonCache$: string;
 
   private cacheStanding$: Map<string, ConstructorStanding[]> = new Map();
-  private cacheConstructors$: Observable<Constructor[]>;
-  private cacheRaces$: Map<string, Observable<Race[]>> = new Map();
+  private cacheConstructors: Constructor[];
+  private cacheRaces: Map<string, Race[]> = new Map();
   private cacheQualifying$: Map<string, Observable<Race[]>> = new Map();
   private cacheSeasons$: Map<string, Observable<Season[]>> = new Map();
 
@@ -44,29 +44,24 @@ export class ConstructorsService {
    *
    * @param season season name
    */
-  public get(season: string) {
+  public get(season: string): Observable<Constructor[]> {
     this.clearCacheIfNeeded(season);
 
-    if (!this.cacheConstructors$) {
-      this.seasonCache$ = season;
-      this.cacheConstructors$ = this.load(season).pipe(shareReplay(1));
+    if (this.cacheConstructors && this.cacheConstructors.length > 0) {
+      return of(this.cacheConstructors);
     }
 
-    return this.cacheConstructors$;
+    return this.load(season);
   }
 
   public getResults(season: string, constructorId: string): Observable<Race[]> {
     this.clearCacheIfNeeded(season, constructorId);
 
-    if (!this.cacheRaces$.get(constructorId)) {
-      this.seasonCache$ = season;
-      this.cacheRaces$.set(
-        constructorId,
-        this.loadResults(season, constructorId),
-      );
+    if (this.cacheRaces && this.cacheRaces.has(constructorId)) {
+      return of(this.cacheRaces.get(constructorId));
     }
 
-    return this.cacheRaces$.get(constructorId);
+    return this.loadResults(season, constructorId);
   }
 
   public getQualifying(
@@ -97,12 +92,12 @@ export class ConstructorsService {
   private clearCacheIfNeeded(season: string, constructorId: string = null) {
     if (season !== this.seasonCache$) {
       this.seasonCache$ = null;
-      this.cacheConstructors$ = null;
+      this.cacheConstructors = null;
       if (constructorId == null) {
-        this.cacheRaces$ = new Map();
+        this.cacheRaces = new Map();
         this.cacheQualifying$ = new Map();
       } else {
-        this.cacheRaces$.delete(constructorId);
+        this.cacheRaces.delete(constructorId);
         this.cacheQualifying$.delete(constructorId);
       }
     }
@@ -141,7 +136,17 @@ export class ConstructorsService {
       .get<ErgastResponse>(
         `${this.config.ServerWithApiUrl}${season}/constructors.json`,
       )
-      .pipe(map(result => result.MRData.ConstructorTable.Constructors));
+      .pipe(
+        map(result => {
+          const constructors =
+            result.MRData.ConstructorTable.Constructors !== undefined
+              ? result.MRData.ConstructorTable.Constructors
+              : [];
+          this.cacheConstructors = constructors;
+          this.seasonCache$ = season;
+          return constructors;
+        }),
+      );
   }
 
   /**
@@ -158,9 +163,21 @@ export class ConstructorsService {
       .get<ErgastResponse>(
         `${
           this.config.ServerWithApiUrl
-        }${season}/constructors/${constructorId}/results.json`,
+        }${season}/constructors/${constructorId}/results.json?limit=${
+          this.config.ApiPageLimit
+        }`,
       )
-      .pipe(map(result => result.MRData.RaceTable.Races));
+      .pipe(
+        map(result => {
+          const results =
+            result.MRData.RaceTable.Races !== undefined
+              ? result.MRData.RaceTable.Races
+              : [];
+          this.cacheRaces.set(constructorId, results);
+          this.seasonCache$ = season;
+          return results;
+        }),
+      );
   }
 
   /**
