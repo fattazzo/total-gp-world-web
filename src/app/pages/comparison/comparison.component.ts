@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SeasonsService } from '../../services/seasons.service';
+import { Driver } from '../../domain/driver';
+import { Constructor } from '../../domain/constructor';
 
 @Component({
   selector: 'comparison',
@@ -12,6 +14,9 @@ export class ComparisonComponent implements OnInit, OnDestroy {
   season: string;
 
   seasonSubscribe: any;
+
+  drivers: Driver[] = [];
+  constructors: Constructor[] = [];
 
   constructor(private seasonsService: SeasonsService) {}
 
@@ -29,5 +34,19 @@ export class ComparisonComponent implements OnInit, OnDestroy {
       });
   }
 
-  onTypeChange() {}
+  onSelectedTypeChange(event: string) {
+    this.drivers = [];
+    this.constructors = undefined;
+    this.selectedType = event;
+  }
+
+  onSelectedDriversChange(value: Driver[]) {
+    this.drivers = value ? value : [];
+    this.constructors = undefined;
+  }
+
+  onSelectedConstructorsChange(value: Constructor[]) {
+    this.constructors = value ? value : [];
+    this.drivers = undefined;
+  }
 }

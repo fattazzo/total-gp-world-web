@@ -2,11 +2,11 @@
   <div class="ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12">
     <nb-card>
       <div class="ui-g">
-        <div class="ui-xl-2 ui-lg-2 ui-md-2 ui-sm-2">
+        <div class="ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
           <nb-select
-            placeholder="Select type"
-            [(ngModel)]="selectedType"
-            (selectedChange)="onTypeChange()"
+            placeholder="{{ 'select-category' | translate | ngxCapitalize }}"
+            [ngModel]="selectedType"
+            (ngModelChange)="onSelectedTypeChange($event)"
           >
             <nb-option value="drivers">{{
               'driver.plur' | translate | ngxCapitalize
@@ -16,13 +16,32 @@
             }}</nb-option>
           </nb-select>
         </div>
-        <div class="ui-xl-10 ui-lg-10 ui-md-10 ui-sm-10">
+        <div class="ui-xl-9 ui-lg-9 ui-md-12 ui-sm-12">
           <drivers-selection
             [season]="season"
+            (selectedDriversChange)="onSelectedDriversChange($event)"
             *ngIf="selectedType === 'drivers'"
           ></drivers-selection>
+          <constructors-selection
+            [season]="season"
+            (selectedConstructorsChange)="onSelectedConstructorsChange($event)"
+            *ngIf="selectedType === 'constructors'"
+          ></constructors-selection>
         </div>
       </div>
+    </nb-card>
+  </div>
+  <div
+    class="ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12"
+    *ngIf="drivers?.length > 0 || constructors?.length > 0"
+  >
+    <nb-card class="chart-comparison-card">
+      <comparison-chart
+        style="height: 100%;"
+        [season]="season"
+        [drivers]="drivers"
+        [constructors]="constructors"
+      ></comparison-chart>
     </nb-card>
   </div>
 </div>
