@@ -120,5 +120,13 @@
   },
   "comparison": {
     "sing": "confronto"
-  }
+  },
+  "to-show-all": "per visualizzare tutto",
+  "loading": {
+    "sing": "caricamento",
+    "data-for": "caricamento dati per",
+    "data-for-error": "errore caricamento dati per"
+  },
+  "select-category": "Seleziona una categoria",
+  "search": "cerca"
 }
