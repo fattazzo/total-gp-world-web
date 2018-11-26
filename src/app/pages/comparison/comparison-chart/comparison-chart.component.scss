@@ -1,0 +1,8 @@
+@import "../../../@theme/styles/themes";
+@import "~@nebular/theme/styles/core/mixins";
+
+@include nb-install-component() {
+  .chart-container {
+    height: 600px;
+  }
+}
