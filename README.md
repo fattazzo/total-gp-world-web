@@ -12,3 +12,9 @@
 This link go to an unstable version of the web app that are generate every single commit from the code that is currently in development.
 
 This means that many bugs may be present, some features may not work properly or the whole site will not be available.
+
+![Dashboard](./screenshots/dashboard.png)
+![Driver info](./screenshots/driver.png)
+![Constructor info](./screenshots/constructor.png)
+![Circuit info](./screenshots/circuit.png)
+![Info](./screenshots/info.png)
