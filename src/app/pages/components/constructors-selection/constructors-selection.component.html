@@ -1,0 +1,15 @@
+<span class="ui-fluid">
+  <p-autoComplete
+    [ngModel]="selectedConstructors"
+    (ngModelChange)="onSelectedConstructorsChange($event)"
+    [suggestions]="filteredConstructors"
+    (completeMethod)="filterConstructors($event)"
+    [minLength]="1"
+    [multiple]="true"
+    field="name"
+    placeholder="{{ 'search' | translate | ngxCapitalize }}..."
+    nbTooltip="'*' {{ 'to-show-all' | translate }}"
+    nbTooltipPlacement="bottom"
+  >
+  </p-autoComplete>
+</span>
