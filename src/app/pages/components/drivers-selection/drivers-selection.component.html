@@ -1,11 +1,14 @@
 <span class="ui-fluid">
   <p-autoComplete
-    [(ngModel)]="selectedDrivers"
+    [ngModel]="selectedDrivers"
+    (ngModelChange)="onSelectedDriversChange($event)"
     [suggestions]="filteredDrivers"
     (completeMethod)="filterDrivers($event)"
     [minLength]="1"
-    placeholder="Drivers_"
     [multiple]="true"
+    placeholder="{{ 'search' | translate | ngxCapitalize }}..."
+    nbTooltip="'*' {{ 'to-show-all' | translate }}"
+    nbTooltipPlacement="bottom"
   >
     <ng-template let-driver pTemplate="selectedItem">
       <span style="margin-right: 20px"

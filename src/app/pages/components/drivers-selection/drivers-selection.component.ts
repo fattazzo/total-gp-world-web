@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DriversService } from '../../../services/drivers.service';
 import { Observable } from 'rxjs';
 import { Driver } from '../../../domain/driver';
@@ -14,6 +14,7 @@ export class DriversSelectionComponent implements OnInit {
   private drivers: Driver[] = [];
 
   selectedDrivers: Driver[] = [];
+  @Output() selectedDriversChange: EventEmitter<Driver[]> = new EventEmitter();
 
   filteredDrivers: Driver[] = [];
 
@@ -41,8 +42,13 @@ export class DriversSelectionComponent implements OnInit {
     this.filteredDrivers = this.drivers.filter(
       dr =>
         query === '*' ||
-        dr.familyName.toUpperCase().includes(query) ||
-        dr.givenName.toUpperCase().includes(query),
+        dr.familyName.toUpperCase().includes(query.replace('*', '')) ||
+        dr.givenName.toUpperCase().includes(query.replace('*', '')),
     );
+  }
+
+  onSelectedDriversChange(event: Driver[]) {
+    this.selectedDrivers = event;
+    this.selectedDriversChange.emit(this.selectedDrivers);
   }
 }
