@@ -128,5 +128,6 @@
     "data-for-error": "errore caricamento dati per"
   },
   "select-category": "Seleziona una categoria",
-  "search": "cerca"
+  "search": "cerca",
+  "cumulative-data": "Dati cumulativi"
 }

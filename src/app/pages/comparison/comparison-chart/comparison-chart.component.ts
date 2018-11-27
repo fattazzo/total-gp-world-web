@@ -1,14 +1,14 @@
-import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { NbColorHelper, NbThemeService } from '@nebular/theme';
+import { TranslateService } from '@ngx-translate/core';
+import { UIChart } from 'primeng/components/chart/chart';
+import { CapitalizePipe } from '../../../@theme/pipes';
+import { Constructor } from '../../../domain/constructor';
 import { Driver } from '../../../domain/driver';
+import { Race } from '../../../domain/race';
+import { ConstructorsService } from '../../../services/constructors.service';
 import { DriversService } from '../../../services/drivers.service';
 import { RacesService } from '../../../services/races.service';
-import { Circuit } from '../../../domain/circuit';
-import { UIChart } from 'primeng/components/chart/chart';
-import { NbThemeService, NbColorHelper } from '@nebular/theme';
-import { Constructor } from '../../../domain/constructor';
-import { ConstructorsService } from '../../../services/constructors.service';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { CapitalizePipe } from '../../../@theme/pipes';
 
 @Component({
   selector: 'comparison-chart',
@@ -32,6 +32,11 @@ export class ComparisonChartComponent implements OnInit, OnDestroy {
 
   loadingData = false;
   loadingMessage = 'Loading';
+
+  cumulativeSumData = false;
+
+  drivers_: Driver[];
+  constructors_: Constructor[];
 
   constructor(
     private driversService: DriversService,
@@ -69,7 +74,30 @@ export class ComparisonChartComponent implements OnInit, OnDestroy {
 
   @Input('drivers')
   set drivers(values: Driver[]) {
-    if (values === undefined) {
+    this.drivers_ = values;
+    this.buildDriversChart();
+  }
+
+  @Input('constructors')
+  set constructors(values: Constructor[]) {
+    this.constructors_ = values;
+    this.buildConstructorsChart();
+  }
+
+  private setLoadingMessage(message: string = '') {
+    this.loadingMessage = message;
+    this.loadingData = message === '' ? false : true;
+  }
+
+  cumulativeSumDataChange(value: boolean) {
+    this.cumulativeSumData = value;
+
+    this.buildDriversChart();
+    this.buildConstructorsChart();
+  }
+
+  private buildDriversChart() {
+    if (this.drivers_ === undefined) {
       return;
     }
     this.data.labels = [];
@@ -80,7 +108,7 @@ export class ComparisonChartComponent implements OnInit, OnDestroy {
       this.data.labels = races.map(race => race.raceName);
     });
 
-    values.forEach(driver => {
+    this.drivers_.forEach(driver => {
       this.setLoadingMessage(
         `${new CapitalizePipe().transform(
           this.translate.instant('loading.data-for'),
@@ -94,7 +122,7 @@ export class ComparisonChartComponent implements OnInit, OnDestroy {
               label: `${races[0].Results[0].Driver.givenName} ${
                 races[0].Results[0].Driver.familyName
               }`,
-              data: races.map(race => race.Results[0].points),
+              data: this.buildDriversData(races),
               fill: true,
               borderColor: this.chartBGColors[this.data.datasets.length],
               backgroundColor: NbColorHelper.hexToRgbA(
@@ -116,9 +144,22 @@ export class ComparisonChartComponent implements OnInit, OnDestroy {
     });
   }
 
-  @Input('constructors')
-  set constructors(values: Constructor[]) {
-    if (values === undefined) {
+  private buildDriversData(input: Race[]): any[] {
+    let cumulArray = input.map(race => race.Results[0].points);
+
+    if (this.cumulativeSumData) {
+      cumulArray = [];
+      let cumulativePoints = 0;
+      input.forEach(race => {
+        cumulativePoints = cumulativePoints + +race.Results[0].points;
+        cumulArray.push(cumulativePoints);
+      });
+    }
+    return cumulArray;
+  }
+
+  private buildConstructorsChart() {
+    if (this.constructors_ === undefined) {
       return;
     }
 
@@ -130,7 +171,7 @@ export class ComparisonChartComponent implements OnInit, OnDestroy {
       this.data.labels = races.map(race => race.raceName);
     });
 
-    values.forEach(constructor => {
+    this.constructors_.forEach(constructor => {
       this.setLoadingMessage(
         `${new CapitalizePipe().transform(
           this.translate.instant('loading.data-for'),
@@ -142,9 +183,7 @@ export class ComparisonChartComponent implements OnInit, OnDestroy {
           try {
             this.data.datasets.push({
               label: races[0].Results[0].Constructor.name,
-              data: races.map(race =>
-                race.Results.reduce((a, b) => a + b['points']++, 0),
-              ),
+              data: this.buildConstructorsData(Object.assign([], races)),
               fill: true,
               borderColor: this.chartBGColors[this.data.datasets.length],
               backgroundColor: NbColorHelper.hexToRgbA(
@@ -166,8 +205,22 @@ export class ComparisonChartComponent implements OnInit, OnDestroy {
     });
   }
 
-  private setLoadingMessage(message: string = '') {
-    this.loadingMessage = message;
-    this.loadingData = message === '' ? false : true;
+  private buildConstructorsData(input: Race[]): any[] {
+    let cumulArray = [];
+    const tmpArray = input.map(race =>
+      race.Results.reduce((a, b) => a + +b['points'], 0),
+    );
+
+    if (this.cumulativeSumData) {
+      cumulArray = [];
+      let cumulativePoints = 0;
+      tmpArray.forEach(p => {
+        cumulativePoints = cumulativePoints + p;
+        cumulArray.push(cumulativePoints);
+      });
+    } else {
+      cumulArray = tmpArray;
+    }
+    return cumulArray;
   }
 }
