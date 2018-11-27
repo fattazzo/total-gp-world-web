@@ -33,6 +33,7 @@ export class DriversSelectionComponent implements OnInit {
         this.selectedDrivers = this.selectedDrivers.filter(sdr =>
           driversId.includes(sdr.driverId),
         );
+        this.selectedDriversChange.emit(this.selectedDrivers);
       });
     }
   }

@@ -34,6 +34,7 @@ export class ConstructorsSelectionComponent implements OnInit {
         this.selectedConstructors = this.selectedConstructors.filter(sct =>
           constructorsId.includes(sct.constructorId),
         );
+        this.selectedConstructorsChange.emit(this.selectedConstructors);
       });
     }
   }
