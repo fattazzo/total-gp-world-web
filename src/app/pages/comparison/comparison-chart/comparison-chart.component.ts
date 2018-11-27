@@ -89,7 +89,7 @@ export class ComparisonChartComponent implements OnInit, OnDestroy {
     this.loadingData = message === '' ? false : true;
   }
 
-  cumulativeSumDataChange(value: boolean) {
+  cumulativeSumDataChange(value: any) {
     this.cumulativeSumData = value;
 
     this.buildDriversChart();

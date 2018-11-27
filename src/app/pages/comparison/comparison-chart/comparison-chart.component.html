@@ -1,8 +1,8 @@
 <div>
   <div style="margin: 20px 20px 0px 20px">
     <nb-checkbox
-      [value]="cumulativeSumData"
-      (change)="cumulativeSumDataChange($event.returnValue)"
+      [ngModel]="cumulativeSumData"
+      (ngModelChange)="cumulativeSumDataChange($event)"
       >{{ 'cumulative-data' | translate | ngxCapitalize }}</nb-checkbox
     >
   </div>
