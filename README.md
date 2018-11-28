@@ -11,6 +11,12 @@
 - **Open**: The project is totally open so everyone can contribute or
 create a new one starting from the existing one. Anyone who does not know the programming will still be able to request new features that I will try to achieve.
 
+### :question: Issues
+
+For any bug, proposal or new feature open new issue <a href="https://github.com/fattazzo/total-gp-world-web/issues/new" target="_blank">:link:here</a>  or go to issues section of project to see those that are already present.
+
+:information_source: **Remember**: __Before creating a new bug check__ that it is not already present and use the __appropriate labels__ (bugs, enhancement, question, etc ...). <a href="https://github.com/fattazzo/total-gp-world-web/labels" target="_blank">:link:Here</a> a list of available labels
+
 ### :globe_with_meridians: Live web app url:
 <a href="https://fattazzo.github.io/total-gp-world-web" target="_blank">https://fattazzo.github.io/total-gp-world-web</a>
 
