@@ -1,5 +1,5 @@
 
-# Total GP world: results, rankings, updated timetables and comparisons from the season 1950 to the present.
+# :racing_car: Total GP world: results, rankings, updated timetables and comparisons from the season 1950 to the present.
 
 ### :checkered_flag: Goals
 - **Responsive**: the layout fits for the web browser, tablet or smartphone.
