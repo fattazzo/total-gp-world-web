@@ -1,5 +1,10 @@
-@import "../../../@theme/styles/themes";
-@import "~@nebular/theme/styles/core/mixins";
+.main-container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  align-items: center;
+}
 
-@include nb-install-component() {
+.info-icon-container {
+  margin: 0.5em;
 }

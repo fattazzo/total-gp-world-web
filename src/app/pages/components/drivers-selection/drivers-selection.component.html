@@ -1,22 +1,22 @@
 <span class="ui-fluid">
-  <p-autoComplete
-    [ngModel]="selectedDrivers"
-    (ngModelChange)="onSelectedDriversChange($event)"
-    [suggestions]="filteredDrivers"
-    (completeMethod)="filterDrivers($event)"
-    [minLength]="1"
-    [multiple]="true"
-    placeholder="{{ 'search' | translate | ngxCapitalize }}..."
-    nbTooltip="'*' {{ 'to-show-all' | translate }}"
-    nbTooltipPlacement="bottom"
-  >
-    <ng-template let-driver pTemplate="selectedItem">
-      <span style="margin-right: 20px"
-        >{{ driver.givenName }} {{ driver.familyName }}</span
+  <div class="main-container">
+    <div style="flex-grow:1;">
+      <p-multiSelect
+        [options]="drivers"
+        [ngModel]="selectedDrivers"
+        (ngModelChange)="onSelectedDriversChange($event)"
+        [filter]="false"
+        defaultLabel="{{ 'select' | translate | ngxCapitalize }}..."
+        [showHeader]="false"
       >
-    </ng-template>
-    <ng-template let-driver pTemplate="item">
-      <span>{{ driver.givenName }} {{ driver.familyName }}</span>
-    </ng-template>
-  </p-autoComplete>
+      </p-multiSelect>
+    </div>
+    <div class="info-icon-container">
+      <fa-icon
+        size="lg"
+        icon="info-circle"
+        nbTooltip="'*' {{ 'to-show-all' | translate }}"
+      ></fa-icon>
+    </div>
+  </div>
 </span>

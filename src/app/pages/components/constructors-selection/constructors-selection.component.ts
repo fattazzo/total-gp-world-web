@@ -17,8 +17,6 @@ export class ConstructorsSelectionComponent implements OnInit {
     Constructor[]
   > = new EventEmitter();
 
-  filteredConstructors: Constructor[] = [];
-
   constructor(private constructorsService: ConstructorsService) {}
 
   ngOnInit() {}
@@ -37,14 +35,6 @@ export class ConstructorsSelectionComponent implements OnInit {
         this.selectedConstructorsChange.emit(this.selectedConstructors);
       });
     }
-  }
-
-  filterConstructors(event) {
-    const query: string = event.query.toUpperCase();
-    this.filteredConstructors = this.constructors.filter(
-      ct =>
-        query === '*' || ct.name.toUpperCase().includes(query.replace('*', '')),
-    );
   }
 
   onSelectedConstructorsChange(event: Constructor[]) {

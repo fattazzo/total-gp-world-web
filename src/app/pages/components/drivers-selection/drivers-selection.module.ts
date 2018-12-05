@@ -5,6 +5,8 @@ import { DriversSelectionComponent } from './drivers-selection.component';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { TranslateModule } from '@ngx-translate/core';
 import { NbTooltipModule } from '@nebular/theme';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [DriversSelectionComponent],
@@ -14,6 +16,8 @@ import { NbTooltipModule } from '@nebular/theme';
     AutoCompleteModule,
     TranslateModule,
     NbTooltipModule,
+    MultiSelectModule,
+    FontAwesomeModule,
   ],
   exports: [DriversSelectionComponent],
 })

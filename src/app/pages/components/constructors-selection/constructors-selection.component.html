@@ -1,15 +1,22 @@
 <span class="ui-fluid">
-  <p-autoComplete
-    [ngModel]="selectedConstructors"
-    (ngModelChange)="onSelectedConstructorsChange($event)"
-    [suggestions]="filteredConstructors"
-    (completeMethod)="filterConstructors($event)"
-    [minLength]="1"
-    [multiple]="true"
-    field="name"
-    placeholder="{{ 'search' | translate | ngxCapitalize }}..."
-    nbTooltip="'*' {{ 'to-show-all' | translate }}"
-    nbTooltipPlacement="bottom"
-  >
-  </p-autoComplete>
+  <div class="main-container">
+    <div style="flex-grow:1;">
+      <p-multiSelect
+        [options]="constructors"
+        [ngModel]="selectedConstructors"
+        (ngModelChange)="onSelectedConstructorsChange($event)"
+        optionLabel="name"
+        [filter]="false"
+        defaultLabel="{{ 'select' | translate | ngxCapitalize }}..."
+        [showHeader]="false"
+      ></p-multiSelect>
+    </div>
+    <div class="info-icon-container">
+      <fa-icon
+        size="lg"
+        icon="info-circle"
+        nbTooltip="'*' {{ 'to-show-all' | translate }}"
+      ></fa-icon>
+    </div>
+  </div>
 </span>

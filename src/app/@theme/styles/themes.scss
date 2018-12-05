@@ -58,9 +58,11 @@ $nb-themes: nb-register-theme(
 );
 
 // Enable scrollable main content
+/**
 div {
   ::ng-deep .columns {
     height: 200px;
     overflow-x: auto;
   }
 }
+**/

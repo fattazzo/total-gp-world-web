@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DriversService } from '../../../services/drivers.service';
 import { Observable } from 'rxjs';
 import { Driver } from '../../../domain/driver';
+import { SelectItem } from 'primeng/components/common/selectitem';
 
 @Component({
   selector: 'drivers-selection',
@@ -11,12 +12,10 @@ import { Driver } from '../../../domain/driver';
 export class DriversSelectionComponent implements OnInit {
   private season_ = '';
 
-  private drivers: Driver[] = [];
+  private drivers: SelectItem[] = [];
 
   selectedDrivers: Driver[] = [];
   @Output() selectedDriversChange: EventEmitter<Driver[]> = new EventEmitter();
-
-  filteredDrivers: Driver[] = [];
 
   constructor(private driversService: DriversService) {}
 
@@ -28,7 +27,10 @@ export class DriversSelectionComponent implements OnInit {
       this.season_ = value;
       this.drivers = [];
       this.driversService.get(this.season_).subscribe(dr => {
-        this.drivers = dr;
+        this.drivers = dr.map(d => ({
+          label: `${d.givenName} ${d.familyName}`,
+          value: d,
+        }));
         const driversId = dr.map(d => d.driverId);
         this.selectedDrivers = this.selectedDrivers.filter(sdr =>
           driversId.includes(sdr.driverId),
@@ -36,16 +38,6 @@ export class DriversSelectionComponent implements OnInit {
         this.selectedDriversChange.emit(this.selectedDrivers);
       });
     }
-  }
-
-  filterDrivers(event) {
-    const query: string = event.query.toUpperCase();
-    this.filteredDrivers = this.drivers.filter(
-      dr =>
-        query === '*' ||
-        dr.familyName.toUpperCase().includes(query.replace('*', '')) ||
-        dr.givenName.toUpperCase().includes(query.replace('*', '')),
-    );
   }
 
   onSelectedDriversChange(event: Driver[]) {

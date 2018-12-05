@@ -5,6 +5,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ThemeModule } from '../../../@theme/theme.module';
 import { NbTooltipModule } from '@nebular/theme';
 import { TranslateModule } from '@ngx-translate/core';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [ConstructorsSelectionComponent],
@@ -14,6 +16,8 @@ import { TranslateModule } from '@ngx-translate/core';
     AutoCompleteModule,
     TranslateModule,
     NbTooltipModule,
+    MultiSelectModule,
+    FontAwesomeModule,
   ],
   exports: [ConstructorsSelectionComponent],
 })
