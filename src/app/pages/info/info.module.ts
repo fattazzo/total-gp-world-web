@@ -6,6 +6,8 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { GalleriaModule } from 'primeng/galleria';
 import { GithubReleasesModule } from '../components/github/github-releases/github-releases.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NbButtonModule } from '@nebular/theme';
 
 @NgModule({
   imports: [
@@ -15,6 +17,8 @@ import { TranslateModule } from '@ngx-translate/core';
     GalleriaModule,
     GithubReleasesModule,
     TranslateModule,
+    FontAwesomeModule,
+    NbButtonModule,
   ],
   declarations: [InfoComponent],
 })

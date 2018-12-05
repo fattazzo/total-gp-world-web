@@ -73,6 +73,15 @@
     height: 100% !important;
   }
 
+  // ISSUES
+  .issues-container {
+    color: nb-theme(color-fg-heading);
+    font-family: nb-theme(font-main);
+    font-size: 1.15rem;
+    font-weight: nb-theme(font-weight-light);
+    padding-bottom: nb-theme(margin);
+  }
+
   // TRANSLATION
   .translation-container {
     color: nb-theme(color-fg-heading);
