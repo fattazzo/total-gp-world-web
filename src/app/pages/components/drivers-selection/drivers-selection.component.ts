@@ -12,7 +12,7 @@ import { SelectItem } from 'primeng/components/common/selectitem';
 export class DriversSelectionComponent implements OnInit {
   private season_ = '';
 
-  private drivers: SelectItem[] = [];
+  drivers: SelectItem[] = [];
 
   selectedDrivers: Driver[] = [];
   @Output() selectedDriversChange: EventEmitter<Driver[]> = new EventEmitter();

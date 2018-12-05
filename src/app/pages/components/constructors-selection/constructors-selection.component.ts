@@ -10,7 +10,7 @@ import { ConstructorsService } from '../../../services/constructors.service';
 export class ConstructorsSelectionComponent implements OnInit {
   private season_ = '';
 
-  private constructors: Constructor[] = [];
+  constructors: Constructor[] = [];
 
   selectedConstructors: Constructor[] = [];
   @Output() selectedConstructorsChange: EventEmitter<
