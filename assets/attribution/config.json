@@ -1,0 +1,14 @@
+{
+  "attributions": [
+    {
+      "link": "http://ergast.com/mrd/",
+      "title": "Ergast Developer API",
+      "image": "./assets/images/ergast.png"
+    },
+    {
+      "link": "https://github.com/akveo/ngx-admin",
+      "title": "",
+      "image": "./assets/images/ngx-admin.png"
+    }
+  ]
+}

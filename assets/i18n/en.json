@@ -117,5 +117,23 @@
   },
   "current": {
     "sing": "current"
+  },
+  "comparison": {
+    "sing": "comparison"
+  },
+  "to-show-all": "to show all",
+  "loading": {
+    "sing": "loading",
+    "data-for": "loading data for",
+    "data-for-error": "error loading data for"
+  },
+  "select-category": "select a category",
+  "select": "select",
+  "search": "search",
+  "cumulative-data": "Cumulative data",
+  "bug-proposal-feature": {
+    "title": "Bug, proposal, new feature",
+    "message": "Did you find any errors? Do you have any proposals to improve the project? Do you request new features? Open a new ticket and write your ideas in as much detail as possible at the following link",
+    "link": "Open new ticket"
   }
 }

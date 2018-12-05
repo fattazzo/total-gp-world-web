@@ -117,5 +117,23 @@
   },
   "current": {
     "sing": "corrente"
+  },
+  "comparison": {
+    "sing": "confronto"
+  },
+  "to-show-all": "per visualizzare tutto",
+  "loading": {
+    "sing": "caricamento",
+    "data-for": "caricamento dati per",
+    "data-for-error": "errore caricamento dati per"
+  },
+  "select-category": "Seleziona una categoria",
+  "select": "seleziona",
+  "search": "cerca",
+  "cumulative-data": "Dati cumulativi",
+  "bug-proposal-feature": {
+    "title": "Errori, proposte, nuove funzionalità",
+    "message": "Hai trovato degli errori? Hai delle proposte per migliorare il progetto? Voi richiedere nuove funzionalità? Apri un nuovo ticket e riporta in modo più dettagliato possibile le tue idee al seguente link",
+    "link": "Apri un nuovo ticket"
   }
 }
