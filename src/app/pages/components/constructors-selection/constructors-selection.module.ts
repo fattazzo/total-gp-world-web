@@ -13,7 +13,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   imports: [
     ThemeModule,
     CommonModule,
-    AutoCompleteModule,
     TranslateModule,
     NbTooltipModule,
     MultiSelectModule,
