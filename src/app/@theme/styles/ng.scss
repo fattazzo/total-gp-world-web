@@ -6,15 +6,15 @@
     font-family: nb-theme(header-font-family) !important;
   }
 
-  .ng-table {
-    .ui-table-thead {
+  p-table {
+    thead.ui-table-thead {
       > tr > th {
         background: nb-theme(smart-table-bg);
         color: nb-theme(color-fg-heading);
       }
     }
 
-    .ui-table-tbody {
+    tbody.ui-table-tbody {
       > tr {
         background: nb-theme(smart-table-bg);
         color: nb-theme(color-fg-heading);
