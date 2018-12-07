@@ -1,11 +1,18 @@
-<nb-card size="large" [nbSpinner]="!standings?.length" nbSpinnerStatus="primary" nbSpinnerSize="xxlarge"
-  nbSpinnerMessage="">
+<nb-card
+  size="large"
+  [nbSpinner]="!standings"
+  nbSpinnerStatus="primary"
+  nbSpinnerSize="xxlarge"
+  nbSpinnerMessage=""
+>
   <div class="chart-container">
     <div class="table-header">
       <fa-icon size="2x" icon="user-astronaut"></fa-icon>
       <div style="margin-right: 10px;margin-left: 10px">
         <div>{{ 'driver.plur' | translate | ngxCapitalize }}</div>
-        <div class="subtitle">{{ 'standing.sing' | translate | ngxCapitalize }}</div>
+        <div class="subtitle">
+          {{ 'standing.sing' | translate | ngxCapitalize }}
+        </div>
       </div>
     </div>
 
@@ -26,13 +33,20 @@
         <div>
           <span class="month">{{ stand.position }}</span>
         </div>
-        <a [routerLink]="['/pages/sections/driver',{ season: season , driverId: stand.Driver.driverId}]" class="link-black">
-          <div class="results" *ngIf="stand.Driver.code; else nameOnly">
-            <b>{{stand.Driver.givenName}} {{stand.Driver.familyName}}</b> ({{stand.Driver.code}})
+        <a
+          [routerLink]="[
+            '/pages/sections/driver',
+            { season: season, driverId: stand.Driver.driverId }
+          ]"
+          class="link-black"
+        >
+          <div class="results" *ngIf="stand.Driver.code; else: nameOnly">
+            <b>{{ stand.Driver.givenName }} {{ stand.Driver.familyName }}</b>
+            ({{ stand.Driver.code }})
           </div>
           <ng-template #nameOnly>
             <div class="results">
-              <b>{{stand.Driver.givenName}} {{stand.Driver.familyName}}</b>
+              <b>{{ stand.Driver.givenName }} {{ stand.Driver.familyName }}</b>
             </div>
           </ng-template>
         </a>

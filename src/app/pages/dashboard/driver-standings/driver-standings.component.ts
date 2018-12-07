@@ -13,8 +13,7 @@ import { DashboardCards } from '../dashboard-cards';
   templateUrl: './driver-standings.component.html',
 })
 export class DriverStandingsComponent implements OnInit {
-  @Input()
-  season: string;
+  @Input() season: string;
 
   standings: DriverStanding[];
 

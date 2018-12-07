@@ -13,8 +13,7 @@ import { DashboardCards } from '../dashboard-cards';
   templateUrl: './constructor-standings.component.html',
 })
 export class ConstructorStandingsComponent implements OnInit {
-  @Input()
-  season: string;
+  @Input() season: string;
 
   standings: ConstructorStanding[];
 

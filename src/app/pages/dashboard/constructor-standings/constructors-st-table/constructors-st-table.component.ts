@@ -7,10 +7,8 @@ import { ConstructorStanding } from '../../../../domain/constructor-standing';
   styleUrls: ['./constructors-st-table.component.scss'],
 })
 export class ConstructorsStTableComponent implements OnInit {
-  @Input()
-  standings: ConstructorStanding[];
-  @Input()
-  season: string;
+  @Input() standings: ConstructorStanding[];
+  @Input() season: string;
 
   constructor() {}
 
