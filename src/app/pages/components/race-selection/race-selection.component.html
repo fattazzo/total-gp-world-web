@@ -1,0 +1,14 @@
+<span class="ui-fluid">
+  <div class="main-container">
+    <div>
+      <p-dropdown
+        [options]="races"
+        (onChange)="onSelectedRaceChange($event.value)"
+        placeholder="_Select a race_"
+        [autoWidth]="true"
+        [filter]="false"
+      >
+      </p-dropdown>
+    </div>
+  </div>
+</span>

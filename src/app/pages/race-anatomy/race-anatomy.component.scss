@@ -1,0 +1,48 @@
+@import "../../@theme/styles/themes";
+@import "~@nebular/theme/components/card/card.component.theme";
+@import "~@nebular/theme/styles/global/typography/typography";
+@import "~@nebular/theme/styles/global/breakpoints";
+
+@include nb-install-component() {
+  .form-content {
+    margin-bottom: 10px;
+  }
+
+  .table-header {
+    @include nb-card-header();
+    font-size: 1.38rem;
+    display: flex;
+    align-items: center;
+    padding: 0;
+  }
+
+  .ui-dropdown .ui-dropdown-panel {
+    min-width: 100%;
+    width: max-content;
+  }
+
+  .loading-message-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .screen-message-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    visibility: hidden;
+  }
+
+  .message {
+    font-size: nb-theme("font-size-lg");
+    color: nb-theme("color-fg-heading");
+    margin: 0px 10px 0px 10px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    .screen-message-container {
+      visibility: visible;
+    }
+  }
+}

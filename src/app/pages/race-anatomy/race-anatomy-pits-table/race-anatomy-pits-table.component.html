@@ -1,0 +1,32 @@
+<div class="main-container">
+  <p-table [value]="pitStops" *ngIf="pitStops?.length > 0">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>{{ 'driver.sing' | translate | ngxCapitalize }}</th>
+        <th>{{ 'lap.sing' | translate | ngxCapitalize }}</th>
+        <th>{{ 'stop.sing' | translate | ngxCapitalize }}</th>
+        <th>{{ 'hour.sing' | translate | ngxCapitalize }}</th>
+        <th>{{ 'duration.sing' | translate | ngxCapitalize }}</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-pit>
+      <tr>
+        <td>
+          <a
+            [routerLink]="[
+              '/pages/sections/driver',
+              { season: season, driverId: pit.driverId }
+            ]"
+            class="link-black"
+          >
+            {{ pit.driver }}</a
+          >
+        </td>
+        <td>{{ pit.lap }}</td>
+        <td>{{ pit.stop }}</td>
+        <td>{{ pit.time }}</td>
+        <td>{{ pit.duration }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

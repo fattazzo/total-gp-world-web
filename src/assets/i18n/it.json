@@ -34,9 +34,11 @@
     "sing": "dashboard"
   },
   "circuit": {
+    "sing": "circuito",
     "plur": "circuiti"
   },
   "race": {
+    "sing": "gara",
     "plur": "gare",
     "numbers": "numero",
     "nationalities": "nazioni"
@@ -85,7 +87,17 @@
     "sing": "stato"
   },
   "lap": {
+    "sing": "giro",
     "plur": "giri"
+  },
+  "pitstop": {
+    "plur": "pit stops"
+  },
+  "stop": {
+    "sing": "stop"
+  },
+  "duration": {
+    "sing": "durata"
   },
   "result": {
     "plur": "risultati"
@@ -94,6 +106,7 @@
     "plur": "qualifiche"
   },
   "chart": {
+    "sing": "grafico",
     "pie": "torta",
     "doughnut": "ciambella",
     "line": "linea",
@@ -121,7 +134,6 @@
   "comparison": {
     "sing": "confronto"
   },
-  "to-show-all": "per visualizzare tutto",
   "loading": {
     "sing": "caricamento",
     "data-for": "caricamento dati per",
@@ -135,5 +147,13 @@
     "title": "Errori, proposte, nuove funzionalità",
     "message": "Hai trovato degli errori? Hai delle proposte per migliorare il progetto? Voi richiedere nuove funzionalità? Apri un nuovo ticket e riporta in modo più dettagliato possibile le tue idee al seguente link",
     "link": "Apri un nuovo ticket"
+  },
+  "race-anatomy": "analisi gara",
+  "race-laps-pitstops": {
+    "loading-message": "Caricare i dati dei tempi sul giro e dei pit stops richiede alcuni secondi e soltanto le gare più recenti contengono questi dati.",
+    "screen-message": "Per visualizzare al meglio i risultati è consigliabile almeno uno schermo di medie dimensioni."
+  },
+  "number": {
+    "sing": "numero"
   }
 }

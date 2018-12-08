@@ -34,9 +34,11 @@
     "sing": "dashboard"
   },
   "circuit": {
+    "sing": "circuit",
     "plur": "circuits"
   },
   "race": {
+    "sing": "race",
     "plur": "races",
     "numbers": "total",
     "nationalities": "countries"
@@ -85,7 +87,17 @@
     "sing": "status"
   },
   "lap": {
+    "sing": "lap",
     "plur": "laps"
+  },
+  "pitstop": {
+    "plur": "pit stops"
+  },
+  "stop": {
+    "sing": "stop"
+  },
+  "duration": {
+    "sing": "duration"
   },
   "result": {
     "plur": "results"
@@ -94,6 +106,7 @@
     "plur": "qualifying"
   },
   "chart": {
+    "sing": "chart",
     "pie": "pie",
     "doughnut": "doughnut",
     "line": "line",
@@ -121,7 +134,6 @@
   "comparison": {
     "sing": "comparison"
   },
-  "to-show-all": "to show all",
   "loading": {
     "sing": "loading",
     "data-for": "loading data for",
@@ -135,5 +147,13 @@
     "title": "Bug, proposal, new feature",
     "message": "Did you find any errors? Do you have any proposals to improve the project? Do you request new features? Open a new ticket and write your ideas in as much detail as possible at the following link",
     "link": "Open new ticket"
+  },
+  "race-anatomy": "race anatomy",
+  "race-laps-pitstops": {
+    "loading-message": "Loading lap times and pit stops requires a few seconds and only the most recent races contain this data.",
+    "screen-message": "At least one medium-sized screen is recommended to better visualization."
+  },
+  "number": {
+    "sing": "number"
   }
 }

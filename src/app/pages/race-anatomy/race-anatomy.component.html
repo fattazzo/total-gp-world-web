@@ -1,0 +1,72 @@
+<div class="ui-g">
+  <div class="ui-g-12">
+    <form class="form-content">
+      <div class="table-header ui-g">
+        <div for="driverSelect" style="padding-right: 10px">
+          {{ 'race.sing' | translate | ngxCapitalize }}
+        </div>
+
+        <race-selection
+          [season]="season"
+          (selectedRaceChange)="onRaceChange($event)"
+        ></race-selection>
+      </div>
+    </form>
+  </div>
+  <div class="ui-g-12 loading-message-container">
+    <fa-icon
+      icon="exclamation-triangle"
+      size="2x"
+      style="color: orange"
+    ></fa-icon>
+    <div class="message">
+      {{ 'race-laps-pitstops.loading-message' | translate }}
+    </div>
+  </div>
+  <div class="ui-g-12 screen-message-container">
+    <fa-icon icon="desktop" size="2x" style="color: dodgerblue"></fa-icon>
+    <div class="message">
+      {{ 'race-laps-pitstops.screen-message' | translate }}
+    </div>
+  </div>
+  <div class="ui-g-12">
+    <race-anatomy-info [race]="race"></race-anatomy-info>
+  </div>
+  <div class="ui-g-12" *ngIf="race">
+    <nb-accordion
+      nbSpinnerMessage="Loading laps and pit stops data"
+      [nbSpinner]="loadingLaps || loadingPits"
+    >
+      <nb-accordion-item>
+        <nb-accordion-item-header>{{
+          'chart.sing' | translate | ngxCapitalize
+        }}</nb-accordion-item-header>
+        <nb-accordion-item-body> </nb-accordion-item-body>
+      </nb-accordion-item>
+
+      <nb-accordion-item>
+        <nb-accordion-item-header>{{
+          'lap.plur' | translate | ngxCapitalize
+        }}</nb-accordion-item-header>
+        <nb-accordion-item-body>
+          <race-anatomy-laps-table
+            [season]="season"
+            [laps]="laps"
+          ></race-anatomy-laps-table>
+        </nb-accordion-item-body>
+      </nb-accordion-item>
+
+      <nb-accordion-item>
+        <nb-accordion-item-header>{{
+          'pitstop.plur' | translate | ngxCapitalize
+        }}</nb-accordion-item-header>
+        <nb-accordion-item-body>
+          <race-anatomy-pits-table
+            [season]="season"
+            [pits]="pits"
+          ></race-anatomy-pits-table>
+        </nb-accordion-item-body>
+      </nb-accordion-item>
+    </nb-accordion>
+  </div>
+</div>

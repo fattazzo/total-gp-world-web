@@ -1,0 +1,29 @@
+<p-table [value]="races" *ngIf="races?.length > 0">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>{{ 'date.sing' | translate | ngxCapitalize }}</th>
+      <th>{{ 'hour.sing' | translate | ngxCapitalize }}</th>
+      <th>{{ 'round.sing' | translate | ngxCapitalize }}</th>
+      <th>{{ 'circuit.sing' | translate | ngxCapitalize }}</th>
+      <th>{{ 'locality.sing' | translate | ngxCapitalize }}</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-race>
+    <tr>
+      <td>{{ race.date }}</td>
+      <td>{{ race.time }}</td>
+      <td>{{ race.round }}</td>
+      <td>{{ race.Circuit.circuitName }}</td>
+      <td>
+        <a
+          href="https://maps.google.com/?q={{ race.Circuit.Location.lat }},{{ race.Circuit.Location.long }}"
+          target="_blank"
+          class="link-black"
+        >
+          <i class="fa fa-map-marker-alt"></i>
+          {{ race.Circuit.Location.locality }}
+        </a>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

@@ -22,6 +22,10 @@ const routes: Routes = [
         loadChildren: './comparison/comparison.module#ComparisonModule',
       },
       {
+        path: 'race-anatomy',
+        loadChildren: './race-anatomy/race-anatomy.module#RaceAnatomyModule',
+      },
+      {
         path: 'sections/driver',
         loadChildren: './driver/driver.module#DriverModule',
       },

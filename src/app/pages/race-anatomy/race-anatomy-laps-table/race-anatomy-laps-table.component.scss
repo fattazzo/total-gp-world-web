@@ -1,0 +1,18 @@
+@import "../../../@theme/styles/themes";
+@import "~@nebular/theme/components/card/card.component.theme";
+@import "~@nebular/theme/styles/global/typography/typography";
+
+@include nb-install-component() {
+  .main-container {
+    margin-top: nb-theme(margin);
+    margin-bottom: nb-theme(margin);
+  }
+
+  .link-black {
+    color: nb-theme(color-fg-heading);
+
+    &:hover {
+      color: nb-theme(color-primary);
+    }
+  }
+}

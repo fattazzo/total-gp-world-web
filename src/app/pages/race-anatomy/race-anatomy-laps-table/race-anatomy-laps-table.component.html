@@ -1,0 +1,56 @@
+<div class="main-container">
+  <p-table [value]="lapsItems" dataKey="number" *ngIf="lapsItems?.length > 0">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>{{ 'driver.sing' | translate | ngxCapitalize }}</th>
+        <th>{{ 'position.sing' | translate | ngxCapitalize }}</th>
+        <th>{{ 'hour.sing' | translate | ngxCapitalize }}</th>
+      </tr>
+    </ng-template>
+    <ng-template
+      pTemplate="body"
+      let-lap
+      let-rowIndex="rowIndex"
+      let-expanded="expanded"
+      let-columns="columns"
+    >
+      <tr
+        class="ui-widget-header"
+        *ngIf="rowGroupMetadata[lap.number].index === rowIndex"
+      >
+        <td colspan="3">
+          <a href="#" [pRowToggler]="lap">
+            <i
+              [ngClass]="
+                expanded
+                  ? 'fa fa-fw fa-chevron-circle-down'
+                  : 'fa fa-fw fa-chevron-circle-right'
+              "
+            ></i>
+            <span
+              >{{ 'lap.sing' | translate | ngxCapitalize }}
+              {{ lap.number }}</span
+            >
+          </a>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-lap let-rowIndex="rowIndex">
+      <tr>
+        <td>
+          <a
+            [routerLink]="[
+              '/pages/sections/driver',
+              { season: season, driverId: lap.driverId }
+            ]"
+            class="link-black"
+          >
+            {{ lap.driver }}</a
+          >
+        </td>
+        <td>{{ lap.position }}</td>
+        <td>{{ lap.time }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
