@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { shareReplay, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { Configuration } from '../app.constants';
 
@@ -11,6 +11,7 @@ import { ErgastResponse } from '../domain/ergast/ergast-response';
 import { Race } from '../domain/race';
 import { Season } from '../domain/season';
 import { of } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -111,7 +112,7 @@ export class ConstructorsService {
   private loadStandings(season: string): Observable<ConstructorStanding[]> {
     return this.http
       .get<ErgastResponse>(
-        `${this.config.ServerWithApiUrl}${season}/constructorStandings.json`,
+        `${environment.ergastApiUrl}${season}/constructorStandings.json`,
       )
       .pipe(
         map(result => {
@@ -134,7 +135,7 @@ export class ConstructorsService {
   private load(season: string): Observable<Constructor[]> {
     return this.http
       .get<ErgastResponse>(
-        `${this.config.ServerWithApiUrl}${season}/constructors.json`,
+        `${environment.ergastApiUrl}${season}/constructors.json`,
       )
       .pipe(
         map(result => {
@@ -162,9 +163,9 @@ export class ConstructorsService {
     return this.http
       .get<ErgastResponse>(
         `${
-          this.config.ServerWithApiUrl
+          environment.ergastApiUrl
         }${season}/constructors/${constructorId}/results.json?limit=${
-          this.config.ApiPageLimit
+          environment.ergastApiPageLimit
         }`,
       )
       .pipe(
@@ -193,7 +194,7 @@ export class ConstructorsService {
     return this.http
       .get<ErgastResponse>(
         `${
-          this.config.ServerWithApiUrl
+          environment.ergastApiUrl
         }${season}/constructors/${constructorId}/qualifying.json`,
       )
       .pipe(map(result => result.MRData.RaceTable.Races));
@@ -208,7 +209,7 @@ export class ConstructorsService {
     return this.http
       .get<ErgastResponse>(
         `${
-          this.config.ServerWithApiUrl
+          environment.ergastApiUrl
         }constructors/${constructorId}/seasons.json?limit=1000`,
       )
       .pipe(map(result => result.MRData.SeasonTable.Seasons));

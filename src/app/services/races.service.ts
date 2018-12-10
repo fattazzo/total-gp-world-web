@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { shareReplay, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
-import { Configuration } from '../app.constants';
 import { Race } from '../domain/race';
 import { ErgastResponse } from '../domain/ergast/ergast-response';
 import { of } from 'rxjs';
 import { Lap } from '../domain/lap';
 import { PitStop } from '../domain/pitstop';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +21,7 @@ export class RacesService {
   private cacheLaps$: Map<string, Lap[]> = new Map();
   private cachePitStops$: Map<string, PitStop[]> = new Map();
 
-  constructor(private http: HttpClient, private config: Configuration) {}
+  constructor(private http: HttpClient) {}
 
   public getSchedule(season: string) {
     this.clearCacheIfNeeded(season);
@@ -64,7 +64,7 @@ export class RacesService {
 
   private loadSchedule(season: string): Observable<Race[]> {
     return this.http
-      .get<ErgastResponse>(`${this.config.ServerWithApiUrl}${season}.json`)
+      .get<ErgastResponse>(`${environment.ergastApiUrl}${season}.json`)
       .pipe(
         map(result => {
           const schedule =
@@ -81,9 +81,7 @@ export class RacesService {
   private loadLaps(season: string, round: string): Observable<Lap[]> {
     return this.http
       .get<ErgastResponse>(
-        `${
-          this.config.ServerWithApiUrl
-        }${season}/${round}/laps.json?limit=2000`,
+        `${environment.ergastApiUrl}${season}/${round}/laps.json?limit=2000`,
       )
       .pipe(
         map(result => {
@@ -101,9 +99,9 @@ export class RacesService {
   private loadPitStops(season: string, round: string): Observable<PitStop[]> {
     return this.http
       .get<ErgastResponse>(
-        `${
-          this.config.ServerWithApiUrl
-        }${season}/${round}/pitstops.json?limit=200`,
+        `${environment.ergastApiUrl}${season}/${round}/pitstops.json?limit=${
+          environment.ergastApiMaxPageLimit
+        }`,
       )
       .pipe(
         map(result => {

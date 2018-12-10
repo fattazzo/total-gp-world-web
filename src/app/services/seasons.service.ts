@@ -7,17 +7,17 @@ import { BehaviorSubject } from 'rxjs';
 import { Season } from '../domain/season';
 import { ErgastResponse } from '../domain/ergast/ergast-response';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SeasonsService {
-
   private seasonsCache$: Observable<Season[]>;
 
   private season = new BehaviorSubject<string>('current');
 
-  constructor(private http: HttpClient, private config: Configuration) { }
+  constructor(private http: HttpClient, private config: Configuration) {}
 
   setSeason(newSeason: string) {
     this.season.next(newSeason);
@@ -37,16 +37,21 @@ export class SeasonsService {
   }
 
   private loadSeasons(): Observable<Season[]> {
-    const currentYear = new Date().getFullYear();
-    const diffYears = currentYear - 1950 + 1;
-    return this.http.get<ErgastResponse>(`${this.config.ServerWithApiUrl}seasons.json?limit=${currentYear}&offset=0`)
-      .pipe(map(result => {
-        const tmp: Season[] = result.MRData.SeasonTable.Seasons;
-        const currentSeason = new Season();
-        currentSeason.season = 'current';
-        currentSeason.url = '';
-        tmp.push(currentSeason);
-        return tmp
-      }));
+    return this.http
+      .get<ErgastResponse>(
+        `${environment.ergastApiUrl}seasons.json?limit=${
+          environment.ergastApiPageLimit
+        }`,
+      )
+      .pipe(
+        map(result => {
+          const tmp: Season[] = result.MRData.SeasonTable.Seasons;
+          const currentSeason = new Season();
+          currentSeason.season = 'current';
+          currentSeason.url = '';
+          tmp.push(currentSeason);
+          return tmp;
+        }),
+      );
   }
 }

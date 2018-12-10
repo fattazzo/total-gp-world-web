@@ -3,10 +3,11 @@ import { Observable, of } from 'rxjs';
 import { Circuit } from '../domain/circuit';
 import { Configuration } from '../app.constants';
 import { HttpClient } from '@angular/common/http';
-import { shareReplay, map } from 'rxjs/operators';
 import { ErgastResponse } from '../domain/ergast/ergast-response';
 import { Race } from '../domain/race';
 import { Season } from '../domain/season';
+import { environment } from '../../environments/environment';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -73,9 +74,7 @@ export class CircuitsService {
    */
   private load(season: string): Observable<Circuit[]> {
     return this.http
-      .get<ErgastResponse>(
-        `${this.config.ServerWithApiUrl}${season}/circuits.json`,
-      )
+      .get<ErgastResponse>(`${environment.ergastApiUrl}${season}/circuits.json`)
       .pipe(
         map(result => {
           this.cacheCircuits$ = result.MRData.CircuitTable.Circuits;
@@ -94,7 +93,7 @@ export class CircuitsService {
     return this.http
       .get<ErgastResponse>(
         `${
-          this.config.ServerWithApiUrl
+          environment.ergastApiUrl
         }${season}/circuits/${circuitId}/results.json`,
       )
       .pipe(
@@ -114,7 +113,7 @@ export class CircuitsService {
     return this.http
       .get<ErgastResponse>(
         `${
-          this.config.ServerWithApiUrl
+          environment.ergastApiUrl
         }circuits/${circuitId}/seasons.json?limit=1000`,
       )
       .pipe(

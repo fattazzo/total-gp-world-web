@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { shareReplay, map, first } from 'rxjs/operators';
-
-import { Configuration } from '../app.constants';
+import { map } from 'rxjs/operators';
 
 import { DriverStanding } from '../domain/driver-standing';
 import { Driver } from '../domain/driver';
@@ -11,6 +9,7 @@ import { Race } from '../domain/race';
 import { ErgastResponse } from '../domain/ergast/ergast-response';
 import { Season } from '../domain/season';
 import { of } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +23,7 @@ export class DriversService {
   private cacheQualifyng$: Map<string, Observable<Race[]>> = new Map();
   private cacheSeasons$: Map<string, Observable<Season[]>> = new Map();
 
-  constructor(private http: HttpClient, private config: Configuration) {}
+  constructor(private http: HttpClient) {}
 
   /**
    * Load the driver standing of the season
@@ -105,7 +104,7 @@ export class DriversService {
   private loadStandings(season: string): Observable<DriverStanding[]> {
     return this.http
       .get<ErgastResponse>(
-        `${this.config.ServerWithApiUrl}${season}/driverStandings.json`,
+        `${environment.ergastApiUrl}${season}/driverStandings.json`,
       )
       .pipe(
         map(result => {
@@ -126,9 +125,7 @@ export class DriversService {
    */
   private load(season: string): Observable<Driver[]> {
     return this.http
-      .get<ErgastResponse>(
-        `${this.config.ServerWithApiUrl}${season}/drivers.json`,
-      )
+      .get<ErgastResponse>(`${environment.ergastApiUrl}${season}/drivers.json`)
       .pipe(
         map(result => {
           const drivers =
@@ -151,9 +148,7 @@ export class DriversService {
   private loadResults(season: string, driverId: string): Observable<Race[]> {
     return this.http
       .get<ErgastResponse>(
-        `${
-          this.config.ServerWithApiUrl
-        }${season}/drivers/${driverId}/results.json`,
+        `${environment.ergastApiUrl}${season}/drivers/${driverId}/results.json`,
       )
       .pipe(
         map(result => {
@@ -178,7 +173,7 @@ export class DriversService {
     return this.http
       .get<ErgastResponse>(
         `${
-          this.config.ServerWithApiUrl
+          environment.ergastApiUrl
         }${season}/drivers/${driverId}/qualifying.json`,
       )
       .pipe(map(result => result.MRData.RaceTable.Races));
@@ -192,7 +187,7 @@ export class DriversService {
   private loadSeasons(driverId: string): Observable<Season[]> {
     return this.http
       .get<ErgastResponse>(
-        `${this.config.ServerWithApiUrl}drivers/${driverId}/seasons.json`,
+        `${environment.ergastApiUrl}drivers/${driverId}/seasons.json`,
       )
       .pipe(map(result => result.MRData.SeasonTable.Seasons));
   }

@@ -1,0 +1,295 @@
+{
+  "id": "seasons",
+  "MRData": {
+    "xmlns": "http://ergast.com/mrd/1.4",
+    "series": "f1",
+    "url": "http://ergast.com/api/f1/seasons.json",
+    "limit": "300",
+    "offset": "0",
+    "total": "70",
+    "SeasonTable": {
+      "Seasons": [
+        {
+          "season": "1950",
+          "url": "https://en.wikipedia.org/wiki/1950_Formula_One_season"
+        },
+        {
+          "season": "1951",
+          "url": "https://en.wikipedia.org/wiki/1951_Formula_One_season"
+        },
+        {
+          "season": "1952",
+          "url": "https://en.wikipedia.org/wiki/1952_Formula_One_season"
+        },
+        {
+          "season": "1953",
+          "url": "https://en.wikipedia.org/wiki/1953_Formula_One_season"
+        },
+        {
+          "season": "1954",
+          "url": "https://en.wikipedia.org/wiki/1954_Formula_One_season"
+        },
+        {
+          "season": "1955",
+          "url": "https://en.wikipedia.org/wiki/1955_Formula_One_season"
+        },
+        {
+          "season": "1956",
+          "url": "https://en.wikipedia.org/wiki/1956_Formula_One_season"
+        },
+        {
+          "season": "1957",
+          "url": "https://en.wikipedia.org/wiki/1957_Formula_One_season"
+        },
+        {
+          "season": "1958",
+          "url": "https://en.wikipedia.org/wiki/1958_Formula_One_season"
+        },
+        {
+          "season": "1959",
+          "url": "https://en.wikipedia.org/wiki/1959_Formula_One_season"
+        },
+        {
+          "season": "1960",
+          "url": "https://en.wikipedia.org/wiki/1960_Formula_One_season"
+        },
+        {
+          "season": "1961",
+          "url": "https://en.wikipedia.org/wiki/1961_Formula_One_season"
+        },
+        {
+          "season": "1962",
+          "url": "https://en.wikipedia.org/wiki/1962_Formula_One_season"
+        },
+        {
+          "season": "1963",
+          "url": "https://en.wikipedia.org/wiki/1963_Formula_One_season"
+        },
+        {
+          "season": "1964",
+          "url": "https://en.wikipedia.org/wiki/1964_Formula_One_season"
+        },
+        {
+          "season": "1965",
+          "url": "https://en.wikipedia.org/wiki/1965_Formula_One_season"
+        },
+        {
+          "season": "1966",
+          "url": "https://en.wikipedia.org/wiki/1966_Formula_One_season"
+        },
+        {
+          "season": "1967",
+          "url": "https://en.wikipedia.org/wiki/1967_Formula_One_season"
+        },
+        {
+          "season": "1968",
+          "url": "https://en.wikipedia.org/wiki/1968_Formula_One_season"
+        },
+        {
+          "season": "1969",
+          "url": "https://en.wikipedia.org/wiki/1969_Formula_One_season"
+        },
+        {
+          "season": "1970",
+          "url": "https://en.wikipedia.org/wiki/1970_Formula_One_season"
+        },
+        {
+          "season": "1971",
+          "url": "https://en.wikipedia.org/wiki/1971_Formula_One_season"
+        },
+        {
+          "season": "1972",
+          "url": "https://en.wikipedia.org/wiki/1972_Formula_One_season"
+        },
+        {
+          "season": "1973",
+          "url": "https://en.wikipedia.org/wiki/1973_Formula_One_season"
+        },
+        {
+          "season": "1974",
+          "url": "https://en.wikipedia.org/wiki/1974_Formula_One_season"
+        },
+        {
+          "season": "1975",
+          "url": "https://en.wikipedia.org/wiki/1975_Formula_One_season"
+        },
+        {
+          "season": "1976",
+          "url": "https://en.wikipedia.org/wiki/1976_Formula_One_season"
+        },
+        {
+          "season": "1977",
+          "url": "https://en.wikipedia.org/wiki/1977_Formula_One_season"
+        },
+        {
+          "season": "1978",
+          "url": "https://en.wikipedia.org/wiki/1978_Formula_One_season"
+        },
+        {
+          "season": "1979",
+          "url": "https://en.wikipedia.org/wiki/1979_Formula_One_season"
+        },
+        {
+          "season": "1980",
+          "url": "https://en.wikipedia.org/wiki/1980_Formula_One_season"
+        },
+        {
+          "season": "1981",
+          "url": "https://en.wikipedia.org/wiki/1981_Formula_One_season"
+        },
+        {
+          "season": "1982",
+          "url": "https://en.wikipedia.org/wiki/1982_Formula_One_season"
+        },
+        {
+          "season": "1983",
+          "url": "https://en.wikipedia.org/wiki/1983_Formula_One_season"
+        },
+        {
+          "season": "1984",
+          "url": "https://en.wikipedia.org/wiki/1984_Formula_One_season"
+        },
+        {
+          "season": "1985",
+          "url": "https://en.wikipedia.org/wiki/1985_Formula_One_season"
+        },
+        {
+          "season": "1986",
+          "url": "https://en.wikipedia.org/wiki/1986_Formula_One_season"
+        },
+        {
+          "season": "1987",
+          "url": "https://en.wikipedia.org/wiki/1987_Formula_One_season"
+        },
+        {
+          "season": "1988",
+          "url": "https://en.wikipedia.org/wiki/1988_Formula_One_season"
+        },
+        {
+          "season": "1989",
+          "url": "https://en.wikipedia.org/wiki/1989_Formula_One_season"
+        },
+        {
+          "season": "1990",
+          "url": "https://en.wikipedia.org/wiki/1990_Formula_One_season"
+        },
+        {
+          "season": "1991",
+          "url": "https://en.wikipedia.org/wiki/1991_Formula_One_season"
+        },
+        {
+          "season": "1992",
+          "url": "https://en.wikipedia.org/wiki/1992_Formula_One_season"
+        },
+        {
+          "season": "1993",
+          "url": "https://en.wikipedia.org/wiki/1993_Formula_One_season"
+        },
+        {
+          "season": "1994",
+          "url": "https://en.wikipedia.org/wiki/1994_Formula_One_season"
+        },
+        {
+          "season": "1995",
+          "url": "https://en.wikipedia.org/wiki/1995_Formula_One_season"
+        },
+        {
+          "season": "1996",
+          "url": "https://en.wikipedia.org/wiki/1996_Formula_One_season"
+        },
+        {
+          "season": "1997",
+          "url": "https://en.wikipedia.org/wiki/1997_Formula_One_season"
+        },
+        {
+          "season": "1998",
+          "url": "https://en.wikipedia.org/wiki/1998_Formula_One_season"
+        },
+        {
+          "season": "1999",
+          "url": "https://en.wikipedia.org/wiki/1999_Formula_One_season"
+        },
+        {
+          "season": "2000",
+          "url": "https://en.wikipedia.org/wiki/2000_Formula_One_season"
+        },
+        {
+          "season": "2001",
+          "url": "https://en.wikipedia.org/wiki/2001_Formula_One_season"
+        },
+        {
+          "season": "2002",
+          "url": "https://en.wikipedia.org/wiki/2002_Formula_One_season"
+        },
+        {
+          "season": "2003",
+          "url": "https://en.wikipedia.org/wiki/2003_Formula_One_season"
+        },
+        {
+          "season": "2004",
+          "url": "https://en.wikipedia.org/wiki/2004_Formula_One_season"
+        },
+        {
+          "season": "2005",
+          "url": "https://en.wikipedia.org/wiki/2005_Formula_One_season"
+        },
+        {
+          "season": "2006",
+          "url": "https://en.wikipedia.org/wiki/2006_Formula_One_season"
+        },
+        {
+          "season": "2007",
+          "url": "https://en.wikipedia.org/wiki/2007_Formula_One_season"
+        },
+        {
+          "season": "2008",
+          "url": "https://en.wikipedia.org/wiki/2008_Formula_One_season"
+        },
+        {
+          "season": "2009",
+          "url": "https://en.wikipedia.org/wiki/2009_Formula_One_season"
+        },
+        {
+          "season": "2010",
+          "url": "https://en.wikipedia.org/wiki/2010_Formula_One_season"
+        },
+        {
+          "season": "2011",
+          "url": "https://en.wikipedia.org/wiki/2011_Formula_One_season"
+        },
+        {
+          "season": "2012",
+          "url": "https://en.wikipedia.org/wiki/2012_Formula_One_season"
+        },
+        {
+          "season": "2013",
+          "url": "https://en.wikipedia.org/wiki/2013_Formula_One_season"
+        },
+        {
+          "season": "2014",
+          "url": "https://en.wikipedia.org/wiki/2014_Formula_One_season"
+        },
+        {
+          "season": "2015",
+          "url": "https://en.wikipedia.org/wiki/2015_Formula_One_season"
+        },
+        {
+          "season": "2016",
+          "url": "https://en.wikipedia.org/wiki/2016_Formula_One_season"
+        },
+        {
+          "season": "2017",
+          "url": "https://en.wikipedia.org/wiki/2017_Formula_One_season"
+        },
+        {
+          "season": "2018",
+          "url": "https://en.wikipedia.org/wiki/2018_Formula_One_World_Championship"
+        },
+        {
+          "season": "2019",
+          "url": "https://en.wikipedia.org/wiki/2019_Formula_One_World_Championship"
+        }
+      ]
+    }
+  }
+}

@@ -10,5 +10,11 @@
 
 export const environment = {
   production: false,
+
   githubUserApiUrl: 'https://api.github.com/users/',
+
+  ergastApiUrl: 'http://localhost:3000/api/f1/',
+
+  ergastApiPageLimit: '100',
+  ergastApiMaxPageLimit: '1000',
 };

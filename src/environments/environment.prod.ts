@@ -5,5 +5,11 @@
  */
 export const environment = {
   production: true,
+
   githubUserApiUrl: 'https://api.github.com/users/',
+
+  ergastApiUrl: 'https://ergast.com/api/f1/',
+
+  ergastApiPageLimit: '100',
+  ergastApiMaxPageLimit: '1000',
 };
