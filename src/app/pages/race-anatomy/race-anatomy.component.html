@@ -33,22 +33,46 @@
     <race-anatomy-info [race]="race"></race-anatomy-info>
   </div>
   <div class="ui-g-12" *ngIf="race">
-    <nb-accordion
-      nbSpinnerMessage="Loading laps and pit stops data"
-      [nbSpinner]="loadingLaps || loadingPits"
-    >
+    <nb-accordion>
+      <nb-accordion-item *ngIf="qualifying?.length > 0">
+        <nb-accordion-item-header>{{
+          'qualify.plur' | translate | ngxCapitalize
+        }}</nb-accordion-item-header>
+        <nb-accordion-item-body [nbSpinner]="loadingQualifying"
+          ><race-anatomy-qualifying
+            [season]="season"
+            [qualifying]="qualifying"
+          ></race-anatomy-qualifying>
+        </nb-accordion-item-body>
+      </nb-accordion-item>
+
+      <nb-accordion-item *ngIf="results?.length > 0">
+        <nb-accordion-item-header>{{
+          'result.plur' | translate | ngxCapitalize
+        }}</nb-accordion-item-header>
+        <nb-accordion-item-body [nbSpinner]="loadingResults"
+          ><race-anatomy-results
+            [season]="season"
+            [results]="results"
+          ></race-anatomy-results>
+        </nb-accordion-item-body>
+      </nb-accordion-item>
+
       <nb-accordion-item>
         <nb-accordion-item-header>{{
           'chart.sing' | translate | ngxCapitalize
         }}</nb-accordion-item-header>
-        <nb-accordion-item-body> </nb-accordion-item-body>
+        <nb-accordion-item-body
+          [nbSpinner]="loadingResults || loadingLaps || loadingPits"
+          ><race-anatomy-chart [pits]="pits" [laps]="laps"></race-anatomy-chart>
+        </nb-accordion-item-body>
       </nb-accordion-item>
 
       <nb-accordion-item>
         <nb-accordion-item-header>{{
           'lap.plur' | translate | ngxCapitalize
         }}</nb-accordion-item-header>
-        <nb-accordion-item-body>
+        <nb-accordion-item-body [nbSpinner]="loadingLaps">
           <race-anatomy-laps-table
             [season]="season"
             [laps]="laps"
@@ -60,7 +84,7 @@
         <nb-accordion-item-header>{{
           'pitstop.plur' | translate | ngxCapitalize
         }}</nb-accordion-item-header>
-        <nb-accordion-item-body>
+        <nb-accordion-item-body [nbSpinner]="loadingPits">
           <race-anatomy-pits-table
             [season]="season"
             [pits]="pits"

@@ -16,6 +16,8 @@
 // global style for primeng components
 @import "./ng";
 
+@import "./custom.scss";
+
 // install the framework and custom global styles
 @include nb-install() {
   // framework global styles

@@ -1,0 +1,47 @@
+<div class="main-container">
+  <p-table [value]="qualifying" *ngIf="qualifying?.length > 0">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>{{ 'position.sing' | translate | ngxCapitalize }}</th>
+        <th>{{ 'number.sing' | translate | ngxCapitalize }}</th>
+        <th>{{ 'driver.sing' | translate | ngxCapitalize }}</th>
+        <th>{{ 'constructor.sing' | translate | ngxCapitalize }}</th>
+        <th>Q1</th>
+        <th>Q2</th>
+        <th>Q3</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-qualify>
+      <tr>
+        <td>{{ qualify.position }}</td>
+        <td>{{ qualify.number }}</td>
+        <td>
+          <a
+            [routerLink]="[
+              '/pages/sections/driver',
+              { season: season, driverId: qualify.Driver.driverId }
+            ]"
+          >
+            {{ qualify.Driver.givenName }} {{ qualify.Driver.familyName }}</a
+          >
+        </td>
+        <td>
+          <a
+            [routerLink]="[
+              '/pages/sections/constructor',
+              {
+                season: season,
+                constructorId: qualify.Constructor.constructorId
+              }
+            ]"
+          >
+            {{ qualify.Constructor.name }}</a
+          >
+        </td>
+        <td>{{ qualify.Q1 }}</td>
+        <td>{{ qualify.Q2 }}</td>
+        <td>{{ qualify.Q3 }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

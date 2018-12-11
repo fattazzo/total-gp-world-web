@@ -5,7 +5,9 @@ import { RacesService } from '../../services/races.service';
 import { Lap } from '../../domain/lap';
 import { PitStop } from '../../domain/pitstop';
 import { HttpClient } from '@angular/common/http';
-import { ErgastResponse } from '../../domain/ergast/ergast-response';
+import { Result } from '../../domain/result';
+import { QualifyingResult } from '../../domain/qualifying-result';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'race-anatomy',
@@ -18,18 +20,23 @@ export class RaceAnatomyComponent implements OnInit, OnDestroy {
   seasonSubscribe: any;
   lapsSubscribe: any;
   pitsSubscribe: any;
+  resultsSubscribe: any;
+  qualifyingSubscribe: any;
 
   race: Race;
   laps: Lap[] = [];
   pits: PitStop[] = [];
+  results: Result[] = [];
+  qualifying: QualifyingResult[] = [];
 
   loadingLaps = false;
   loadingPits = false;
+  loadingResults = false;
+  loadingQualifying = false;
 
   constructor(
     private seasonsService: SeasonsService,
     private racesService: RacesService,
-    private http: HttpClient,
   ) {}
 
   ngOnDestroy() {
@@ -49,22 +56,16 @@ export class RaceAnatomyComponent implements OnInit, OnDestroy {
   onRaceChange(value: Race) {
     this.race = value;
 
-    this.laps = [];
-    this.pits = [];
+    this.loadQualifying();
+
+    this.loadResults();
 
     this.loadLaps();
     this.loadPits();
-
-    // this.http
-    //  .get<ErgastResponse>('./assets/pits.json')
-    //  .subscribe(l => (this.pits = l.MRData.RaceTable.Races[0].PitStops));
-
-    // this.http
-    //  .get<ErgastResponse>('./assets/laps.json')
-    //  .subscribe(l => (this.laps = l.MRData.RaceTable.Races[0].Laps));
   }
 
   private loadLaps() {
+    this.laps = [];
     this.loadingLaps = true;
 
     if (this.lapsSubscribe !== undefined) {
@@ -80,6 +81,7 @@ export class RaceAnatomyComponent implements OnInit, OnDestroy {
   }
 
   private loadPits() {
+    this.pits = [];
     this.loadingPits = true;
 
     if (this.pitsSubscribe !== undefined) {
@@ -91,6 +93,38 @@ export class RaceAnatomyComponent implements OnInit, OnDestroy {
       .subscribe(p => {
         this.pits = p;
         this.loadingPits = false;
+      });
+  }
+
+  private loadResults() {
+    this.results = [];
+    this.loadingResults = true;
+
+    if (this.resultsSubscribe !== undefined) {
+      this.resultsSubscribe.unsubscribe();
+    }
+
+    this.resultsSubscribe = this.racesService
+      .getResults(this.season, this.race.round)
+      .subscribe(r => {
+        this.results = r;
+        this.loadingResults = false;
+      });
+  }
+
+  private loadQualifying() {
+    this.qualifying = [];
+    this.loadingQualifying = true;
+
+    if (this.qualifyingSubscribe !== undefined) {
+      this.qualifyingSubscribe.unsubscribe();
+    }
+
+    this.qualifyingSubscribe = this.racesService
+      .getQualifying(this.season, this.race.round)
+      .subscribe(q => {
+        this.qualifying = q;
+        this.loadingQualifying = false;
       });
   }
 }

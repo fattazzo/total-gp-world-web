@@ -11,6 +11,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RaceAnatomyLapsTableComponent } from './race-anatomy-laps-table/race-anatomy-laps-table.component';
 import { RaceAnatomyPitsTableComponent } from './race-anatomy-pits-table/race-anatomy-pits-table.component';
 import { NbAccordionModule } from '@nebular/theme';
+import { RaceAnatomyChartComponent } from './race-anatomy-chart/race-anatomy-chart.component';
+import { ChartModule } from 'primeng/chart';
+import { RaceAnatomyResultsComponent } from './race-anatomy-results/race-anatomy-results.component';
+import { RaceAnatomyQualifyingComponent } from './race-anatomy-qualifying/race-anatomy-qualifying.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +22,9 @@ import { NbAccordionModule } from '@nebular/theme';
     RaceAnatomyInfoComponent,
     RaceAnatomyLapsTableComponent,
     RaceAnatomyPitsTableComponent,
+    RaceAnatomyChartComponent,
+    RaceAnatomyResultsComponent,
+    RaceAnatomyQualifyingComponent,
   ],
   imports: [
     RaceAnatomyRoutingModule,
@@ -28,6 +35,7 @@ import { NbAccordionModule } from '@nebular/theme';
     TableModule,
     FontAwesomeModule,
     NbAccordionModule,
+    ChartModule,
   ],
 })
 export class RaceAnatomyModule {}

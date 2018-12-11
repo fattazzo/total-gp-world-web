@@ -3,8 +3,13 @@
 @import "~@nebular/theme/styles/global/typography/typography";
 
 @include nb-install-component() {
-  .main-container {
-    margin-top: nb-theme(margin);
-    margin-bottom: nb-theme(margin);
+  .chart-container {
+    min-height: 500px;
+    min-width: 500px;
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
   }
 }

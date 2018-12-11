@@ -7,5 +7,7 @@
   "/:season/:round/pitstops.json?limit=1000": "/pits/:season-:round",
   "/:season/:round/laps.json?limit=2000": "/laps/:season-:round",
   "/:season/drivers.json": "/drivers/:season",
-  "/2018/drivers/:driverId/result.json": "/results/:driverId"
+  "/:season/constructors.json": "/constructors/:season",
+  "/:season/:round/results.json": "/results/:season-:round",
+  "/:season/:round/qualifying.json": "/qualifying/:season-:round"
 }

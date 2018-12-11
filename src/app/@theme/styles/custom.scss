@@ -1,0 +1,11 @@
+@import "./themes";
+
+@mixin ng-theme() {
+  a {
+    color: nb-theme(color-fg-heading);
+
+    &:hover {
+      color: nb-theme(color-primary);
+    }
+  }
+}
