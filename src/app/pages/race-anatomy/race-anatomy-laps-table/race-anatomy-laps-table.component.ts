@@ -19,8 +19,13 @@ export interface LapItem {
 export class RaceAnatomyLapsTableComponent implements OnInit {
   @Input() season: string;
 
-  lapsItems: LapItem[];
-  rowGroupMetadata: any;
+  totalLapsItems: LapItem[];
+  pageLapsItems: LapItem[];
+
+  rowsPerPage = 1;
+  totalRecords = 0;
+
+  loading = false;
 
   constructor(private driversService: DriversService) {}
 
@@ -31,16 +36,18 @@ export class RaceAnatomyLapsTableComponent implements OnInit {
     const driversMap = new Map();
     this.driversService.get(this.season).subscribe(drivers => {
       drivers.forEach(d => driversMap.set(d.driverId, d));
+      this.rowsPerPage = drivers.length;
       this.buildLapsItems(values, driversMap);
     });
   }
 
   private buildLapsItems(values: Lap[], driversMap: Map<string, Driver>) {
-    this.lapsItems = [];
+    this.totalLapsItems = [];
+    this.pageLapsItems = [];
     values.forEach(lap => {
       const number = lap.number;
       lap.Timings.forEach(t =>
-        this.lapsItems.push({
+        this.totalLapsItems.push({
           number: number,
           driver: `${driversMap.get(t.driverId).givenName} ${
             driversMap.get(t.driverId).familyName
@@ -51,24 +58,16 @@ export class RaceAnatomyLapsTableComponent implements OnInit {
         }),
       );
     });
-    this.updateRowGroupMetaData();
+    this.totalRecords = this.rowsPerPage * values.length;
   }
 
-  updateRowGroupMetaData() {
-    this.rowGroupMetadata = {};
-    if (this.lapsItems) {
-      for (let i = 0; i < this.lapsItems.length; i++) {
-        const rowData = this.lapsItems[i];
-        const number = rowData.number;
-        if (i === 0) {
-          this.rowGroupMetadata[number] = { index: 0, size: 1 };
-        } else {
-          const previousRowData = this.lapsItems[i - 1];
-          const previousRowGroup = previousRowData.number;
-          if (number === previousRowGroup) this.rowGroupMetadata[number].size++;
-          else this.rowGroupMetadata[number] = { index: i, size: 1 };
-        }
-      }
-    }
+  loadLapsLazy(event: any) {
+    setTimeout(
+      () =>
+        (this.pageLapsItems = this.totalLapsItems.filter(
+          l => l.number === `${(event.first + event.rows) / this.rowsPerPage}`,
+        )),
+      0,
+    );
   }
 }
