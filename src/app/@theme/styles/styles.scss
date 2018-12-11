@@ -16,7 +16,7 @@
 // global style for primeng components
 @import "./ng";
 
-@import "./custom.scss";
+@import "./custom";
 
 // install the framework and custom global styles
 @include nb-install() {
@@ -34,4 +34,6 @@
   @include bootstrap-rtl();
 
   @include ng-theme();
+
+  @include custom-theme();
 }
