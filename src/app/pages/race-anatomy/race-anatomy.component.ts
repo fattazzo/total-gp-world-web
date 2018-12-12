@@ -56,16 +56,22 @@ export class RaceAnatomyComponent implements OnInit, OnDestroy {
   onRaceChange(value: Race) {
     this.race = value;
 
-    this.loadQualifying();
+    this.laps = [];
+    this.pits = [];
+    this.results = [];
+    this.qualifying = [];
 
-    this.loadResults();
+    if (this.race !== null) {
+      this.loadQualifying();
 
-    this.loadLaps();
-    this.loadPits();
+      this.loadResults();
+
+      this.loadPits();
+      this.loadLaps();
+    }
   }
 
   private loadLaps() {
-    this.laps = [];
     this.loadingLaps = true;
 
     if (this.lapsSubscribe !== undefined) {
@@ -81,7 +87,6 @@ export class RaceAnatomyComponent implements OnInit, OnDestroy {
   }
 
   private loadPits() {
-    this.pits = [];
     this.loadingPits = true;
 
     if (this.pitsSubscribe !== undefined) {
@@ -97,7 +102,6 @@ export class RaceAnatomyComponent implements OnInit, OnDestroy {
   }
 
   private loadResults() {
-    this.results = [];
     this.loadingResults = true;
 
     if (this.resultsSubscribe !== undefined) {
@@ -113,7 +117,6 @@ export class RaceAnatomyComponent implements OnInit, OnDestroy {
   }
 
   private loadQualifying() {
-    this.qualifying = [];
     this.loadingQualifying = true;
 
     if (this.qualifyingSubscribe !== undefined) {

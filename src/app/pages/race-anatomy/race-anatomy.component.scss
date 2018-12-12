@@ -28,10 +28,9 @@
   }
 
   .screen-message-container {
-    display: flex;
+    display: none;
     flex-direction: row;
     align-items: center;
-    visibility: hidden;
   }
 
   .message {
@@ -42,7 +41,7 @@
 
   @include media-breakpoint-down(sm) {
     .screen-message-container {
-      visibility: visible;
+      display: flex;
     }
   }
 }
