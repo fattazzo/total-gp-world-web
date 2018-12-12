@@ -1,12 +1,10 @@
 <div class="main-container">
-  <p-table [value]="pitStops" *ngIf="pitStops?.length > 0">
-    <ng-template pTemplate="header">
+  <p-table [value]="pitStops" [columns]="cols" *ngIf="pitStops?.length > 0">
+    <ng-template pTemplate="header" let-columns>
       <tr>
-        <th>{{ 'driver.sing' | translate | ngxCapitalize }}</th>
-        <th>{{ 'lap.sing' | translate | ngxCapitalize }}</th>
-        <th>{{ 'stop.sing' | translate | ngxCapitalize }}</th>
-        <th>{{ 'hour.sing' | translate | ngxCapitalize }}</th>
-        <th>{{ 'duration.sing' | translate | ngxCapitalize }}</th>
+        <th *ngFor="let col of columns">
+          {{ col.header | translate | ngxCapitalize }}
+        </th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-pit>

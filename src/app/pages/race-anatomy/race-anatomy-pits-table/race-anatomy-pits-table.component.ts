@@ -23,9 +23,19 @@ export class RaceAnatomyPitsTableComponent implements OnInit {
 
   pitStops: PitItem[];
 
+  cols: any[];
+
   constructor(private driversService: DriversService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.cols = [
+      { field: 'driver', header: 'driver.sing' },
+      { field: 'lap', header: 'lap.sing' },
+      { field: 'stop', header: 'stop.sing' },
+      { field: 'hour', header: 'hour.sing' },
+      { field: 'duration', header: 'duration.sing' },
+    ];
+  }
 
   @Input('pits')
   set pits(values: PitStop[]) {
