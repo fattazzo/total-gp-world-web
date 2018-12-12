@@ -6,6 +6,12 @@
     font-family: nb-theme(header-font-family) !important;
   }
 
+  .ui-inputtext {
+    background: nb-theme(color-bg);
+    color: nb-theme(search-text);
+    font-family: nb-theme(header-font-family);
+  }
+
   p-table {
     thead.ui-table-thead {
       > tr > th {
@@ -49,6 +55,15 @@
 
     .ui-dropdown li.ui-dropdown-item {
       color: nb-theme(color-fg-text);
+    }
+
+    .ui-dropdown li.ui-dropdown-item:hover {
+      background: nb-theme(color-bg-active) !important;
+      color: nb-theme(color-fg-text) !important;
+    }
+
+    .ui-dropdown-panel .ui-dropdown-filter-container {
+      background: nb-theme(color-bg);
     }
   }
 
@@ -113,6 +128,17 @@
     }
     div.ui-multiselect-trigger {
       background-color: transparent !important;
+    }
+  }
+
+  p-paginator {
+    .ui-paginator {
+      background: nb-theme(color-bg);
+    }
+
+    a:hover {
+      background: nb-theme(color-bg-active) !important;
+      color: nb-theme(color-fg-text) !important;
     }
   }
 }
