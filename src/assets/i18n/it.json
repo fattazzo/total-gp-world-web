@@ -139,8 +139,11 @@
     "data-for": "caricamento dati per",
     "data-for-error": "errore caricamento dati per"
   },
-  "select-category": "Seleziona una categoria",
-  "select": "seleziona",
+  "select": {
+    "sing": "seleziona",
+    "category": "Seleziona una categoria",
+    "race": "seleziona una gara"
+  },
   "search": "cerca",
   "cumulative-data": "Dati cumulativi",
   "bug-proposal-feature": {

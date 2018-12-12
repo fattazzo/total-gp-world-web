@@ -139,8 +139,11 @@
     "data-for": "loading data for",
     "data-for-error": "error loading data for"
   },
-  "select-category": "select a category",
-  "select": "select",
+  "select": {
+    "sing": "select",
+    "category": "select a category",
+    "race": "select a race"
+  },
   "search": "search",
   "cumulative-data": "Cumulative data",
   "bug-proposal-feature": {
