@@ -13,6 +13,7 @@ import { SelectItem } from 'primeng/components/common/selectitem';
 export class RaceSelectionComponent implements OnInit {
   private season_ = '';
 
+  selectedRace: Race;
   @Output() selectedRaceChange: EventEmitter<Race> = new EventEmitter();
 
   races: SelectItem[] = [];
@@ -26,6 +27,8 @@ export class RaceSelectionComponent implements OnInit {
     if (this.season_ !== value) {
       this.season_ = value;
       this.races = [];
+      this.selectedRace = null;
+      this.onSelectedRaceChange(null);
       this.racesService.getSchedule(this.season_).subscribe(rs => {
         this.races = rs.map(r => ({
           label: r.raceName,

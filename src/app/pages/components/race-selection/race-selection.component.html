@@ -3,8 +3,9 @@
     <div>
       <p-dropdown
         [options]="races"
+        [(ngModel)]="selectedRace"
         (onChange)="onSelectedRaceChange($event.value)"
-        placeholder="_Select a race_"
+        placeholder="{{ 'select.race' | translate | ngxCapitalize }}"
         [autoWidth]="true"
         [filter]="false"
       >
