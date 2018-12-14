@@ -10,6 +10,7 @@ module.exports = function() {
     qualifying: requireMany('./seasons/rounds/qualifying'),
     drivers: requireMany('./seasons/drivers'),
     constructors: requireMany('./seasons/constructors'),
+    constructorsResult: requireMany('./seasons/constructors/results'),
   };
 };
 

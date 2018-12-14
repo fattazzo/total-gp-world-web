@@ -9,5 +9,6 @@
   "/:season/drivers.json": "/drivers/:season",
   "/:season/constructors.json": "/constructors/:season",
   "/:season/:round/results.json": "/results/:season-:round",
-  "/:season/:round/qualifying.json": "/qualifying/:season-:round"
+  "/:season/:round/qualifying.json": "/qualifying/:season-:round",
+  "/:season/constructors/:constructor/results.json?limit=100": "/constructorsResult/:season-:constructor"
 }

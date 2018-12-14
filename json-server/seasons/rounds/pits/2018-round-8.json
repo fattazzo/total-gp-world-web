@@ -1,0 +1,178 @@
+{
+  "id": "2018-8",
+  "MRData": {
+    "xmlns": "http://ergast.com/mrd/1.4",
+    "series": "f1",
+    "url": "http://ergast.com/api/f1/2018/8/pitstops.json",
+    "limit": "1000",
+    "offset": "0",
+    "total": "20",
+    "RaceTable": {
+      "season": "2018",
+      "round": "8",
+      "Races": [
+        {
+          "season": "2018",
+          "round": "8",
+          "url": "https://en.wikipedia.org/wiki/2018_French_Grand_Prix",
+          "raceName": "French Grand Prix",
+          "Circuit": {
+            "circuitId": "ricard",
+            "url": "http://en.wikipedia.org/wiki/Paul_Ricard_Circuit",
+            "circuitName": "Circuit Paul Ricard",
+            "Location": {
+              "lat": "43.2506",
+              "long": "5.79167",
+              "locality": "Le Castellet",
+              "country": "France"
+            }
+          },
+          "date": "2018-06-24",
+          "time": "14:10:00Z",
+          "PitStops": [
+            {
+              "driverId": "stroll",
+              "lap": "1",
+              "stop": "1",
+              "time": "16:15:46",
+              "duration": "26.576"
+            },
+            {
+              "driverId": "sirotkin",
+              "lap": "1",
+              "stop": "1",
+              "time": "16:15:55",
+              "duration": "26.273"
+            },
+            {
+              "driverId": "vettel",
+              "lap": "1",
+              "stop": "1",
+              "time": "16:15:56",
+              "duration": "32.612"
+            },
+            {
+              "driverId": "alonso",
+              "lap": "1",
+              "stop": "1",
+              "time": "16:15:56",
+              "duration": "25.789"
+            },
+            {
+              "driverId": "bottas",
+              "lap": "1",
+              "stop": "1",
+              "time": "16:16:38",
+              "duration": "27.955"
+            },
+            {
+              "driverId": "max_verstappen",
+              "lap": "25",
+              "stop": "1",
+              "time": "16:57:59",
+              "duration": "24.395"
+            },
+            {
+              "driverId": "sainz",
+              "lap": "26",
+              "stop": "1",
+              "time": "17:00:15",
+              "duration": "25.423"
+            },
+            {
+              "driverId": "ricciardo",
+              "lap": "28",
+              "stop": "1",
+              "time": "17:02:52",
+              "duration": "24.309"
+            },
+            {
+              "driverId": "kevin_magnussen",
+              "lap": "28",
+              "stop": "1",
+              "time": "17:03:31",
+              "duration": "25.419"
+            },
+            {
+              "driverId": "leclerc",
+              "lap": "31",
+              "stop": "1",
+              "time": "17:08:35",
+              "duration": "25.026"
+            },
+            {
+              "driverId": "hamilton",
+              "lap": "33",
+              "stop": "1",
+              "time": "17:10:41",
+              "duration": "24.310"
+            },
+            {
+              "driverId": "raikkonen",
+              "lap": "34",
+              "stop": "1",
+              "time": "17:12:38",
+              "duration": "24.289"
+            },
+            {
+              "driverId": "grosjean",
+              "lap": "34",
+              "stop": "1",
+              "time": "17:13:30",
+              "duration": "29.996"
+            },
+            {
+              "driverId": "ericsson",
+              "lap": "35",
+              "stop": "1",
+              "time": "17:15:27",
+              "duration": "24.295"
+            },
+            {
+              "driverId": "hulkenberg",
+              "lap": "37",
+              "stop": "1",
+              "time": "17:18:16",
+              "duration": "25.016"
+            },
+            {
+              "driverId": "brendon_hartley",
+              "lap": "38",
+              "stop": "1",
+              "time": "17:20:21",
+              "duration": "24.297"
+            },
+            {
+              "driverId": "bottas",
+              "lap": "39",
+              "stop": "2",
+              "time": "17:21:22",
+              "duration": "30.666"
+            },
+            {
+              "driverId": "vettel",
+              "lap": "40",
+              "stop": "2",
+              "time": "17:22:38",
+              "duration": "31.029"
+            },
+            {
+              "driverId": "vandoorne",
+              "lap": "40",
+              "stop": "1",
+              "time": "17:23:26",
+              "duration": "24.399"
+            },
+            {
+              "driverId": "alonso",
+              "lap": "46",
+              "stop": "2",
+              "time": "17:33:42",
+              "duration": "24.788"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
