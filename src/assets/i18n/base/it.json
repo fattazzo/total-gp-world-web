@@ -83,9 +83,6 @@
   "grid": {
     "sing": "griglia"
   },
-  "status": {
-    "sing": "stato"
-  },
   "lap": {
     "sing": "giro",
     "plur": "giri"
@@ -158,5 +155,6 @@
   },
   "number": {
     "sing": "numero"
-  }
+  },
+  "nodata": "nessun dato"
 }
