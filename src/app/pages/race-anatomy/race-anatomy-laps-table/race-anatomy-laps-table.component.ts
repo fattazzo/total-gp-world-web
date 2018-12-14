@@ -36,7 +36,7 @@ export class RaceAnatomyLapsTableComponent implements OnInit {
     const driversMap = new Map();
     this.driversService.get(this.season).subscribe(drivers => {
       drivers.forEach(d => driversMap.set(d.driverId, d));
-      this.rowsPerPage = drivers.length;
+      this.rowsPerPage = driversMap.size;
       this.buildLapsItems(values, driversMap);
     });
   }

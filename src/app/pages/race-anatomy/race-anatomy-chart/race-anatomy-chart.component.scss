@@ -12,4 +12,17 @@
     align-items: center;
     justify-content: center;
   }
+
+  .status-legend-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .status-legend-item {
+    margin: 0px 10px 0px 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
 }

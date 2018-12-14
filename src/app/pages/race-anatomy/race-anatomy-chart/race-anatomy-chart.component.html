@@ -1,3 +1,20 @@
-<div style="position: relative; min-width: 900px;">
-  <p-chart type="line" [data]="data" [options]="options"></p-chart>
-</div>
+<ng-container
+  *ngIf="laps_?.length > 0 && results_?.length > 0; else: elseTemplate"
+>
+  <div class="status-legend-container">
+    <div
+      class="status-legend-item"
+      *ngFor="let statusImage of (imagesStatusItems | keyvalue)"
+    >
+      <img [src]="statusImage.key" width="16px" height="16px" /><span>
+        &nbsp;{{ statusImage.value.join(', ') }}</span
+      >
+    </div>
+  </div>
+  <div style="position: relative; min-width: 900px;">
+    <p-chart type="line" [data]="data" [options]="options"></p-chart>
+  </div>
+</ng-container>
+<ng-template #elseTemplate>
+  {{ 'nodata' | translate | ngxCapitalize }}
+</ng-template>

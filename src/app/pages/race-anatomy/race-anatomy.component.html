@@ -58,17 +58,7 @@
         </nb-accordion-item-body>
       </nb-accordion-item>
 
-      <nb-accordion-item>
-        <nb-accordion-item-header>{{
-          'chart.sing' | translate | ngxCapitalize
-        }}</nb-accordion-item-header>
-        <nb-accordion-item-body
-          [nbSpinner]="loadingResults || loadingLaps || loadingPits"
-          ><race-anatomy-chart [pits]="pits" [laps]="laps"></race-anatomy-chart>
-        </nb-accordion-item-body>
-      </nb-accordion-item>
-
-      <nb-accordion-item>
+      <nb-accordion-item *ngIf="laps?.length > 0">
         <nb-accordion-item-header>{{
           'lap.plur' | translate | ngxCapitalize
         }}</nb-accordion-item-header>
@@ -80,7 +70,7 @@
         </nb-accordion-item-body>
       </nb-accordion-item>
 
-      <nb-accordion-item>
+      <nb-accordion-item *ngIf="pits?.length > 0">
         <nb-accordion-item-header>{{
           'pitstop.plur' | translate | ngxCapitalize
         }}</nb-accordion-item-header>
@@ -89,6 +79,23 @@
             [season]="season"
             [pits]="pits"
           ></race-anatomy-pits-table>
+        </nb-accordion-item-body>
+      </nb-accordion-item>
+
+      <nb-accordion-item>
+        <nb-accordion-item-header>{{
+          'chart.sing' | translate | ngxCapitalize
+        }}</nb-accordion-item-header>
+        <nb-accordion-item-body
+          [nbSpinner]="
+            loadingQualifying || loadingResults || loadingLaps || loadingPits
+          "
+          ><race-anatomy-chart
+            [qualifying]="qualifying"
+            [results]="results"
+            [pits]="pits"
+            [laps]="laps"
+          ></race-anatomy-chart>
         </nb-accordion-item-body>
       </nb-accordion-item>
     </nb-accordion>

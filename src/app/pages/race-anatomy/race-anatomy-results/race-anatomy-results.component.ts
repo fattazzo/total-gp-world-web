@@ -11,7 +11,20 @@ export class RaceAnatomyResultsComponent implements OnInit {
 
   @Input() results: Result[];
 
+  cols: any[];
+
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.cols = [
+      'position.sing',
+      'number.sing',
+      'driver.sing',
+      'constructor.sing',
+      'lap.plur',
+      'time.sing',
+      'status.sing',
+      'point.plur',
+    ];
+  }
 }

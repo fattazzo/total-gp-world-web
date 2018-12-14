@@ -1,15 +1,10 @@
 <div class="main-container">
-  <p-table [value]="results" *ngIf="results?.length > 0">
-    <ng-template pTemplate="header">
+  <p-table [value]="results" [columns]="cols" *ngIf="results?.length > 0">
+    <ng-template pTemplate="header" let-columns>
       <tr>
-        <th>{{ 'position.sing' | translate | ngxCapitalize }}</th>
-        <th>{{ 'number.sing' | translate | ngxCapitalize }}</th>
-        <th>{{ 'driver.sing' | translate | ngxCapitalize }}</th>
-        <th>{{ 'constructor.sing' | translate | ngxCapitalize }}</th>
-        <th>{{ 'lap.plur' | translate | ngxCapitalize }}</th>
-        <th>{{ 'time.sing' | translate | ngxCapitalize }}</th>
-        <th>{{ 'status.sing' | translate | ngxCapitalize }}</th>
-        <th>{{ 'point.plur' | translate | ngxCapitalize }}</th>
+        <th *ngFor="let col of columns">
+          {{ col | translate | ngxCapitalize }}
+        </th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-result>
@@ -41,7 +36,7 @@
         </td>
         <td>{{ result.laps }}</td>
         <td>{{ result.Time?.time }}</td>
-        <td>{{ result.status }}</td>
+        <td>{{ 'status.' + result.status | translate | ngxCapitalize }}</td>
         <td>{{ result.points }}</td>
       </tr>
     </ng-template>

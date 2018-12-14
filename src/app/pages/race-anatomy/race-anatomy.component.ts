@@ -80,10 +80,13 @@ export class RaceAnatomyComponent implements OnInit, OnDestroy {
 
     this.lapsSubscribe = this.racesService
       .getLaps(this.season, this.race.round)
-      .subscribe(l => {
-        this.laps = l;
-        this.loadingLaps = false;
-      });
+      .subscribe(
+        l => {
+          this.laps = l;
+          this.loadingLaps = false;
+        },
+        error => (this.loadingLaps = false),
+      );
   }
 
   private loadPits() {
@@ -95,10 +98,13 @@ export class RaceAnatomyComponent implements OnInit, OnDestroy {
 
     this.pitsSubscribe = this.racesService
       .getPitStops(this.season, this.race.round)
-      .subscribe(p => {
-        this.pits = p;
-        this.loadingPits = false;
-      });
+      .subscribe(
+        p => {
+          this.pits = p;
+          this.loadingPits = false;
+        },
+        error => (this.loadingPits = false),
+      );
   }
 
   private loadResults() {
@@ -110,10 +116,13 @@ export class RaceAnatomyComponent implements OnInit, OnDestroy {
 
     this.resultsSubscribe = this.racesService
       .getResults(this.season, this.race.round)
-      .subscribe(r => {
-        this.results = r;
-        this.loadingResults = false;
-      });
+      .subscribe(
+        r => {
+          this.results = r;
+          this.loadingResults = false;
+        },
+        error => (this.loadingResults = false),
+      );
   }
 
   private loadQualifying() {
@@ -125,9 +134,12 @@ export class RaceAnatomyComponent implements OnInit, OnDestroy {
 
     this.qualifyingSubscribe = this.racesService
       .getQualifying(this.season, this.race.round)
-      .subscribe(q => {
-        this.qualifying = q;
-        this.loadingQualifying = false;
-      });
+      .subscribe(
+        q => {
+          this.qualifying = q;
+          this.loadingQualifying = false;
+        },
+        error => (this.loadingQualifying = false),
+      );
   }
 }
