@@ -13,3 +13,8 @@ interface NodeModule {
 declare var tinymce: any;
 
 declare var echarts: any;
+
+declare module '*.json' {
+  const value: any;
+  export default value;
+}
