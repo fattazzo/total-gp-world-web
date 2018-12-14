@@ -33,27 +33,21 @@
 
       &.primary {
         @include btn-hero-primary-gradient();
-        @include btn-hero-primary-bevel-glow-shadow();
       }
       &.success {
         @include btn-hero-success-gradient();
-        @include btn-hero-success-bevel-glow-shadow();
       }
       &.info {
         @include btn-hero-info-gradient();
-        @include btn-hero-info-bevel-glow-shadow();
       }
       &.warning {
         @include btn-hero-warning-gradient();
-        @include btn-hero-warning-bevel-glow-shadow();
       }
       &.danger {
         @include btn-hero-danger-gradient();
-        @include btn-hero-danger-bevel-glow-shadow();
       }
       &.secondary {
         @include btn-hero-secondary-bg();
-        @include btn-hero-secondary-bevel-glow-shadow();
         color: nb-theme(card-fg);
       }
 
@@ -158,46 +152,6 @@
       font-weight: nb-theme(font-weight-light);
       text-transform: uppercase;
       color: nb-theme(card-fg);
-    }
-  }
-
-  @include nb-for-theme(cosmic) {
-    nb-card {
-      &.off .icon-container {
-        @include nb-ltr(border-right, 1px solid nb-theme(separator));
-        @include nb-rtl(border-left, 1px solid nb-theme(separator));
-      }
-
-      .icon-container {
-        padding: 0;
-      }
-
-      .details {
-        @include nb-ltr(padding-left, 1.25rem);
-        @include nb-rtl(padding-right, 1.25rem);
-      }
-
-      .icon {
-        width: 7rem;
-        height: 100%;
-        font-size: 4.5rem;
-        @include nb-ltr(
-          border-radius,
-          nb-theme(card-border-radius) 0 0 nb-theme(card-border-radius)
-        );
-        @include nb-rtl(
-          border-radius,
-          0 nb-theme(card-border-radius) nb-theme(card-border-radius) 0
-        );
-      }
-
-      .title {
-        font-weight: nb-theme(font-weight-bolder);
-      }
-
-      .status {
-        font-weight: nb-theme(font-weight-light);
-      }
     }
   }
 
