@@ -1,0 +1,160 @@
+{
+  "position": {
+    "sing": "position",
+    "plur": "positions"
+  },
+  "driver": {
+    "sing": "driver",
+    "plur": "drivers",
+    "points": "points",
+    "numbers": "total",
+    "winning": "winning",
+    "nationalities": "nationalities"
+  },
+  "point": {
+    "sing": "point",
+    "plur": "points"
+  },
+  "standing": {
+    "sing": "standing",
+    "plur": "standings"
+  },
+  "constructor": {
+    "sing": "constructor",
+    "plur": "constructors",
+    "points": "points",
+    "numbers": "total",
+    "winning": "winning",
+    "nationalities": "nationalities"
+  },
+  "section": {
+    "plur": "sections"
+  },
+  "dashboard": {
+    "sing": "dashboard"
+  },
+  "circuit": {
+    "sing": "circuit",
+    "plur": "circuits"
+  },
+  "race": {
+    "sing": "race",
+    "plur": "races",
+    "numbers": "total",
+    "nationalities": "countries"
+  },
+  "schedule": {
+    "sing": "schedule"
+  },
+  "round": {
+    "sing": "round"
+  },
+  "name": {
+    "sing": "name"
+  },
+  "date": {
+    "sing": "date"
+  },
+  "hour": {
+    "sing": "hour"
+  },
+  "time": {
+    "sing": "time"
+  },
+  "country": {
+    "sing": "country"
+  },
+  "locality": {
+    "sing": "locality"
+  },
+  "language": {
+    "sing": "language"
+  },
+  "theme": {
+    "sing": "theme"
+  },
+  "direction": {
+    "sing": "direction"
+  },
+  "wikipedia": {
+    "sing": "wikipedia",
+    "introOf": "intro from Wikipedia"
+  },
+  "grid": {
+    "sing": "grid"
+  },
+  "lap": {
+    "sing": "lap",
+    "plur": "laps"
+  },
+  "pitstop": {
+    "plur": "pit stops"
+  },
+  "stop": {
+    "sing": "stop"
+  },
+  "duration": {
+    "sing": "duration"
+  },
+  "result": {
+    "plur": "results"
+  },
+  "qualify": {
+    "plur": "qualifying"
+  },
+  "chart": {
+    "sing": "chart",
+    "pie": "pie",
+    "doughnut": "doughnut",
+    "line": "line",
+    "bar": "bar"
+  },
+  "continue-reading": "continue reading...",
+  "season": {
+    "sing": "season",
+    "plur": "seasons"
+  },
+  "other": {
+    "sing": "other"
+  },
+  "about": "about",
+  "special-thanks": "Special thanks",
+  "info": {
+    "sing": "info",
+    "android-p1": "All data and statistics can also be consulted on all Android devices through a native application in the Google store.",
+    "android-p2": "In the \"About\" section you can find all the project information with download links.",
+    "android-p3": "Here some screenshot of the application."
+  },
+  "current": {
+    "sing": "current"
+  },
+  "comparison": {
+    "sing": "comparison"
+  },
+  "loading": {
+    "sing": "loading",
+    "data-for": "loading data for",
+    "data-for-error": "error loading data for"
+  },
+  "select": {
+    "sing": "select",
+    "category": "select a category",
+    "race": "select a race"
+  },
+  "search": "search",
+  "cumulative-data": "Cumulative data",
+  "bug-proposal-feature": {
+    "title": "Bug, proposal, new feature",
+    "message": "Did you find any errors? Do you have any proposals to improve the project? Do you request new features? Open a new ticket and write your ideas in as much detail as possible at the following link",
+    "link": "Open new ticket"
+  },
+  "race-anatomy": "race anatomy",
+  "race-laps-pitstops": {
+    "loading-message": "Loading lap times and pit stops requires a few seconds and only the most recent races contain this data.",
+    "screen-message": "At least one medium-sized screen is recommended to better visualization."
+  },
+  "number": {
+    "sing": "number"
+  },
+  "nodata": "no data"
+}
