@@ -129,6 +129,10 @@
     div.ui-multiselect-trigger {
       background-color: transparent !important;
     }
+
+    .ui-multiselect-panel .ui-multiselect-items .ui-multiselect-item label {
+      margin-bottom: 0px;
+    }
   }
 
   p-paginator {
