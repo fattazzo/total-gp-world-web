@@ -90,7 +90,11 @@ export class RacesService {
 
   private loadSchedule(season: string): Observable<Race[]> {
     return this.http
-      .get<ErgastResponse>(`${environment.ergastApiUrl}${season}.json`)
+      .get<ErgastResponse>(
+        `${environment.ergastApiUrl}${season}.json?limit=${
+          environment.ergastApiMaxPageLimit
+        }`,
+      )
       .pipe(
         map(result => {
           const schedule =
@@ -145,7 +149,9 @@ export class RacesService {
   private loadResults(season: string, round: string): Observable<Result[]> {
     return this.http
       .get<ErgastResponse>(
-        `${environment.ergastApiUrl}${season}/${round}/results.json`,
+        `${environment.ergastApiUrl}${season}/${round}/results.json?limit=${
+          environment.ergastApiMaxPageLimit
+        }`,
       )
       .pipe(
         map(result => {
@@ -166,7 +172,9 @@ export class RacesService {
   ): Observable<QualifyingResult[]> {
     return this.http
       .get<ErgastResponse>(
-        `${environment.ergastApiUrl}${season}/${round}/qualifying.json`,
+        `${environment.ergastApiUrl}${season}/${round}/qualifying.json?limit=${
+          environment.ergastApiMaxPageLimit
+        }`,
       )
       .pipe(
         map(result => {

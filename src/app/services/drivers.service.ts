@@ -104,7 +104,9 @@ export class DriversService {
   private loadStandings(season: string): Observable<DriverStanding[]> {
     return this.http
       .get<ErgastResponse>(
-        `${environment.ergastApiUrl}${season}/driverStandings.json`,
+        `${environment.ergastApiUrl}${season}/driverStandings.json?limit=${
+          environment.ergastApiMaxPageLimit
+        }`,
       )
       .pipe(
         map(result => {
@@ -125,7 +127,11 @@ export class DriversService {
    */
   private load(season: string): Observable<Driver[]> {
     return this.http
-      .get<ErgastResponse>(`${environment.ergastApiUrl}${season}/drivers.json`)
+      .get<ErgastResponse>(
+        `${environment.ergastApiUrl}${season}/drivers.json?limit=${
+          environment.ergastApiMaxPageLimit
+        }`,
+      )
       .pipe(
         map(result => {
           const drivers =
@@ -148,7 +154,11 @@ export class DriversService {
   private loadResults(season: string, driverId: string): Observable<Race[]> {
     return this.http
       .get<ErgastResponse>(
-        `${environment.ergastApiUrl}${season}/drivers/${driverId}/results.json`,
+        `${
+          environment.ergastApiUrl
+        }${season}/drivers/${driverId}/results.json?limit=${
+          environment.ergastApiMaxPageLimit
+        }`,
       )
       .pipe(
         map(result => {
@@ -174,7 +184,9 @@ export class DriversService {
       .get<ErgastResponse>(
         `${
           environment.ergastApiUrl
-        }${season}/drivers/${driverId}/qualifying.json`,
+        }${season}/drivers/${driverId}/qualifying.json?limit=${
+          environment.ergastApiMaxPageLimit
+        }`,
       )
       .pipe(map(result => result.MRData.RaceTable.Races));
   }
@@ -187,7 +199,9 @@ export class DriversService {
   private loadSeasons(driverId: string): Observable<Season[]> {
     return this.http
       .get<ErgastResponse>(
-        `${environment.ergastApiUrl}drivers/${driverId}/seasons.json`,
+        `${environment.ergastApiUrl}drivers/${driverId}/seasons.json?limit=${
+          environment.ergastApiMaxPageLimit
+        }`,
       )
       .pipe(map(result => result.MRData.SeasonTable.Seasons));
   }

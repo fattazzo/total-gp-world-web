@@ -1,14 +1,14 @@
 {
   "/api/f1/*": "/$1",
-  "/seasons.json\\?limit=100": "/seasonsList/seasons",
-  "/:id.json": "/seasons/:id",
-  "/:season/constructorStandings.json": "/constructorStandings/:season",
-  "/:season/driverStandings.json": "/driverStandings/:season",
+  "/seasons.json\\?limit=1000": "/seasonsList/seasons",
+  "/:id.json?limit=1000": "/seasons/:id",
+  "/:season/constructorStandings.json?limit=1000": "/constructorStandings/:season",
+  "/:season/driverStandings.json?limit=1000": "/driverStandings/:season",
   "/:season/:round/pitstops.json?limit=1000": "/pits/:season-:round",
   "/:season/:round/laps.json?limit=2000": "/laps/:season-:round",
-  "/:season/drivers.json": "/drivers/:season",
-  "/:season/constructors.json": "/constructors/:season",
-  "/:season/:round/results.json": "/results/:season-:round",
-  "/:season/:round/qualifying.json": "/qualifying/:season-:round",
-  "/:season/constructors/:constructor/results.json?limit=100": "/constructorsResult/:season-:constructor"
+  "/:season/drivers.json?limit=1000": "/drivers/:season",
+  "/:season/constructors.json?limit=1000": "/constructors/:season",
+  "/:season/:round/results.json?limit=1000": "/results/:season-:round",
+  "/:season/:round/qualifying.json?limit=1000": "/qualifying/:season-:round",
+  "/:season/constructors/:constructor/results.json?limit=1000": "/constructorsResult/:season-:constructor"
 }

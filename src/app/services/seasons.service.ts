@@ -40,7 +40,7 @@ export class SeasonsService {
     return this.http
       .get<ErgastResponse>(
         `${environment.ergastApiUrl}seasons.json?limit=${
-          environment.ergastApiPageLimit
+          environment.ergastApiMaxPageLimit
         }`,
       )
       .pipe(

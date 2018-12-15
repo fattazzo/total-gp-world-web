@@ -74,7 +74,11 @@ export class CircuitsService {
    */
   private load(season: string): Observable<Circuit[]> {
     return this.http
-      .get<ErgastResponse>(`${environment.ergastApiUrl}${season}/circuits.json`)
+      .get<ErgastResponse>(
+        `${environment.ergastApiUrl}${season}/circuits.json?limit=${
+          environment.ergastApiMaxPageLimit
+        }`,
+      )
       .pipe(
         map(result => {
           this.cacheCircuits$ = result.MRData.CircuitTable.Circuits;
@@ -94,7 +98,9 @@ export class CircuitsService {
       .get<ErgastResponse>(
         `${
           environment.ergastApiUrl
-        }${season}/circuits/${circuitId}/results.json`,
+        }${season}/circuits/${circuitId}/results.json?limit=${
+          environment.ergastApiMaxPageLimit
+        }`,
       )
       .pipe(
         map(result => {
@@ -112,9 +118,9 @@ export class CircuitsService {
   private loadSeasons(circuitId: string): Observable<Season[]> {
     return this.http
       .get<ErgastResponse>(
-        `${
-          environment.ergastApiUrl
-        }circuits/${circuitId}/seasons.json?limit=1000`,
+        `${environment.ergastApiUrl}circuits/${circuitId}/seasons.json?limit=${
+          environment.ergastApiMaxPageLimit
+        }`,
       )
       .pipe(
         map(result => {

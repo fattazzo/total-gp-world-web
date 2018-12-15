@@ -10,6 +10,5 @@ export const environment = {
 
   ergastApiUrl: 'https://ergast.com/api/f1/',
 
-  ergastApiPageLimit: '100',
   ergastApiMaxPageLimit: '1000',
 };

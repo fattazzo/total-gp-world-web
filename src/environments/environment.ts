@@ -15,6 +15,5 @@ export const environment = {
 
   ergastApiUrl: 'http://localhost:3000/api/f1/',
 
-  ergastApiPageLimit: '100',
   ergastApiMaxPageLimit: '1000',
 };

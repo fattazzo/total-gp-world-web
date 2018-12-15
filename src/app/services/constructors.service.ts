@@ -112,7 +112,9 @@ export class ConstructorsService {
   private loadStandings(season: string): Observable<ConstructorStanding[]> {
     return this.http
       .get<ErgastResponse>(
-        `${environment.ergastApiUrl}${season}/constructorStandings.json`,
+        `${environment.ergastApiUrl}${season}/constructorStandings.json?limit=${
+          environment.ergastApiMaxPageLimit
+        }`,
       )
       .pipe(
         map(result => {
@@ -135,7 +137,9 @@ export class ConstructorsService {
   private load(season: string): Observable<Constructor[]> {
     return this.http
       .get<ErgastResponse>(
-        `${environment.ergastApiUrl}${season}/constructors.json`,
+        `${environment.ergastApiUrl}${season}/constructors.json?limit=${
+          environment.ergastApiMaxPageLimit
+        }`,
       )
       .pipe(
         map(result => {
@@ -165,7 +169,7 @@ export class ConstructorsService {
         `${
           environment.ergastApiUrl
         }${season}/constructors/${constructorId}/results.json?limit=${
-          environment.ergastApiPageLimit
+          environment.ergastApiMaxPageLimit
         }`,
       )
       .pipe(
@@ -195,7 +199,9 @@ export class ConstructorsService {
       .get<ErgastResponse>(
         `${
           environment.ergastApiUrl
-        }${season}/constructors/${constructorId}/qualifying.json`,
+        }${season}/constructors/${constructorId}/qualifying.json?limit=${
+          environment.ergastApiMaxPageLimit
+        }`,
       )
       .pipe(map(result => result.MRData.RaceTable.Races));
   }
@@ -210,7 +216,9 @@ export class ConstructorsService {
       .get<ErgastResponse>(
         `${
           environment.ergastApiUrl
-        }constructors/${constructorId}/seasons.json?limit=1000`,
+        }constructors/${constructorId}/seasons.json?limit=${
+          environment.ergastApiMaxPageLimit
+        }`,
       )
       .pipe(map(result => result.MRData.SeasonTable.Seasons));
   }
