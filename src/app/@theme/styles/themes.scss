@@ -12,7 +12,7 @@ $nb-enabled-themes: (default, cosmic, corporate);
 $nb-themes: nb-register-theme(
   (
     // app wise variables for each theme
-      sidebar-header-gap: 2rem,
+      sidebar-header-gap: 0rem,
     sidebar-header-height: initial,
     layout-content-width: 1400px,
     font-main: Roboto,
@@ -28,7 +28,7 @@ $nb-themes: nb-register-theme(
 $nb-themes: nb-register-theme(
   (
     // app wise variables for each theme
-      sidebar-header-gap: 2rem,
+      sidebar-header-gap: 0rem,
     sidebar-header-height: initial,
     layout-content-width: 1400px,
     font-main: Roboto,
