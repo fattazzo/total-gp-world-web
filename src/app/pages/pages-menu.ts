@@ -35,6 +35,17 @@ export const MENU_I18N_SPEC: TitleI18NSpec[] = [
     },
   },
   {
+    capitalize: true,
+    uppercase: false,
+    key: 'query',
+    menuItem: {
+      title: 'Query',
+      icon: 'fas fa-search',
+      link: '/pages/query',
+      home: true,
+    },
+  },
+  {
     capitalize: false,
     uppercase: true,
     key: 'section.plur',

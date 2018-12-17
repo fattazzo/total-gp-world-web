@@ -23,6 +23,8 @@ export class DriversService {
   private cacheQualifyng$: Map<string, Observable<Race[]>> = new Map();
   private cacheSeasons$: Map<string, Observable<Season[]>> = new Map();
 
+  private cacheAllDrivers$: Driver[];
+
   constructor(private http: HttpClient) {}
 
   /**
@@ -51,6 +53,17 @@ export class DriversService {
     }
 
     return this.load(season);
+  }
+
+  /**
+   * Load all drivers
+   */
+  public getAll() {
+    if (this.cacheAllDrivers$ && this.cacheAllDrivers$.length > 0) {
+      return of(this.cacheAllDrivers$);
+    }
+
+    return this.loadAll();
   }
 
   public getResults(season: string, driverId: string): Observable<Race[]> {
@@ -140,6 +153,28 @@ export class DriversService {
               : [];
           this.cacheDrivers$ = drivers;
           this.seasonCache$ = season;
+          return drivers;
+        }),
+      );
+  }
+
+  /**
+   * Load driver's list from remote
+   */
+  private loadAll(): Observable<Driver[]> {
+    return this.http
+      .get<ErgastResponse>(
+        `${environment.ergastApiUrl}drivers.json?limit=${
+          environment.ergastApiMaxPageLimit
+        }`,
+      )
+      .pipe(
+        map(result => {
+          const drivers =
+            result.MRData.DriverTable.Drivers !== undefined
+              ? result.MRData.DriverTable.Drivers
+              : [];
+          this.cacheAllDrivers$ = drivers;
           return drivers;
         }),
       );

@@ -1,0 +1,26 @@
+@import "../../@theme/styles/themes";
+@import "~@nebular/theme/components/card/card.component.theme";
+@import "~@nebular/theme/styles/global/typography/typography";
+@import "~@nebular/theme/styles/global/breakpoints";
+
+@include nb-install-component() {
+  .params-container {
+    width: 25%;
+    padding: 0.5em;
+  }
+
+  .results-container {
+    width: 75%;
+    padding: 0.5em;
+  }
+
+  @include media-breakpoint-down(md) {
+    .params-container {
+      width: 100%;
+    }
+
+    .results-container {
+      width: 100%;
+    }
+  }
+}

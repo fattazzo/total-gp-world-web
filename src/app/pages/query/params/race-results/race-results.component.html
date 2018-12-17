@@ -1,0 +1,127 @@
+<div class="container">
+  <form #paramsForm="ngForm" (ngSubmit)="onSubmit()">
+    <!-- Type -->
+    <div class="form-group">
+      <label for="type">type</label>
+
+      <p-dropdown
+        [optionLabel]="label"
+        [options]="types"
+        id="type"
+        required
+        [(ngModel)]="model.type"
+        name="type"
+        #type="ngModel"
+        appendTo="body"
+        [style]="{ width: '100%' }"
+        [filter]="true"
+      ></p-dropdown>
+    </div>
+
+    <!-- Season -->
+    <div class="form-group">
+      <label for="season">season</label>
+
+      <p-dropdown
+        [optionLabel]="label"
+        [options]="seasons"
+        id="season"
+        required
+        [(ngModel)]="model.season"
+        name="season"
+        #season="ngModel"
+        appendTo="body"
+        [style]="{ width: '100%' }"
+        [filter]="true"
+      ></p-dropdown>
+    </div>
+
+    <!-- Round -->
+    <div class="form-group">
+      <label for="round">round</label>
+
+      <p-dropdown
+        [optionLabel]="label"
+        [options]="rounds"
+        id="round"
+        required
+        [(ngModel)]="model.round"
+        name="round"
+        #round="ngModel"
+        appendTo="body"
+        [style]="{ width: '100%' }"
+        [filter]="true"
+      ></p-dropdown>
+    </div>
+
+    <!-- Driver -->
+    <div class="form-group">
+      <label for="driverId">driverId</label>
+
+      <p-dropdown
+        [optionLabel]="label"
+        [options]="drivers"
+        id="driverId"
+        required
+        [(ngModel)]="model.driverId"
+        name="driverId"
+        #driverId="ngModel"
+        appendTo="body"
+        [style]="{ width: '100%' }"
+        [filter]="true"
+      ></p-dropdown>
+    </div>
+
+    <!-- Constructor -->
+    <div class="form-group">
+      <label for="constructorId">constructorId</label>
+
+      <p-dropdown
+        [optionLabel]="label"
+        [options]="constructors"
+        id="constructorId"
+        required
+        [(ngModel)]="model.constructorId"
+        name="constructorId"
+        #constructorId="ngModel"
+        appendTo="body"
+        [style]="{ width: '100%' }"
+        [filter]="true"
+      ></p-dropdown>
+    </div>
+
+    <!-- Circuit -->
+    <div class="form-group">
+      <label for="circuitId">circuitId</label>
+
+      <p-dropdown
+        [optionLabel]="label"
+        [options]="circuits"
+        id="circuitId"
+        required
+        [(ngModel)]="model.circuitId"
+        name="circuitId"
+        #circuitId="ngModel"
+        appendTo="body"
+        [style]="{ width: '100%' }"
+        [filter]="true"
+      ></p-dropdown>
+    </div>
+
+    <div style="width: 100%;display:flex;justify-content:space-around;">
+      <button
+        nbButton
+        type="button"
+        class="btn btn-default form-button"
+        (click)="newModel(); paramsForm.reset()"
+      >
+        _Reset_
+      </button>
+      <button nbButton type="submit" class="btn btn-success form-button">
+        _Submit_
+      </button>
+    </div>
+
+    {{ diagnostic }}
+  </form>
+</div>

@@ -19,6 +19,8 @@ export class CircuitsService {
   private cacheResults$: Map<string, Race[]> = new Map();
   private cacheSeasons$: Map<string, Season[]> = new Map();
 
+  private cacheAllCircuits$: Circuit[];
+
   constructor(private http: HttpClient, private config: Configuration) {}
 
   /**
@@ -34,6 +36,17 @@ export class CircuitsService {
     }
 
     return this.load(season);
+  }
+
+  /**
+   * Load all circuits
+   */
+  public getAll() {
+    if (this.cacheAllCircuits$ && this.cacheAllCircuits$.length > 0) {
+      return of(this.cacheAllCircuits$);
+    }
+
+    return this.loadAll();
   }
 
   public getResults(season: string, circuitId: string): Observable<Race[]> {
@@ -83,6 +96,24 @@ export class CircuitsService {
         map(result => {
           this.cacheCircuits$ = result.MRData.CircuitTable.Circuits;
           return this.cacheCircuits$;
+        }),
+      );
+  }
+
+  /**
+   * Load circuit list from remote
+   */
+  private loadAll(): Observable<Circuit[]> {
+    return this.http
+      .get<ErgastResponse>(
+        `${environment.ergastApiUrl}circuits.json?limit=${
+          environment.ergastApiMaxPageLimit
+        }`,
+      )
+      .pipe(
+        map(result => {
+          this.cacheAllCircuits$ = result.MRData.CircuitTable.Circuits;
+          return this.cacheAllCircuits$;
         }),
       );
   }

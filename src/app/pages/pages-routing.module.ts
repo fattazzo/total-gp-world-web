@@ -26,6 +26,10 @@ const routes: Routes = [
         loadChildren: './race-anatomy/race-anatomy.module#RaceAnatomyModule',
       },
       {
+        path: 'query',
+        loadChildren: './query/query.module#QueryModule',
+      },
+      {
         path: 'sections/driver',
         loadChildren: './driver/driver.module#DriverModule',
       },

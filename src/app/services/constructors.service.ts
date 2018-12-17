@@ -25,6 +25,8 @@ export class ConstructorsService {
   private cacheQualifying$: Map<string, Observable<Race[]>> = new Map();
   private cacheSeasons$: Map<string, Observable<Season[]>> = new Map();
 
+  private cacheAllConstructors$: Constructor[];
+
   constructor(private http: HttpClient, private config: Configuration) {}
 
   /**
@@ -53,6 +55,17 @@ export class ConstructorsService {
     }
 
     return this.load(season);
+  }
+
+  /**
+   * Load all constructors
+   */
+  public getAll(): Observable<Constructor[]> {
+    if (this.cacheAllConstructors$ && this.cacheAllConstructors$.length > 0) {
+      return of(this.cacheAllConstructors$);
+    }
+
+    return this.loadAll();
   }
 
   public getResults(season: string, constructorId: string): Observable<Race[]> {
@@ -149,6 +162,28 @@ export class ConstructorsService {
               : [];
           this.cacheConstructors = constructors;
           this.seasonCache$ = season;
+          return constructors;
+        }),
+      );
+  }
+
+  /**
+   * Load constructor's list from remote
+   */
+  private loadAll(): Observable<Constructor[]> {
+    return this.http
+      .get<ErgastResponse>(
+        `${environment.ergastApiUrl}constructors.json?limit=${
+          environment.ergastApiMaxPageLimit
+        }`,
+      )
+      .pipe(
+        map(result => {
+          const constructors =
+            result.MRData.ConstructorTable.Constructors !== undefined
+              ? result.MRData.ConstructorTable.Constructors
+              : [];
+          this.cacheAllConstructors$ = constructors;
           return constructors;
         }),
       );
