@@ -10,18 +10,18 @@ export class RaceResultsModel {
     { key: 'finishing.status', endPointName: 'status' },
   ];
 
-  private type: Type = RaceResultsModel.searchTypes[0];
-  private season: string = null;
-  private round: string;
-  private driverId: string;
-  private constructorId: string;
-  private finishingPosition: string;
-  private grid: string;
-  private fastestLapRank: string;
-  private circuitId: string;
-  private status: string;
+  public type: Type = RaceResultsModel.searchTypes[0];
+  public season: string = null;
+  public round: string;
+  public driverId: string;
+  public constructorId: string;
+  public finishingPosition: string;
+  public grid: string;
+  public fastestLapRank: string;
+  public circuitId: string;
+  public status: string;
 
-  private resultPerPage: number = 30;
+  public resultPerPage: number = 30;
 }
 
 export interface Type {
