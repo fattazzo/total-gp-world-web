@@ -1,6 +1,9 @@
 {
   "/api/f1/*": "/$1",
-  "/seasons.json\\?limit=1000": "/seasonsList/seasons",
+  "/drivers.json\\?limit=1000": "/lists/drivers",
+  "/constructors.json\\?limit=1000": "/lists/constructors",
+  "/circuits.json\\?limit=1000": "/lists/circuits",
+  "/seasons.json\\?limit=1000": "/lists/seasons",
   "/:id.json?limit=1000": "/seasons/:id",
   "/:season/constructorStandings.json?limit=1000": "/constructorStandings/:season",
   "/:season/driverStandings.json?limit=1000": "/driverStandings/:season",

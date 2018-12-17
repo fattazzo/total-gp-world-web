@@ -1,6 +1,6 @@
 module.exports = function() {
   return {
-    seasonsList: requireMany('./seasonslist'),
+    lists: requireMany('./lists'),
     seasons: requireMany('./seasons'),
     constructorStandings: requireMany('./seasons/constructorStandings'),
     driverStandings: requireMany('./seasons/driverStandings'),
