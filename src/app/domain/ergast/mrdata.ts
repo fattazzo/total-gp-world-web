@@ -9,9 +9,9 @@ export class MRData {
   xmlns: string;
   series: string;
   url: string;
-  limit: string;
-  offset: string;
-  total: string;
+  limit: number;
+  offset: number;
+  total: number;
 
   RaceTable: RaceTable;
 
