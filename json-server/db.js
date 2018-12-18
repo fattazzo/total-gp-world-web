@@ -21,7 +21,6 @@ function requireMany(folder) {
   });
 
   return files.map(function(value) {
-    console.log(folder + '/' + value);
     try {
       return require(folder + '/' + value);
     } catch (event) {
