@@ -6,10 +6,26 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { RaceResultsComponent } from './params/race-results/race-results.component';
 import { FormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
-import { NbButtonModule } from '@nebular/theme';
+import { NbButtonModule, NbAccordionModule } from '@nebular/theme';
+import { QueryParamsComponent } from './params/query-params.component';
+import { QueryResultsComponent } from './results/query-results.component';
+import { SlideOutComponent } from '../../components/slide-out/slide-out.component';
+import { QueryResultsInfoComponent } from './results/query-results-info/query-results-info.component';
+import { TableModule } from 'primeng/table';
+import { QueryResultsDataComponent } from './results/query-results-data/query-results-data.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
-  declarations: [QueryComponent, RaceResultsComponent],
+  declarations: [
+    QueryComponent,
+    RaceResultsComponent,
+    QueryParamsComponent,
+    QueryResultsComponent,
+    SlideOutComponent,
+    QueryResultsInfoComponent,
+    QueryResultsDataComponent,
+  ],
   imports: [
     CommonModule,
     ThemeModule,
@@ -17,6 +33,10 @@ import { NbButtonModule } from '@nebular/theme';
     FormsModule,
     DropdownModule,
     NbButtonModule,
+    NbAccordionModule,
+    TableModule,
+    TranslateModule,
+    FontAwesomeModule,
   ],
 })
 export class QueryModule {}

@@ -1,30 +1,21 @@
+import { SearchType } from './search-type';
+
 export class RaceResultsModel {
-  static readonly searchTypes: Type[] = [
-    { key: 'circuit.information', endPointName: 'circuits' },
-    { key: 'constructors.information', endPointName: 'constructors' },
-    { key: 'drivers.information', endPointName: 'drivers' },
-    { key: 'qualifying.results', endPointName: 'qualifying' },
-    { key: 'race.results', endPointName: 'results' },
-    { key: 'race.schedule', endPointName: 'races' },
-    { key: 'season.list', endPointName: 'seasons' },
-    { key: 'finishing.status', endPointName: 'status' },
-  ];
-
-  public type: Type = RaceResultsModel.searchTypes[0];
+  public type: string = null;
   public season: string = null;
-  public round: string;
-  public driverId: string;
-  public constructorId: string;
-  public finishingPosition: string;
-  public grid: string;
-  public fastestLapRank: string;
-  public circuitId: string;
-  public status: string;
+  public round: string = null;
+  public driverId: string = null;
+  public constructorId: string = null;
+  public finishingPosition: string = null;
+  public grid: string = null;
+  public fastestLapRank: string = null;
+  public circuitId: string = null;
+  public statusId: string = null;
 
-  public resultPerPage: number = 30;
-}
+  public resultPerPage: number = null;
 
-export interface Type {
-  key: string;
-  endPointName: string;
+  constructor() {
+    this.type = SearchType.getRsultsSearchTypes()[0].key;
+    this.resultPerPage = 20;
+  }
 }

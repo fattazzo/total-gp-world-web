@@ -2,7 +2,7 @@
   <form #paramsForm="ngForm" (ngSubmit)="onSubmit()">
     <!-- Type -->
     <div class="form-group">
-      <label for="type">type</label>
+      <label for="type">{{ 'type.sing' | translate | ngxCapitalize }}</label>
 
       <p-dropdown
         [options]="types"
@@ -19,7 +19,9 @@
 
     <!-- Season -->
     <div class="form-group">
-      <label for="season">season</label>
+      <label for="season">{{
+        'season.sing' | translate | ngxCapitalize
+      }}</label>
 
       <p-dropdown
         [options]="seasons"
@@ -36,7 +38,7 @@
 
     <!-- Round -->
     <div class="form-group">
-      <label for="round">round</label>
+      <label for="round">{{ 'round.sing' | translate | ngxCapitalize }}</label>
 
       <p-dropdown
         [options]="rounds"
@@ -53,7 +55,9 @@
 
     <!-- Driver -->
     <div class="form-group">
-      <label for="driverId">driverId</label>
+      <label for="driverId">{{
+        'driver.sing' | translate | ngxCapitalize
+      }}</label>
 
       <p-dropdown
         [options]="drivers"
@@ -70,7 +74,9 @@
 
     <!-- Constructor -->
     <div class="form-group">
-      <label for="constructorId">constructorId</label>
+      <label for="constructorId">{{
+        'constructor.sing' | translate | ngxCapitalize
+      }}</label>
 
       <p-dropdown
         [options]="constructors"
@@ -87,7 +93,9 @@
 
     <!-- Circuit -->
     <div class="form-group">
-      <label for="circuitId">circuitId</label>
+      <label for="circuitId">{{
+        'circuit.sing' | translate | ngxCapitalize
+      }}</label>
 
       <p-dropdown
         [options]="circuits"
@@ -102,20 +110,37 @@
       ></p-dropdown>
     </div>
 
+    <!-- Result per page -->
+    <div class="form-group">
+      <label for="resultPerPage">{{
+        'result.per-page' | translate | ngxCapitalize
+      }}</label>
+
+      <p-dropdown
+        [options]="resultsPerPage"
+        id="resultPerPage"
+        required
+        [(ngModel)]="model.resultPerPage"
+        name="resultPerPage"
+        #resultPerPage="ngModel"
+        appendTo="body"
+        [style]="{ width: '100%' }"
+        [filter]="true"
+      ></p-dropdown>
+    </div>
+
     <div style="width: 100%;display:flex;justify-content:space-around;">
       <button
         nbButton
         type="button"
         class="btn btn-default form-button"
-        (click)="newModel(); paramsForm.reset()"
+        (click)="paramsForm.reset(); newModel()"
       >
-        _Reset_
+        {{ 'cancel' | translate | ngxCapitalize }}
       </button>
       <button nbButton type="submit" class="btn btn-success form-button">
-        _Submit_
+        {{ 'search.sing' | translate | ngxCapitalize }}
       </button>
     </div>
-
-    {{ diagnostic }}
   </form>
 </div>

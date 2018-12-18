@@ -1,0 +1,31 @@
+@import "../../../@theme/styles/themes";
+@import "~@nebular/theme/components/card/card.component.theme";
+@import "~@nebular/theme/styles/global/typography/typography";
+@import "~@nebular/theme/styles/global/breakpoints";
+
+@include nb-install-component() {
+  nb-card {
+    height: 100%;
+  }
+
+  nb-card-header {
+    border-bottom: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .title {
+      font-size: 1.5rem;
+      font-weight: nb-theme(font-weight-bold);
+      margin: 0px 5px 0px 5px;
+    }
+  }
+
+  .accordion-container {
+    height: 100%;
+  }
+
+  nb-accordion nb-accordion-item-header {
+    background-color: nb-theme(color-primary);
+  }
+}

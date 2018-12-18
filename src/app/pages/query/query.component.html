@@ -1,28 +1,21 @@
 <div class="ui-g">
-  <div class="ui-xl-3 ui-lg-12 ui-md-12 ui-sm-12">
-    <div class="ui-g">
-      <div class="ui-xl-12 ui-lg-6 ui-md-6 ui-sm-12">
-        <nb-card accent="info">
-          <nb-card-header>Race & Results</nb-card-header>
-          <nb-card-body>
-            <query-race-results></query-race-results>
-          </nb-card-body>
-        </nb-card>
-      </div>
-      <div class="ui-xl-12 ui-lg-6 ui-md-6 ui-sm-12">
-        <nb-card accent="info">
-          <nb-card-header>Standings</nb-card-header>
-          <nb-card-body> aaaa </nb-card-body>
-        </nb-card>
-      </div>
-    </div>
-  </div>
-  <div class="ui-xl-9 ui-lg-12 ui-md-12 ui-sm-12">
-    <div class="ui-g-12">
-      <nb-card accent="primary">
-        <nb-card-header>Results</nb-card-header>
-        <nb-card-body> aaaa </nb-card-body>
-      </nb-card>
-    </div>
+  <div class="ui-g-12" style="overflow: hidden">
+    <nb-card style="min-height: 600px">
+      <nb-card-header>
+        <fa-icon size="2x" icon="list"></fa-icon>
+        <div class="title">{{ 'result.plur' | translate | ngxCapitalize }}</div>
+      </nb-card-header>
+      <nb-card-body style="height: -webkit-fill-available;">
+        <div class="chart-container" style="overflow: auto; width: 100%">
+          <query-results [searchUrl]="searchUrl"></query-results>
+        </div>
+      </nb-card-body>
+
+      <ngx-slide-out [show]="showParams">
+        <query-params
+          (searchUrlChange)="onSearchUrlChange($event)"
+        ></query-params>
+      </ngx-slide-out>
+    </nb-card>
   </div>
 </div>

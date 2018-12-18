@@ -9,7 +9,8 @@
     "points": "points",
     "numbers": "total",
     "winning": "winning",
-    "nationalities": "nationalities"
+    "nationalities": "nationalities",
+    "id": "driver id"
   },
   "point": {
     "sing": "point",
@@ -25,7 +26,8 @@
     "points": "points",
     "numbers": "total",
     "winning": "winning",
-    "nationalities": "nationalities"
+    "nationalities": "nationalities",
+    "id": "constructor id"
   },
   "section": {
     "plur": "sections"
@@ -35,7 +37,8 @@
   },
   "circuit": {
     "sing": "circuit",
-    "plur": "circuits"
+    "plur": "circuits",
+    "id": "circuit id"
   },
   "race": {
     "sing": "race",
@@ -53,7 +56,8 @@
     "sing": "name"
   },
   "date": {
-    "sing": "date"
+    "sing": "date",
+    "of-bird": "date of bird"
   },
   "hour": {
     "sing": "hour"
@@ -97,7 +101,8 @@
     "sing": "duration"
   },
   "result": {
-    "plur": "results"
+    "plur": "results",
+    "per-page": "results per page"
   },
   "qualify": {
     "plur": "qualifying"
@@ -141,7 +146,11 @@
     "category": "select a category",
     "race": "select a race"
   },
-  "search": "search",
+  "search": {
+    "sing": "search",
+    "race-and-results": "Race & Results",
+    "standings": "Standings"
+  },
   "cumulative-data": "Cumulative data",
   "bug-proposal-feature": {
     "title": "Bug, proposal, new feature",
@@ -156,5 +165,33 @@
   "number": {
     "sing": "number"
   },
-  "nodata": "no data"
+  "nodata": "no data",
+  "code": {
+    "sing": "code"
+  },
+  "nationality": {
+    "sing": "nationality"
+  },
+  "page": {
+    "sing": "page",
+    "plur": "pages"
+  },
+  "status": {
+    "id": "id status"
+  },
+  "parameter": {
+    "plur": "parameters"
+  },
+  "type": {
+    "sing": "type",
+    "circuit-information": "circuit information",
+    "constructor-information": "constructors information",
+    "driver-information": "drivers information",
+    "qualifying-results": "qualifying results",
+    "race-results": "race results",
+    "race-schedule": "race schedule",
+    "season-list": "season list",
+    "finishing-status": "finishing status"
+  },
+  "cancel": "cancel"
 }

@@ -9,7 +9,8 @@
     "points": "punti",
     "numbers": "numero",
     "winning": "piloti vincenti",
-    "nationalities": "nazionalità"
+    "nationalities": "nazionalità",
+    "id": "id pilota"
   },
   "point": {
     "sing": "punto",
@@ -25,7 +26,8 @@
     "points": "punti",
     "numbers": "numero",
     "winning": "team vincenti",
-    "nationalities": "nazioni"
+    "nationalities": "nazioni",
+    "id": "id costruttore"
   },
   "section": {
     "plur": "sezioni"
@@ -35,7 +37,8 @@
   },
   "circuit": {
     "sing": "circuito",
-    "plur": "circuiti"
+    "plur": "circuiti",
+    "id": "id circuito"
   },
   "race": {
     "sing": "gara",
@@ -53,7 +56,8 @@
     "sing": "nome"
   },
   "date": {
-    "sing": "data"
+    "sing": "data",
+    "of-bird": "data di nascita"
   },
   "hour": {
     "sing": "ora"
@@ -97,7 +101,8 @@
     "sing": "durata"
   },
   "result": {
-    "plur": "risultati"
+    "plur": "risultati",
+    "per-page": "risultati per pagina"
   },
   "qualify": {
     "plur": "qualifiche"
@@ -141,7 +146,11 @@
     "category": "Seleziona una categoria",
     "race": "seleziona una gara"
   },
-  "search": "cerca",
+  "search": {
+    "sing": "cerca",
+    "race-and-results": "Gara e Risultati",
+    "standings": "Classifiche"
+  },
   "cumulative-data": "Dati cumulativi",
   "bug-proposal-feature": {
     "title": "Errori, proposte, nuove funzionalità",
@@ -156,5 +165,33 @@
   "number": {
     "sing": "numero"
   },
-  "nodata": "nessun dato"
+  "nodata": "nessun dato",
+  "code": {
+    "sing": "codice"
+  },
+  "nationality": {
+    "sing": "nazionalità"
+  },
+  "page": {
+    "sing": "pagina",
+    "plur": "pagine"
+  },
+  "status": {
+    "id": "id stato"
+  },
+  "parameter": {
+    "plur": "parametri"
+  },
+  "type": {
+    "sing": "tipo",
+    "circuit-information": "informazioni circuito",
+    "constructor-information": "informazioni costruttore",
+    "driver-information": "informazioni pilota",
+    "qualifying-results": "risultati qualifiche",
+    "race-results": "risultati gara",
+    "race-schedule": "gare programmate",
+    "season-list": "lista stagioni",
+    "finishing-status": "stato di fine gara"
+  },
+  "cancel": "cancella"
 }

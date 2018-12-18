@@ -1,0 +1,33 @@
+<div class="ui-g accordion-container">
+  <div class="ui-g-12" style="padding: 0px;">
+    <nb-card>
+      <nb-card-header
+        ><fa-icon size="2x" icon="search"></fa-icon>
+        <div class="title">
+          {{ 'parameter.plur' | translate | ngxCapitalize }}
+        </div></nb-card-header
+      >
+      <nb-card-body>
+        <nb-accordion>
+          <nb-accordion-item expanded="true">
+            <nb-accordion-item-header>{{
+              'search.race-and-results' | translate | ngxCapitalize
+            }}</nb-accordion-item-header>
+            <nb-accordion-item-body
+              ><query-race-results
+                (resultsUrlChange)="resultsSearchUrlChange($event)"
+              ></query-race-results>
+            </nb-accordion-item-body>
+          </nb-accordion-item>
+
+          <nb-accordion-item>
+            <nb-accordion-item-header>{{
+              'search.standings' | translate | ngxCapitalize
+            }}</nb-accordion-item-header>
+            <nb-accordion-item-body> </nb-accordion-item-body>
+          </nb-accordion-item>
+        </nb-accordion>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
