@@ -19,7 +19,11 @@ $nb-themes: nb-register-theme(
     font-secondary: Exo,
     switcher-background: #ebeff5,
     switcher-background-percentage: 50%,
-    drops-icon-line-gadient: -webkit-linear-gradient(#01dbb5, #0bbb79)
+    drops-icon-line-gadient: -webkit-linear-gradient(#01dbb5, #0bbb79),
+    slide-out-container-width: 30%,
+    slide-out-background: tranparent,
+    slide-out-shadow-color: 0 4px 14px 0 tranparent,
+    slide-out-shadow-color-rtl: 0 4px 14px 0 tranparent
   ),
   default,
   default
@@ -35,7 +39,11 @@ $nb-themes: nb-register-theme(
     font-secondary: Exo,
     switcher-background: #4e41a5,
     switcher-background-percentage: 14%,
-    drops-icon-line-gadient: -webkit-linear-gradient(#a258fe, #7958fa)
+    drops-icon-line-gadient: -webkit-linear-gradient(#a258fe, #7958fa),
+    slide-out-container-width: 30%,
+    slide-out-background: tranparent,
+    slide-out-shadow-color: 2px 0 3px tranparent,
+    slide-out-shadow-color-rtl: -2px 0 3px tranparent
   ),
   cosmic,
   cosmic
@@ -51,7 +59,11 @@ $nb-themes: nb-register-theme(
     font-secondary: Exo,
     switcher-background: #2b2d34,
     switcher-background-percentage: 14%,
-    drops-icon-line-gadient: -webkit-linear-gradient(#e9e8eb, #a7a2be)
+    drops-icon-line-gadient: -webkit-linear-gradient(#e9e8eb, #a7a2be),
+    slide-out-container-width: 30%,
+    slide-out-background: tranparent,
+    slide-out-shadow-color: 0 4px 14px 0 tranparent,
+    slide-out-shadow-color-rtl: 0 4px 14px 0 tranparent
   ),
   corporate,
   corporate

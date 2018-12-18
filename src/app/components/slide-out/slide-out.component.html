@@ -1,0 +1,13 @@
+<i
+  class="show-hide-toggle"
+  [class.nb-arrow-thin-left]="!show"
+  [class.nb-arrow-thin-right]="show"
+  (click)="toggle()"
+></i>
+<div
+  class="slide-out-container"
+  [class.expanded]="show"
+  [class.collapsed]="!show"
+>
+  <div class="content-wrapper"><ng-content></ng-content></div>
+</div>
