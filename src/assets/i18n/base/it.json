@@ -176,9 +176,6 @@
     "sing": "pagina",
     "plur": "pagine"
   },
-  "status": {
-    "id": "id stato"
-  },
   "parameter": {
     "plur": "parametri"
   },
@@ -193,5 +190,8 @@
     "season-list": "lista stagioni",
     "finishing-status": "stato di fine gara"
   },
-  "cancel": "cancella"
+  "cancel": "cancella",
+  "count": {
+    "sing": "count"
+  }
 }

@@ -17,17 +17,25 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-data>
-      <tr>
-        <td *ngFor="let col of columns">
-          <ng-container *ngIf="col.key === 'info'; else: elseTemplate">
-            <a [href]="data[col.key]" target="_blank">
-              <i class="fa fa-info-circle"></i>
-              {{ 'info.sing' | translate | ngxCapitalize }}
-            </a>
-          </ng-container>
-          <ng-template #elseTemplate> {{ data[col.key] }} </ng-template>
-        </td>
-      </tr>
+      <ng-container [ngSwitch]="data['value'] !== undefined">
+        <tr *ngSwitchCase="true">
+          <!--Span column-->
+          <td [attr.colspan]="columns.length">
+            <span style="font-weight:bold">{{ data['value'] }}</span>
+          </td>
+        </tr>
+        <tr *ngSwitchCase="false">
+          <td *ngFor="let col of columns">
+            <ng-container *ngIf="col.key === 'info'; else elseTemplate">
+              <a [href]="data[col.key]" target="_blank">
+                <i class="fa fa-info-circle"></i>
+                {{ 'info.sing' | translate | ngxCapitalize }}
+              </a>
+            </ng-container>
+            <ng-template #elseTemplate> {{ data[col.key] }} </ng-template>
+          </td>
+        </tr>
+      </ng-container>
     </ng-template>
   </p-table>
 </div>

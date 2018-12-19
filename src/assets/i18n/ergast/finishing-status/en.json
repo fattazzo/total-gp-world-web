@@ -1,6 +1,7 @@
 {
   "status": {
     "sing": "status",
+    "id": "id status",
     "Other": "Other",
     "Finished": "Finished",
     "Disqualified": "Disqualified",

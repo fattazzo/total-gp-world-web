@@ -176,9 +176,6 @@
     "sing": "page",
     "plur": "pages"
   },
-  "status": {
-    "id": "id status"
-  },
   "parameter": {
     "plur": "parameters"
   },
@@ -193,5 +190,8 @@
     "season-list": "season list",
     "finishing-status": "finishing status"
   },
-  "cancel": "cancel"
+  "cancel": "cancel",
+  "count": {
+    "sing": "conteggio"
+  }
 }

@@ -5,6 +5,8 @@
 
 @include nb-install-component() {
   nb-card {
+    margin: 0px;
+    padding-bottom: 10px;
     height: 100%;
   }
 
