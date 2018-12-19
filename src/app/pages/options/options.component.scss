@@ -1,8 +1,8 @@
 @import "../../@theme/styles/themes";
 
 @include nb-install-component() {
-  .row {
-    margin-bottom: 3rem;
+  .ui-g {
+    margin-top: 3rem;
   }
 
   ngx-layout-direction-switcher {
