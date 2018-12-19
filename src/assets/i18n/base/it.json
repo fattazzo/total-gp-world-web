@@ -193,5 +193,8 @@
   "cancel": "cancella",
   "count": {
     "sing": "count"
+  },
+  "query": {
+    "plur": "ricerche"
   }
 }
