@@ -1,4 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  OnDestroy,
+} from '@angular/core';
 import { RaceResultsModel } from './models/race-results-model';
 import { DriversService } from '../../../../services/drivers.service';
 import { Observable } from 'rxjs';
@@ -9,13 +15,14 @@ import { QueryBuilder } from '../query-builder/query-builder';
 import { SearchType } from './models/search-type';
 import { TranslateService } from '@ngx-translate/core';
 import { CapitalizePipe } from '../../../../@theme/pipes/capitalize.pipe';
+import { NbThemeService } from '@nebular/theme';
 
 @Component({
   selector: 'query-race-results',
   templateUrl: './race-results.component.html',
   styleUrls: ['./race-results.component.scss'],
 })
-export class RaceResultsComponent implements OnInit {
+export class RaceResultsComponent implements OnInit, OnDestroy {
   model: RaceResultsModel = new RaceResultsModel();
 
   types: any;
@@ -26,6 +33,8 @@ export class RaceResultsComponent implements OnInit {
   circuits: any;
   resultsPerPage: any;
 
+  langSubscribe: any;
+
   @Output() resultsUrlChange: EventEmitter<string> = new EventEmitter();
 
   private queryBuilder = new QueryBuilder();
@@ -35,14 +44,18 @@ export class RaceResultsComponent implements OnInit {
     private constructorsService: ConstructorsService,
     private circuitsService: CircuitsService,
     private translate: TranslateService,
-  ) {}
+  ) {
+    this.langSubscribe = this.translate.onLangChange.subscribe(event => {
+      this.loadTypes();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.langSubscribe.unsubscribe();
+  }
 
   ngOnInit() {
-    const capitalizePipe = new CapitalizePipe();
-    this.types = SearchType.getRsultsSearchTypes().map(t => ({
-      value: t.key,
-      label: capitalizePipe.transform(this.translate.instant(`type.${t.key}`)),
-    }));
+    this.loadTypes();
     this.seasons = generateArray(2018, 1950, true, false);
     this.rounds = generateArray(1, 30);
     this.driversService.getAll().subscribe(dr => {
@@ -73,6 +86,14 @@ export class RaceResultsComponent implements OnInit {
       { value: 50, label: 50 },
       { value: 100, label: 100 },
     ];
+  }
+
+  private loadTypes() {
+    const capitalizePipe = new CapitalizePipe();
+    this.types = SearchType.getRsultsSearchTypes().map(t => ({
+      value: t.key,
+      label: capitalizePipe.transform(this.translate.instant(`type.${t.key}`)),
+    }));
   }
 
   newModel() {
