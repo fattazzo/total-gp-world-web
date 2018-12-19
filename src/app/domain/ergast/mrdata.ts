@@ -4,6 +4,7 @@ import { DriverTable } from '../tables/driver-table';
 import { RaceTable } from '../tables/race-table';
 import { SeasonTable } from '../tables/season-table';
 import { StandingsTable } from '../tables/standings-table';
+import { StatusTable } from '../tables/status-table';
 
 export class MRData {
   xmlns: string;
@@ -23,4 +24,6 @@ export class MRData {
   StandingsTable: StandingsTable;
 
   CircuitTable: CircuitTable;
+
+  StatusTable: StatusTable;
 }
