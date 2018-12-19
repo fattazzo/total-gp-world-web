@@ -13,10 +13,12 @@ export class QueryService {
   constructor(private http: HttpClient) {}
 
   search(url: string): Observable<MRData> {
-    return this.http.get<ErgastResponse>(url).pipe(
-      map(result => {
-        return result.MRData;
-      }),
-    );
+    return this.http
+      .get<ErgastResponse>(url.replace('http://', 'https://'))
+      .pipe(
+        map(result => {
+          return result.MRData;
+        }),
+      );
   }
 }
