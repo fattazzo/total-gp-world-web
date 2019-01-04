@@ -4,14 +4,23 @@
       <div class="table-header ui-g">
         <div for="circuitSelect" style="padding-right: 10px">Circuit</div>
 
-        <p-dropdown [options]="circuits | async | selectItemPipe:'circuitId':'circuitName'" [(ngModel)]="circuitSelected"
-          [ngModelOptions]="{standalone: true}" (onChange)="onChange($event.value)" placeholder="Select a Circuit"
-          [autoWidth]="false" filter="true" filterBy="label.circuitName">
+        <p-dropdown
+          [options]="
+            circuits | async | selectItemPipe: 'circuitId':'circuitName'
+          "
+          [(ngModel)]="circuitSelected"
+          [ngModelOptions]="{ standalone: true }"
+          (onChange)="onChange($event.value)"
+          placeholder="Select a Circuit"
+          [autoWidth]="false"
+          [filter]="appSettings.filterVisible"
+          filterBy="label.circuitName"
+        >
           <ng-template let-item pTemplate="selectedItem">
-            <div style="white-space: nowrap;">{{item.label.circuitName}}</div>
+            <div style="white-space: nowrap;">{{ item.label.circuitName }}</div>
           </ng-template>
           <ng-template let-item pTemplate="item">
-            <div style="white-space: nowrap;">{{item.label.circuitName}}</div>
+            <div style="white-space: nowrap;">{{ item.label.circuitName }}</div>
           </ng-template>
         </p-dropdown>
       </div>
@@ -30,6 +39,10 @@
 
 <div class="ui-g">
   <div class="ui-g-12">
-    <f1-results [season]="season" [circuitId]="circuitSelected" [showChart]="false"></f1-results>
+    <f1-results
+      [season]="season"
+      [circuitId]="circuitSelected"
+      [showChart]="false"
+    ></f1-results>
   </div>
 </div>

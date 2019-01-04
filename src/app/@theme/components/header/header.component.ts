@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { Season } from '../../../domain/season';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+import { AppSettingsService } from '../../../services/app-settings.service';
 
 @Component({
   selector: 'ngx-header',
@@ -16,8 +17,6 @@ import { Router } from '@angular/router';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-
-
   @Input() position = 'normal';
 
   user: any;
@@ -30,26 +29,29 @@ export class HeaderComponent implements OnInit, OnDestroy {
   currentLang: string;
   langSubscribe: any;
 
-  constructor(private sidebarService: NbSidebarService,
+  constructor(
+    private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
     private userService: UserService,
     private analyticsService: AnalyticsService,
     private seasonsService: SeasonsService,
     public translate: TranslateService,
-    private route: Router) {
-  }
+    private route: Router,
+    public appSettings: AppSettingsService,
+  ) {}
 
   ngOnInit() {
     this.seasons = this.seasonsService.seasons;
-    this.userService.getUsers()
-      .subscribe((users: any) => this.user = users.nick);
+    this.userService
+      .getUsers()
+      .subscribe((users: any) => (this.user = users.nick));
 
     this.currentLang = this.translate.currentLang;
     this.langSubscribe = this.translate.onLangChange.subscribe(event => {
-      this.currentLang = event.lang
-    })
+      this.currentLang = event.lang;
+    });
 
-    this.seasonsService.getSeason().subscribe(s => this.selectedSeason = s)
+    this.seasonsService.getSeason().subscribe(s => (this.selectedSeason = s));
   }
 
   ngOnDestroy() {
@@ -57,7 +59,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onLangChange(lang: string) {
-    this.translate.use(lang)
+    this.translate.use(lang);
     this.currentLang = lang;
   }
 

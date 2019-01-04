@@ -4,14 +4,25 @@
       <div class="table-header ui-g">
         <div for="driverSelect" style="padding-right: 10px">Driver</div>
 
-        <p-dropdown [options]="drivers | async | selectItemPipe:'driverId':'givenName'" [(ngModel)]="driverIdSelected"
-          [ngModelOptions]="{standalone: true}" (onChange)="onChange($event.value)" placeholder="Select a Driver"
-          [autoWidth]="false" filter="true" filterBy="label.givenName,label.familyName">
+        <p-dropdown
+          [options]="drivers | async | selectItemPipe: 'driverId':'givenName'"
+          [(ngModel)]="driverIdSelected"
+          [ngModelOptions]="{ standalone: true }"
+          (onChange)="onChange($event.value)"
+          placeholder="Select a Driver"
+          [autoWidth]="false"
+          [filter]="appSettings.filterVisible"
+          filterBy="label.givenName,label.familyName"
+        >
           <ng-template let-item pTemplate="selectedItem">
-            <div style="white-space: nowrap;">{{item.label.givenName}} {{item.label.familyName}}</div>
+            <div style="white-space: nowrap;">
+              {{ item.label.givenName }} {{ item.label.familyName }}
+            </div>
           </ng-template>
           <ng-template let-item pTemplate="item">
-            <div style="white-space: nowrap;">{{item.label.givenName}} {{item.label.familyName}}</div>
+            <div style="white-space: nowrap;">
+              {{ item.label.givenName }} {{ item.label.familyName }}
+            </div>
           </ng-template>
         </p-dropdown>
       </div>
@@ -34,7 +45,7 @@
   </div>
 
   <div class="ui-g-12 ui-xl-6">
-    <f1-qualifying [season]=" season" [driverId]="driverIdSelected">
+    <f1-qualifying [season]="season" [driverId]="driverIdSelected">
     </f1-qualifying>
   </div>
 </div>

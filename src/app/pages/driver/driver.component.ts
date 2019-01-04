@@ -6,6 +6,7 @@ import { DriversService } from '../../services/drivers.service';
 import { SeasonsService } from '../../services/seasons.service';
 
 import { Driver } from '../../domain/driver';
+import { AppSettingsService } from '../../services/app-settings.service';
 
 @Component({
   selector: 'driver',
@@ -27,6 +28,7 @@ export class DriverComponent implements OnInit, OnDestroy {
     private router: Router,
     private driversService: DriversService,
     private seasonsService: SeasonsService,
+    public appSettings: AppSettingsService,
   ) {}
 
   ngOnDestroy() {

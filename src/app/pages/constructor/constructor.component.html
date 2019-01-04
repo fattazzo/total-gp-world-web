@@ -2,16 +2,27 @@
   <div class="ui-g-12">
     <form class="form-content">
       <div class="table-header ui-g">
-        <div for="constructorSelect" style="padding-right: 10px">Constructor</div>
+        <div for="constructorSelect" style="padding-right: 10px">
+          Constructor
+        </div>
 
-        <p-dropdown [options]="constructors | async | selectItemPipe:'constructorId':'name'" [(ngModel)]="constructorSelected"
-          [ngModelOptions]="{standalone: true}" (onChange)="onChange($event.value)" placeholder="Select a Constructor"
-          [autoWidth]="false" filter="true" filterBy="label.name">
+        <p-dropdown
+          [options]="
+            constructors | async | selectItemPipe: 'constructorId':'name'
+          "
+          [(ngModel)]="constructorSelected"
+          [ngModelOptions]="{ standalone: true }"
+          (onChange)="onChange($event.value)"
+          placeholder="Select a Constructor"
+          [autoWidth]="false"
+          [filter]="appSettings.filterVisible"
+          filterBy="label.name"
+        >
           <ng-template let-item pTemplate="selectedItem">
-            <div style="white-space: nowrap;">{{item.label.name}}</div>
+            <div style="white-space: nowrap;">{{ item.label.name }}</div>
           </ng-template>
           <ng-template let-item pTemplate="item">
-            <div style="white-space: nowrap;">{{item.label.name}}</div>
+            <div style="white-space: nowrap;">{{ item.label.name }}</div>
           </ng-template>
         </p-dropdown>
       </div>
@@ -30,10 +41,16 @@
 
 <div class="ui-g">
   <div class="ui-g-12 ui-xl-6">
-    <f1-results [season]="season" [constructorId]="constructorSelected"></f1-results>
+    <f1-results
+      [season]="season"
+      [constructorId]="constructorSelected"
+    ></f1-results>
   </div>
 
   <div class="ui-g-12 ui-xl-6">
-    <f1-qualifying [season]="season" [constructorId]="constructorSelected"></f1-qualifying>
+    <f1-qualifying
+      [season]="season"
+      [constructorId]="constructorSelected"
+    ></f1-qualifying>
   </div>
 </div>

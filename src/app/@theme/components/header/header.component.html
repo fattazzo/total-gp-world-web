@@ -1,6 +1,12 @@
-<div class="header-container" [class.left]="position === 'normal'" [class.right]="position === 'inverse'">
+<div
+  class="header-container"
+  [class.left]="position === 'normal'"
+  [class.right]="position === 'inverse'"
+>
   <div class="logo-containter">
-    <a (click)="toggleSidebar()" href="#" class="navigation"><i class="nb-menu"></i></a>
+    <a (click)="toggleSidebar()" href="#" class="navigation"
+      ><i class="nb-menu"></i
+    ></a>
     <div class="logo" (click)="goToHome()">Formula 1 stats</div>
   </div>
   <!--<ngx-theme-switcher></ngx-theme-switcher>-->
@@ -8,8 +14,11 @@
 
 <div class="header-container">
   <!--<ngx-layout-direction-switcher></ngx-layout-direction-switcher>-->
-  <nb-actions size="medium" [class.right]="position === 'normal'" [class.left]="position === 'inverse'">
-
+  <nb-actions
+    size="medium"
+    [class.right]="position === 'normal'"
+    [class.left]="position === 'inverse'"
+  >
     <!--<nb-action icon="nb-gear" class="toggle-layout" (click)="toggleSettings()"></nb-action>
     <nb-action *nbIsGranted="['view', 'user']" >
       <nb-user [nbContextMenu]="userMenu" [name]="user?.name" [picture]="user?.picture"></nb-user>
@@ -20,27 +29,43 @@
       <nb-search type="rotate-layout" (click)="startSearch()"></nb-search>
     </nb-action>-->
 
-    <nb-action icon="nb-gear" class="toggle-layout" (click)="openOptions()"></nb-action>
+    <nb-action
+      icon="nb-gear"
+      class="toggle-layout"
+      (click)="openOptions()"
+    ></nb-action>
   </nb-actions>
 
   <div class="season-containter">
     <div class="logo">Season</div>
-    <p-dropdown [options]="seasons | async | reverse | selectItemPipe:'season'" [(ngModel)]="selectedSeason"
-      [ngModelOptions]="{standalone: true}" (onChange)="onChange($event.value)" [autoWidth]="false" filter="true"
-      filterBy="label.season">
+    <p-dropdown
+      [options]="seasons | async | reverse | selectItemPipe: 'season'"
+      [(ngModel)]="selectedSeason"
+      [ngModelOptions]="{ standalone: true }"
+      (onChange)="onChange($event.value)"
+      [autoWidth]="false"
+      [filter]="appSettings.filterVisible"
+      autoFocus="true"
+      filterBy="label.season"
+    >
       <ng-template let-item pTemplate="selectedItem">
-        <div style="white-space: nowrap;">{{item.label.season}}</div>
+        <div style="white-space: nowrap;">{{ item.label.season }}</div>
       </ng-template>
       <ng-template let-item pTemplate="item">
-        <div style="white-space: nowrap;">{{item.label.season}}</div>
+        <div style="white-space: nowrap;">{{ item.label.season }}</div>
       </ng-template>
     </p-dropdown>
   </div>
 
   <div class="lang-containter">
     <i _ngcontent-c6="" class="fas fa-language"></i>
-    <p-dropdown [options]="translate.getLangs() | selectItemPipe:'*'" [(ngModel)]="currentLang" [ngModelOptions]="{standalone: true}"
-      (onChange)="onLangChange($event.value)" [autoWidth]="false">
+    <p-dropdown
+      [options]="translate.getLangs() | selectItemPipe: '*'"
+      [(ngModel)]="currentLang"
+      [ngModelOptions]="{ standalone: true }"
+      (onChange)="onLangChange($event.value)"
+      [autoWidth]="false"
+    >
     </p-dropdown>
   </div>
 </div>

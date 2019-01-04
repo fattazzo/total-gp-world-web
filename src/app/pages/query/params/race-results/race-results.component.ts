@@ -16,6 +16,7 @@ import { SearchType } from './models/search-type';
 import { TranslateService } from '@ngx-translate/core';
 import { CapitalizePipe } from '../../../../@theme/pipes/capitalize.pipe';
 import { NbThemeService } from '@nebular/theme';
+import { AppSettingsService } from '../../../../services/app-settings.service';
 
 @Component({
   selector: 'query-race-results',
@@ -44,6 +45,7 @@ export class RaceResultsComponent implements OnInit, OnDestroy {
     private constructorsService: ConstructorsService,
     private circuitsService: CircuitsService,
     private translate: TranslateService,
+    public appSettings: AppSettingsService,
   ) {
     this.langSubscribe = this.translate.onLangChange.subscribe(event => {
       this.loadTypes();

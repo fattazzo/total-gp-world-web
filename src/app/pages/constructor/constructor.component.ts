@@ -4,6 +4,7 @@ import { Constructor } from '../../domain/constructor';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { ConstructorsService } from '../../services/constructors.service';
 import { SeasonsService } from '../../services/seasons.service';
+import { AppSettingsService } from '../../services/app-settings.service';
 
 @Component({
   selector: 'constructor',
@@ -25,6 +26,7 @@ export class ConstructorComponent implements OnInit, OnDestroy {
     private router: Router,
     private constructorsService: ConstructorsService,
     private seasonsService: SeasonsService,
+    public appSettings: AppSettingsService,
   ) {}
 
   ngOnDestroy() {

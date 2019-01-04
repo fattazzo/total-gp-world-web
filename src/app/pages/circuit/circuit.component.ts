@@ -4,6 +4,7 @@ import { SeasonsService } from '../../services/seasons.service';
 import { CircuitsService } from '../../services/circuits.service';
 import { Observable, of } from 'rxjs';
 import { Circuit } from '../../domain/circuit';
+import { AppSettingsService } from '../../services/app-settings.service';
 
 @Component({
   selector: 'circuit',
@@ -25,6 +26,7 @@ export class CircuitComponent implements OnInit, OnDestroy {
     private router: Router,
     private circuitsService: CircuitsService,
     private seasonsService: SeasonsService,
+    public appSettings: AppSettingsService,
   ) {}
 
   ngOnDestroy() {
