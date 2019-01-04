@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { AppSettingsService } from '../../services/app-settings.service';
 
 @Component({
   selector: 'options',
@@ -25,13 +26,19 @@ export class OptionsComponent implements OnInit, OnDestroy {
     },
   ];
 
-  constructor(public translate: TranslateService) {}
+  filterVisible: boolean;
+
+  constructor(
+    public translate: TranslateService,
+    private appSettings: AppSettingsService,
+  ) {}
 
   ngOnInit() {
     this.currentLang = this.translate.currentLang;
     this.langSubscribe = this.translate.onLangChange.subscribe(event => {
       this.currentLang = event.lang;
     });
+    this.filterVisible = this.appSettings.filterVisible;
   }
 
   ngOnDestroy() {
@@ -41,5 +48,10 @@ export class OptionsComponent implements OnInit, OnDestroy {
   onLangChange(lang: any) {
     this.translate.use(lang);
     this.currentLang = lang;
+  }
+
+  onFilterVisibleChange(value: boolean) {
+    this.appSettings.filterVisible = value;
+    this.filterVisible = value;
   }
 }

@@ -1,6 +1,6 @@
 <div class="ui-g">
   <div class="ui-xl-3 ui-lg-3 ui-md-4 ui-sm-12">
-    <h2>{{ 'language.sing' | translate | ngxCapitalize }}</h2>
+    <h2>{{ 'settings.language' | translate | ngxCapitalize }}</h2>
   </div>
 
   <div class="ui-xl-3 ui-lg-3 ui-md-8 ui-sm-12">
@@ -28,7 +28,7 @@
 
 <div class="ui-g">
   <div class="ui-xl-3 ui-lg-3 ui-md-4 ui-sm-12">
-    <h2>{{ 'theme.sing' | translate | ngxCapitalize }}</h2>
+    <h2>{{ 'settings.theme' | translate | ngxCapitalize }}</h2>
   </div>
 
   <div class="ui-xl-6 ui-lg-6 ui-md-8 ui-sm-12">
@@ -38,8 +38,25 @@
 
 <div class="ui-g">
   <div class="ui-xl-3 ui-lg-3 ui-md-4 ui-sm-12">
-    <h2>{{ 'direction.sing' | translate | ngxCapitalize }}</h2>
+    <h2>{{ 'settings.direction' | translate | ngxCapitalize }}</h2>
   </div>
 
   <ngx-layout-direction-switcher></ngx-layout-direction-switcher>
+</div>
+
+<div class="ui-g">
+  <div class="ui-xl-3 ui-lg-3 ui-md-4 ui-sm-12">
+    <h2>{{ 'settings.filter' | translate | ngxCapitalize }}</h2>
+  </div>
+
+  <ngx-switcher
+    [firstValue]="true"
+    [secondValue]="false"
+    [firstValueLabel]="'yes' | translate | ngxCapitalize"
+    [secondValueLabel]="'no' | translate | ngxCapitalize"
+    [value]="filterVisible"
+    (valueChange)="onFilterVisibleChange($event)"
+    [vertical]="vertical"
+  >
+  </ngx-switcher>
 </div>
