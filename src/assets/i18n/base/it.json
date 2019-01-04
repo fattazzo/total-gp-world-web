@@ -71,15 +71,6 @@
   "locality": {
     "sing": "località"
   },
-  "language": {
-    "sing": "lingua"
-  },
-  "theme": {
-    "sing": "tema"
-  },
-  "direction": {
-    "sing": "direzione"
-  },
   "wikipedia": {
     "sing": "wikipedia",
     "introOf": "intro da Wikipedia"
@@ -186,7 +177,7 @@
     "driver-information": "informazioni pilota",
     "qualifying-results": "risultati qualifiche",
     "race-results": "risultati gara",
-    "race-schedule": "gare programmate",
+    "race-schedule": "calendario gare",
     "season-list": "lista stagioni",
     "finishing-status": "stato di fine gara"
   },
@@ -196,5 +187,7 @@
   },
   "query": {
     "plur": "ricerche"
-  }
+  },
+  "yes": "si",
+  "no": "no"
 }

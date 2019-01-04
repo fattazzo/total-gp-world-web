@@ -71,15 +71,6 @@
   "locality": {
     "sing": "locality"
   },
-  "language": {
-    "sing": "language"
-  },
-  "theme": {
-    "sing": "theme"
-  },
-  "direction": {
-    "sing": "direction"
-  },
   "wikipedia": {
     "sing": "wikipedia",
     "introOf": "intro from Wikipedia"
@@ -196,5 +187,7 @@
   },
   "query": {
     "plur": "queries"
-  }
+  },
+  "yes": "yes",
+  "no": "no"
 }

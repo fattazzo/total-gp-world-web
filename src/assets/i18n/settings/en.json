@@ -1,0 +1,8 @@
+{
+  "settings": {
+    "language": "language",
+    "theme": "theme",
+    "direction": "direction",
+    "filter": "filters"
+  }
+}
