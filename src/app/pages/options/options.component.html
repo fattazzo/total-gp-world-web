@@ -3,7 +3,7 @@
     <h2>{{ 'settings.language' | translate | ngxCapitalize }}</h2>
   </div>
 
-  <div class="ui-xl-3 ui-lg-3 ui-md-8 ui-sm-12">
+  <div class="ui-xl-3 ui-lg-3 ui-md-8 ui-sm-12 value-container">
     <div
       [(ngModel)]="currentLang"
       ngbRadioGroup
@@ -31,7 +31,7 @@
     <h2>{{ 'settings.theme' | translate | ngxCapitalize }}</h2>
   </div>
 
-  <div class="ui-xl-6 ui-lg-6 ui-md-8 ui-sm-12">
+  <div class="ui-xl-6 ui-lg-6 ui-md-8 ui-sm-12 value-container">
     <themes-switcher></themes-switcher>
   </div>
 </div>
@@ -41,7 +41,9 @@
     <h2>{{ 'settings.direction' | translate | ngxCapitalize }}</h2>
   </div>
 
-  <ngx-layout-direction-switcher></ngx-layout-direction-switcher>
+  <div class="value-container">
+    <ngx-layout-direction-switcher></ngx-layout-direction-switcher>
+  </div>
 </div>
 
 <div class="ui-g">
@@ -49,13 +51,15 @@
     <h2>{{ 'settings.filter' | translate | ngxCapitalize }}</h2>
   </div>
 
-  <ngx-switcher
-    [firstValue]="true"
-    [secondValue]="false"
-    [firstValueLabel]="'yes' | translate | ngxCapitalize"
-    [secondValueLabel]="'no' | translate | ngxCapitalize"
-    [value]="filterVisible"
-    (valueChange)="onFilterVisibleChange($event)"
-  >
-  </ngx-switcher>
+  <div class="value-container">
+    <ngx-switcher
+      [firstValue]="true"
+      [secondValue]="false"
+      [firstValueLabel]="'yes' | translate | uppercase"
+      [secondValueLabel]="'no' | translate | uppercase"
+      [value]="filterVisible"
+      (valueChange)="onFilterVisibleChange($event)"
+    >
+    </ngx-switcher>
+  </div>
 </div>
