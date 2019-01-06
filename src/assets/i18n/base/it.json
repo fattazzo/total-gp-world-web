@@ -135,7 +135,10 @@
   "select": {
     "sing": "seleziona",
     "category": "Seleziona una categoria",
-    "race": "seleziona una gara"
+    "race": "seleziona una gara",
+    "driver": "seleziona un pilota",
+    "constructor": "seleziona un costruttore",
+    "circuit": "seleziona un circuito"
   },
   "search": {
     "sing": "cerca",

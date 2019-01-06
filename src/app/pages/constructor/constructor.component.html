@@ -3,7 +3,7 @@
     <form class="form-content">
       <div class="table-header ui-g">
         <div for="constructorSelect" style="padding-right: 10px">
-          Constructor
+          {{ 'constructor.sing' | translate | ngxCapitalize }}
         </div>
 
         <p-dropdown
@@ -13,7 +13,7 @@
           [(ngModel)]="constructorSelected"
           [ngModelOptions]="{ standalone: true }"
           (onChange)="onChange($event.value)"
-          placeholder="Select a Constructor"
+          [placeholder]="'select.constructor' | translate | ngxCapitalize"
           [autoWidth]="false"
           [filter]="appSettings.filterVisible"
           filterBy="label.name"

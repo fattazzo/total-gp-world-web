@@ -2,7 +2,9 @@
   <div class="ui-g-12">
     <form class="form-content">
       <div class="table-header ui-g">
-        <div for="circuitSelect" style="padding-right: 10px">Circuit</div>
+        <div for="circuitSelect" style="padding-right: 10px">
+          {{ 'circuit.sing' | translate | ngxCapitalize }}
+        </div>
 
         <p-dropdown
           [options]="
@@ -11,7 +13,7 @@
           [(ngModel)]="circuitSelected"
           [ngModelOptions]="{ standalone: true }"
           (onChange)="onChange($event.value)"
-          placeholder="Select a Circuit"
+          [placeholder]="'select.circuit' | translate | ngxCapitalize"
           [autoWidth]="false"
           [filter]="appSettings.filterVisible"
           filterBy="label.circuitName"

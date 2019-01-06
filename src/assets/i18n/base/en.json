@@ -135,7 +135,10 @@
   "select": {
     "sing": "select",
     "category": "select a category",
-    "race": "select a race"
+    "race": "select a race",
+    "driver": "select a driver",
+    "constructor": "select a constructor",
+    "circuit": "select a circuit"
   },
   "search": {
     "sing": "search",
