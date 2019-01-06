@@ -60,27 +60,42 @@ export class RaceResultsComponent implements OnInit, OnDestroy {
     this.loadTypes();
     this.seasons = generateArray(2018, 1950, true, false);
     this.rounds = generateArray(1, 30);
+
     this.driversService.getAll().subscribe(dr => {
-      this.drivers = dr.map(d => ({
-        value: d.driverId,
-        label: `${d.givenName} ${d.familyName}`,
-      }));
+      this.drivers = dr
+        .sort((d1, d2) =>
+          `${d1.givenName} ${d1.familyName}` >
+          `${d2.givenName} ${d2.familyName}`
+            ? 1
+            : -1,
+        )
+        .map(d => ({
+          value: d.driverId,
+          label: `${d.givenName} ${d.familyName}`,
+        }));
       this.drivers.unshift({ value: null, label: '' });
     });
+
     this.constructorsService.getAll().subscribe(cs => {
-      this.constructors = cs.map(c => ({
-        value: c.constructorId,
-        label: c.name,
-      }));
+      this.constructors = cs
+        .sort((c1, c2) => (c1.name > c2.name ? 1 : -1))
+        .map(c => ({
+          value: c.constructorId,
+          label: c.name,
+        }));
       this.constructors.unshift({ value: null, label: '' });
     });
+
     this.circuitsService.getAll().subscribe(cs => {
-      this.circuits = cs.map(c => ({
-        value: c.circuitId,
-        label: c.circuitName,
-      }));
+      this.circuits = cs
+        .sort((c1, c2) => (c1.circuitName > c2.circuitName ? 1 : -1))
+        .map(c => ({
+          value: c.circuitId,
+          label: c.circuitName,
+        }));
       this.circuits.unshift({ value: null, label: '' });
     });
+
     this.resultsPerPage = [
       { value: 10, label: 10 },
       { value: 20, label: 20 },
