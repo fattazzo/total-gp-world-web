@@ -1,6 +1,7 @@
 {
   "status": {
     "sing": "stato",
+    "id": "id stato",
     "Other": "Altro",
     "Finished": "Traguardo",
     "Disqualified": "Squalificato",

@@ -1,0 +1,10 @@
+{
+  "faq1": {
+    "q": "How soon after a race will data become available?",
+    "a": "Usually in 3 – 6 hrs."
+  },
+  "faq2": {
+    "q": "Why opening the list of seasons and some other lists the results disappear immediately without typing anything?",
+    "a": "In some mobile devices if the filters are activated it is possible to run into this problem. To solve it, you need to deactivate the filters on the options page."
+  }
+}

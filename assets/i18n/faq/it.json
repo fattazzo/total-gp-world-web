@@ -1,0 +1,10 @@
+{
+  "faq1": {
+    "q": "Dopo quanto tempo sono disponibili i nuovi risultati?",
+    "a": "Generalmente dopo 3 - 6 ore."
+  },
+  "faq2": {
+    "q": "Perchè aprendo l'elenco delle stagioni e alcune alter liste i risultati scompaiono subito senza digitare niente?",
+    "a": "In alcuni dispositivi mobile se i filtri sono attivati è possibile incorrere in questo problema. Per risolverlo è necessario disattivare i filtri nella pagina delle opzioni."
+  }
+}
