@@ -1,0 +1,23 @@
+<nb-card status="primary">
+  <nb-card-header>Android</nb-card-header>
+  <nb-card-body>
+    <div class="android-container">
+      <p>{{ 'info.android-p1' | translate }}</p>
+      <p>{{ 'info.android-p2' | translate }}</p>
+      <p>{{ 'info.android-p3' | translate }}</p>
+
+      <div class="ui-g-12 gallery-container">
+        <div>
+          <p-galleria
+            [images]="androidAppImages"
+            panelWidth="306"
+            panelHeight="544"
+            frameWidth="30"
+            frameHeight="54"
+            [showFilmstrip]="false"
+          ></p-galleria>
+        </div>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

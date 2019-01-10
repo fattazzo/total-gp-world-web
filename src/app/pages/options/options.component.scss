@@ -20,4 +20,25 @@
     flex-direction: row;
     align-items: center;
   }
+
+  .key-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  h2 {
+    margin: 0px 5px 0px 5px;
+  }
+
+  fa-icon {
+    color: nb-theme(color-primary);
+  }
+
+  fa-layers-counter {
+    zoom: 160%;
+    position: relative;
+    left: 1.2rem;
+    top: 1rem;
+  }
 }

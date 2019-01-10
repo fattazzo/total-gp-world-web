@@ -8,6 +8,11 @@ import { GithubReleasesModule } from '../components/github/github-releases/githu
 import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NbButtonModule } from '@nebular/theme';
+import { InfoReleasesComponent } from './info-releases/info-releases.component';
+import { InfoThanksComponent } from './info-thanks/info-thanks.component';
+import { InfoAndroidComponent } from './info-android/info-android.component';
+import { InfoHelpCollaborationComponent } from './info-help-collaboration/info-help-collaboration.component';
+import { InfoFaqComponent } from './info-faq/info-faq.component';
 
 @NgModule({
   imports: [
@@ -20,6 +25,6 @@ import { NbButtonModule } from '@nebular/theme';
     FontAwesomeModule,
     NbButtonModule,
   ],
-  declarations: [InfoComponent],
+  declarations: [InfoComponent, InfoReleasesComponent, InfoThanksComponent, InfoAndroidComponent, InfoHelpCollaborationComponent, InfoFaqComponent],
 })
 export class InfoModule {}

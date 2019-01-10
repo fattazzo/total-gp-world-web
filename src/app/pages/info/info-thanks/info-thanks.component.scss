@@ -1,0 +1,35 @@
+@import "../../../@theme/styles/themes";
+@import "~@nebular/theme/components/card/card.component.theme";
+@import "~@nebular/theme/styles/global/typography/typography";
+
+@include nb-install-component() {
+  // THANKS
+  .attr-container {
+    position: relative;
+    justify-content: center;
+    display: flex;
+    margin: 10px;
+
+    .attr-image {
+      width: 100%;
+      height: 100%;
+    }
+
+    span {
+      position: absolute;
+      text-align: center;
+      height: 100%;
+      width: 100%;
+      color: white;
+      font-family: nb-theme(font-main);
+      font-size: 1.15rem;
+
+      &:before {
+        display: inline-block;
+        vertical-align: middle;
+        height: 100%;
+        content: "";
+      }
+    }
+  }
+}

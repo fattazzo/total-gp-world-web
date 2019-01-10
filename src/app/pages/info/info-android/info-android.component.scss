@@ -1,26 +1,25 @@
-@import "../../@theme/styles/themes";
+@import "../../../@theme/styles/themes";
 @import "~@nebular/theme/components/card/card.component.theme";
 @import "~@nebular/theme/styles/global/typography/typography";
 
 @include nb-install-component() {
-  // FAQ
-  .faq-container {
+  .android-container {
     display: flex;
     flex-direction: column;
     color: nb-theme(color-fg-heading);
     font-family: nb-theme(font-main);
     font-size: 1.15rem;
     font-weight: nb-theme(font-weight-light);
-
-    .faq-title {
-      //margin-top: nb-theme(margin);
-      font-weight: nb-theme(font-weight-bold);
-    }
-
-    .faq-text {
-      margin-top: 0.5rem;
-    }
   }
 
-  // ISSUES
+  .gallery-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  ::ng-deep .ui-panel-images {
+    width: auto !important;
+    height: 100% !important;
+  }
 }

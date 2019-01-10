@@ -1,5 +1,6 @@
 <div class="ui-g">
-  <div class="ui-xl-3 ui-lg-3 ui-md-4 ui-sm-12">
+  <div class="ui-xl-3 ui-lg-3 ui-md-4 ui-sm-12 key-container">
+    <fa-icon size="2x" icon="language" [fixedWidth]="true"></fa-icon>
     <h2>{{ 'settings.language' | translate | ngxCapitalize }}</h2>
   </div>
 
@@ -27,7 +28,8 @@
 </div>
 
 <div class="ui-g">
-  <div class="ui-xl-3 ui-lg-3 ui-md-4 ui-sm-12">
+  <div class="ui-xl-3 ui-lg-3 ui-md-4 ui-sm-12 key-container">
+    <fa-icon size="2x" icon="palette" [fixedWidth]="true"></fa-icon>
     <h2>{{ 'settings.theme' | translate | ngxCapitalize }}</h2>
   </div>
 
@@ -37,7 +39,8 @@
 </div>
 
 <div class="ui-g">
-  <div class="ui-xl-3 ui-lg-3 ui-md-4 ui-sm-12">
+  <div class="ui-xl-3 ui-lg-3 ui-md-4 ui-sm-12 key-container">
+    <fa-icon size="2x" icon="exchange-alt" [fixedWidth]="true"></fa-icon>
     <h2>{{ 'settings.direction' | translate | ngxCapitalize }}</h2>
   </div>
 
@@ -47,8 +50,15 @@
 </div>
 
 <div class="ui-g">
-  <div class="ui-xl-3 ui-lg-3 ui-md-4 ui-sm-12">
-    <h2>{{ 'settings.filter' | translate | ngxCapitalize }}</h2>
+  <div
+    class="ui-xl-3 ui-lg-3 ui-md-4 ui-sm-12 key-container"
+    [nbTooltip]="'settings.filter.info' | translate | ngxCapitalize"
+  >
+    <fa-layers size="2x">
+      <fa-icon icon="filter" [fixedWidth]="true"></fa-icon>
+      <fa-layers-counter content="?"></fa-layers-counter>
+    </fa-layers>
+    <h2>{{ 'settings.filter.plur' | translate | ngxCapitalize }}</h2>
   </div>
 
   <div class="value-container">

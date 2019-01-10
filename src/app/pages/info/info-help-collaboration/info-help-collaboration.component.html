@@ -1,0 +1,34 @@
+<nb-card status="primary">
+  <nb-card-header>Help and Collaboration</nb-card-header>
+  <nb-card-body>
+    <div class="issues-container">
+      <h2>
+        <fa-icon icon="bug"></fa-icon>
+        {{ 'bug-proposal-feature.title' | translate }}
+      </h2>
+      <p>{{ 'bug-proposal-feature.message' | translate }}</p>
+      <p>
+        <a
+          href="https://github.com/fattazzo/total-gp-world-web/issues/new/choose"
+          target="_blank"
+          nbButton
+          >{{ 'bug-proposal-feature.link' | translate }}</a
+        >
+      </p>
+    </div>
+    <div class="translation-container">
+      <h2><fa-icon icon="language"></fa-icon> Translation</h2>
+      <p>Would you like this site to support your favorite language?</p>
+      <p>
+        At this time only Italian and English are active but if you want to
+        dedicate just a little of your free time quickly and easily you can make
+        yourself useful for other users!
+      </p>
+      <p>In the "About" section you can find all the ways to contact me.</p>
+      <img
+        src="./assets/images/thank-you-word-cloud.jpg"
+        class="thank-you-image"
+      />
+    </div>
+  </nb-card-body>
+</nb-card>

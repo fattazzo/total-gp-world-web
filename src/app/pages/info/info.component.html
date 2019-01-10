@@ -1,95 +1,17 @@
 <div class="ui-g">
   <div class="ui-xl-6 ui-lg-6 ui-md-12 ui-sm-12">
-    <nb-card status="primary">
-      <nb-card-header
-        >Releases ({{ 'current.sing' | translate }}
-        {{ version }})</nb-card-header
-      >
-      <nb-card-body> <github-releases></github-releases> </nb-card-body>
-    </nb-card>
+    <div class="ui-g-12"><info-releases></info-releases></div>
+
+    <div class="ui-g-12"><info-faq></info-faq></div>
+
+    <div class="ui-g-12"><info-android></info-android></div>
   </div>
 
   <div class="ui-xl-6 ui-lg-6 ui-md-12 ui-sm-12">
-    <nb-card status="primary">
-      <nb-card-header>{{ 'special-thanks' | translate }} </nb-card-header>
-      <nb-card-body>
-        <div
-          class="thanks-container"
-          *ngIf="(attribution$ | async) as attribution"
-        >
-          <div *ngFor="let attr of attribution.attributions">
-            <a [href]="attr?.link" target="_blank">
-              <div class="attr-container">
-                <span>{{ attr?.title }}</span>
-                <img [src]="attr?.image" class="attr-image" />
-              </div>
-            </a>
-          </div>
-        </div>
-      </nb-card-body>
-    </nb-card>
-  </div>
+    <div class="ui-g-12"><info-thanks></info-thanks></div>
 
-  <div class="ui-xl-6 ui-lg-6 ui-md-12 ui-sm-12">
-    <nb-card status="primary">
-      <nb-card-header>Android</nb-card-header>
-      <nb-card-body>
-        <div class="android-container">
-          <p>{{ 'info.android-p1' | translate }}</p>
-          <p>{{ 'info.android-p2' | translate }}</p>
-          <p>{{ 'info.android-p3' | translate }}</p>
-
-          <div class="ui-g-12 gallery-container">
-            <div>
-              <p-galleria
-                [images]="androidAppImages"
-                panelWidth="306"
-                panelHeight="544"
-                frameWidth="30"
-                frameHeight="54"
-                [showFilmstrip]="false"
-              ></p-galleria>
-            </div>
-          </div>
-        </div>
-      </nb-card-body>
-    </nb-card>
-  </div>
-
-  <div class="ui-xl-6 ui-lg-6 ui-md-12 ui-sm-12">
-    <nb-card status="primary">
-      <nb-card-header>Help and Collaboration</nb-card-header>
-      <nb-card-body>
-        <div class="issues-container">
-          <h2>
-            <fa-icon icon="bug"></fa-icon>
-            {{ 'bug-proposal-feature.title' | translate }}
-          </h2>
-          <p>{{ 'bug-proposal-feature.message' | translate }}</p>
-          <p>
-            <a
-              href="https://github.com/fattazzo/total-gp-world-web/issues/new/choose"
-              target="_blank"
-              nbButton
-              >{{ 'bug-proposal-feature.link' | translate }}</a
-            >
-          </p>
-        </div>
-        <div class="translation-container">
-          <h2><fa-icon icon="language"></fa-icon> Translation</h2>
-          <p>Would you like this site to support your favorite language?</p>
-          <p>
-            At this time only Italian and English are active but if you want to
-            dedicate just a little of your free time quickly and easily you can
-            make yourself useful for other users!
-          </p>
-          <p>In the "About" section you can find all the ways to contact me.</p>
-          <img
-            src="./assets/images/thank-you-word-cloud.jpg"
-            class="thank-you-image"
-          />
-        </div>
-      </nb-card-body>
-    </nb-card>
+    <div class="ui-g-12">
+      <info-help-collaboration></info-help-collaboration>
+    </div>
   </div>
 </div>

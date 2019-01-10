@@ -3,6 +3,9 @@
     "language": "lingua",
     "theme": "tema",
     "direction": "direzione",
-    "filter": "filtri"
+    "filter": {
+      "plur": "filtri",
+      "info": "Consulta la sezione FAQ della pagina Info per maggiori informazioni"
+    }
   }
 }

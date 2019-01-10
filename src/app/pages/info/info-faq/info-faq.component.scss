@@ -1,0 +1,20 @@
+@import "../../../@theme/styles/themes";
+@import "~@nebular/theme/components/card/card.component.theme";
+@import "~@nebular/theme/styles/global/typography/typography";
+
+@include nb-install-component() {
+  .question-container {
+    color: nb-theme(color-fg-heading);
+    font-family: nb-theme(header-font-family);
+    font-size: 1.15rem;
+    font-weight: nb-theme(font-weight-bold);
+    margin-bottom: 10px;
+  }
+
+  .answer-container {
+    color: nb-theme(color-fg-heading);
+    font-family: nb-theme(header-font-family);
+    font-size: 1.15rem;
+    margin-bottom: nb-theme(margin);
+  }
+}

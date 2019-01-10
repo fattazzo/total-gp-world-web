@@ -1,0 +1,15 @@
+<nb-card status="primary">
+  <nb-card-header>{{ 'special-thanks' | translate }} </nb-card-header>
+  <nb-card-body>
+    <div class="thanks-container" *ngIf="(attribution$ | async) as attribution">
+      <div *ngFor="let attr of attribution.attributions">
+        <a [href]="attr?.link" target="_blank">
+          <div class="attr-container">
+            <span>{{ attr?.title }}</span>
+            <img [src]="attr?.image" class="attr-image" />
+          </div>
+        </a>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>
