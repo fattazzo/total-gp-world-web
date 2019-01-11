@@ -17,6 +17,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { CapitalizePipe } from '../../../../@theme/pipes/capitalize.pipe';
 import { NbThemeService } from '@nebular/theme';
 import { AppSettingsService } from '../../../../services/app-settings.service';
+import { Constructor } from '../../../../domain/constructor';
+import { Circuit } from '../../../../domain/circuit';
+import { RacesService } from '../../../../services/races.service';
 
 @Component({
   selector: 'query-race-results',
@@ -44,6 +47,7 @@ export class RaceResultsComponent implements OnInit, OnDestroy {
     private driversService: DriversService,
     private constructorsService: ConstructorsService,
     private circuitsService: CircuitsService,
+    private racesService: RacesService,
     private translate: TranslateService,
     public appSettings: AppSettingsService,
   ) {
@@ -59,42 +63,11 @@ export class RaceResultsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loadTypes();
     this.seasons = generateArray(2018, 1950, true, false);
-    this.rounds = generateArray(1, 30);
+    this.loadRounds();
 
-    this.driversService.getAll().subscribe(dr => {
-      this.drivers = dr
-        .sort((d1, d2) =>
-          `${d1.givenName} ${d1.familyName}` >
-          `${d2.givenName} ${d2.familyName}`
-            ? 1
-            : -1,
-        )
-        .map(d => ({
-          value: d.driverId,
-          label: `${d.givenName} ${d.familyName}`,
-        }));
-      this.drivers.unshift({ value: null, label: '' });
-    });
-
-    this.constructorsService.getAll().subscribe(cs => {
-      this.constructors = cs
-        .sort((c1, c2) => (c1.name > c2.name ? 1 : -1))
-        .map(c => ({
-          value: c.constructorId,
-          label: c.name,
-        }));
-      this.constructors.unshift({ value: null, label: '' });
-    });
-
-    this.circuitsService.getAll().subscribe(cs => {
-      this.circuits = cs
-        .sort((c1, c2) => (c1.circuitName > c2.circuitName ? 1 : -1))
-        .map(c => ({
-          value: c.circuitId,
-          label: c.circuitName,
-        }));
-      this.circuits.unshift({ value: null, label: '' });
-    });
+    this.loadDrivers();
+    this.loadConstructors();
+    this.loadCircuits();
 
     this.resultsPerPage = [
       { value: 10, label: 10 },
@@ -120,6 +93,114 @@ export class RaceResultsComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.resultsUrlChange.emit(this.queryBuilder.buildUrl(this.model));
+  }
+
+  onSeasonChange(value: any) {
+    this.loadRounds();
+    this.loadDrivers();
+    this.loadConstructors();
+    this.loadCircuits();
+  }
+
+  private loadDrivers() {
+    let driversObs: Observable<Driver[]>;
+    if (!this.model.season) {
+      driversObs = this.driversService.getAll();
+    } else {
+      driversObs = this.driversService.get(`${this.model.season}`, false);
+    }
+
+    this.model.driverId = null;
+    driversObs.subscribe(
+      dr => {
+        this.drivers = dr
+          .sort((d1, d2) =>
+            `${d1.givenName} ${d1.familyName}` >
+            `${d2.givenName} ${d2.familyName}`
+              ? 1
+              : -1,
+          )
+          .map(d => ({
+            value: d.driverId,
+            label: `${d.givenName} ${d.familyName}`,
+          }));
+        this.drivers.unshift({ value: null, label: '' });
+      },
+      error => {
+        this.drivers = [];
+      },
+    );
+  }
+
+  private loadConstructors() {
+    let constructorsObs: Observable<Constructor[]>;
+    if (!this.model.season) {
+      constructorsObs = this.constructorsService.getAll();
+    } else {
+      constructorsObs = this.constructorsService.get(
+        `${this.model.season}`,
+        false,
+      );
+    }
+
+    this.model.constructorId = null;
+    constructorsObs.subscribe(
+      cs => {
+        this.constructors = cs
+          .sort((c1, c2) => (c1.name > c2.name ? 1 : -1))
+          .map(c => ({
+            value: c.constructorId,
+            label: c.name,
+          }));
+        this.constructors.unshift({ value: null, label: '' });
+      },
+      error => {
+        this.constructors = [];
+      },
+    );
+  }
+
+  private loadCircuits() {
+    let circuitsObs: Observable<Circuit[]>;
+    if (!this.model.season) {
+      circuitsObs = this.circuitsService.getAll();
+    } else {
+      circuitsObs = this.circuitsService.get(`${this.model.season}`, false);
+    }
+
+    this.model.circuitId = null;
+    circuitsObs.subscribe(
+      cs => {
+        this.circuits = cs
+          .sort((c1, c2) => (c1.circuitName > c2.circuitName ? 1 : -1))
+          .map(c => ({
+            value: c.circuitId,
+            label: c.circuitName,
+          }));
+        this.circuits.unshift({ value: null, label: '' });
+      },
+      error => {
+        this.circuits = [];
+      },
+    );
+  }
+
+  private loadRounds() {
+    this.model.round = null;
+
+    if (!this.model.season) {
+      this.rounds = generateArray(1, 30);
+    } else {
+      this.racesService.getSchedule(`${this.model.season}`, false).subscribe(
+        sc => {
+          const nrRounds = Math.max(1, sc.length);
+          this.rounds = generateArray(1, nrRounds);
+        },
+        error => {
+          this.rounds = generateArray(1, 30);
+        },
+      );
+    }
   }
 }
 

@@ -47,14 +47,16 @@ export class ConstructorsService {
    *
    * @param season season name
    */
-  public get(season: string): Observable<Constructor[]> {
-    this.clearCacheIfNeeded(season);
+  public get(season: string, useCache = true): Observable<Constructor[]> {
+    if (useCache) {
+      this.clearCacheIfNeeded(season);
 
-    if (this.cacheConstructors && this.cacheConstructors.length > 0) {
-      return of(this.cacheConstructors);
+      if (this.cacheConstructors && this.cacheConstructors.length > 0) {
+        return of(this.cacheConstructors);
+      }
     }
 
-    return this.load(season);
+    return this.load(season, useCache);
   }
 
   /**
@@ -147,7 +149,7 @@ export class ConstructorsService {
    *
    * @param season season name
    */
-  private load(season: string): Observable<Constructor[]> {
+  private load(season: string, useCache: boolean): Observable<Constructor[]> {
     return this.http
       .get<ErgastResponse>(
         `${environment.ergastApiUrl}${season}/constructors.json?limit=${
@@ -160,8 +162,10 @@ export class ConstructorsService {
             result.MRData.ConstructorTable.Constructors !== undefined
               ? result.MRData.ConstructorTable.Constructors
               : [];
-          this.cacheConstructors = constructors;
-          this.seasonCache$ = season;
+          if (useCache) {
+            this.cacheConstructors = constructors;
+            this.seasonCache$ = season;
+          }
           return constructors;
         }),
       );

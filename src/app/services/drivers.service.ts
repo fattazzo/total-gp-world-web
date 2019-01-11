@@ -45,14 +45,16 @@ export class DriversService {
    *
    * @param season season name
    */
-  public get(season: string) {
-    this.clearCacheIfNeeded(season);
+  public get(season: string, useCache = true) {
+    if (useCache) {
+      this.clearCacheIfNeeded(season);
 
-    if (this.cacheDrivers$ && this.cacheDrivers$.length > 0) {
-      return of(this.cacheDrivers$);
+      if (this.cacheDrivers$ && this.cacheDrivers$.length > 0) {
+        return of(this.cacheDrivers$);
+      }
     }
 
-    return this.load(season);
+    return this.load(season, useCache);
   }
 
   /**
@@ -138,7 +140,7 @@ export class DriversService {
    *
    * @param season season name
    */
-  private load(season: string): Observable<Driver[]> {
+  private load(season: string, useCache: boolean): Observable<Driver[]> {
     return this.http
       .get<ErgastResponse>(
         `${environment.ergastApiUrl}${season}/drivers.json?limit=${
@@ -151,8 +153,10 @@ export class DriversService {
             result.MRData.DriverTable.Drivers !== undefined
               ? result.MRData.DriverTable.Drivers
               : [];
-          this.cacheDrivers$ = drivers;
-          this.seasonCache$ = season;
+          if (useCache) {
+            this.cacheDrivers$ = drivers;
+            this.seasonCache$ = season;
+          }
           return drivers;
         }),
       );

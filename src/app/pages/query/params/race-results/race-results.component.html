@@ -28,6 +28,7 @@
         id="season"
         required
         [(ngModel)]="model.season"
+        (onChange)="onSeasonChange($event.value)"
         name="season"
         #season="ngModel"
         appendTo="body"

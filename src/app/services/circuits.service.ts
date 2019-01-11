@@ -28,14 +28,16 @@ export class CircuitsService {
    *
    * @param season season name
    */
-  public get(season: string) {
-    this.clearCacheIfNeeded(season);
+  public get(season: string, useCache = true) {
+    if (useCache) {
+      this.clearCacheIfNeeded(season);
 
-    if (this.cacheCircuits$ && this.cacheCircuits$.length > 0) {
-      return of(this.cacheCircuits$);
+      if (this.cacheCircuits$ && this.cacheCircuits$.length > 0) {
+        return of(this.cacheCircuits$);
+      }
     }
 
-    return this.load(season);
+    return this.load(season, useCache);
   }
 
   /**
@@ -85,7 +87,7 @@ export class CircuitsService {
    *
    * @param season season name
    */
-  private load(season: string): Observable<Circuit[]> {
+  private load(season: string, useCache: boolean): Observable<Circuit[]> {
     return this.http
       .get<ErgastResponse>(
         `${environment.ergastApiUrl}${season}/circuits.json?limit=${
@@ -94,8 +96,15 @@ export class CircuitsService {
       )
       .pipe(
         map(result => {
-          this.cacheCircuits$ = result.MRData.CircuitTable.Circuits;
-          return this.cacheCircuits$;
+          const circuits =
+            result.MRData.CircuitTable.Circuits !== undefined
+              ? result.MRData.CircuitTable.Circuits
+              : [];
+          if (useCache) {
+            this.cacheCircuits$ = circuits;
+            this.seasonCache$ = season;
+          }
+          return circuits;
         }),
       );
   }

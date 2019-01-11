@@ -27,14 +27,16 @@ export class RacesService {
 
   constructor(private http: HttpClient) {}
 
-  public getSchedule(season: string) {
-    this.clearCacheIfNeeded(season);
+  public getSchedule(season: string, useCache = true) {
+    if (useCache) {
+      this.clearCacheIfNeeded(season);
 
-    if (this.cacheSchedule$ && this.cacheSchedule$.has(season)) {
-      return of(this.cacheSchedule$.get(season));
+      if (this.cacheSchedule$ && this.cacheSchedule$.has(season)) {
+        return of(this.cacheSchedule$.get(season));
+      }
     }
 
-    return this.loadSchedule(season);
+    return this.loadSchedule(season, useCache);
   }
 
   public getLaps(season: string, round: string) {
@@ -88,7 +90,7 @@ export class RacesService {
     }
   }
 
-  private loadSchedule(season: string): Observable<Race[]> {
+  private loadSchedule(season: string, useCache: boolean): Observable<Race[]> {
     return this.http
       .get<ErgastResponse>(
         `${environment.ergastApiUrl}${season}.json?limit=${
@@ -101,8 +103,10 @@ export class RacesService {
             result.MRData.RaceTable.Races !== undefined
               ? result.MRData.RaceTable.Races
               : [];
-          this.cacheSchedule$.set(season, schedule);
-          this.seasonCache$ = season;
+          if (useCache) {
+            this.cacheSchedule$.set(season, schedule);
+            this.seasonCache$ = season;
+          }
           return schedule;
         }),
       );
