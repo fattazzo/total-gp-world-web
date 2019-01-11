@@ -11,6 +11,7 @@
   "/:season/:round/laps.json?limit=2000": "/laps/:season-:round",
   "/:season/drivers.json?limit=1000": "/drivers/:season",
   "/:season/constructors.json?limit=1000": "/constructors/:season",
+  "/:season/circuits.json?limit=1000": "/circuits/:season",
   "/:season/:round/results.json?limit=1000": "/results/:season-:round",
   "/:season/:round/qualifying.json?limit=1000": "/qualifying/:season-:round",
   "/:season/constructors/:constructor/results.json?limit=1000": "/constructorsResult/:season-:constructor"
