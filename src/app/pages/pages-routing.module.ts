@@ -53,6 +53,10 @@ const routes: Routes = [
         path: 'info',
         loadChildren: './info/info.module#InfoModule',
       },
+      {
+        path: 'policy',
+        loadChildren: './policy/policy.module#PolicyModule',
+      },
     ],
   },
 ];

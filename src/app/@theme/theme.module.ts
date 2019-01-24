@@ -53,6 +53,7 @@ import { AppControlsComponent } from '../components/app-controls/app-controls.co
 
 import { DropdownModule } from 'primeng/dropdown';
 import { ApplicationPipesModule } from '../pipes/application-pipes.module';
+import { RouterModule } from '@angular/router';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
@@ -112,6 +113,7 @@ const NB_THEME_PROVIDERS = [
     ...NB_MODULES,
     DropdownModule,
     ApplicationPipesModule,
+    RouterModule,
   ],
   exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS, ...PIPES],
   declarations: [...COMPONENTS, ...PIPES],
