@@ -182,7 +182,9 @@
     "race-results": "risultati gara",
     "race-schedule": "calendario gare",
     "season-list": "lista stagioni",
-    "finishing-status": "stato di fine gara"
+    "finishing-status": "stato di fine gara",
+    "driver-standings": "classifica piloti",
+    "constructor-standings": "classifica costruttori"
   },
   "cancel": "cancella",
   "count": {
@@ -192,5 +194,11 @@
     "plur": "ricerche"
   },
   "yes": "si",
-  "no": "no"
+  "no": "no",
+  "win": {
+    "sing": "vittoria",
+    "plur": "vittorie"
+  },
+  "driver-standings": "classifica piloti",
+  "constructor-standings": "classifica costruttori"
 }

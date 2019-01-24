@@ -182,7 +182,9 @@
     "race-results": "race results",
     "race-schedule": "race schedule",
     "season-list": "season list",
-    "finishing-status": "finishing status"
+    "finishing-status": "finishing status",
+    "driver-standings": "driver standings",
+    "constructor-standings": "constructor standings"
   },
   "cancel": "cancel",
   "count": {
@@ -192,5 +194,11 @@
     "plur": "queries"
   },
   "yes": "yes",
-  "no": "no"
+  "no": "no",
+  "win": {
+    "sing": "win",
+    "plur": "wins"
+  },
+  "driver-standings": "driver standings",
+  "constructor-standings": "constructor standings"
 }
