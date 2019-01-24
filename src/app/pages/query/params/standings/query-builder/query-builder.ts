@@ -30,14 +30,14 @@ export class QueryBuilder {
     if (model.driverId !== null) {
       url += `/drivers/${model.driverId}`;
     }
-    if (model.driverStanding !== null) {
-      url += `/driverStandings/${model.driverStanding}`;
+    if (model.driverStandings !== null) {
+      url += `/driverStandings/${model.driverStandings}`;
     }
     if (model.constructorId !== null) {
       url += `/constructors/${model.constructorId}`;
     }
-    if (model.constructorStanding !== null) {
-      url += `/constructorStanding/${model.constructorStanding}`;
+    if (model.constructorStandings !== null) {
+      url += `/constructorStanding/${model.constructorStandings}`;
     }
 
     return url;
