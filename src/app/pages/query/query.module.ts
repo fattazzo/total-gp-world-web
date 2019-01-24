@@ -15,6 +15,8 @@ import { TableModule } from 'primeng/table';
 import { QueryResultsDataComponent } from './results/query-results-data/query-results-data.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { StandingsComponent } from './params/standings/standings.component';
+import { NbSpinnerModule } from '@nebular/theme/components/spinner/spinner.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     SlideOutComponent,
     QueryResultsInfoComponent,
     QueryResultsDataComponent,
+    StandingsComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +37,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     DropdownModule,
     NbButtonModule,
     NbAccordionModule,
+    NbSpinnerModule,
     TableModule,
     TranslateModule,
     FontAwesomeModule,

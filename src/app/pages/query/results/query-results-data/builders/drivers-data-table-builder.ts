@@ -4,6 +4,9 @@ import { Driver } from '../../../../../domain/driver';
 import { Column } from '../models/column';
 
 export class DriversDataTableBuilder implements DataTableBuilder {
+  canHandleData(mrData: MRData): boolean {
+    return !!mrData.DriverTable;
+  }
   public buildColunms(mrData: MRData): Column[] {
     return [
       { key: 'driver', labelKey: 'driver.sing' },

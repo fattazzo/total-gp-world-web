@@ -1,13 +1,21 @@
 <div class="ui-g">
   <div class="ui-g-12" style="overflow: hidden">
-    <nb-card style="min-height: 600px">
+    <nb-card
+      style="min-height: 600px"
+      [nbSpinner]="loadingData"
+      [nbSpinnerMessage]="'loading.sing' | translate | ngxCapitalize"
+      nbSpinnerSize="large"
+    >
       <nb-card-header>
         <fa-icon size="2x" icon="list"></fa-icon>
         <div class="title">{{ 'result.plur' | translate | ngxCapitalize }}</div>
       </nb-card-header>
       <nb-card-body style="height: -webkit-fill-available;">
         <div class="chart-container" style="overflow: auto; width: 100%">
-          <query-results [searchUrl]="searchUrl"></query-results>
+          <query-results
+            [searchUrl]="searchUrl"
+            (loadingDataChange)="onLoading($event)"
+          ></query-results>
         </div>
       </nb-card-body>
 

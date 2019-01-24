@@ -4,6 +4,9 @@ import { Column } from '../models/column';
 import { Season } from '../../../../../domain/season';
 
 export class SeasonsDataTableBuilder implements DataTableBuilder {
+  canHandleData(mrData: MRData): boolean {
+    return !!mrData.SeasonTable;
+  }
   public buildColunms(mrData: MRData): Column[] {
     return [
       { key: 'season', labelKey: 'season.sing' },

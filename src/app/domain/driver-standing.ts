@@ -1,14 +1,13 @@
-import { Driver } from "./driver";
-import { Constructor } from "./constructor";
+import { Driver } from './driver';
+import { Constructor } from './constructor';
 
 export class DriverStanding {
+  position: string;
+  positionText: string;
+  points: string;
+  wins: string;
 
-    position: string;
-    positionText: string;
-    points: string;
-    wins: string;
+  Driver: Driver;
 
-    Driver: Driver;
-
-    constructors: Constructor[];
+  Constructors: Constructor[];
 }

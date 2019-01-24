@@ -1,0 +1,166 @@
+<div class="container">
+  <form #paramsStandingsForm="ngForm" (ngSubmit)="onSubmit()">
+    <!-- Type -->
+    <div class="form-group">
+      <label for="type">{{ 'type.sing' | translate | ngxCapitalize }}</label>
+
+      <p-dropdown
+        [options]="types"
+        id="type"
+        required
+        [(ngModel)]="model.type"
+        (onChange)="onTypeChange()"
+        name="type"
+        #type="ngModel"
+        appendTo="body"
+        [style]="{ width: '100%' }"
+        [filter]="appSettings.filterVisible"
+      ></p-dropdown>
+    </div>
+
+    <!-- Season -->
+    <div class="form-group">
+      <label for="season">{{
+        'season.sing' | translate | ngxCapitalize
+      }}</label>
+
+      <p-dropdown
+        [options]="seasons"
+        id="season"
+        [(ngModel)]="model.season"
+        (onChange)="onSeasonChange($event.value)"
+        name="season"
+        #season="ngModel"
+        appendTo="body"
+        [style]="{ width: '100%' }"
+        [filter]="appSettings.filterVisible"
+      ></p-dropdown>
+    </div>
+
+    <!-- Round -->
+    <div class="form-group">
+      <label for="round">{{ 'round.sing' | translate | ngxCapitalize }}</label>
+
+      <p-dropdown
+        [options]="rounds"
+        id="round"
+        [(ngModel)]="model.round"
+        name="round"
+        #round="ngModel"
+        appendTo="body"
+        [style]="{ width: '100%' }"
+        [filter]="appSettings.filterVisible"
+        [disabled]="roundsDisable"
+      ></p-dropdown>
+    </div>
+
+    <!-- Driver standings -->
+    <div class="form-group">
+      <label for="drStandings">{{
+        'driver-standings' | translate | ngxCapitalize
+      }}</label>
+
+      <p-dropdown
+        [options]="driverStandings"
+        id="drStandings"
+        [(ngModel)]="model.driverStandings"
+        name="drStandings"
+        #drStandings="ngModel"
+        appendTo="body"
+        [style]="{ width: '100%' }"
+        [filter]="appSettings.filterVisible"
+        [disabled]="driversDisable"
+      ></p-dropdown>
+    </div>
+
+    <!-- Driver -->
+    <div class="form-group">
+      <label for="driverId">{{
+        'driver.sing' | translate | ngxCapitalize
+      }}</label>
+
+      <p-dropdown
+        [options]="drivers"
+        id="driverId"
+        [(ngModel)]="model.driverId"
+        name="driverId"
+        #driverId="ngModel"
+        appendTo="body"
+        autoWidth="false"
+        [style]="{ width: '100%' }"
+        [filter]="appSettings.filterVisible"
+        [disabled]="driversDisable"
+      ></p-dropdown>
+    </div>
+
+    <!-- Constructor standings -->
+    <div class="form-group">
+      <label for="csStandings">{{
+        'constructor-standings' | translate | ngxCapitalize
+      }}</label>
+
+      <p-dropdown
+        [options]="constructorStandings"
+        id="csStandings"
+        [(ngModel)]="model.constructorStandings"
+        name="csStandings"
+        #csStandings="ngModel"
+        appendTo="body"
+        [style]="{ width: '100%' }"
+        [filter]="appSettings.filterVisible"
+        [disabled]="constructorDisable"
+      ></p-dropdown>
+    </div>
+
+    <!-- Constructor -->
+    <div class="form-group">
+      <label for="constructorId">{{
+        'constructor.sing' | translate | ngxCapitalize
+      }}</label>
+
+      <p-dropdown
+        [options]="constructors"
+        id="constructorId"
+        [(ngModel)]="model.constructorId"
+        name="constructorId"
+        #constructorId="ngModel"
+        appendTo="body"
+        [style]="{ width: '100%' }"
+        [filter]="appSettings.filterVisible"
+        [disabled]="constructorDisable"
+      ></p-dropdown>
+    </div>
+
+    <!-- Result per page -->
+    <div class="form-group">
+      <label for="resultPerPage">{{
+        'result.per-page' | translate | ngxCapitalize
+      }}</label>
+
+      <p-dropdown
+        [options]="resultsPerPage"
+        id="resultPerPage"
+        required
+        [(ngModel)]="model.resultPerPage"
+        name="resultPerPage"
+        #resultPerPage="ngModel"
+        appendTo="body"
+        [style]="{ width: '100%' }"
+      ></p-dropdown>
+    </div>
+
+    <div style="width: 100%;display:flex;justify-content:space-around;">
+      <button
+        nbButton
+        type="button"
+        class="btn btn-default form-button"
+        (click)="paramsStandingsForm.reset(); newModel()"
+      >
+        {{ 'cancel' | translate | ngxCapitalize }}
+      </button>
+      <button nbButton type="submit" class="btn btn-success form-button">
+        {{ 'search.sing' | translate | ngxCapitalize }}
+      </button>
+    </div>
+  </form>
+</div>

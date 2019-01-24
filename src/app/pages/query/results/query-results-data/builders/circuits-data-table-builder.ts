@@ -4,6 +4,9 @@ import { Column } from '../models/column';
 import { Circuit } from '../../../../../domain/circuit';
 
 export class CircuitsDataTableBuilder implements DataTableBuilder {
+  canHandleData(mrData: MRData): boolean {
+    return !!mrData.CircuitTable;
+  }
   public buildColunms(mrData: MRData): Column[] {
     return [
       { key: 'circuitName', labelKey: 'circuit.sing' },

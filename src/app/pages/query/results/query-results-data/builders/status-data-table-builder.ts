@@ -4,6 +4,9 @@ import { Column } from '../models/column';
 import { Status } from '../../../../../domain/status';
 
 export class StatusDataTableBuilder implements DataTableBuilder {
+  canHandleData(mrData: MRData): boolean {
+    return !!mrData.StatusTable;
+  }
   public buildColunms(mrData: MRData): Column[] {
     return [
       { key: 'statusId', labelKey: 'status.id' },

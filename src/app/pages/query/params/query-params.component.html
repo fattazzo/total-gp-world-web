@@ -20,14 +20,16 @@
             </nb-accordion-item-body>
           </nb-accordion-item>
 
-          <!--
           <nb-accordion-item>
             <nb-accordion-item-header>{{
               'search.standings' | translate | ngxCapitalize
             }}</nb-accordion-item-header>
-            <nb-accordion-item-body> </nb-accordion-item-body>
+            <nb-accordion-item-body>
+              <query-standings
+                (resultsUrlChange)="resultsSearchUrlChange($event)"
+              ></query-standings>
+            </nb-accordion-item-body>
           </nb-accordion-item>
-          -->
         </nb-accordion>
       </nb-card-body>
     </nb-card>

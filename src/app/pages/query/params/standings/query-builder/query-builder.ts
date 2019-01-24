@@ -1,8 +1,8 @@
-import { RaceResultsModel } from '../race-results/models/race-results-model';
-import { environment } from '../../../../../environments/environment.prod';
-import { SearchType } from '../race-results/models/search-type';
+import { environment } from '../../../../../../environments/environment.prod';
+import { StandingsModel } from '../models/standings-model';
+import { SearchType } from '../models/search-type';
 export class QueryBuilder {
-  buildUrl(model: RaceResultsModel): string {
+  buildUrl(model: StandingsModel): string {
     // Remove last char ( last char = '/' )
     let url = environment.ergastApiUrl.slice(0, -1);
 
@@ -18,7 +18,7 @@ export class QueryBuilder {
     return url;
   }
 
-  private getUrlFromModel(model: RaceResultsModel): string {
+  private getUrlFromModel(model: StandingsModel): string {
     let url = '';
 
     if (model.season !== null) {
@@ -30,11 +30,14 @@ export class QueryBuilder {
     if (model.driverId !== null) {
       url += `/drivers/${model.driverId}`;
     }
+    if (model.driverStanding !== null) {
+      url += `/driverStandings/${model.driverStanding}`;
+    }
     if (model.constructorId !== null) {
       url += `/constructors/${model.constructorId}`;
     }
-    if (model.circuitId !== null) {
-      url += `/circuits/${model.circuitId}`;
+    if (model.constructorStanding !== null) {
+      url += `/constructorStanding/${model.constructorStanding}`;
     }
 
     return url;

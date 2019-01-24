@@ -4,6 +4,16 @@ import { Column } from '../models/column';
 import { Race } from '../../../../../domain/race';
 
 export class ResultsDataTableBuilder implements DataTableBuilder {
+  canHandleData(mrData: MRData): boolean {
+    if (mrData.RaceTable) {
+      const raceTbl = mrData.RaceTable;
+      if (raceTbl.Races && raceTbl.Races[0].Results) {
+        return true;
+      }
+    }
+
+    return false;
+  }
   public buildColunms(mrData: MRData): Column[] {
     return [
       { key: 'position', labelKey: 'position.sing' },

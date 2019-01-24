@@ -4,6 +4,9 @@ import { Column } from '../models/column';
 import { Constructor } from '../../../../../domain/constructor';
 
 export class ConstructorsDataTableBuilder implements DataTableBuilder {
+  canHandleData(mrData: MRData): boolean {
+    return !!mrData.ConstructorTable;
+  }
   public buildColunms(mrData: MRData): Column[] {
     return [
       { key: 'name', labelKey: 'name.sing' },

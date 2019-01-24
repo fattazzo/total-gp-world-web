@@ -1,42 +1,46 @@
 import {
   Component,
   OnInit,
-  Output,
-  EventEmitter,
   OnDestroy,
+  EventEmitter,
+  Output,
 } from '@angular/core';
-import { RaceResultsModel } from './models/race-results-model';
-import { DriversService } from '../../../../services/drivers.service';
-import { Observable } from 'rxjs';
+import { StandingsModel } from './models/standings-model';
+import { SearchType } from './models/search-type';
+import { CapitalizePipe } from '../../../../@theme/pipes/capitalize.pipe';
+import { TranslateService } from '@ngx-translate/core';
+import { AppSettingsService } from '../../../../services/app-settings.service';
+import { RacesService } from '../../../../services/races.service';
+import { Observable } from 'rxjs/Observable';
 import { Driver } from '../../../../domain/driver';
 import { ConstructorsService } from '../../../../services/constructors.service';
-import { CircuitsService } from '../../../../services/circuits.service';
-import { QueryBuilder } from './query-builder/query-builder';
-import { SearchType } from './models/search-type';
-import { TranslateService } from '@ngx-translate/core';
-import { CapitalizePipe } from '../../../../@theme/pipes/capitalize.pipe';
-import { AppSettingsService } from '../../../../services/app-settings.service';
+import { DriversService } from '../../../../services/drivers.service';
 import { Constructor } from '../../../../domain/constructor';
-import { Circuit } from '../../../../domain/circuit';
-import { RacesService } from '../../../../services/races.service';
+import { QueryBuilder } from './query-builder/query-builder';
+import { of } from 'rxjs';
 
 @Component({
-  selector: 'query-race-results',
-  templateUrl: './race-results.component.html',
-  styleUrls: ['./race-results.component.scss'],
+  selector: 'query-standings',
+  templateUrl: './standings.component.html',
+  styleUrls: ['./standings.component.scss'],
 })
-export class RaceResultsComponent implements OnInit, OnDestroy {
-  model: RaceResultsModel = new RaceResultsModel();
+export class StandingsComponent implements OnInit, OnDestroy {
+  model: StandingsModel = new StandingsModel();
 
   types: any;
   seasons: any;
   rounds: any;
+  driverStandings: any;
   drivers: any;
+  constructorStandings: any;
   constructors: any;
-  circuits: any;
   resultsPerPage: any;
 
   langSubscribe: any;
+
+  roundsDisable = false;
+  driversDisable = false;
+  constructorDisable = false;
 
   @Output() resultsUrlChange: EventEmitter<string> = new EventEmitter();
 
@@ -45,7 +49,6 @@ export class RaceResultsComponent implements OnInit, OnDestroy {
   constructor(
     private driversService: DriversService,
     private constructorsService: ConstructorsService,
-    private circuitsService: CircuitsService,
     private racesService: RacesService,
     private translate: TranslateService,
     public appSettings: AppSettingsService,
@@ -55,18 +58,17 @@ export class RaceResultsComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    this.langSubscribe.unsubscribe();
-  }
-
   ngOnInit() {
+    this.onTypeChange();
     this.loadTypes();
     this.seasons = generateArray(2018, 1950, true, false);
     this.loadRounds();
 
     this.loadDrivers();
     this.loadConstructors();
-    this.loadCircuits();
+
+    this.driverStandings = generateArray(1, 108);
+    this.constructorStandings = generateArray(1, 22);
 
     this.resultsPerPage = [
       { value: 10, label: 10 },
@@ -77,6 +79,35 @@ export class RaceResultsComponent implements OnInit, OnDestroy {
     ];
   }
 
+  ngOnDestroy(): void {
+    this.langSubscribe.unsubscribe();
+  }
+
+  newModel() {
+    this.model = new StandingsModel();
+    this.onTypeChange();
+    this.resultsUrlChange.emit('');
+  }
+
+  onSubmit() {
+    this.resultsUrlChange.emit(this.queryBuilder.buildUrl(this.model));
+  }
+
+  onTypeChange() {
+    this.driversDisable =
+      this.model.type === SearchType.KEY_CONSTRUCTOR_STANDINGS ||
+      this.model.type === SearchType.KEY_CONSTRUCTOR_INFORMATION;
+    this.constructorDisable =
+      this.model.type === SearchType.KEY_DRIVER_STANDINGS ||
+      this.model.type === SearchType.KEY_DRIVER_INFORMATION;
+  }
+
+  onSeasonChange(value: any) {
+    this.loadRounds();
+    this.loadDrivers();
+    this.loadConstructors();
+  }
+
   private loadTypes() {
     const capitalizePipe = new CapitalizePipe();
     this.types = SearchType.getRsultsSearchTypes().map(t => ({
@@ -85,28 +116,35 @@ export class RaceResultsComponent implements OnInit, OnDestroy {
     }));
   }
 
-  newModel() {
-    this.model = new RaceResultsModel();
-    this.resultsUrlChange.emit('');
-  }
+  private loadRounds() {
+    this.model.round = null;
+    this.roundsDisable = true;
 
-  onSubmit() {
-    this.resultsUrlChange.emit(this.queryBuilder.buildUrl(this.model));
-  }
-
-  onSeasonChange(value: any) {
-    this.loadRounds();
-    this.loadDrivers();
-    this.loadConstructors();
-    this.loadCircuits();
+    if (!this.model.season) {
+      this.rounds = generateArray(1, 30);
+    } else {
+      this.racesService.getSchedule(`${this.model.season}`, false).subscribe(
+        sc => {
+          const nrRounds = Math.max(1, sc.length);
+          this.rounds = generateArray(1, nrRounds);
+        },
+        error => {
+          this.rounds = generateArray(1, 30);
+        },
+      );
+      this.roundsDisable = false;
+    }
   }
 
   private loadDrivers() {
-    let driversObs: Observable<Driver[]>;
-    if (!this.model.season) {
-      driversObs = this.driversService.getAll();
-    } else {
-      driversObs = this.driversService.get(`${this.model.season}`, false);
+    let driversObs: Observable<Driver[]> = of([]);
+
+    if (!this.driversDisable) {
+      if (!this.model.season) {
+        driversObs = this.driversService.getAll();
+      } else {
+        driversObs = this.driversService.get(`${this.model.season}`, false);
+      }
     }
 
     this.model.driverId = null;
@@ -132,14 +170,17 @@ export class RaceResultsComponent implements OnInit, OnDestroy {
   }
 
   private loadConstructors() {
-    let constructorsObs: Observable<Constructor[]>;
-    if (!this.model.season) {
-      constructorsObs = this.constructorsService.getAll();
-    } else {
-      constructorsObs = this.constructorsService.get(
-        `${this.model.season}`,
-        false,
-      );
+    let constructorsObs: Observable<Constructor[]> = of([]);
+
+    if (!this.constructorDisable) {
+      if (!this.model.season) {
+        constructorsObs = this.constructorsService.getAll();
+      } else {
+        constructorsObs = this.constructorsService.get(
+          `${this.model.season}`,
+          false,
+        );
+      }
     }
 
     this.model.constructorId = null;
@@ -158,49 +199,6 @@ export class RaceResultsComponent implements OnInit, OnDestroy {
       },
     );
   }
-
-  private loadCircuits() {
-    let circuitsObs: Observable<Circuit[]>;
-    if (!this.model.season) {
-      circuitsObs = this.circuitsService.getAll();
-    } else {
-      circuitsObs = this.circuitsService.get(`${this.model.season}`, false);
-    }
-
-    this.model.circuitId = null;
-    circuitsObs.subscribe(
-      cs => {
-        this.circuits = cs
-          .sort((c1, c2) => (c1.circuitName > c2.circuitName ? 1 : -1))
-          .map(c => ({
-            value: c.circuitId,
-            label: c.circuitName,
-          }));
-        this.circuits.unshift({ value: null, label: '' });
-      },
-      error => {
-        this.circuits = [];
-      },
-    );
-  }
-
-  private loadRounds() {
-    this.model.round = null;
-
-    if (!this.model.season) {
-      this.rounds = generateArray(1, 30);
-    } else {
-      this.racesService.getSchedule(`${this.model.season}`, false).subscribe(
-        sc => {
-          const nrRounds = Math.max(1, sc.length);
-          this.rounds = generateArray(1, nrRounds);
-        },
-        error => {
-          this.rounds = generateArray(1, 30);
-        },
-      );
-    }
-  }
 }
 
 function generateArray(
@@ -210,7 +208,7 @@ function generateArray(
   asc: boolean = true,
 ) {
   const array = asc
-    ? Array.from({ length: end - start }, (v, k) => ({
+    ? Array.from({ length: end - start + 1 }, (v, k) => ({
         value: k + start,
         label: `${k + start}`,
       }))

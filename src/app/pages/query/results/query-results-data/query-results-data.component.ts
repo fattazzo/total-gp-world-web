@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MRData } from '../../../../domain/ergast/mrdata';
 import { DataTableBuilderFactory } from './builders/data-table-builder-factory';
 import { QueryService } from '../../../../services/query.service';
@@ -18,6 +18,8 @@ export class QueryResultsDataComponent implements OnInit {
   columns: Column[];
   pageDataItems: any[];
 
+  @Output() pageLoading: EventEmitter<boolean> = new EventEmitter();
+
   constructor(private queryService: QueryService) {}
 
   ngOnInit() {}
@@ -28,18 +30,16 @@ export class QueryResultsDataComponent implements OnInit {
   }
 
   loadDataLazy(event: any) {
+    this.pageLoading.emit(true);
     const pageUrl = `${this.url}?limit=${event.rows}&offset=${event.first}`;
 
-    this.queryService
-      .search(pageUrl)
-      .subscribe(result => this.buildData(result));
-    // setTimeout(
-    //  () =>
-    // (this.pageLapsItems = this.totalLapsItems.filter(
-    //   l => l.number === `${(event.first + event.rows) / this.rowsPerPage}`,
-    // )),
-    // 0,
-    // );
+    this.queryService.search(pageUrl).subscribe(
+      result => {
+        this.buildData(result);
+        this.pageLoading.emit(false);
+      },
+      error => this.pageLoading.emit(false),
+    );
   }
 
   private buildData(mrData: MRData) {

@@ -8,36 +8,33 @@ import { QualifyingDataTableBuilder } from './qualifying-data-table-builder';
 import { ResultsDataTableBuilder } from './results-data-table-builder';
 import { SeasonsDataTableBuilder } from './seasons-data-table-builder';
 import { StatusDataTableBuilder } from './status-data-table-builder';
+import { DriverStandingsDataTableBuilder } from './driver-standings-data-table-builder';
+import { ConstructorStandingsDataTableBuilder } from './constructor-standings-data-table-builder';
 export class DataTableBuilderFactory {
+  public static builders: DataTableBuilder[] = [
+    new CircuitsDataTableBuilder(),
+    new ConstructorsDataTableBuilder(),
+    new DriversDataTableBuilder(),
+    new QualifyingDataTableBuilder(),
+    new ResultsDataTableBuilder(),
+    new RacesDataTableBuilder(),
+    new SeasonsDataTableBuilder(),
+    new StatusDataTableBuilder(),
+    new DriverStandingsDataTableBuilder(),
+    new ConstructorStandingsDataTableBuilder(),
+  ];
+
   public static getBuilder(mrData: MRData): DataTableBuilder {
-    if (mrData.CircuitTable) {
-      return new CircuitsDataTableBuilder();
-    }
-    if (mrData.ConstructorTable) {
-      return new ConstructorsDataTableBuilder();
-    }
-    if (mrData.DriverTable) {
-      return new DriversDataTableBuilder();
-    }
-    if (mrData.RaceTable) {
-      const raceTbl = mrData.RaceTable;
-      if (raceTbl.Races && raceTbl.Races[0].QualifyingResults) {
-        return new QualifyingDataTableBuilder();
+    let dataBuilder: DataTableBuilder = null;
+
+    this.builders.every(builder => {
+      if (builder.canHandleData(mrData)) {
+        dataBuilder = builder;
+        return false;
       }
-      if (raceTbl.Races && raceTbl.Races[0].Results) {
-        return new ResultsDataTableBuilder();
-      }
-      if (raceTbl.Races) {
-        return new RacesDataTableBuilder();
-      }
-      return null;
-    }
-    if (mrData.SeasonTable) {
-      return new SeasonsDataTableBuilder();
-    }
-    if (mrData.StatusTable) {
-      return new StatusDataTableBuilder();
-    }
-    return null;
+      return true;
+    });
+
+    return dataBuilder;
   }
 }

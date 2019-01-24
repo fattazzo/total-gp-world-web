@@ -1,0 +1,9 @@
+@import "../../../../@theme/styles/themes";
+@import "~@nebular/theme/components/card/card.component.theme";
+
+@include nb-install-component() {
+  .form-button {
+    width: 100%;
+    margin: 0px 5px 0px 5px;
+  }
+}

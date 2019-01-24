@@ -4,6 +4,15 @@ import { Column } from '../models/column';
 import { Race } from '../../../../../domain/race';
 
 export class RacesDataTableBuilder implements DataTableBuilder {
+  canHandleData(mrData: MRData): boolean {
+    if (mrData.RaceTable) {
+      const raceTbl = mrData.RaceTable;
+      if (raceTbl.Races) {
+        return true;
+      }
+    }
+    return false;
+  }
   public buildColunms(mrData: MRData): Column[] {
     return [
       { key: 'season', labelKey: 'season.sing' },

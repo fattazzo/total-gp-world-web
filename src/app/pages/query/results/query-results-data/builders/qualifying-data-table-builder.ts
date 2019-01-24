@@ -5,6 +5,16 @@ import { QualifyingResult } from '../../../../../domain/qualifying-result';
 import { Race } from '../../../../../domain/race';
 
 export class QualifyingDataTableBuilder implements DataTableBuilder {
+  canHandleData(mrData: MRData): boolean {
+    if (mrData.RaceTable) {
+      const raceTbl = mrData.RaceTable;
+      if (raceTbl.Races && raceTbl.Races[0].QualifyingResults) {
+        return true;
+      }
+    }
+
+    return false;
+  }
   public buildColunms(mrData: MRData): Column[] {
     return [
       { key: 'position', labelKey: 'position.sing' },

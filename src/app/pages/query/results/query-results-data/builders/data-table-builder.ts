@@ -4,4 +4,6 @@ export interface DataTableBuilder {
   buildColunms(mrData: MRData): Column[];
 
   buildData(mrData: MRData): any[];
+
+  canHandleData(mrData: MRData): boolean;
 }

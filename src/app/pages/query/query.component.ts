@@ -10,6 +10,8 @@ export class QueryComponent implements OnInit {
 
   showParams = true;
 
+  loadingData = false;
+
   constructor() {}
 
   ngOnInit() {}
@@ -23,5 +25,9 @@ export class QueryComponent implements OnInit {
       // this.showParams = true;
       setTimeout(() => (this.showParams = false), 0);
     }
+  }
+
+  onLoading(value: boolean) {
+    setTimeout(() => (this.loadingData = value), 0);
   }
 }
